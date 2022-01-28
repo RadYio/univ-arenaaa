@@ -1,0 +1,4 @@
+Debut sujet tp2
+makefile complet avec macros
+fichier config doxygen complet avec nos informations / adhoc repository
+micro planning
