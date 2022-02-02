@@ -1,0 +1,4 @@
+- Tests d'affichage via sdl2
+- Découpage en fonction
+- Création des structures en .c et premier aperçu d'un lien de ces cartes en structures via une bdd
+- Premier regard sur le réseau
