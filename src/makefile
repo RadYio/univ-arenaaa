@@ -1,35 +1,18 @@
-# nom du projet, a creer sous ce nom
-TARGETS  = Univ-arena
+CC=gcc
 
-CC       = gcc
-
-
-# compiling flags here
-CFLAGS_COMPIL   =  -c -Wall
-CFLAGS_DEBUG    = -g -Wextra
-
-
-#repertoires
-SRCDIR   = src #fichiers sources
-OBJDIR   = obj #.o
-BINDIR   = bin #executables
-TRGS	 := $(TARGETS:%=$(BINDIR)/%)
-
-#---------------------------------------SDL------------------------------------------------------
 SDL_DIR=${HOME}/SDL2
-SDL_LIB_DIR=${SDL_DIR}/lib
-SDL_INC_DIR=${SDL_DIR}/include
-LIBS=-L${SDL_LIB_DIR} -lSDL2 -lSDL2 image -lSDL2 ttf
+SDLLIB_DIR=${SDL_DIR}/lib
+SDLINC_DIR=${SDL_DIR}/include
 
-INCS=-I${SDL_INC_DIR}
+LIBS=-L${SDLLIB_DIR} -lSDL2 -lSDL2_ttf -lSDL2_image
+INCLUDES=-I${SDLINC_DIR}
 
-PROG=univ-arena
+PROG=sdl_test
 
-all: test #à changer
+all: sdl_text
 
-test: ${TARGETS}.c
-	${CC} -o ${PROG} ${TARGETS}.c ${LIBS} ${INCS} ${CFLAGS_COMPIL}
-
+sdl_text: main.c window.c jeu.c menu.c
+	${CC} -o ${PROG} main.c window.c jeu.c menu.c ${LIBS} ${INCLUDES}
 
 clean:
 	rm -f ${PROG}
