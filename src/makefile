@@ -9,9 +9,9 @@ INCLUDES=-I${SDLINC_DIR}
 
 PROG=sdl_test
 
-all: sdl_text
+all: sdl_test
 
-sdl_text: main.c window.c jeu.c menu.c
+sdl_test: main.c window.c jeu.c menu.c
 	${CC} -o ${PROG} main.c window.c jeu.c menu.c ${LIBS} ${INCLUDES}
 
 clean:
