@@ -1,5 +1,5 @@
 #include "../header/window.h"
-#include "../header/jeu.h"
+#include "../header/menu.h"
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
@@ -9,14 +9,15 @@
 
 
 
-//fonction de creation de fenetre, mise en place de tout les trucs importants de SDL (a documenter plus par la suite)
+//fonction de creation de fenetre, mise en place de tous les trucs importants de SDL (a documenter plus par la suite)
 
 int initialiser_fenetre(){
   //initialisation de SDL---------------------------------------------------------------
   if(SDL_Init(SDL_INIT_VIDEO) != 0 ) {
       fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());
       return -1;
-  }else{
+  }
+
     //creation de la fenetre-------------------------------------------------------------
     SDL_Window * pWindow = NULL;
     pWindow = SDL_CreateWindow(
@@ -36,6 +37,6 @@ int initialiser_fenetre(){
       printf("erreur de creation de fenetre\n");
       return -1;
     }
-  }
+    
   SDL_Quit();
 }

@@ -7,12 +7,14 @@ SDLINC_DIR=${SDL_DIR}/include
 LIBS=-L${SDLLIB_DIR} -lSDL2 -lSDL2_ttf -lSDL2_image
 INCLUDES=-I${SDLINC_DIR}
 
+CFLAGS_DEBUG    = -g -Wextra
+
 PROG=sdl_test
 
 all: sdl_test
 
-sdl_test: main.c window.c jeu.c menu.c
-	${CC} -o ${PROG} main.c window.c jeu.c menu.c ${LIBS} ${INCLUDES}
+sdl_test: main.c window.c menu.c
+	${CC} -o ${PROG} main.c window.c menu.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 clean:
 	rm -f ${PROG}
