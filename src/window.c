@@ -30,7 +30,7 @@ int initialiser_fenetre(){
 
     if(pWindow){
       //lancement du jeu si fenetre bien crée-------------------------------------------------
-      jeu(pWindow); //on transmet le pointeur de la fenetre pour des utilisations antétieures
+      menu(pWindow); //on transmet le pointeur de la fenetre pour des utilisations antétieures
       SDL_DestroyWindow(pWindow);
     }else{
       printf("erreur de creation de fenetre\n");
