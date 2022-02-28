@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "carte.h"
 
-#define N 13 //nombre de cartes dans le jeu au total
+
 
 
 //fonction de creation de cartes

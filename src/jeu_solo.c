@@ -16,5 +16,20 @@ void jeu_solo(SDL_Renderer* renderer_menu, SDL_Window * pWindow){
 		exit(EXIT_FAILURE);
 	}
     
+	/* DECLARATION BG_JEU*/
+	SDL_Surface* img_jeu_Surface = IMG_Load("../img/BG_JEU.jpg");
+
+	if(!img_jeu_Surface){
+		fprintf(stderr, "Probleme chargement du background jeu: %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+    //creation de tecture à partir de surface
+    SDL_Texture* img_jeu_Texture = SDL_CreateTextureFromSurface(renderer_jeu, img_jeu_Surface);
+    SDL_FreeSurface(img_jeu_Surface); /* on a la texture, plus besoin de l'image */
+
+	if(!img_jeu_Texture){
+		fprintf(stderr, "Erreur à la création du rendu de l'image ''CHOIX'': %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
 
 }

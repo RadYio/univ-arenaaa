@@ -1,3 +1,4 @@
+#define N 13; //nombre de cartes dans le jeu au total
 
 typedef enum type{Poison, Psy, Physique}type_t;
 
