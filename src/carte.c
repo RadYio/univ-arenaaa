@@ -18,7 +18,7 @@ carte_t * creer_carte(char * nom, int hp , int nb_degats , type_t type_attaque ,
 }
 
 //fonction d'initialisation de toutes les cartes, 12 en brut car on à que 12 cartes, à modifier si on en rajoute plus
-void init_cartes(carte_t * tab_cartes_total[N]){
+void init_cartes(carte_t * tab_cartes_total[]){
     tab_cartes_total[0] = creer_carte("Allan maître des enigmes", 10, 4 , Psy,Poison,0);
     tab_cartes_total[1] = creer_carte("Charly maître du Ratio", 10, 4 , Psy,Poison,1);
     tab_cartes_total[2] = creer_carte("Jonathan maître du temps", 10, 4 , Physique,Psy,2);
@@ -54,7 +54,7 @@ void maj_sauvergarde(carte_t * carte){
 }
 
 //fonction de récupération des cartes que possède le joueur selon son fichier de sauvegarde
-void recup_sauvegarde(carte_t * tab_sauvegarde[N], carte_t * tab_cartes_total[N]){
+void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]){
     FILE * fic1;
     int id;
     int i = 0;

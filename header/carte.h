@@ -1,4 +1,4 @@
-#define N 13; //nombre de cartes dans le jeu au total
+#define N 13 //nombre de cartes dans le jeu au total
 
 typedef enum type{Poison, Psy, Physique}type_t;
 
@@ -14,13 +14,13 @@ typedef struct carte{
 
 carte_t * creer_carte(char * nom, int hp , int attaque , type_t type_attaque , type_t type_vulnerable, int id);
 
-void init_cartes(carte_t * tab_cartes_total[N]);
+void init_cartes(carte_t * tab_cartes_total[]);
 
 void creer_sauvegarde();
 
 void maj_sauvergarde(carte_t * carte);
 
-void recup_sauvegarde(carte_t * tab_sauvegarde[N], carte_t * tab_cartes_total[N]);
+void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]);
 
 void creation_deck(carte_t * deck[12]);
 
