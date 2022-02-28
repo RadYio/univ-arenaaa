@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "../header/carte.h"
 
-
+//alane
 
 
 //fonction de creation de cartes
