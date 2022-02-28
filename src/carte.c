@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "../header/carte.h"
 
-//alane
-
 
 //fonction de creation de cartes
 carte_t * creer_carte(char * nom, int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_image){
@@ -48,7 +46,7 @@ void creer_sauvegarde(){
 //fonction de mise à jour de la sauvergarde du joueur si il obtient une nouvelle carte
 void maj_sauvergarde(carte_t * carte){
   FILE * fic1;
-  fic1 = fopen(fic1,"./save/sauvergarde.txt","a");
+  fic1 = fopen("./save/sauvergarde.txt","a");
   fprintf(fic1,"%i",carte->id_image);
   fclose(fic1);
 }
