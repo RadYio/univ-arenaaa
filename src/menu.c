@@ -48,7 +48,7 @@ int menu(SDL_Window * pWindow){
 
 
 	/* DECLARATION BG_MENU*/
-	SDL_Surface* img_Menu_Surface = IMG_Load("../img/BG_MENU.png");
+	SDL_Surface* img_Menu_Surface = IMG_Load("../img/BG_TEST1.png");
 
 	if(!img_Menu_Surface){
 		fprintf(stderr, "Probleme chargement du background menu: %s\n", SDL_GetError());
@@ -204,11 +204,11 @@ int menu(SDL_Window * pWindow){
 	txt_optn4_R.h=105;
 
 //récupération des données de sauvegarde (quelles cartes possède le joueur / quelles sont toutes les cartes qui existent)-------------------------------------------
-	
-	carte_t * tab_cartes_total[N]; //tableau qui repertorie toutes les cartes qui existent
+
+	/*carte_t * tab_cartes_total[N]; //tableau qui repertorie toutes les cartes qui existent
 	carte_t * tab_sauvegarde[N]; //tableau qui repertorie les cartes que possède le joueur
 	init_cartes(tab_cartes_total);
-	recup_sauvegarde(tab_sauvegarde, tab_cartes_total);
+	recup_sauvegarde(tab_sauvegarde, tab_cartes_total);*/
 
 //gestion des evenements---------------------------------------------------------------------------------------------------------------------------------------------
 
