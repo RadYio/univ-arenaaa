@@ -9,12 +9,12 @@ INCLUDES=-I${SDLINC_DIR}
 
 CFLAGS_DEBUG    = -g -Wextra
 
-PROG=sdl_test
+PROG=univ-arenaaaa
 
-all: sdl_test
+all: univ-arenaaaa
 
-sdl_test: main.c window.c menu.c
-	${CC} -o ${PROG} main.c window.c menu.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
+univ-arenaaaa: main.c carte.c jeu_solo.c menu.c window.c
+	${CC} -o ${PROG} main.c carte.c jeu_solo.c menu.c window.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 clean:
 	rm -f ${PROG}
