@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "../header/carte.h"
 
 
@@ -29,9 +30,9 @@ void init_cartes(carte_t * tab_cartes_total[]){
     tab_cartes_total[7] = creer_carte("Chevalier", 5, 3 , Physique,Psy,7);
     tab_cartes_total[8] = creer_carte("Mage", 3, 5 , Psy,Poison,8);
     tab_cartes_total[9] = creer_carte("Mage", 3, 5 , Psy,Poison,9);
-    tab_cartes_total[10] = creer_carte("Voleur", 4, 4 , Poison,Phsique,10);
+    tab_cartes_total[10] = creer_carte("Voleur", 4, 4 , Poison,Physique,10);
     tab_cartes_total[11] = creer_carte("Voleur", 4, 4 , Poison,Physique,11);
-    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent", 10, 10 , Prof,Null,12); //a modifier
+    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent", 10, 10 , Psy, Psy,12); //a modifier
 }
 
 //si c'est la premiere fois que le joueur se connecte il n'a pas de sauvegarde, il faut la creer
@@ -39,7 +40,7 @@ void creer_sauvegarde(){
   FILE * fic1;
   int i;
   fic1 = fopen("./save/sauvegarde.txt", "w");
-  for(i = 0; i < 12, i++){
+  for(i = 0; i < 12; i++){
     fprintf(fic1, "%i ", i);
   }
   fclose(fic1);
@@ -48,7 +49,7 @@ void creer_sauvegarde(){
 //fonction de mise à jour de la sauvergarde du joueur si il obtient une nouvelle carte
 void maj_sauvergarde(carte_t * carte){
   FILE * fic1;
-  fic1 = fopen(fic1,"./save/sauvergarde.txt","a");
+  fic1 = fopen("./save/sauvergarde.txt","a");
   fprintf(fic1,"%i",carte->id_image);
   fclose(fic1);
 }

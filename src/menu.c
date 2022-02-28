@@ -206,7 +206,7 @@ int menu(SDL_Window * pWindow){
 //récupération des données de sauvegarde (quelles cartes possède le joueur / quelles sont toutes les cartes qui existent)-------------------------------------------
 	
 	carte_t * tab_cartes_total[N]; //tableau qui repertorie toutes les cartes qui existent
-	carte_t * tab_sauvegarde[]; //tableau qui repertorie les cartes que possède le joueur
+	carte_t * tab_sauvegarde[N]; //tableau qui repertorie les cartes que possède le joueur
 	init_cartes(tab_cartes_total);
 	recup_sauvegarde(tab_sauvegarde, tab_cartes_total);
 
