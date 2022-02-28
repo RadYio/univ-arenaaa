@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <time.h>
 
 #include "../header/window.h"
 #include "../header/carte.h"
@@ -16,12 +17,7 @@ typedef struct button_s{
 int menu(SDL_Window * pWindow){
 
   //initialisations de base------------------------------------------------------------------------------------------------------
-  button_t button1;
-	button1.x=20;
-	button1.y=100;
-	button1.hauteur=20;
-	button1.largeur=100;
-
+	int randomMenu = 0;
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
 	SDL_Color couleurBlanche = {255, 255, 255};
@@ -46,9 +42,27 @@ int menu(SDL_Window * pWindow){
 		exit(EXIT_FAILURE);
 	}
 
-
-	/* DECLARATION BG_MENU*/
-	SDL_Surface* img_Menu_Surface = IMG_Load("../img/BG_TEST1.png");
+	SDL_Surface* img_Menu_Surface;
+	// DECLARATION BG_MENU aléatoire
+	srand(time(NULL));
+	randomMenu = rand()%5;
+	printf("Choix random du menu Version:%i\n\n",randomMenu);
+	switch(randomMenu){
+		case 1:
+			img_Menu_Surface = IMG_Load("../img/BG_MENU1.png");
+			break;
+		case 2:
+			img_Menu_Surface = IMG_Load("../img/BG_MENU2.png");
+			break;
+		case 3:
+			img_Menu_Surface = IMG_Load("../img/BG_MENU3.png");
+			break;
+		case 4:
+			img_Menu_Surface = IMG_Load("../img/BG_MENU4.png");
+			break;
+		default:
+			img_Menu_Surface = IMG_Load("../img/BG_DEFAULT.png");
+	}
 
 	if(!img_Menu_Surface){
 		fprintf(stderr, "Probleme chargement du background menu: %s\n", SDL_GetError());
