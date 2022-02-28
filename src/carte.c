@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "carte.h"
-//nombre de cartes dans le jeu au total
-#define N 13
+
+#define N 13 //nombre de cartes dans le jeu au total
 
 
 //fonction de creation de cartes
@@ -53,7 +53,7 @@ void maj_sauvergarde(carte_t * carte){
   fclose(fic1);
 }
 
-//fonction de réucpération des cartes que possède le joueur selon son fichier de sauvegarde
+//fonction de récupération des cartes que possède le joueur selon son fichier de sauvegarde
 void recup_sauvegarde(carte_t * tab_sauvegarde[N], carte_t * tab_cartes_total[N]){
     FILE * fic1;
     int id;
@@ -72,7 +72,7 @@ void recup_sauvegarde(carte_t * tab_sauvegarde[N], carte_t * tab_cartes_total[N]
 
 
 
-//fonction de creation du deck, 12 sera fixe obligatoirement
+//fonction de creation du deck lors du lancement d'une game, 12 sera fixe obligatoirement car 12 cartes en main
 void creation_deck(carte_t * deck[12]){
     
 

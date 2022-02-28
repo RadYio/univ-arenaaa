@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "../header/window.h"
+#include "../header/carte.h"
 
 
 typedef struct button_s{
@@ -38,9 +39,9 @@ int menu(SDL_Window * pWindow){
 	//pWindow = SDL_CreateWindow("univ-arenaaa",SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1600, 900, SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE);
 
 	/* renderer */
-	SDL_Renderer* renderer = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
+	SDL_Renderer* renderer_menu = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
 
-	if(renderer == NULL){
+	if(renderer_menu == NULL){
 		fprintf(stderr, "Erreur à la création du renderer\n");
 		exit(EXIT_FAILURE);
 	}
@@ -54,7 +55,7 @@ int menu(SDL_Window * pWindow){
 		exit(EXIT_FAILURE);
 	}
 
-  SDL_Texture* img_Menu_Texture = SDL_CreateTextureFromSurface(renderer, img_Menu_Surface);
+  SDL_Texture* img_Menu_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Menu_Surface);
   SDL_FreeSurface(img_Menu_Surface); /* on a la texture, plus besoin de l'image */
 
 	if(!img_Menu_Texture){
@@ -71,7 +72,7 @@ int menu(SDL_Window * pWindow){
 		exit(EXIT_FAILURE);
 	}
 
-  SDL_Texture* img_Choix_Texture = SDL_CreateTextureFromSurface(renderer, img_Choix_Surface);
+  SDL_Texture* img_Choix_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Choix_Surface);
   SDL_FreeSurface(img_Choix_Surface); /* on a la texture, plus besoin de l'image */
 
 	if(!img_Menu_Texture){
@@ -101,8 +102,8 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/*Texture du bouton jouer en solo*/
-	SDL_Texture *txt_optn1_T = SDL_CreateTextureFromSurface(renderer, txt_optn1_S);
-	SDL_Texture *txt_optn1_Hover_T = SDL_CreateTextureFromSurface(renderer, txt_optn1_Hover_S);
+	SDL_Texture *txt_optn1_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn1_S);
+	SDL_Texture *txt_optn1_Hover_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn1_Hover_S);
 	if(!txt_optn1_T || !txt_optn1_Hover_T){
 		fprintf(stderr, "Erreur à la création du rendu du texte : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -131,8 +132,8 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/*Texture du bouton jouer en multi*/
-	SDL_Texture *txt_optn2_T = SDL_CreateTextureFromSurface(renderer, txt_optn2_S);
-	SDL_Texture *txt_optn2_Hover_T = SDL_CreateTextureFromSurface(renderer, txt_optn2_Hover_S);
+	SDL_Texture *txt_optn2_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn2_S);
+	SDL_Texture *txt_optn2_Hover_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn2_Hover_S);
 	if(!txt_optn2_T || !txt_optn2_Hover_T){
 		fprintf(stderr, "Erreur à la création du rendu du texte : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -159,8 +160,8 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/*Texture du bouton jouer en multi*/
-	SDL_Texture *txt_optn3_T = SDL_CreateTextureFromSurface(renderer, txt_optn3_S);
-	SDL_Texture *txt_optn3_Hover_T = SDL_CreateTextureFromSurface(renderer, txt_optn3_Hover_S);
+	SDL_Texture *txt_optn3_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn3_S);
+	SDL_Texture *txt_optn3_Hover_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn3_Hover_S);
 	if(!txt_optn3_T || !txt_optn3_Hover_T){
 		fprintf(stderr, "Erreur à la création du rendu du texte : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -187,8 +188,8 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/*Texture du bouton jouer en multi*/
-	SDL_Texture *txt_optn4_T = SDL_CreateTextureFromSurface(renderer, txt_optn4_S);
-	SDL_Texture *txt_optn4_Hover_T = SDL_CreateTextureFromSurface(renderer, txt_optn4_Hover_S);
+	SDL_Texture *txt_optn4_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn4_S);
+	SDL_Texture *txt_optn4_Hover_T = SDL_CreateTextureFromSurface(renderer_menu, txt_optn4_Hover_S);
 	if(!txt_optn4_T || !txt_optn4_T){
 		fprintf(stderr, "Erreur à la création du rendu du texte : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
@@ -202,9 +203,14 @@ int menu(SDL_Window * pWindow){
 	txt_optn4_R.w=265;
 	txt_optn4_R.h=105;
 
+//récupération des données de sauvegarde (quelles cartes possède le joueur / quelles sont toutes les cartes qui existent)-------------------------------------------
+	
+	carte_t * tab_cartes_total[N]; //tableau qui repertorie toutes les cartes qui existent
+	carte_t * tab_sauvegarde[]; //tableau qui repertorie les cartes que possède le joueur
+	init_cartes(tab_cartes_total);
+	recup_sauvegarde(tab_sauvegarde, tab_cartes_total);
 
-
-//gestion des evenements---------------------------------------------------------------------------------------------------------------
+//gestion des evenements---------------------------------------------------------------------------------------------------------------------------------------------
 
 if(pWindow){
   int running = 1;
@@ -222,31 +228,31 @@ if(pWindow){
             case SDL_WINDOWEVENT_SHOWN:
 
               // Le fond de la fenêtre sera blanc
-              SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-              SDL_RenderClear(renderer);
+              SDL_SetRenderDrawColor(renderer_menu, 255, 255, 255, 255);
+              SDL_RenderClear(renderer_menu);
 
-              SDL_RenderCopy(renderer, img_Menu_Texture, NULL, NULL);
-              SDL_RenderCopy(renderer, img_Choix_Texture, NULL, NULL);
+              SDL_RenderCopy(renderer_menu, img_Menu_Texture, NULL, NULL);
+              SDL_RenderCopy(renderer_menu, img_Choix_Texture, NULL, NULL);
 
 							//Render de toutes les options du menu principal
 							//OPTION 1
-							SDL_RenderCopy(renderer, txt_optn1_T, NULL, &txt_optn1_R);
-							SDL_RenderCopy(renderer, txt_optn1_Hover_T, NULL, &txt_optn1_R);
+							SDL_RenderCopy(renderer_menu, txt_optn1_T, NULL, &txt_optn1_R);
+							SDL_RenderCopy(renderer_menu, txt_optn1_Hover_T, NULL, &txt_optn1_R);
 							//OPTION 2
-							SDL_RenderCopy(renderer, txt_optn2_T, NULL, &txt_optn2_R);
-							SDL_RenderCopy(renderer, txt_optn2_Hover_T, NULL, &txt_optn2_R);
+							SDL_RenderCopy(renderer_menu, txt_optn2_T, NULL, &txt_optn2_R);
+							SDL_RenderCopy(renderer_menu, txt_optn2_Hover_T, NULL, &txt_optn2_R);
 							//OPTION 3
-							SDL_RenderCopy(renderer, txt_optn3_T, NULL, &txt_optn3_R);
-							SDL_RenderCopy(renderer, txt_optn3_Hover_T, NULL, &txt_optn3_R);
+							SDL_RenderCopy(renderer_menu, txt_optn3_T, NULL, &txt_optn3_R);
+							SDL_RenderCopy(renderer_menu, txt_optn3_Hover_T, NULL, &txt_optn3_R);
 							//OPTION 4
-							SDL_RenderCopy(renderer, txt_optn4_T, NULL, &txt_optn4_R);
-							SDL_RenderCopy(renderer, txt_optn4_Hover_T, NULL, &txt_optn4_R);
+							SDL_RenderCopy(renderer_menu, txt_optn4_T, NULL, &txt_optn4_R);
+							SDL_RenderCopy(renderer_menu, txt_optn4_Hover_T, NULL, &txt_optn4_R);
 
 
 
 
               /* On fait le rendu ! */
-              SDL_RenderPresent(renderer);
+              SDL_RenderPresent(renderer_menu);
 
             break;
           }
