@@ -3,6 +3,8 @@
 #include <SDL2/SDL_image.h>
 #include <time.h>
 
+
+#include "../header/collection.h"
 #include "../header/window.h"
 #include "../header/carte.h"
 
@@ -165,8 +167,8 @@ int menu(SDL_Window * pWindow){
 
 
 	/*Surface du bouton 3*/
-	SDL_Surface* txt_optn3_S = TTF_RenderUTF8_Blended(police, "OPTION 3", couleurNoire);
-	SDL_Surface* txt_optn3_Hover_S = TTF_RenderUTF8_Blended(police, "OPTION 3", couleurGold);
+	SDL_Surface* txt_optn3_S = TTF_RenderUTF8_Blended(police, "Collection", couleurNoire);
+	SDL_Surface* txt_optn3_Hover_S = TTF_RenderUTF8_Blended(police, "Collection", couleurGold);
 
 	if(!txt_optn3_S || !txt_optn3_Hover_S){
 		fprintf(stderr, "Erreur à la création du texte ''option 3'': %s\n", SDL_GetError());
@@ -216,6 +218,8 @@ int menu(SDL_Window * pWindow){
 	txt_optn4_R.y=545;
 	txt_optn4_R.w=265;
 	txt_optn4_R.h=105;
+
+
 
 //récupération des données de sauvegarde (quelles cartes possède le joueur / quelles sont toutes les cartes qui existent)-------------------------------------------
 
@@ -270,6 +274,14 @@ if(pWindow){
             //Si on clique sur le bouton 1
 
           }
+					else if(e.button.x >= txt_optn3_R.x && e.button.x <= txt_optn3_R.x+txt_optn3_R.w && e.button.y >= txt_optn3_R.y && e.button.y <= txt_optn3_R.y+txt_optn3_R.h){
+						  //Si on clique sur le bouton 3
+							printf("Test\n");
+							SDL_RenderClear(renderer_menu);
+							collection(pWindow ,img_Menu_Texture);
+							SDL_RenderPresent(renderer_menu);
+
+					}
 					case SDL_MOUSEMOTION:
 						//SOURIS QUI HOVER SUR LE BOUTON 1
 						if(e.button.x >= txt_optn1_R.x && e.button.x <= txt_optn1_R.x+txt_optn1_R.w && e.button.y >= txt_optn1_R.y && e.button.y <= txt_optn1_R.y+txt_optn1_R.h){
