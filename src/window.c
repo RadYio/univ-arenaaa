@@ -42,6 +42,7 @@ int initialiser_fenetre(){
     if(pWindow){
       //lancement du jeu si fenetre bien crée-------------------------------------------------
       menu(pWindow); //on transmet le pointeur de la fenetre pour des utilisations antétieures
+      printf("Attention il faut delete ca\n\n\n");
       SDL_DestroyWindow(pWindow);
     }
     else{

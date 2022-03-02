@@ -14,17 +14,16 @@ int test_collec(){
 
 /*
 */
-int collection(SDL_Window * pWindow,SDL_Texture* img_Collec_Texture){
+int collection(SDL_Window * pWindow,SDL_Texture* img_Collec_Texture, SDL_Renderer* renderer_collec){
 
 
-	SDL_Renderer* renderer_collec = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
+	/*SDL_Renderer* renderer_collec = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
 
-
-
-	if(!img_Collec_Texture){
-		fprintf(stderr, "Erreur à la création du rendu de l'image ''CHOIX'': %s\n", SDL_GetError());
+  if(renderer_collec == NULL){
+		//fprintf(stderr, "Erreur à la création du renderer 2\n");
+    fprintf(stderr, "Erreur à la création du renderer 2 : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
-	}
+	}*/
 
   /* DECLARATION BG_CHOIX*/
   SDL_Surface* img_Planche_Collec = IMG_Load("../img/planche_collec.png");
@@ -37,10 +36,10 @@ int collection(SDL_Window * pWindow,SDL_Texture* img_Collec_Texture){
 
     if(pWindow){
       int running = 1;
-      while(running) {
+      while(running){
         SDL_Event e;
-        while(SDL_PollEvent(&e)) {
-          switch(e.type) {
+        while(SDL_PollEvent(&e)){
+          switch(e.type){
             case SDL_QUIT: running = 0;
             break;
             case SDL_WINDOWEVENT:
@@ -53,6 +52,7 @@ int collection(SDL_Window * pWindow,SDL_Texture* img_Collec_Texture){
 
                   // Le fond de la fenêtre sera blanc
                   SDL_SetRenderDrawColor(renderer_collec, 255, 255, 255, 255);
+                  printf("Test2222\n\n\n\n");
                   SDL_RenderClear(renderer_collec);
 
                   SDL_RenderCopy(renderer_collec, img_Collec_Texture, NULL, NULL);
