@@ -286,7 +286,7 @@ if(pWindow){
 						  //Si on clique sur le bouton 3
 							printf("Test on clique sur le bouton 3\n\n");
 							SDL_RenderClear(renderer_menu);
-							collection(pWindow ,img_Menu_Texture, renderer_menu);
+							collection(pWindow ,img_Menu_Texture, renderer_menu, &running);
 
 					}
 
@@ -377,7 +377,7 @@ if(pWindow){
 //Destruction de la fenetre
 SDL_DestroyWindow(pWindow);
 
-TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
+TTF_CloseFont(police); //Doit être avant TTF_Quit()
 TTF_Quit();
   SDL_Quit();
   return 0;
