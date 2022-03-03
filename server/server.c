@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
+
 
 #define PORT 8080
 
@@ -15,6 +17,10 @@ typedef struct sockaddr_in_s{
     char                sin_zero[8];
 }sockaddr_in_t;
 
+void* jeSuisThread(void* v){
+  printf("Bonjour je suis dans le thread\n");
+  return NULL;
+}
 
 int main(){
   //DEFINITION DU SERVEUR
@@ -26,6 +32,10 @@ int main(){
   sockaddr_in_t client_Sin;
   int clientSocket;
   socklen_t c_Taille = sizeof(client_Sin);
+
+
+  //DEFINITION DES THREADS SAH QUEL PLAISIR
+  pthread_t thread;
 
   //On vérifie la création socket de notre serveur
   if(serverSocket==-1){
@@ -52,9 +62,18 @@ int main(){
   printf("Utilisation et écoute du port %d...\n", PORT);
 
 
-
-
   printf("On attente de la connexion d'un client ...\n");
   clientSocket = accept(serverSocket, (struct sockaddr*)&client_Sin, &c_Taille);
   printf("Un client se connecte avec la socket %d de %s:%d\n", clientSocket, inet_ntoa(client_Sin.sin_addr), htons(client_Sin.sin_port));
+
+  pthread_create(&thread, NULL, jeSuisThread, NULL);
+
+  int ijj;
+  for(ijj=0;ijj<20;ijj++){
+    printf("(%i)\n",ijj);
+  }
+
+  pthread_join(thread, NULL);
+
+  printf("Plus connecté\n");
 }

@@ -50,4 +50,19 @@ int main(){
   }
   printf("wtf: %i\n", testConnect);
   printf("Connexion à %s sur le port %d\n", inet_ntoa(sin.sin_addr), htons(sin.sin_port));
+
+  int choix = -1;
+  do{
+    printf("---MENU TEST ---\n");
+    printf("1) QUITTER\n");
+    printf("\n");
+    scanf("%i",&choix);
+  }while(choix==-1);
+  switch (choix){
+    case 1: //OPTN: QUITTER
+      printf("1) %i\n",shutdown(clientSocket, 2));
+      printf("2) %i\n",close(clientSocket));
+      printf("3) On quitte le client\n");
+      return 1;
+  }
 }
