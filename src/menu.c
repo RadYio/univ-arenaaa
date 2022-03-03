@@ -274,6 +274,14 @@ if(pWindow){
             //Si on clique sur le bouton 1
 
           }
+
+
+
+
+
+
+
+
 					else if(e.button.x >= txt_optn3_R.x && e.button.x <= txt_optn3_R.x+txt_optn3_R.w && e.button.y >= txt_optn3_R.y && e.button.y <= txt_optn3_R.y+txt_optn3_R.h){
 						  //Si on clique sur le bouton 3
 							printf("Test on clique sur le bouton 3\n\n");
@@ -281,9 +289,23 @@ if(pWindow){
 							collection(pWindow ,img_Menu_Texture, renderer_menu);
 
 					}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 					else if(e.button.x >= txt_optn4_R.x && e.button.x <= txt_optn4_R.x+txt_optn4_R.w && e.button.y >= txt_optn4_R.y && e.button.y <= txt_optn4_R.y+txt_optn4_R.h){
 						  //Si on clique sur le bouton 4
-							running=0;
+							running=0; //Quitter le jeu
 
 					}
 					case SDL_MOUSEMOTION:

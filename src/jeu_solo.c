@@ -6,17 +6,17 @@
 #include "../header/carte.h"
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
-void jeu_solo(SDL_Renderer* renderer_menu, SDL_Window * pWindow){ //a rajouter : deck de la main
+/*void jeu_solo(SDL_Renderer* renderer_menu, SDL_Window * pWindow){ //a rajouter : deck de la main
     //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
     SDL_RenderClear(renderer_menu); //on arrete d'afficher tout ce qu'il est en lien avec le menu
     SDL_Renderer* renderer_jeu = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED); //creation d'un nouveau renderer pour le jeu
-    
+
     if(renderer_jeu == NULL){
 		fprintf(stderr, "Erreur à la création du renderer de jeu\n");
 		exit(EXIT_FAILURE);
 	}
-    
-	/* DECLARATION BG_JEU*/
+
+	// DECLARATION BG_JEU
 	SDL_Surface* img_jeu_Surface = IMG_Load("../img/BG_JEU.jpg");
 
 	if(!img_jeu_Surface){
@@ -25,13 +25,13 @@ void jeu_solo(SDL_Renderer* renderer_menu, SDL_Window * pWindow){ //a rajouter :
 	}
     //creation de texture à partir de surface
     SDL_Texture* img_jeu_Texture = SDL_CreateTextureFromSurface(renderer_jeu, img_jeu_Surface);
-    SDL_FreeSurface(img_jeu_Surface); /* on a la texture, plus besoin de l'image */
+    SDL_FreeSurface(img_jeu_Surface); // on a la texture, plus besoin de l'image
 
 	if(!img_jeu_Texture){
 		fprintf(stderr, "Erreur à la création du rendu de l'image ''CHOIX'': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
-	
+
 
 
 
@@ -162,4 +162,4 @@ void jeu_solo(SDL_Renderer* renderer_menu, SDL_Window * pWindow){ //a rajouter :
 } else {
   fprintf(stderr,"Erreur de création de la fenêtre: %s\n",SDL_GetError());
 }
-}
+}*/

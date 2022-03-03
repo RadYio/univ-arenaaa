@@ -17,13 +17,7 @@ int test_collec(){
 int collection(SDL_Window * pWindow,SDL_Texture* img_Collec_Texture, SDL_Renderer* renderer_collec){
 
 
-	/*SDL_Renderer* renderer_collec = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED);
-
-  if(renderer_collec == NULL){
-		//fprintf(stderr, "Erreur à la création du renderer 2\n");
-    fprintf(stderr, "Erreur à la création du renderer 2 : %s\n", SDL_GetError());
-		exit(EXIT_FAILURE);
-	}*/
+	
 
   /* DECLARATION BG_CHOIX*/
   SDL_Surface* img_Planche_Collec = IMG_Load("../img/planche_collec.png");
