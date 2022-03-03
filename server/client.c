@@ -1,0 +1,40 @@
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define PORT 8080
+
+typedef struct sockaddr_in_s{
+    short               sin_family;
+    unsigned short      sin_port;
+    struct in_addr      sin_addr;
+    char                sin_zero[8];
+}sockaddr_in_t;
+
+
+int main(){
+  sockaddr_in_t sin;
+  socklen_t taille = sizeof(sin);
+
+  //On crée notre socket
+  int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+  if(clientSocket==-1){
+    printf("Sortie à cause d'un bug de création Socket\n");
+    return 1;
+  }
+  printf("La socket %d est maintenant ouverte en mode TCP/IP\n", clientSocket);
+
+
+  //Configuration
+  //inet_addr("172.18.41.23");                //Oblige une certaine IP
+  sin.sin_addr.s_addr = htonl(INADDR_ANY);  //htonl donne une ip automatique
+  sin.sin_family = AF_INET;                 //Protocole ici (IP)
+  sin.sin_port = htons(PORT);               //Port
+
+  int testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+  printf("Un client se connecte avec la socket %d de %s:%d\n", testConnect, inet_ntoa(sin.sin_addr), htons(sin.sin_port));
+}
