@@ -7,6 +7,8 @@
 #include <stdlib.h>
 
 #define PORT 8080
+#define NB_TENTATIVE 5
+#define DELAI 5
 
 typedef struct sockaddr_in_s{
     short               sin_family;
@@ -30,11 +32,21 @@ int main(){
 
 
   //Configuration
-  inet_addr("172.18.41.144");                //Oblige une certaine IP
-  sin.sin_addr.s_addr = inet_addr("172.18.41.144");  //htonl donne une ip automatique
-  sin.sin_family = AF_INET;                 //Protocole ici (IP)
-  sin.sin_port = htons(PORT);               //Port
+  sin.sin_addr.s_addr = inet_addr("172.18.41.144");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_family = AF_INET;                           //Protocole ici (IP)
+  sin.sin_port = htons(PORT);                         //Port
 
-  int testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+  int testConnect=-1;
+  int i;
+  testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+  for(i=1;i<=NB_TENTATIVE && testConnect==-1;i++){
+    printf("Nouvelle tentative de connexion (%i)\n",i);
+    sleep(DELAI);
+    testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+  }
+  if(i>=NB_TENTATIVE){
+    printf("Nombre de tentative max atteinte (%i)\n\nEXIT\n",i);
+    return 1;
+  }
   printf("Un client se connecte avec la socket %d de %s:%d\n", testConnect, inet_ntoa(sin.sin_addr), htons(sin.sin_port));
 }
