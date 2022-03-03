@@ -5,7 +5,15 @@
 #include "../header/window.h"
 #include "../header/carte.h"
 
-
+//creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
+//vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1
+int tab_formation_cartes[5][3] = {
+    {-2, -1, -1},
+    {-1, -2, -1},
+    {-2, -1, -2},
+    {-1, -2, -1},
+    {-2, -1, -1}};
+//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
 
 
 
@@ -25,7 +33,15 @@ void main(){
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+//focntion de creation d'un rectangle prcq sinon ca va devenir le cancer a devoir déclarer 30 rectangles avec 150 lignes rien que pour ca
+SDL_Rect create_rectangle(int x, int y, int w, int h){
+    SDL_Rect rect_temp;
+    rect_temp.x = x;
+    rect_temp.y = y;
+    rect_temp.w = w;
+    rect_temp.h = h;
+    return rect_temp;
+}
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
@@ -42,35 +58,21 @@ void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à
 		exit(EXIT_FAILURE);
 	}
 
-     //creation du rectangle pour la zone joueur
-    SDL_Rect rect_joueur;
-	rect_joueur.x=100;
-	rect_joueur.y=75;
-	rect_joueur.w=600;
-	rect_joueur.h=750;
+    //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
+
+    //creation du rectangle pour la zone joueur
+    SDL_Rect rect_joueur = create_rectangle(100, 75, 600, 750);
 
     //creation du rectangle pour la zone adversaire
-    SDL_Rect rect_adv;
-	rect_adv.x=900;
-	rect_adv.y=75;
-	rect_adv.w=600;
-	rect_adv.h=750;
+    SDL_Rect rect_adv = create_rectangle(900, 75, 600, 750);
 
     //creation du rectangle pour le texte de deck du joueur
-    SDL_Rect rect_txt_deck_j;
-	rect_txt_deck_j.x=300;
-	rect_txt_deck_j.y=20;
-	rect_txt_deck_j.w=200;
-	rect_txt_deck_j.h=50;
+    SDL_Rect rect_txt_deck_j = create_rectangle(300, 20, 200, 50);
 
     //creation du rectangle pour le texte de deck de l'adversaire
-    SDL_Rect rect_txt_deck_adv;
-	rect_txt_deck_adv.x=1060;
-	rect_txt_deck_adv.y=20;
-	rect_txt_deck_adv.w=300;
-	rect_txt_deck_adv.h=50;
+    SDL_Rect rect_txt_deck_adv = create_rectangle(1060, 20, 300, 50);
 
-
+    //a rajouter: les rectangles pour les postitions des cartes
 
 
     //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -163,6 +165,7 @@ void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à
                 switch(e.type) {
                     case SDL_QUIT: running = 0;
                     break;
+
                 }
             }
         }
