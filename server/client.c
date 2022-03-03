@@ -36,10 +36,10 @@ int main(){
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
-  int testConnect=-1;
+  int testConnect=SO_ERROR;
   int i;
   testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
-  for(i=1;i<=NB_TENTATIVE && testConnect==-1;i++){
+  for(i=1;i<=NB_TENTATIVE && testConnect==SO_ERROR;i++){
     printf("Nouvelle tentative de connexion (%i)\n",i);
     sleep(DELAI);
     testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
@@ -48,5 +48,5 @@ int main(){
     printf("Nombre de tentative max atteinte (%i)\n\nEXIT\n",i);
     return 1;
   }
-  printf("Un client se connecte avec la socket %d de %s:%d\n", testConnect, inet_ntoa(sin.sin_addr), htons(sin.sin_port));
+  printf("Connexion à %s sur le port %d\n", inet_ntoa(sin.sin_addr), htons(sin.sin_port));
 }
