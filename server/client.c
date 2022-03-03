@@ -31,7 +31,7 @@ int main(){
 
   //Configuration
   inet_addr("172.18.41.144");                //Oblige une certaine IP
-  sin.sin_addr.s_addr = htonl(INADDR_ANY);  //htonl donne une ip automatique
+  sin.sin_addr.s_addr = inet_addr("172.18.41.144");  //htonl donne une ip automatique
   sin.sin_family = AF_INET;                 //Protocole ici (IP)
   sin.sin_port = htons(PORT);               //Port
 
