@@ -17,9 +17,24 @@ typedef struct sockaddr_in_s{
     char                sin_zero[8];
 }sockaddr_in_t;
 
-void* jeSuisThread(void* v){
-  printf("Bonjour je suis dans le thread\n");
-  return NULL;
+int clientSocket;
+
+void* attente1(void* v){
+  ssize_t verif = -1;
+  char* buffer = malloc(sizeof(char)*32+1);
+  while(verif!=0){
+    printf("Client1: j'attends des informations...\n");
+    verif = read(clientSocket,buffer,32);
+    if(verif==0){
+      printf("Client[1] s'est deconnecté (%ld)\n",verif);
+      return NULL;
+    }
+    else{
+      printf("chaine: %s\n",buffer);
+    }
+  }
+
+
 }
 
 int main(){
@@ -30,7 +45,7 @@ int main(){
 
   //DEFINITION DU CLIENT
   sockaddr_in_t client_Sin;
-  int clientSocket;
+
   socklen_t c_Taille = sizeof(client_Sin);
 
 
@@ -66,12 +81,8 @@ int main(){
   clientSocket = accept(serverSocket, (struct sockaddr*)&client_Sin, &c_Taille);
   printf("Un client se connecte avec la socket %d de %s:%d\n", clientSocket, inet_ntoa(client_Sin.sin_addr), htons(client_Sin.sin_port));
 
-  pthread_create(&thread, NULL, jeSuisThread, NULL);
+  pthread_create(&thread, NULL, attente1, NULL);
 
-  int ijj;
-  for(ijj=0;ijj<20;ijj++){
-    printf("(%i)\n",ijj);
-  }
 
   pthread_join(thread, NULL);
 

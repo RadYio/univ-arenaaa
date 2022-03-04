@@ -32,7 +32,7 @@ int main(){
 
 
   //Configuration
-  sin.sin_addr.s_addr = inet_addr("172.18.41.144");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_addr.s_addr = inet_addr("172.18.41.23");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
@@ -52,17 +52,24 @@ int main(){
   printf("Connexion à %s sur le port %d\n", inet_ntoa(sin.sin_addr), htons(sin.sin_port));
 
   int choix = -1;
+  char* chaine = malloc(sizeof(char)*32+1);
   do{
     printf("---MENU TEST ---\n");
     printf("1) QUITTER\n");
+    printf("2) ENVOYER CHAINE\n");
     printf("\n");
     scanf("%i",&choix);
-  }while(choix==-1);
-  switch (choix){
-    case 1: //OPTN: QUITTER
-      printf("1) %i\n",shutdown(clientSocket, 2));
-      printf("2) %i\n",close(clientSocket));
-      printf("3) On quitte le client\n");
-      return 1;
-  }
+    switch (choix){
+      case 1: //OPTN: QUITTER
+        printf("On quitte le client. CODE DE SORTIE: (%i: attendu 0 / %i: attendu 0)\n",shutdown(clientSocket, 2),close(clientSocket));
+        return 1;
+      case 2:
+        printf("Saisir votre chaine <32 char: ");
+        scanf("%s",chaine);
+        write(clientSocket, chaine, 32);
+        printf("\n\nchaine: %s\nEnvoyée\n",chaine);
+        break;
+    }
+  }while(choix!=1);
+
 }
