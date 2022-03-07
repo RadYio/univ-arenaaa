@@ -2,6 +2,9 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 #include <time.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "../header/window.h"
 #include "../header/carte.h"
@@ -11,13 +14,22 @@ int test_collec(){
   printf("test\n");
 }
 
-char * nom_carte = "../img/Carte_Leo.png";
+char * chemin_carte = "../img/Carte_Leo.png"; 
+char * nom_carte = "Leo Maître de la bagarre";
+
 
 /*
 */
 int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* renderer_collec, int* running){
 
 
+	// Variable de couleur
+	SDL_Color couleurNoire = {0, 0, 0};
+	SDL_Color couleurBlanche = {255, 255, 255};
+	SDL_Color couleurGold = {255, 215, 0};
+
+	// Le pointeur vers notre police
+	TTF_Font* police = NULL;
 
 
   /* DECLARATION BG_CHOIX*/
@@ -25,6 +37,17 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 
   if(!img_Planche_Collec_S){
 		fprintf(stderr, "Erreur à la création du texte ''img_Planche_Collec_S'': %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+
+  if(TTF_Init() == -1) {
+		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+		exit(EXIT_FAILURE);
+	}
+
+	/* Choix de la police */
+	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -37,7 +60,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	}
 
   /* DECLARATION carte*/
-  SDL_Surface* img_Carte_Leo_S = IMG_Load(nom_carte);
+  SDL_Surface* img_Carte_Leo_S = IMG_Load(chemin_carte);
 
   if(!img_Carte_Leo_S){
 		fprintf(stderr, "Erreur à la création du texte ''img_Carte_Leo_S'': %s\n", SDL_GetError());
@@ -61,80 +84,66 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 
 
   //Déclaration des rectangles dans lesquels vont être stockées les cartes
-
   SDL_Rect nom_carte1;
-	nom_carte1.x=10;
-	nom_carte1.y=10;
-	nom_carte1.w=800;
-	nom_carte1.h=1000;
+	nom_carte1.x=80;
+	nom_carte1.y=80;
+	nom_carte1.w=((strlen ("Leo Maître de la bagarre")+1)* 20 +100);
+	nom_carte1.h=80;
+
 
   SDL_Rect nom_carte2;
-	nom_carte2.x=10;
-	nom_carte2.y=10;
-	nom_carte2.w=800;
-	nom_carte2.h=1000;
+	nom_carte2.x=80;
+	nom_carte2.y=160;
+	nom_carte2.w=(strlen("Texte 2")* 20 +100);
+	nom_carte2.h=80;
 
   SDL_Rect nom_carte3;
-	nom_carte3.x=30;
-	nom_carte3.y=30;
-	nom_carte3.w=800;
-	nom_carte3.h=3000;  
+	nom_carte3.x=80;
+	nom_carte3.y=240;
+	nom_carte3.w=(strlen("Texte 3 un peu")* 20 +100);;
+	nom_carte3.h=100;  
   
   SDL_Rect nom_carte4;
-	nom_carte4.x=40;
-	nom_carte4.y=40;
-	nom_carte4.w=800;
-	nom_carte4.h=4000;
+	nom_carte4.x=80;
+	nom_carte4.y=320;
+	nom_carte4.w=(strlen("Texte 4 beacoup plus long genre un peu trop")* 20 +100);;
+	nom_carte4.h=100;
   
   SDL_Rect nom_carte5;
 	nom_carte5.x=50;
-	nom_carte5.y=50;
+	nom_carte5.y=510;
 	nom_carte5.w=800;
-	nom_carte5.h=1000;  
+	nom_carte5.h=100;  
   
   SDL_Rect nom_carte6;
 	nom_carte6.x=60;
-	nom_carte6.y=60;
+	nom_carte6.y=610;
 	nom_carte6.w=800;
-	nom_carte6.h=1000;
+	nom_carte6.h=100;
 
   SDL_Rect nom_carte7;
 	nom_carte7.x=70;
-	nom_carte7.y=70;
+	nom_carte7.y=710;
 	nom_carte7.w=800;
-	nom_carte7.h=1000;  
-  
-  SDL_Rect nom_carte8;
-	nom_carte8.x=80;
-	nom_carte8.y=80;
-	nom_carte8.w=800;
-	nom_carte8.h=8000;
+	nom_carte7.h=100;  
   
   SDL_Rect nom_carte8;
 	nom_carte8.x=10;
-	nom_carte8.y=10;
+	nom_carte8.y=810;
 	nom_carte8.w=800;
-	nom_carte8.h=1000;
-
+	nom_carte8.h=100;
+  
   SDL_Rect nom_carte9;
 	nom_carte9.x=10;
-	nom_carte9.y=10;
+	nom_carte9.y=910;
 	nom_carte9.w=800;
-	nom_carte9.h=1000;
-  
+	nom_carte9.h=100;
+
   SDL_Rect nom_carte10;
 	nom_carte10.x=10;
-	nom_carte10.y=10;
+	nom_carte10.y=1010;
 	nom_carte10.w=800;
-	nom_carte10.h=1000;
-
-  SDL_Rect nom_carte11;
-	nom_carte11.x=10;
-	nom_carte11.y=10;
-	nom_carte11.w=800;
-	nom_carte11.h=1000;
-
-
+	nom_carte10.h=100;
   
 
 
@@ -147,14 +156,80 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	Carte_R.w=500;
 	Carte_R.h=800;
 
+
+
+
   //Attention je l'ai placé ici, mais il faudra le déplacer pour faire ce qu'il doit faire
   SDL_SetRenderDrawColor(renderer_collec, 255, 255, 255, 255);
   //printf("Test2222\n\n\n\n");
   SDL_RenderClear(renderer_collec);
 
+
+
+
+
+	SDL_Surface* txt_carte1_S = TTF_RenderUTF8_Blended(police, nom_carte, couleurNoire);
+	SDL_Surface* txt_carte1_Hover_S = TTF_RenderUTF8_Blended(police, nom_carte, couleurGold);
+
+	SDL_Texture *txt_optn1_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte1_S);
+	SDL_Texture *txt_optn1_Hover_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte1_Hover_S);
+
+	SDL_FreeSurface(txt_carte1_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(txt_carte1_Hover_S); /* on a la texture, plus besoin du texte via surface */
+
+  // 2e carte
+  SDL_Surface* txt_carte2_S = TTF_RenderUTF8_Blended(police, "texte 2", couleurNoire);
+	SDL_Surface* txt_carte2_Hover_S = TTF_RenderUTF8_Blended(police, "texte 2", couleurGold);
+
+	SDL_Texture *txt_optn2_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte2_S);
+	SDL_Texture *txt_optn2_Hover_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte2_Hover_S);
+
+	SDL_FreeSurface(txt_carte2_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(txt_carte2_Hover_S); /* on a la texture, plus besoin du texte via surface */
+
+  // 3e carte
+  SDL_Surface* txt_carte3_S = TTF_RenderUTF8_Blended(police, "Texte 3 un peu", couleurNoire);
+	SDL_Surface* txt_carte3_Hover_S = TTF_RenderUTF8_Blended(police, "Texte 3 un peu", couleurGold);
+
+	SDL_Texture *txt_optn3_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte3_S);
+	SDL_Texture *txt_optn3_Hover_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte3_Hover_S);
+
+	SDL_FreeSurface(txt_carte3_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(txt_carte3_Hover_S); /* on a la texture, plus besoin du texte via surface */
+
+  // 4e carte
+  SDL_Surface* txt_carte4_S = TTF_RenderUTF8_Blended(police, "Texte 4 beacoup plus long genre un peu trop", couleurNoire);
+	SDL_Surface* txt_carte4_Hover_S = TTF_RenderUTF8_Blended(police, "Texte 4 beacoup plus long genre un peu trop", couleurGold);
+
+	SDL_Texture *txt_optn4_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte4_S);
+	SDL_Texture *txt_optn4_Hover_T = SDL_CreateTextureFromSurface(renderer_collec, txt_carte4_Hover_S);
+
+	SDL_FreeSurface(txt_carte4_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(txt_carte4_Hover_S); /* on a la texture, plus besoin du texte via surface */
+
+
+
+
+
+
+
+
+
   SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
   SDL_RenderCopy(renderer_collec, img_Planche_Collec_T, NULL, &planche_R);
   SDL_RenderCopy(renderer_collec, img_Carte_Leo_T, NULL, &Carte_R);
+  SDL_RenderCopy(renderer_collec, txt_optn1_T, NULL, &nom_carte1);
+  SDL_RenderCopy(renderer_collec, txt_optn1_Hover_T, NULL, &nom_carte1);
+
+  SDL_RenderCopy(renderer_collec, txt_optn2_T, NULL, &nom_carte2);
+  SDL_RenderCopy(renderer_collec, txt_optn2_Hover_T, NULL, &nom_carte2);
+
+  SDL_RenderCopy(renderer_collec, txt_optn3_T, NULL, &nom_carte3);
+  SDL_RenderCopy(renderer_collec, txt_optn3_Hover_T, NULL, &nom_carte3);
+
+  SDL_RenderCopy(renderer_collec, txt_optn4_T, NULL, &nom_carte4);
+  SDL_RenderCopy(renderer_collec, txt_optn4_Hover_T, NULL, &nom_carte4);
+
   //printf("test 2\n");
   SDL_RenderPresent(renderer_collec);
   //printf("test 3\n");
