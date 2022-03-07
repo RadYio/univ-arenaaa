@@ -6,6 +6,7 @@
 #include "../header/carte.h"
 #include "../header/tour.h"
 
+
 //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
 //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
 int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
@@ -23,31 +24,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {-1, -1, -2}};
 //à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
 
+//tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
+int deck_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
-//fonction d'affichage de cartes, prend en paramètre le renderer, l'id de la carte en question, et le rectangle pour afficher l'image
-void afficher_carte(SDL_Renderer* renderer_jeu, int id_carte, SDL_Rect rect){
-    SDL_Surface* img_carte;
-    SDL_Texture* img_carte_T;
-    switch(id_carte){
-      case 0 : img_carte = IMG_Load("../img/carte0.png"); break;
-      case 1 : img_carte = IMG_Load("../img/carte1.png"); break;
-      case 2 : img_carte = IMG_Load("../img/carte2.png"); break;
-      case 3 : img_carte = IMG_Load("../img/carte3.png"); break;
-      case 4 : img_carte = IMG_Load("../img/carte4.png"); break;
-      case 5 : img_carte = IMG_Load("../img/carte5.png"); break;
-      case 6 : img_carte = IMG_Load("../img/carte6.png"); break;
-      case 7 : img_carte = IMG_Load("../img/carte7.png"); break;
-      case 8 : img_carte = IMG_Load("../img/carte8.png"); break;
-      case 9 : img_carte = IMG_Load("../img/carte9.png"); break;
-      case 10 : img_carte = IMG_Load("../img/carte10.png"); break;
-      case 11 : img_carte = IMG_Load("../img/carte11.png"); break;
-      case 12 : img_carte = IMG_Load("../img/carte12.png"); break;
-    }
-    img_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, img_carte);
-    SDL_FreeSurface(img_carte);
-    SDL_RenderCopy(renderer_jeu, img_carte_T, NULL, &rect);
-    SDL_RenderPresent(renderer_jeu);
-}
 
 
 void main(){
@@ -66,8 +45,19 @@ void main(){
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+//affiche les cartes qu'il y a dans la main du joueur != cartes sur le plateau
+void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12]){
+    int i;
+    for(i = 0; i < 12; i++){
+        afficher_carte(renderer_jeu, deck_main[i], tab_rect_main[i]);
+    }
+}
+
+
 //focntion de creation d'un rectangle prcq sinon ca va devenir le cancer a devoir déclarer 30 rectangles avec 150 lignes rien que pour ca
-SDL_Rect create_rectangle(int x, int y, int w, int h){
+SDL_Rect create_rectangle(int x, int y, int h, int w){
     SDL_Rect rect_temp;
     rect_temp.x = x;
     rect_temp.y = y;
@@ -76,8 +66,48 @@ SDL_Rect create_rectangle(int x, int y, int w, int h){
     return rect_temp;
 }
 
+
+
+//A RECREER : AFFICHER CARTE, SWITCH CASE AVEC ID DE LA CARTE ET LOAD_IMG EN FONCTION
+//CREATION D'UNE SURFACE, LOAD, METTRE DANS TEXTURE, RETOURNER JSP JE VEUX MOURIR
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
-void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     //déclarations de variables, choses à utiliser plus tard dans le code---------------------------------------------------------------------------------------------------------------------
 
     SDL_Color couleurJaune = {255, 215, 0};
@@ -94,16 +124,16 @@ void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
 
     //creation du rectangle pour la zone joueur
-    SDL_Rect rect_joueur = create_rectangle(100, 75, 600, 750);
+    SDL_Rect rect_joueur = create_rectangle(100, 75, 750, 600);
 
     //creation du rectangle pour la zone adversaire
-    SDL_Rect rect_adv = create_rectangle(900, 75, 600, 750);
+    SDL_Rect rect_adv = create_rectangle(900, 75, 750, 600);
 
     //creation du rectangle pour le texte de deck du joueur
-    SDL_Rect rect_txt_deck_j = create_rectangle(300, 20, 200, 50);
+    SDL_Rect rect_txt_deck_j = create_rectangle(300, 20, 50, 200);
 
     //creation du rectangle pour le texte de deck de l'adversaire
-    SDL_Rect rect_txt_deck_adv = create_rectangle(1060, 20, 300, 50);
+    SDL_Rect rect_txt_deck_adv = create_rectangle(1060, 20, 50, 300);
 
     //creation des rectangles pour l'affichage des cartes sur le plateau du joueur
     //à noter : pour les cartes, hauteur = 144, largeur = 132, 5 de marge en hauteur, 51 de marge en largeur entre les cartes
@@ -147,19 +177,32 @@ void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à
     SDL_Rect rect_formationAdv15 = create_rectangle(951, 676, 144, 132);
 
     //creation des rectangles pour l'affichage des cartes dans la main du joueur
-    SDL_Rect rect_main1 = create_rectangle(2, 70, 144, 132);
-    SDL_Rect rect_main2 = create_rectangle(135, 70, 144, 132);
-    SDL_Rect rect_main3 = create_rectangle(268, 70, 144, 132);
-    SDL_Rect rect_main4 = create_rectangle(401, 70, 144, 132);
-    SDL_Rect rect_main5 = create_rectangle(534, 70, 144, 132);
-    SDL_Rect rect_main6 = create_rectangle(667, 70, 144, 132);
-    SDL_Rect rect_main7 = create_rectangle(800, 70, 144, 132);
-    SDL_Rect rect_main8 = create_rectangle(933, 70, 144, 132);
-    SDL_Rect rect_main9 = create_rectangle(1066, 70, 144, 132);
-    SDL_Rect rect_main10 = create_rectangle(1199, 70, 144, 132);
-    SDL_Rect rect_main11 = create_rectangle(1332, 70, 144, 132);
-    SDL_Rect rect_main12 = create_rectangle(1465, 70, 144, 132);
-
+    SDL_Rect rect_main1 = create_rectangle(2, 830, 144, 132);
+    SDL_Rect rect_main2 = create_rectangle(135, 830, 144, 132);
+    SDL_Rect rect_main3 = create_rectangle(268, 830, 144, 132);
+    SDL_Rect rect_main4 = create_rectangle(401, 830, 144, 132);
+    SDL_Rect rect_main5 = create_rectangle(534, 830, 144, 132);
+    SDL_Rect rect_main6 = create_rectangle(667, 830, 144, 132);
+    SDL_Rect rect_main7 = create_rectangle(800, 830, 144, 132);
+    SDL_Rect rect_main8 = create_rectangle(933, 830, 144, 132);
+    SDL_Rect rect_main9 = create_rectangle(1066, 830, 144, 132);
+    SDL_Rect rect_main10 = create_rectangle(1199, 830, 144, 132);
+    SDL_Rect rect_main11 = create_rectangle(1332, 830, 144, 132);
+    SDL_Rect rect_main12 = create_rectangle(1465, 830, 144, 132);
+    //tableau qui repertorie les rectangles liés a la main du joueur
+    /*SDL_Rect tab_rect_main[12];
+    tab_rect_main[0] = rect_main1;
+    tab_rect_main[1] = rect_main2;
+    tab_rect_main[2] = rect_main3;
+    tab_rect_main[3] = rect_main4;
+    tab_rect_main[4] = rect_main5;
+    tab_rect_main[5] = rect_main6;
+    tab_rect_main[6] = rect_main7;
+    tab_rect_main[7] = rect_main8;
+    tab_rect_main[8] = rect_main9;
+    tab_rect_main[9] = rect_main10;
+    tab_rect_main[10] = rect_main11;
+    tab_rect_main[11] = rect_main12;*/
 
 
     //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -303,9 +346,24 @@ void jeu_solo(SDL_Window * pWindow){ //a rajouter : deck de la main, TTF_FONT à
 
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
-    while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
+    //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
+    
+    void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12]);
 
+    if(pWindow){
+      int running = 1;
+        while(running) {
+          SDL_Event e;
+          while(SDL_PollEvent(&e)) {
+              switch(e.type) {
+                  case SDL_QUIT: running = 0;
+                  break;
 
+              }
+                    break;
+          }
+        }
+    }
 
 
 
@@ -351,7 +409,7 @@ int initialiser_fenetre(){
 
     if(pWindow){
       //lancement du jeu si fenetre bien crée-------------------------------------------------
-      jeu_solo(pWindow); //on transmet le pointeur de la fenetre pour des utilisations antétieures
+      jeu_solo(pWindow, deck_main); //on transmet le pointeur de la fenetre pour des utilisations antétieures
       SDL_DestroyWindow(pWindow);
     }
     else{

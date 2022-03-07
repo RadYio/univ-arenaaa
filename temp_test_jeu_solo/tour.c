@@ -5,6 +5,7 @@
 #include "../header/window.h"
 #include "../header/carte.h"
 #include "../header/test_jeu_solo"
+#include "../header/affichages.h"
 
 //fonction d'un tour, à répéter jusqu'a victoire, fonction retourne 1 si victoire joueur, -1 si victoire adversaire et 0 si rien, on continue alors
 int tour(SDL_Renderer* renderer_jeu, SDL_Window pWindow){
