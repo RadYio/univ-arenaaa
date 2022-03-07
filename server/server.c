@@ -8,7 +8,8 @@
 #include <pthread.h>
 
 
-#define PORT 8080
+#define PORT 6666
+#define nbClientMax 12
 
 typedef struct sockaddr_in_s{
     short               sin_family;
@@ -17,9 +18,14 @@ typedef struct sockaddr_in_s{
     char                sin_zero[8];
 }sockaddr_in_t;
 
+typedef struct client_s{
+  int indice;
+  int numSock;
+}client_t;
+
 int clientSocket;
 
-void* attente1(void* v){
+void* attente(void* v){
   ssize_t verif = -1;
   char* buffer = malloc(sizeof(char)*32+1);
   while(verif!=0){
@@ -33,8 +39,6 @@ void* attente1(void* v){
       printf("chaine: %s\n",buffer);
     }
   }
-
-
 }
 
 int main(){
@@ -81,10 +85,8 @@ int main(){
   clientSocket = accept(serverSocket, (struct sockaddr*)&client_Sin, &c_Taille);
   printf("Un client se connecte avec la socket %d de %s:%d\n", clientSocket, inet_ntoa(client_Sin.sin_addr), htons(client_Sin.sin_port));
 
-  pthread_create(&thread, NULL, attente1, NULL);
+  pthread_create(&thread, NULL, attente, NULL);
 
 
   pthread_join(thread, NULL);
-
-  printf("Plus connecté\n");
 }

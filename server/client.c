@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define PORT 8080
+#define PORT 6666
 #define NB_TENTATIVE 5
 #define DELAI 5
 
@@ -32,7 +32,7 @@ int main(){
 
 
   //Configuration
-  sin.sin_addr.s_addr = inet_addr("172.18.41.23");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_addr.s_addr = inet_addr("172.18.41.135");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
