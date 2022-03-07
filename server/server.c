@@ -6,10 +6,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <time.h>
+
 
 
 #define PORT 6666
-#define nbClientMax 12
 
 typedef struct sockaddr_in_s{
     short               sin_family;
@@ -19,13 +20,32 @@ typedef struct sockaddr_in_s{
 }sockaddr_in_t;
 
 typedef struct client_s{
-  int indice;
   int numSock;
+  sockaddr_in_t sin; //Socket address IN
+  socklen_t taille;
 }client_t;
 
-int clientSocket;
+//DEFINITION DU CLIENT
+client_t listeClient[32];
+int nb_client_total=0;
 
-void* attente(void* v){
+//DEFINITION DES THREADS SAH QUEL PLAISIR
+pthread_t thread[32];
+
+//DEFINITION GLOBALE DU serveur
+int serverSocket;
+
+void* connecting(void* v){
+  client_t new;
+  new.taille=sizeof(new.sin);
+  new.numSock=accept(serverSocket, (struct sockaddr*)&new.sin, &new.taille);
+  printf("Un client se connecte avec la socket %d de %s:%d\n", new.numSock, inet_ntoa(new.sin.sin_addr), htons(new.sin.sin_port));
+
+  listeClient[nb_client_total++]=new;
+  return NULL;
+}
+
+/*void* attente(void* v){
   ssize_t verif = -1;
   char* buffer = malloc(sizeof(char)*32+1);
   while(verif!=0){
@@ -39,25 +59,18 @@ void* attente(void* v){
       printf("chaine: %s\n",buffer);
     }
   }
-}
+}*/
 
 int main(){
   //DEFINITION DU SERVEUR
-  sockaddr_in_t server_Sin;
-  int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+  sockaddr_in_t server_Sin;                               //Socket address IN
+  serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
   socklen_t s_Taille = sizeof(server_Sin);
 
-  //DEFINITION DU CLIENT
-  sockaddr_in_t client_Sin;
 
-  socklen_t c_Taille = sizeof(client_Sin);
+  srand(time(NULL));
 
-
-  //DEFINITION DES THREADS SAH QUEL PLAISIR
-  pthread_t thread;
-
-  //On vérifie la création socket de notre serveur
-  if(serverSocket==-1){
+  if(serverSocket==-1){ //On vérifie la création socket de notre serveur
     printf("Sortie à cause d'un bug de création Socket\n");
     return 1;
   }
@@ -81,12 +94,19 @@ int main(){
   printf("Utilisation et écoute du port %d...\n", PORT);
 
 
+
+
+
   printf("On attente de la connexion d'un client ...\n");
-  clientSocket = accept(serverSocket, (struct sockaddr*)&client_Sin, &c_Taille);
-  printf("Un client se connecte avec la socket %d de %s:%d\n", clientSocket, inet_ntoa(client_Sin.sin_addr), htons(client_Sin.sin_port));
 
-  pthread_create(&thread, NULL, attente, NULL);
+  pthread_create(&thread[0], NULL, connecting, NULL);
+  pthread_create(&thread[1], NULL, connecting, NULL);
+
+  while(1){
+    //pthread_join(thread, NULL);
+    printf("val(%i):%i\n\n",rand(),nb_client_total);
+  }
 
 
-  pthread_join(thread, NULL);
+
 }
