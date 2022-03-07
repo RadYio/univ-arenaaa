@@ -18,10 +18,10 @@ carte_t * creer_carte(char * nom, int hp , int nb_degats , type_t type_attaque ,
 
 //fonction d'initialisation de toutes les cartes, 12 en brut car on à que 12 cartes, à modifier si on en rajoute plus
 void init_cartes(carte_t * tab_cartes_total[]){
-    tab_cartes_total[0] = creer_carte("Allan maître des enigmes", 10, 4 , Psy,Poison,0);
-    tab_cartes_total[1] = creer_carte("Charly maître du Ratio", 10, 4 , Psy,Poison,1);
+    tab_cartes_total[0] = creer_carte("Allan maître des l'esprit", 10, 4 , Psy,Poison,0);
+    tab_cartes_total[1] = creer_carte("Charly maître du ratio", 10, 4 , Psy,Poison,1);
     tab_cartes_total[2] = creer_carte("Jonathan maître du temps", 10, 4 , Physique,Psy,2);
-    tab_cartes_total[3] = creer_carte("Léo maître des combats", 10, 4 , Physique,Psy,3);
+    tab_cartes_total[3] = creer_carte("Léo maître de la bagarre", 10, 4 , Physique,Psy,3);
     tab_cartes_total[4] = creer_carte("Alexis maître du sel", 10, 4 , Poison,Physique,4);
     tab_cartes_total[5] = creer_carte("Arthur maître du silence", 10, 4 , Poison,Physique,5);
     tab_cartes_total[6] = creer_carte("Chevalier", 5, 3 , Physique,Psy,6);
