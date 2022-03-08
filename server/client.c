@@ -61,7 +61,7 @@ int main(){
     scanf("%i",&choix);
     switch (choix){
       case 1: //OPTN: QUITTER
-        printf("On quitte le client. CODE DE SORTIE: (%i: attendu 0 / %i: attendu 0)\n",shutdown(clientSocket, 2),close(clientSocket));
+        printf("On quitte le client. CODE DE SORTIE: (%i: attendu -1 / %i: attendu 0)\n",shutdown(clientSocket, 2),close(clientSocket));
         return 1;
       case 2:
         printf("Saisir votre chaine <32 char: ");
@@ -69,6 +69,9 @@ int main(){
         write(clientSocket, chaine, 32);
         printf("\n\nchaine: %s\nEnvoyée\n",chaine);
         break;
+      default:
+      printf("Mais fréro, tu es cringe\n\n");
+      break;
     }
   }while(choix!=1);
 

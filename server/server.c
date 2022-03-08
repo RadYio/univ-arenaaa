@@ -52,6 +52,16 @@ int serverSocket;
   return NULL;
 }*/
 
+void pasDePerte(int position){
+  int i;
+  for(i=position;i<nb_client_total-1;i++){
+    listeClient[i]=listeClient[i+1];
+    listeClient[i].num=i;
+  }
+  nb_client_total--;
+  printf("On cherche a maintenir\n");
+}
+
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
 
@@ -62,6 +72,7 @@ void* attente(void* informations){
     verif = read(client->numSock,buffer,32);
     if(verif==0){
       printf("Client[%i] s'est deconnecté (pas cool)\n",client->num);
+      pasDePerte(client->num);
       return NULL;
     }
     else{
@@ -90,16 +101,21 @@ int main(){
   server_Sin.sin_family = AF_INET;                 //Protocole ici (IP)
   server_Sin.sin_port = htons(PORT);               //Port
 
-  int testBind = bind(serverSocket, (struct sockaddr *)&server_Sin, sizeof(server_Sin));
-  if(testBind==SO_ERROR){
+  int* test = malloc(sizeof(int));
+  *test = bind(serverSocket, (struct sockaddr *)&server_Sin, sizeof(server_Sin));
+  if(*test==SO_ERROR){
     printf("Sortie à cause d'un bug de bind Socket\n");
     return 1;
   }
-  int testListen = listen(serverSocket, 50);
-  if(testListen==SO_ERROR){
+
+
+
+  *test= listen(serverSocket, 50);
+  if(*test==SO_ERROR){
     printf("Sortie à cause d'un bug de listen Socket\n");
     return 1;
   }
+  free(test);
   printf("Utilisation et écoute du port %d...\n\n", PORT);
 
   //pthread_create(&thread[0], NULL, connecting, NULL);
@@ -109,7 +125,7 @@ int main(){
   time(&horloge);
   while(1){
     if(oldSecondes!=horloge)
-      printf("temps:(%li)\n\n",horloge);
+      printf("temps:(%li)\n\n",horloge-oldSecondes);
     else
       oldSecondes = horloge;
 
