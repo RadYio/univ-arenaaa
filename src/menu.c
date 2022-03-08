@@ -263,13 +263,8 @@ if(pWindow){
 							SDL_RenderCopy(renderer_menu, txt_optn3_T, NULL, &txt_optn3_R);
 							//OPTION 4
 							SDL_RenderCopy(renderer_menu, txt_optn4_T, NULL, &txt_optn4_R);
-              //On fait le rendu !
-              SDL_RenderPresent(renderer_menu);
-
-            break;
-          }
-        case SDL_MOUSEBUTTONDOWN:
-					printf("x: %i\ny: %i\n",e.button.x,e.button.y);
+              //On fait le rendu !SDL_Surface* carte_s;
+          SDL_Texture* carte_t;utton.y);
           if(e.button.x >= txt_optn1_R.x && e.button.x <= txt_optn1_R.x+txt_optn1_R.w && e.button.y >= txt_optn1_R.y && e.button.y <= txt_optn1_R.y+txt_optn1_R.h){
             //Si on clique sur le bouton 1
 
