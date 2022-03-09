@@ -52,7 +52,7 @@ int serverSocket;
   return NULL;
 }*/
 
-void pasDePerte(int position){
+/*void pasDePerte(int position){
   int i;
   for(i=position;i<nb_client_total-1;i++){
     listeClient[i]=listeClient[i+1];
@@ -60,7 +60,7 @@ void pasDePerte(int position){
   }
   nb_client_total--;
   printf("On cherche a maintenir\n");
-}
+}*/
 
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
@@ -72,7 +72,7 @@ void* attente(void* informations){
     verif = read(client->numSock,buffer,32);
     if(verif==0){
       printf("Client[%i] s'est deconnecté (pas cool)\n",client->num);
-      pasDePerte(client->num);
+      client->num=-1;
       return NULL;
     }
     else{
@@ -123,6 +123,8 @@ int main(){
 
 
   time(&horloge);
+  int i;
+  int connect = -1;
   while(1){
     if(oldSecondes!=horloge)
       printf("temps:(%li)\n\n",horloge-oldSecondes);
@@ -131,10 +133,22 @@ int main(){
 
 
     printf("On attente de la connexion d'un client ...\n");
-    listeClient[nb_client_total].numSock = accept(serverSocket, (struct sockaddr*)&listeClient[nb_client_total].sin, &listeClient[nb_client_total].taille);
-    listeClient[nb_client_total].num=nb_client_total;
 
-    pthread_create(&thread[nb_client_total], NULL, attente, (void*)&listeClient[nb_client_total]);
+    connect = accept(serverSocket, (struct sockaddr*)&listeClient[nb_client_total].sin, &listeClient[nb_client_total].taille);
+    if(connect!=-1){
+      for(i=0;i<CLIENT_MAX;i++){
+        if(listeClient[i].num==-1){ //Si libre
+          listeClient[i].numSock = connect;
+          listeClient[i].num=nb_client_total;
+          break; //On break afin de garder l'indice de i;
+        }
+      }
+      if(i<CLIENT_MAX) //On a trouvé une place
+        pthread_create(&thread[i], NULL, attente, (void*)&listeClient[i]);
+
+    }
+
+
 
 
     time(&horloge);
