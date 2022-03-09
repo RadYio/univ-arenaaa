@@ -2,6 +2,7 @@
 #include "../header/carte.h"
 #include "../header/tour.h"
 #include "../header/affichages.h"
+#include "../header/musique.h"
 
 
 #include <SDL2/SDL.h>
@@ -331,9 +332,12 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
               switch(e.type) {
                   case SDL_QUIT: running = 0;
                   break;
-
+                  case SDL_KEYDOWN :
+                  if(e.key.keysym.sym == SDLK_UP){
+                    lancer_musique();
+                  }
+                  break;
               }
-                    break;
           }
         }
     }

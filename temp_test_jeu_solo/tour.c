@@ -7,13 +7,13 @@
 #include "../header/affichages.h"
 
 //fonction qui tranfère une carte de la main du joueur sur le plateau
-void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15], int colone, int ligne, int indice_main){
+/*void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15], int colone, int ligne, int indice_main){
   tab_formation_cartes[colone][ligne] = deck_main[indice_main];
   deck_main[indice_main] = -1;
-  
 
 
-}
+
+}*/
 
 
 
