@@ -1,10 +1,12 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
-
 #include "../header/window.h"
 #include "../header/carte.h"
 #include "../header/tour.h"
+#include "../header/affichages.h"
+
+
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 
 //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
@@ -45,32 +47,6 @@ void main(){
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
-//fonction d'affichage d'une carte dans un rectangle donné
-void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_afficher){
-  SDL_Surface* carte_s;
-  SDL_Texture* carte_t;
-  printf("BBBBBBBBBBBBBB\n");
-  switch(carte){
-    case 0 : carte_s = IMG_Load("../img/img_cartes/carte0.png"); break;
-    case 1 : carte_s = IMG_Load("../img/img_cartes/carte1.png"); break;
-    case 2 : carte_s = IMG_Load("../img/img_cartes/carte2.png"); break;
-    case 3 : carte_s = IMG_Load("../img/img_cartes/carte3.png"); printf("CCCCCCCCCCCCCCCCCCC\n"); break;
-    case 4 : carte_s = IMG_Load("../img/img_cartes/carte4.png"); break;
-    case 5 : carte_s = IMG_Load("../img/img_cartes/carte5.png"); break;
-    case 6 : carte_s = IMG_Load("../img/img_cartes/carte6.png"); break;
-    case 7 : carte_s = IMG_Load("../img/img_cartes/carte7.png"); break;
-    case 8 : carte_s = IMG_Load("../img/img_cartes/carte8.png"); break;
-    case 9 : carte_s = IMG_Load("../img/img_cartes/carte9.png"); break;
-    case 10 : carte_s = IMG_Load("../img/img_cartes/carte10.png"); break;
-    case 11 : carte_s = IMG_Load("../img/img_cartes/carte11.png"); break;
-    case 12 : carte_s = IMG_Load("../img/img_cartes/carte12.png"); break;
-  }
-    carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
-    SDL_FreeSurface(carte_s);
-    SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
-    SDL_RenderPresent(renderer_jeu);
-}
 
 //affiche les cartes qu'il y a dans la main du joueur != cartes sur le plateau
 void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12]){
@@ -328,43 +304,6 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     SDL_RenderDrawRect(renderer_jeu, &rect_main12);
 
 
-  //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- 
-
-
-    int i;
-    SDL_Surface* carte_s;
-    SDL_Texture* carte_t;
-      for(i = 0; i < 12; i++){
-        //printf("i = %i\n", i);
-          
-          printf("BBBBBBBBBBBBBB\n");
-          switch(3){
-            case 0 : carte_s = IMG_Load("../img/img_cartes/carte0.png"); break;
-            case 1 : carte_s = IMG_Load("../img/img_cartes/carte1.png"); break;
-            case 2 : carte_s = IMG_Load("../img/img_cartes/carte2.png"); break;
-            case 3 : carte_s = IMG_Load("../img/img_cartes/carte3.png"); printf("CCCCCCCCCCCCCCCCCCC\n"); break;
-            case 4 : carte_s = IMG_Load("../img/img_cartes/carte4.png"); break;
-            case 5 : carte_s = IMG_Load("../img/img_cartes/carte5.png"); break;
-            case 6 : carte_s = IMG_Load("../img/img_cartes/carte6.png"); break;
-            case 7 : carte_s = IMG_Load("../img/img_cartes/carte7.png"); break;
-            case 8 : carte_s = IMG_Load("../img/img_cartes/carte8.png"); break;
-            case 9 : carte_s = IMG_Load("../img/img_cartes/carte9.png"); break;
-            case 10 : carte_s = IMG_Load("../img/img_cartes/carte10.png"); break;
-            case 11 : carte_s = IMG_Load("../img/img_cartes/carte11.png"); break;
-            case 12 : carte_s = IMG_Load("../img/img_cartes/carte12.png"); break;
-          }
-          carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
-          SDL_FreeSurface(carte_s);
-          SDL_RenderCopy(renderer_jeu, carte_t, NULL, &tab_rect_main[i]);
-          SDL_RenderPresent(renderer_jeu);
-      }
-      
-
-
-
-
-
 
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);
@@ -374,8 +313,8 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
-    printf("AAAAAAAAAAAAAAAA\n");
-    //affichage_main(renderer_jeu, deck_main, tab_rect_main);
+    affichage_main(renderer_jeu, deck_main, tab_rect_main);
+    SDL_RenderPresent(renderer_jeu);
 
     if(pWindow){
       int running = 1;
@@ -398,7 +337,7 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //Destruction de la fenetre
-    SDL_DestroyWindow(pWindow);
+    //SDL_DestroyWindow(pWindow);
     //A SUPPRIMER--------------------------------------------------------------------------------------------------------
     TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
     TTF_Quit();

@@ -13,8 +13,8 @@ PROG=test
 
 all: test
 
-test: test_jeu_solo.c
-	${CC} -o ${PROG} test_jeu_solo.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
+test: test_jeu_solo.c affichages.c
+	${CC} -o ${PROG} test_jeu_solo.c affichages.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 clean:
 	rm -f ${PROG}
