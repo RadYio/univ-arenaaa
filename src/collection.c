@@ -25,10 +25,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	init_cartes(tab_cartes_total);
 	
 	recup_sauvegarde(tab_sauvegarde,tab_cartes_total);
-	printf("%s\n",tab_sauvegarde[10]->nom_collec);
-
-	printf("%s\n",tab_sauvegarde[11]->nom_collec);
-
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
 	SDL_Color couleurBlanche = {255, 255, 255};
@@ -39,10 +35,10 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 
 
   /* DECLARATION BG_CHOIX*/
-  SDL_Surface* img_Planche_Collec_S = IMG_Load("../img/planche_collec.png");
+  SDL_Surface* img_planche_bg1_S = IMG_Load("../img/planche_bg1.png");
 
-  if(!img_Planche_Collec_S){
-		fprintf(stderr, "Erreur à la création du texte ''img_Planche_Collec_S'': %s\n", SDL_GetError());
+  if(!img_planche_bg1_S){
+		fprintf(stderr, "Erreur à la création du texte ''img_planche_bg1_S'': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
 
@@ -58,10 +54,10 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	}
 
   //Déclaration image planche
-  SDL_Texture* img_Planche_Collec_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_Collec_S);
-  SDL_FreeSurface(img_Planche_Collec_S); // on a la texture, plus besoin de l'image
-  if(!img_Planche_Collec_T){
-		fprintf(stderr, "Erreur à la création du rendu ''img_Planche_Collec_T'' : %s\n", SDL_GetError());
+  SDL_Texture* img_planche_bg1_T = SDL_CreateTextureFromSurface(renderer_collec, img_planche_bg1_S);
+  SDL_FreeSurface(img_planche_bg1_S); // on a la texture, plus besoin de l'image
+  if(!img_planche_bg1_T){
+		fprintf(stderr, "Erreur à la création du rendu ''img_planche_bg1_T'' : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
   SDL_Surface* img_Planche_haut_S = IMG_Load("../img/panneau_haut.png");
@@ -71,6 +67,10 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
   SDL_Texture* img_Planche_bas_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_bas_S);
   SDL_FreeSurface(img_Planche_bas_S); // on a la texture, plus besoin de l'image
+
+SDL_Surface* img_retour_menu_S = IMG_Load("../img/retour_menu.png");
+  SDL_Texture* img_retour_menu_T = SDL_CreateTextureFromSurface(renderer_collec, img_retour_menu_S);
+  SDL_FreeSurface(img_retour_menu_S); // on a la texture, plus besoin de l'image
 
   /* DECLARATION carte1*/
   SDL_Surface* img_carte_1_S = IMG_Load(tab_sauvegarde[0]->chemin_carte);
@@ -138,10 +138,10 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 
   //Déclaration de la zone dans laquelle vont être listées les cartes
   SDL_Rect planche_R;
-	planche_R.x=10;
+	planche_R.x=75;
 	planche_R.y=100;
-	planche_R.w=800;
-	planche_R.h=900;
+	planche_R.w=650;
+	planche_R.h=700;
 
   SDL_Rect planche_haut_R;
 	planche_haut_R.x=10;
@@ -151,27 +151,38 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 
   SDL_Rect planche_bas_R;
 	planche_bas_R.x=10;
-	planche_bas_R.y=10;
+	planche_bas_R.y=5;
 	planche_bas_R.w=800;
 	planche_bas_R.h=200;
 
+  SDL_Rect retour_menu_R;
+	retour_menu_R.x=800;
+	retour_menu_R.y=750;
+	retour_menu_R.w=300;
+	retour_menu_R.h=120;
+
+  SDL_Rect texte_retour_R;
+	texte_retour_R.x=900;
+	texte_retour_R.y=780;
+	texte_retour_R.w=160;
+	texte_retour_R.h=60;
 
   //Déclaration des rectangles dans lesquels vont être stockées les cartes
   SDL_Rect nom_carte1;
-	nom_carte1.x=100;
-	nom_carte1.y=170;
+	nom_carte1.x=110;
+	nom_carte1.y=180;
 	nom_carte1.w=(strlen(tab_sauvegarde[0]->nom_collec)* 30 );
 	nom_carte1.h=80;
 
 
   SDL_Rect nom_carte2;
 	nom_carte2.x=420;
-	nom_carte2.y=170;
+	nom_carte2.y=180;
 	nom_carte2.w=(strlen(tab_sauvegarde[1]->nom_collec)* 30 );
 	nom_carte2.h=80;
 
   SDL_Rect nom_carte3;
-	nom_carte3.x=100;
+	nom_carte3.x=110;
 	nom_carte3.y=260;
 	nom_carte3.w=(strlen(tab_sauvegarde[2]->nom_collec)* 30 );
 	nom_carte3.h=80;  
@@ -183,7 +194,7 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 	nom_carte4.h=80;
   
   SDL_Rect nom_carte5;
-	nom_carte5.x=100;
+	nom_carte5.x=110;
 	nom_carte5.y=350;
 	nom_carte5.w=(strlen(tab_sauvegarde[4]->nom_collec)* 30 );
 	nom_carte5.h=80;  
@@ -195,7 +206,7 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 	nom_carte6.h=80;
 
   SDL_Rect nom_carte7;
-	nom_carte7.x=100;
+	nom_carte7.x=110;
 	nom_carte7.y=440;
 	nom_carte7.w=(strlen(tab_sauvegarde[6]->nom_collec)* 30 );
 	nom_carte7.h=80;  
@@ -207,7 +218,7 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 	nom_carte8.h=80;
   
   SDL_Rect nom_carte9;
-	nom_carte9.x=100;
+	nom_carte9.x=110;
 	nom_carte9.y=530;
 	nom_carte9.w=(strlen(tab_sauvegarde[8]->nom_collec)* 30 );
 	nom_carte9.h=80;
@@ -219,7 +230,7 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 	nom_carte10.h=80;
 
   SDL_Rect nom_carte11;
-	nom_carte11.x=100;
+	nom_carte11.x=110;
 	nom_carte11.y=620;
 	nom_carte11.w=(strlen(tab_sauvegarde[10]->nom_collec)* 30 );
 	nom_carte11.h=80;
@@ -371,11 +382,22 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 	SDL_FreeSurface(txt_carte12_S); /* on a la texture, plus besoin du texte via surface */
 	SDL_FreeSurface(txt_carte12_Hover_S); /* on a la texture, plus besoin du texte via surface */
 
+ //  retour au menu
+  SDL_Surface* retour_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
+	SDL_Surface* retour_menu_Hover_S = TTF_RenderUTF8_Blended(police, "Menu", couleurGold);
+
+	SDL_Texture *retour_menu_T = SDL_CreateTextureFromSurface(renderer_collec, retour_menu_S);
+	SDL_Texture *retour_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_collec, retour_menu_Hover_S);
+
+	SDL_FreeSurface(retour_menu_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(retour_menu_Hover_S); /* on a la texture, plus besoin du texte via surface */
 
   SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
-  SDL_RenderCopy(renderer_collec, img_Planche_Collec_T, NULL, &planche_R);
+  SDL_RenderCopy(renderer_collec, img_planche_bg1_T, NULL, &planche_R);
   SDL_RenderCopy(renderer_collec, img_Planche_haut_T, NULL, &planche_haut_R);
   SDL_RenderCopy(renderer_collec, img_Planche_bas_T, NULL, &planche_bas_R);
+  SDL_RenderCopy(renderer_collec, img_retour_menu_T, NULL, &retour_menu_R);
+
 
 
 
@@ -415,6 +437,8 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
   SDL_RenderCopy(renderer_collec, txt_optn12_Hover_T, NULL, &nom_carte12);
   SDL_RenderCopy(renderer_collec, txt_optn12_T, NULL, &nom_carte12);
 
+  SDL_RenderCopy(renderer_collec, retour_menu_Hover_T, NULL, &texte_retour_R);
+  SDL_RenderCopy(renderer_collec, retour_menu_T, NULL, &texte_retour_R);
 
   SDL_RenderPresent(renderer_collec);
 
@@ -432,7 +456,14 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 
           switch(e.type){
             case SDL_QUIT: *running = 0;
-            break;			
+            break;
+			case SDL_MOUSEBUTTONDOWN:
+			printf("x: %i\ny: %i\n",e.button.x,e.button.y);
+			if(e.button.x >= texte_retour_R.x && e.button.x <= texte_retour_R.x+texte_retour_R.w && e.button.y >= texte_retour_R.y && e.button.y <= texte_retour_R.y+texte_retour_R.h){
+				//Si on clique sur le bouton 1
+				SDL_RenderClear(renderer_collec);
+				return 1;
+			}
 			case SDL_MOUSEMOTION:
 				//SOURIS QUI HOVER SUR LA CARTE 1
 				if(e.button.x >= nom_carte1.x && e.button.x <= nom_carte1.x+nom_carte1.w && e.button.y >= nom_carte1.y && e.button.y <= nom_carte1.y+nom_carte1.h){
@@ -443,7 +474,7 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 					oldHover=1;
 				}
 				//SOURIS QUI HOVER SUR LA CARTE 2
-				else if(oldHover ==0 && e.button.x >= nom_carte2.x && e.button.x <= nom_carte2.x+nom_carte2.w && e.button.y >= nom_carte2.y && e.button.y <= nom_carte2.y+nom_carte2.h){
+				else if(e.button.x >= nom_carte2.x && e.button.x <= nom_carte2.x+nom_carte2.w && e.button.y >= nom_carte2.y && e.button.y <= nom_carte2.y+nom_carte2.h){
 					SDL_RenderCopy(renderer_collec, txt_optn2_Hover_T, NULL, &nom_carte2);
 					SDL_RenderCopy(renderer_collec, img_carte_2_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
@@ -533,13 +564,22 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
 					oldHover=1;
 				}
+				//SOURIS QUI HOVER SUR LE BOUTON RETOUR MENU
+				else if(e.button.x >= texte_retour_R.x && e.button.x <= texte_retour_R.x+texte_retour_R.w && e.button.y >= texte_retour_R.y && e.button.y <= texte_retour_R.y+texte_retour_R.h){
+					SDL_RenderCopy(renderer_collec, retour_menu_Hover_T, NULL, &texte_retour_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
 				//Si on a deja effectué des hovers
 				else if(oldHover){
 					SDL_RenderClear(renderer_collec);
                   	SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
-                  	SDL_RenderCopy(renderer_collec, img_Planche_Collec_T, NULL, &planche_R);
+                  	SDL_RenderCopy(renderer_collec, img_planche_bg1_T, NULL, &planche_R);
 					SDL_RenderCopy(renderer_collec, img_Planche_haut_T, NULL, &planche_haut_R);
   					SDL_RenderCopy(renderer_collec, img_Planche_bas_T, NULL, &planche_bas_R);
+  					SDL_RenderCopy(renderer_collec, img_retour_menu_T, NULL, &retour_menu_R);
+
 					//Render de toutes les options du menu principal
 					//OPTION 1
 					SDL_RenderCopy(renderer_collec, txt_optn1_T, NULL, &nom_carte1);
@@ -554,6 +594,8 @@ SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
 					SDL_RenderCopy(renderer_collec, txt_optn10_T, NULL, &nom_carte10);
 					SDL_RenderCopy(renderer_collec, txt_optn11_T, NULL, &nom_carte11);
 					SDL_RenderCopy(renderer_collec, txt_optn12_T, NULL, &nom_carte12);
+					SDL_RenderCopy(renderer_collec, retour_menu_Hover_T, NULL, &texte_retour_R);
+					SDL_RenderCopy(renderer_collec, retour_menu_T, NULL, &texte_retour_R);
 
 
 /*
