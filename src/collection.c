@@ -15,18 +15,19 @@ int test_collec(){
   printf("test\n");
 }
 
-//char * chemin_carte = "../img/Carte_Leo.png"; 
-//char * nom_carte = "Leo Maître de la bagarre";
 
 
-/*
-*/
+
+
 int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* renderer_collec, int * running){
 	carte_t * tab_cartes_total[13];
 	carte_t * tab_sauvegarde[13];
 	init_cartes(tab_cartes_total);
 	
 	recup_sauvegarde(tab_sauvegarde,tab_cartes_total);
+	printf("%s\n",tab_sauvegarde[10]->nom_collec);
+
+	printf("%s\n",tab_sauvegarde[11]->nom_collec);
 
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
@@ -63,125 +64,171 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 		fprintf(stderr, "Erreur à la création du rendu ''img_Planche_Collec_T'' : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
+  SDL_Surface* img_Planche_haut_S = IMG_Load("../img/panneau_haut.png");
+  SDL_Texture* img_Planche_haut_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_haut_S);
+  SDL_FreeSurface(img_Planche_haut_S); // on a la texture, plus besoin de l'image
 
-  /* DECLARATION carte*/
+SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
+  SDL_Texture* img_Planche_bas_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_bas_S);
+  SDL_FreeSurface(img_Planche_bas_S); // on a la texture, plus besoin de l'image
+
+  /* DECLARATION carte1*/
   SDL_Surface* img_carte_1_S = IMG_Load(tab_sauvegarde[0]->chemin_carte);
-
-  if(!img_carte_1_S){
-		fprintf(stderr, "Erreur à la création du texte ''img_carte_1_S'': %s\n", SDL_GetError());
-		exit(EXIT_FAILURE);
-	}
-
-  //Déclaration image carte
   SDL_Texture* img_carte_1_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_1_S);
   SDL_FreeSurface(img_carte_1_S); // on a la texture, plus besoin de l'image
-  if(!img_carte_1_T){
-		fprintf(stderr, "Erreur à la création du rendu ''img'' : %s\n", SDL_GetError());
-		exit(EXIT_FAILURE);
-  }
 
 
   /* DECLARATION carte2*/
   SDL_Surface* img_carte_2_S = IMG_Load(tab_sauvegarde[1]->chemin_carte);
-
-  if(!img_carte_2_S){
-		fprintf(stderr, "Erreur à la création du texte ''img_carte_2_S'': %s\n", SDL_GetError());
-		exit(EXIT_FAILURE);
-	}
-
-  //Déclaration image carte
   SDL_Texture* img_carte_2_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_2_S);
   SDL_FreeSurface(img_carte_2_S); // on a la texture, plus besoin de l'image
-  if(!img_carte_2_T){
-		fprintf(stderr, "Erreur à la création du rendu ''img_Carte_Leo_T'' : %s\n", SDL_GetError());
-  }
 
     /* DECLARATION carte3*/
   SDL_Surface* img_carte_3_S = IMG_Load(tab_sauvegarde[2]->chemin_carte);
   SDL_Texture* img_carte_3_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_3_S);
+  SDL_FreeSurface(img_carte_3_S); // on a la texture, plus besoin de l'image
 
+  /* DECLARATION carte4*/
+  SDL_Surface* img_carte_4_S = IMG_Load(tab_sauvegarde[3]->chemin_carte);
+  SDL_Texture* img_carte_4_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_4_S);
+  SDL_FreeSurface(img_carte_4_S); // on a la texture, plus besoin de l'image
+
+
+  /* DECLARATION carte5*/
+  SDL_Surface* img_carte_5_S = IMG_Load(tab_sauvegarde[4]->chemin_carte);
+  SDL_Texture* img_carte_5_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_5_S);
+  SDL_FreeSurface(img_carte_5_S); // on a la texture, plus besoin de l'image
+
+    /* DECLARATION carte6*/
+  SDL_Surface* img_carte_6_S = IMG_Load(tab_sauvegarde[5]->chemin_carte);
+  SDL_Texture* img_carte_6_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_6_S);
+  SDL_FreeSurface(img_carte_6_S); // on a la texture, plus besoin de l'image
+
+    /* DECLARATION carte7*/
+  SDL_Surface* img_carte_7_S = IMG_Load(tab_sauvegarde[6]->chemin_carte);
+  SDL_Texture* img_carte_7_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_7_S);
+  SDL_FreeSurface(img_carte_7_S); // on a la texture, plus besoin de l'image
+
+
+  /* DECLARATION carte8*/
+  SDL_Surface* img_carte_8_S = IMG_Load(tab_sauvegarde[7]->chemin_carte);
+  SDL_Texture* img_carte_8_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_8_S);
+  SDL_FreeSurface(img_carte_8_S); // on a la texture, plus besoin de l'image
+
+    /* DECLARATION carte9*/
+  SDL_Surface* img_carte_9_S = IMG_Load(tab_sauvegarde[8]->chemin_carte);
+  SDL_Texture* img_carte_9_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_9_S);
+  SDL_FreeSurface(img_carte_9_S); // on a la texture, plus besoin de l'image
+
+  /* DECLARATION carte10*/
+  SDL_Surface* img_carte_10_S = IMG_Load(tab_sauvegarde[9]->chemin_carte);
+  SDL_Texture* img_carte_10_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_10_S);
+  SDL_FreeSurface(img_carte_10_S); // on a la texture, plus besoin de l'image
+
+
+  /* DECLARATION carte11*/
+  SDL_Surface* img_carte_11_S = IMG_Load(tab_sauvegarde[10]->chemin_carte);
+  SDL_Texture* img_carte_11_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_11_S);
+  SDL_FreeSurface(img_carte_11_S); // on a la texture, plus besoin de l'image
+
+    /* DECLARATION carte12*/
+  SDL_Surface* img_carte_12_S = IMG_Load(tab_sauvegarde[11]->chemin_carte);
+  SDL_Texture* img_carte_12_T = SDL_CreateTextureFromSurface(renderer_collec, img_carte_12_S);
+  SDL_FreeSurface(img_carte_12_S); // on a la texture, plus besoin de l'image
 
   //Déclaration de la zone dans laquelle vont être listées les cartes
   SDL_Rect planche_R;
 	planche_R.x=10;
-	planche_R.y=10;
+	planche_R.y=100;
 	planche_R.w=800;
 	planche_R.h=900;
+
+  SDL_Rect planche_haut_R;
+	planche_haut_R.x=10;
+	planche_haut_R.y=700;
+	planche_haut_R.w=800;
+	planche_haut_R.h=200;
+
+  SDL_Rect planche_bas_R;
+	planche_bas_R.x=10;
+	planche_bas_R.y=10;
+	planche_bas_R.w=800;
+	planche_bas_R.h=200;
 
 
   //Déclaration des rectangles dans lesquels vont être stockées les cartes
   SDL_Rect nom_carte1;
 	nom_carte1.x=100;
-	nom_carte1.y=80;
+	nom_carte1.y=170;
 	nom_carte1.w=(strlen(tab_sauvegarde[0]->nom_collec)* 30 );
 	nom_carte1.h=80;
 
 
   SDL_Rect nom_carte2;
 	nom_carte2.x=420;
-	nom_carte2.y=80;
+	nom_carte2.y=170;
 	nom_carte2.w=(strlen(tab_sauvegarde[1]->nom_collec)* 30 );
 	nom_carte2.h=80;
 
   SDL_Rect nom_carte3;
 	nom_carte3.x=100;
-	nom_carte3.y=160;
+	nom_carte3.y=260;
 	nom_carte3.w=(strlen(tab_sauvegarde[2]->nom_collec)* 30 );
 	nom_carte3.h=80;  
   
   SDL_Rect nom_carte4;
 	nom_carte4.x=420;
-	nom_carte4.y=160;
+	nom_carte4.y=260;
 	nom_carte4.w=(strlen(tab_sauvegarde[3]->nom_collec)* 30 );
 	nom_carte4.h=80;
   
   SDL_Rect nom_carte5;
 	nom_carte5.x=100;
-	nom_carte5.y=240;
+	nom_carte5.y=350;
 	nom_carte5.w=(strlen(tab_sauvegarde[4]->nom_collec)* 30 );
 	nom_carte5.h=80;  
   
   SDL_Rect nom_carte6;
 	nom_carte6.x=420;
-	nom_carte6.y=240;
+	nom_carte6.y=350;
 	nom_carte6.w=(strlen(tab_sauvegarde[5]->nom_collec)* 30 );
 	nom_carte6.h=80;
 
   SDL_Rect nom_carte7;
 	nom_carte7.x=100;
-	nom_carte7.y=320;
+	nom_carte7.y=440;
 	nom_carte7.w=(strlen(tab_sauvegarde[6]->nom_collec)* 30 );
 	nom_carte7.h=80;  
   
   SDL_Rect nom_carte8;
 	nom_carte8.x=420;
-	nom_carte8.y=320;
+	nom_carte8.y=440;
 	nom_carte8.w=(strlen(tab_sauvegarde[7]->nom_collec)* 30 );
 	nom_carte8.h=80;
   
   SDL_Rect nom_carte9;
 	nom_carte9.x=100;
-	nom_carte9.y=400;
+	nom_carte9.y=530;
 	nom_carte9.w=(strlen(tab_sauvegarde[8]->nom_collec)* 30 );
 	nom_carte9.h=80;
 
   SDL_Rect nom_carte10;
 	nom_carte10.x=420;
-	nom_carte10.y=400;
+	nom_carte10.y=530;
 	nom_carte10.w=(strlen(tab_sauvegarde[9]->nom_collec)* 30 );
 	nom_carte10.h=80;
 
   SDL_Rect nom_carte11;
-	nom_carte9.x=100;
-	nom_carte9.y=480;
-	nom_carte9.w=(strlen(tab_sauvegarde[10]->nom_collec)* 30 );
-	nom_carte9.h=80;
+	nom_carte11.x=100;
+	nom_carte11.y=620;
+	nom_carte11.w=(strlen(tab_sauvegarde[10]->nom_collec)* 30 );
+	nom_carte11.h=80;
 
   SDL_Rect nom_carte12;
-	nom_carte10.x=420;
-	nom_carte10.y=480;
-	nom_carte10.w=(strlen(tab_sauvegarde[11]->nom_collec)* 30 );
-	nom_carte10.h=80;
+	nom_carte12.x=420;
+	nom_carte12.y=620;
+	nom_carte12.w=(strlen(tab_sauvegarde[11]->nom_collec)* 30 );
+	nom_carte12.h=80;
   
 
 
@@ -327,6 +374,8 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 
   SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
   SDL_RenderCopy(renderer_collec, img_Planche_Collec_T, NULL, &planche_R);
+  SDL_RenderCopy(renderer_collec, img_Planche_haut_T, NULL, &planche_haut_R);
+  SDL_RenderCopy(renderer_collec, img_Planche_bas_T, NULL, &planche_bas_R);
 
 
 
@@ -366,9 +415,8 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
   SDL_RenderCopy(renderer_collec, txt_optn12_Hover_T, NULL, &nom_carte12);
   SDL_RenderCopy(renderer_collec, txt_optn12_T, NULL, &nom_carte12);
 
-  //printf("test 2\n");
+
   SDL_RenderPresent(renderer_collec);
-  //printf("test 3\n");
 
 
 //gestion des evenements---------------------------------------------------------------------------------------------------------------------------------------------
@@ -395,7 +443,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					oldHover=1;
 				}
 				//SOURIS QUI HOVER SUR LA CARTE 2
-				else if(e.button.x >= nom_carte2.x && e.button.x <= nom_carte2.x+nom_carte2.w && e.button.y >= nom_carte2.y && e.button.y <= nom_carte2.y+nom_carte2.h){
+				else if(oldHover ==0 && e.button.x >= nom_carte2.x && e.button.x <= nom_carte2.x+nom_carte2.w && e.button.y >= nom_carte2.y && e.button.y <= nom_carte2.y+nom_carte2.h){
 					SDL_RenderCopy(renderer_collec, txt_optn2_Hover_T, NULL, &nom_carte2);
 					SDL_RenderCopy(renderer_collec, img_carte_2_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
@@ -408,6 +456,81 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					SDL_RenderCopy(renderer_collec, img_carte_3_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
 					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=3;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 4
+				else if(e.button.x >= nom_carte4.x && e.button.x <= nom_carte4.x+nom_carte4.w && e.button.y >= nom_carte4.y && e.button.y <= nom_carte4.y+nom_carte4.h){
+					SDL_RenderCopy(renderer_collec, txt_optn4_Hover_T, NULL, &nom_carte4);
+					SDL_RenderCopy(renderer_collec, img_carte_4_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 5
+				else if(oldHover ==0 && e.button.x >= nom_carte5.x && e.button.x <= nom_carte5.x+nom_carte5.w && e.button.y >= nom_carte5.y && e.button.y <= nom_carte5.y+nom_carte5.h){
+					SDL_RenderCopy(renderer_collec, txt_optn5_Hover_T, NULL, &nom_carte5);
+					SDL_RenderCopy(renderer_collec, img_carte_5_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 6
+				else if(e.button.x >= nom_carte6.x && e.button.x <= nom_carte6.x+nom_carte6.w && e.button.y >= nom_carte6.y && e.button.y <= nom_carte6.y+nom_carte6.h){
+					SDL_RenderCopy(renderer_collec, txt_optn6_Hover_T, NULL, &nom_carte6);
+					SDL_RenderCopy(renderer_collec, img_carte_6_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+
+
+
+				//SOURIS QUI HOVER SUR LA CARTE 7
+				else if(e.button.x >= nom_carte7.x && e.button.x <= nom_carte7.x+nom_carte7.w && e.button.y >= nom_carte7.y && e.button.y <= nom_carte7.y+nom_carte7.h){
+					SDL_RenderCopy(renderer_collec, txt_optn7_Hover_T, NULL, &nom_carte7);
+					SDL_RenderCopy(renderer_collec, img_carte_7_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 8
+				else if(oldHover ==0 && e.button.x >= nom_carte8.x && e.button.x <= nom_carte8.x+nom_carte8.w && e.button.y >= nom_carte8.y && e.button.y <= nom_carte8.y+nom_carte8.h){
+					SDL_RenderCopy(renderer_collec, txt_optn8_Hover_T, NULL, &nom_carte8);
+					SDL_RenderCopy(renderer_collec, img_carte_8_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 9
+				else if(e.button.x >= nom_carte9.x && e.button.x <= nom_carte9.x+nom_carte9.w && e.button.y >= nom_carte9.y && e.button.y <= nom_carte9.y+nom_carte9.h){
+					SDL_RenderCopy(renderer_collec, txt_optn9_Hover_T, NULL, &nom_carte9);
+					SDL_RenderCopy(renderer_collec, img_carte_9_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 10
+				else if(e.button.x >= nom_carte10.x && e.button.x <= nom_carte10.x+nom_carte10.w && e.button.y >= nom_carte10.y && e.button.y <= nom_carte10.y+nom_carte10.h){
+					SDL_RenderCopy(renderer_collec, txt_optn10_Hover_T, NULL, &nom_carte10);
+					SDL_RenderCopy(renderer_collec, img_carte_10_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 11
+				else if(oldHover ==0 && e.button.x >= nom_carte11.x && e.button.x <= nom_carte11.x+nom_carte11.w && e.button.y >= nom_carte11.y && e.button.y <= nom_carte11.y+nom_carte11.h){
+					SDL_RenderCopy(renderer_collec, txt_optn11_Hover_T, NULL, &nom_carte11);
+					SDL_RenderCopy(renderer_collec, img_carte_11_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
+					oldHover=1;
+				}
+				//SOURIS QUI HOVER SUR LA CARTE 12
+				else if(e.button.x >= nom_carte12.x && e.button.x <= nom_carte12.x+nom_carte12.w && e.button.y >= nom_carte12.y && e.button.y <= nom_carte12.y+nom_carte12.h){
+					SDL_RenderCopy(renderer_collec, txt_optn12_Hover_T, NULL, &nom_carte12);
+					SDL_RenderCopy(renderer_collec, img_carte_12_T, NULL, &Carte_R);
+					SDL_RenderPresent(renderer_collec);
+					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
 					oldHover=1;
 				}
 				//Si on a deja effectué des hovers
@@ -415,11 +538,22 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					SDL_RenderClear(renderer_collec);
                   	SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
                   	SDL_RenderCopy(renderer_collec, img_Planche_Collec_T, NULL, &planche_R);
+					SDL_RenderCopy(renderer_collec, img_Planche_haut_T, NULL, &planche_haut_R);
+  					SDL_RenderCopy(renderer_collec, img_Planche_bas_T, NULL, &planche_bas_R);
 					//Render de toutes les options du menu principal
 					//OPTION 1
 					SDL_RenderCopy(renderer_collec, txt_optn1_T, NULL, &nom_carte1);
 					SDL_RenderCopy(renderer_collec, txt_optn2_T, NULL, &nom_carte2);
 					SDL_RenderCopy(renderer_collec, txt_optn3_T, NULL, &nom_carte3);
+					SDL_RenderCopy(renderer_collec, txt_optn4_T, NULL, &nom_carte4);
+					SDL_RenderCopy(renderer_collec, txt_optn5_T, NULL, &nom_carte5);
+					SDL_RenderCopy(renderer_collec, txt_optn6_T, NULL, &nom_carte6);
+					SDL_RenderCopy(renderer_collec, txt_optn7_T, NULL, &nom_carte7);
+					SDL_RenderCopy(renderer_collec, txt_optn8_T, NULL, &nom_carte8);
+					SDL_RenderCopy(renderer_collec, txt_optn9_T, NULL, &nom_carte9);
+					SDL_RenderCopy(renderer_collec, txt_optn10_T, NULL, &nom_carte10);
+					SDL_RenderCopy(renderer_collec, txt_optn11_T, NULL, &nom_carte11);
+					SDL_RenderCopy(renderer_collec, txt_optn12_T, NULL, &nom_carte12);
 
 
 /*
