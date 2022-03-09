@@ -30,7 +30,7 @@ typedef struct client_s{
 
 //HORLOGE
 time_t horloge;
-int oldSecondes;
+long oldSecondes;
 
 //DEFINITION DU CLIENT
 client_t listeClient[CLIENT_MAX];
@@ -62,9 +62,16 @@ int serverSocket;
   printf("On cherche a maintenir\n");
 }*/
 
+void tableauPropre(){
+  int i;
+  for(i=0;i<CLIENT_MAX;i++){
+    listeClient[i].num=-1;
+  }
+}
+
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
-
+  void* pasContent;
   ssize_t verif = -1;
   char* buffer = malloc(sizeof(char)*32+1);
   while(verif!=0){
@@ -73,6 +80,7 @@ void* attente(void* informations){
     if(verif==0){
       printf("Client[%i] s'est deconnecté (pas cool)\n",client->num);
       client->num=-1;
+      pthread_exit(pasContent);
       return NULL;
     }
     else{
@@ -125,6 +133,7 @@ int main(){
   time(&horloge);
   int i;
   int connect = -1;
+  tableauPropre();
   while(1){
     if(oldSecondes!=horloge)
       printf("temps:(%li)\n\n",horloge-oldSecondes);
@@ -139,16 +148,18 @@ int main(){
       for(i=0;i<CLIENT_MAX;i++){
         if(listeClient[i].num==-1){ //Si libre
           listeClient[i].numSock = connect;
-          listeClient[i].num=nb_client_total;
+          listeClient[i].num=i;
           break; //On break afin de garder l'indice de i;
         }
       }
       if(i<CLIENT_MAX) //On a trouvé une place
         pthread_create(&thread[i], NULL, attente, (void*)&listeClient[i]);
 
+      printf("Utilisateur à essayer de se connecter, mais on a plus de place\n\n");
+      //pas oublier le shutdown
+    }else{
+      printf("Aucune connexion,, ETRANGE\n\n");
     }
-
-
 
 
     time(&horloge);
