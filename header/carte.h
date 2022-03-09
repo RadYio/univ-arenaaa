@@ -4,6 +4,8 @@ typedef enum type{Poison, Psy, Physique}type_t;
 
 typedef struct carte{
   char * nom;
+  char * nom_collec;
+  char * chemin_carte;
   int hp_carte;
   int nb_degats;
   type_t  type_attaque;
@@ -12,7 +14,7 @@ typedef struct carte{
 }carte_t;
 
 
-carte_t * creer_carte(char * nom, int hp , int attaque , type_t type_attaque , type_t type_vulnerable, int id);
+carte_t * creer_carte(char * nom, char * nom_collec,char * chemin_carte,int hp , int attaque , type_t type_attaque , type_t type_vulnerable, int id);
 
 void init_cartes(carte_t * tab_cartes_total[]);
 
