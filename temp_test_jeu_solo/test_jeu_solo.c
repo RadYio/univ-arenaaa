@@ -290,19 +290,9 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     if(tab_formation_cartesADV[4][0] == -2) SDL_RenderDrawRect(renderer_jeu, &rect_formationAdv15);
 
     //affichage des rectangles de la main
-    SDL_RenderDrawRect(renderer_jeu, &rect_main1);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main2);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main3);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main4);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main5);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main6);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main7);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main8);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main9);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main10);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main11);
-    SDL_RenderDrawRect(renderer_jeu, &rect_main12);
-
+    for(int i = 0; i < 12; i++){
+      SDL_RenderDrawRect(renderer_jeu, &tab_rect_main[i]);
+    }
 
 
     //On fait le rendu !
@@ -315,6 +305,7 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
     affichage_main(renderer_jeu, deck_main, tab_rect_main);
     SDL_RenderPresent(renderer_jeu);
+    
 
     if(pWindow){
       int running = 1;

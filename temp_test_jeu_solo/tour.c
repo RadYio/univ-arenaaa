@@ -8,7 +8,7 @@
 #include "../header/affichages.h"
 
 //fonction d'un tour, à répéter jusqu'a victoire, fonction retourne 1 si victoire joueur, -1 si victoire adversaire et 0 si rien, on continue alors
-int tour(SDL_Renderer* renderer_jeu, SDL_Window pWindow){
+int tour(SDL_Renderer* renderer_jeu, SDL_Window pWindow, SDL_Rect tab_rect_main[12]){
   if(pWindow){
       int running = 1;
       while(running) {

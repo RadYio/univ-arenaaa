@@ -33,3 +33,4 @@ extern void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_
     SDL_FreeSurface(carte_s);
     SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
 }
+
