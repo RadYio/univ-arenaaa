@@ -12,6 +12,7 @@ CFLAGS_DEBUG    = -g -Wextra
 PROG=univ-arenaaaa
 
 all: univ-arenaaaa
+	./univ-arenaaaa
 
 univ-arenaaaa: main.c carte.c jeu_solo.c menu.c window.c collection.c
 	${CC} -o ${PROG} main.c carte.c jeu_solo.c menu.c window.c collection.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
@@ -19,3 +20,5 @@ univ-arenaaaa: main.c carte.c jeu_solo.c menu.c window.c collection.c
 clean:
 	rm -f ${PROG}
 	rm -f *.o
+
+
