@@ -32,7 +32,7 @@ int main(){
 
 
   //Configuration
-  sin.sin_addr.s_addr = inet_addr("172.18.41.227");   //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_addr.s_addr = inet_addr("172.18.41.29");    //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
