@@ -2,18 +2,33 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
+#include "../header/window.h"
 #include "../header/tour.h"
 #include "../header/carte.h"
 #include "../header/affichages.h"
 
-//fonction qui tranfère une carte de la main du joueur sur le plateau
-/*void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15], int colone, int ligne, int indice_main){
-  tab_formation_cartes[colone][ligne] = deck_main[indice_main];
-  deck_main[indice_main] = -1;
+//fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ                                                                                              
+/*void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[12], int colone, int ligne, int indice_main){
+  //mises à jour des tableaux
+  tab_formation_cartesJ[colone][ligne] = deck_main[indice_main]; //mise à jour de notre formation, on place l'id de la carte au lieu d'un -2 signifiant qu'une carte peut aller là mais qu'il y a rien
+  deck_main[indice_main] = -1; //mise à jour de notre main, on place -1 pour signifier qu'il n'y a plus de carte à cet emplacement
+  //affichages
+  afficher_main(renderer_jeu, deck_main, tab_rect_main);
+
+
+  void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12])
 
 
 
+
+
+
+  carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
+    SDL_FreeSurface(carte_s);
+    SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
 }*/
+
+
 
 
 
