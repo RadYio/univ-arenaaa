@@ -8,7 +8,7 @@
 #include <pthread.h>
 
 #define PORT 6666
-#define NB_TENTATIVE 5
+#define NB_TENTATIVE 500
 #define DELAI 5
 
 typedef struct sockaddr_in_s{
@@ -22,13 +22,10 @@ typedef struct sockaddr_in_s{
 void* lecture(void* socket){
   int* socketLecture = (int*)socket;
   char buffer[64];
-  while(1){
-    printf("1");
-    if(recv(*socketLecture, buffer, 32, 0) != SO_ERROR)
-      printf("Recu : %s\n", buffer);
-    else
-      printf("Rien du tout\n");
-  }
+  if(recv(*socketLecture, buffer, 64, 0) != SO_ERROR)
+    printf("Recu : %s\n", buffer);
+  else
+    printf("Rien du tout\n");
   return NULL;
 }
 
@@ -69,23 +66,16 @@ int main(){
   pthread_create(&thread, NULL, lecture, (void*)&clientSocket);
 
   int choix = -1;
-  char* chaine = malloc(sizeof(char)*32+1);
   do{
     printf("---MENU TEST ---\n");
     printf("1) QUITTER\n");
-    printf("2) ENVOYER CHAINE\n");
     printf("\n");
     scanf("%i",&choix);
     switch (choix){
       case 1: //OPTN: QUITTER
         printf("On quitte le client. CODE DE SORTIE: (%i: attendu -1 / %i: attendu 0)\n",shutdown(clientSocket, 2),close(clientSocket));
+        choix=-1;
         return 1;
-      case 2:
-        printf("Saisir votre chaine <32 char: ");
-        scanf("%s",chaine);
-        write(clientSocket, chaine, 32);
-        printf("\n\nchaine: %s\nEnvoyée\n",chaine);
-        break;
       default:
       printf("Mais fréro, tu es cringe\n\n");
       break;
