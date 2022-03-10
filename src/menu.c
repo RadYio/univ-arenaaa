@@ -48,7 +48,7 @@ int menu(SDL_Window * pWindow){
 	SDL_Surface* img_Menu_Surface;
 	// DECLARATION BG_MENU aléatoire
 	srand(time(NULL));
-	randomMenu = rand()%5;
+	randomMenu = rand()%4+1;
 	printf("Choix random du menu Version:%i\n\n",randomMenu);
 	switch(randomMenu){
 		case 1:
@@ -110,8 +110,8 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/*Surface du bouton jouer en solo*/
-	SDL_Surface* txt_optn1_S = TTF_RenderUTF8_Blended(police, "JOUER EN SOLO", couleurNoire);
-	SDL_Surface* txt_optn1_Hover_S = TTF_RenderUTF8_Blended(police, "JOUER EN SOLO", couleurGold);
+	SDL_Surface* txt_optn1_S = TTF_RenderUTF8_Blended(police, "Jouer en solo", couleurNoire);
+	SDL_Surface* txt_optn1_Hover_S = TTF_RenderUTF8_Blended(police, "Jouer en solo", couleurGold);
 
 	if(!txt_optn1_S || !txt_optn1_Hover_S){
 		fprintf(stderr, "Erreur à la création du texte ''option 1 '': %s\n", SDL_GetError());
@@ -129,9 +129,9 @@ int menu(SDL_Window * pWindow){
 	SDL_FreeSurface(txt_optn1_Hover_S); /* on a la texture, plus besoin du texte via surface */
 
 	SDL_Rect txt_optn1_R;
-	txt_optn1_R.x=1015;
+	txt_optn1_R.x=950;
 	txt_optn1_R.y=140;
-	txt_optn1_R.w=265;
+	txt_optn1_R.w=strlen("jouer en solo")*30;
 	txt_optn1_R.h=105;
 
 
@@ -140,8 +140,8 @@ int menu(SDL_Window * pWindow){
 
 
 	/*Surface du bouton jouer en multi*/
-	SDL_Surface* txt_optn2_S = TTF_RenderUTF8_Blended(police, "JOUER EN LIGNE", couleurNoire);
-	SDL_Surface* txt_optn2_Hover_S = TTF_RenderUTF8_Blended(police, "JOUER EN LIGNE", couleurGold);
+	SDL_Surface* txt_optn2_S = TTF_RenderUTF8_Blended(police, "Jouer en ligne", couleurNoire);
+	SDL_Surface* txt_optn2_Hover_S = TTF_RenderUTF8_Blended(police, "Jouer en ligne", couleurGold);
 
 	if(!txt_optn2_S || !txt_optn2_Hover_S){
 		fprintf(stderr, "Erreur à la création du texte ''option 2'': %s\n", SDL_GetError());
@@ -159,9 +159,9 @@ int menu(SDL_Window * pWindow){
 	SDL_FreeSurface(txt_optn2_Hover_S); /* on a la texture, plus besoin du texte via surface */
 
 	SDL_Rect txt_optn2_R;
-	txt_optn2_R.x=420;
+	txt_optn2_R.x=320;
 	txt_optn2_R.y=275;
-	txt_optn2_R.w=265;
+	txt_optn2_R.w=strlen("jouer en ligne")*30;
 	txt_optn2_R.h=105;
 
 
@@ -189,7 +189,7 @@ int menu(SDL_Window * pWindow){
 	SDL_Rect txt_optn3_R;
 	txt_optn3_R.x=1015;
 	txt_optn3_R.y=410;
-	txt_optn3_R.w=265;
+	txt_optn3_R.w=strlen("Collection")*30;
 	txt_optn3_R.h=105;
 
 
@@ -217,7 +217,7 @@ int menu(SDL_Window * pWindow){
 	SDL_Rect txt_optn4_R;
 	txt_optn4_R.x=420;
 	txt_optn4_R.y=545;
-	txt_optn4_R.w=265;
+	txt_optn4_R.w=strlen("QUITTER ?")*30;
 	txt_optn4_R.h=105;
 
 
@@ -278,7 +278,11 @@ if(pWindow){
 			else if(e.button.x >= txt_optn3_R.x && e.button.x <= txt_optn3_R.x+txt_optn3_R.w && e.button.y >= txt_optn3_R.y && e.button.y <= txt_optn3_R.y+txt_optn3_R.h){
 				//Si on clique sur le bouton 3
 				printf("Test on clique sur le bouton 3\n\n");
+
 				collection(pWindow ,img_Menu_Texture, renderer_menu, &running);
+				//on récupère la nouvelle position du curseur
+				SDL_PollEvent(&e);
+
 
 
 			}
