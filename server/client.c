@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 
 #define PORT 6666
 #define NB_TENTATIVE 5
@@ -18,9 +19,20 @@ typedef struct sockaddr_in_s{
 }sockaddr_in_t;
 
 
+void* lecture(void* socket){
+  int* socketLecture = (int*)socket;
+  char buffer[64];
+  if(recv(*socketLecture, buffer, 32, 0) != SO_ERROR)
+    printf("Recu : %s\n", buffer);
+  else
+    printf("Rien du tout\n");
+  return NULL;
+}
+
 int main(){
   sockaddr_in_t sin;
   socklen_t taille = sizeof(sin);
+  pthread_t thread;
 
   //On crée notre socket
   int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -41,15 +53,16 @@ int main(){
   testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
   for(i=1;i<=NB_TENTATIVE && testConnect==-1;i++){
     printf("Nouvelle tentative de connexion (%i)\n",i);
-    sleep(DELAI);
     testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
   }
   if(i>=NB_TENTATIVE){
     printf("Nombre de tentative max atteinte (%i)\n\nEXIT\n",i);
     return 1;
   }
-  printf("wtf: %i\n", testConnect);
+
   printf("Connexion à %s sur le port %d\n", inet_ntoa(sin.sin_addr), htons(sin.sin_port));
+
+  pthread_create(&thread, NULL, lecture, (void*)&clientSocket);
 
   int choix = -1;
   char* chaine = malloc(sizeof(char)*32+1);

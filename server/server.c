@@ -29,8 +29,7 @@ typedef struct client_s{
 
 
 //HORLOGE
-time_t horloge;
-long oldSecondes;
+struct tm* horloge;
 
 //DEFINITION DU CLIENT
 client_t listeClient[CLIENT_MAX];
@@ -39,34 +38,19 @@ int nb_client_total=0;
 //DEFINITION DES THREADS SAH QUEL PLAISIR
 pthread_t thread[CLIENT_MAX];
 
-//DEFINITION GLOBALE DU serveur
-int serverSocket;
 
-/*void* connecting(void* v){
-  client_t new;
-  new.taille=sizeof(new.sin);
-  new.numSock=accept(serverSocket, (struct sockaddr*)&new.sin, &new.taille);
-  printf("Un client se connecte avec la socket %d de %s:%d\n", new.numSock, inet_ntoa(new.sin.sin_addr), htons(new.sin.sin_port));
 
-  listeClient[nb_client_total++]=new;
-  return NULL;
-}*/
+struct tm* recupererTemps(){
+  time_t temp;
 
-/*void pasDePerte(int position){
-  int i;
-  for(i=position;i<nb_client_total-1;i++){
-    listeClient[i]=listeClient[i+1];
-    listeClient[i].num=i;
-  }
-  nb_client_total--;
-  printf("On cherche a maintenir\n");
-}*/
+  time(&temp);
+  return localtime(&temp);
+}
 
 void tableauPropre(){
   int i;
-  for(i=0;i<CLIENT_MAX;i++){
+  for(i=0;i<CLIENT_MAX;i++)
     listeClient[i].num=-1;
-  }
 }
 
 void* attente(void* informations){
@@ -84,7 +68,13 @@ void* attente(void* informations){
       return NULL;
     }
     else{
-      printf("chaine: %s\n",buffer);
+      printf("Client[%i] envoie: chaine[%s]\n",client->num,buffer);
+      if(client->num==1){
+        send(listeClient[0].numSock, buffer, 32, 0);
+      }
+      else{
+        send(listeClient[1].numSock, buffer, 32, 0);
+      }
     }
   }
 }
@@ -92,11 +82,11 @@ void* attente(void* informations){
 int main(){
   //DEFINITION DU SERVEUR
   sockaddr_in_t server_Sin;                               //Socket address IN
-  serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
+  int serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
   socklen_t s_Taille = sizeof(server_Sin);
 
 
-  srand(time(NULL));
+  struct tm* date = recupererTemps(); //stucture date, contenant le temps actuel de l'ordinateur
 
   if(serverSocket==-1){ //On vérifie la création socket de notre serveur
     printf("Sortie à cause d'un bug de création Socket\n");
@@ -109,7 +99,10 @@ int main(){
   server_Sin.sin_family = AF_INET;                 //Protocole ici (IP)
   server_Sin.sin_port = htons(PORT);               //Port
 
+
+  //DECLARATION *test afin de se souvenir de la valeur des tests
   int* test = malloc(sizeof(int));
+
   *test = bind(serverSocket, (struct sockaddr *)&server_Sin, sizeof(server_Sin));
   if(*test==SO_ERROR){
     printf("Sortie à cause d'un bug de bind Socket\n");
@@ -126,19 +119,15 @@ int main(){
   free(test);
   printf("Utilisation et écoute du port %d...\n\n", PORT);
 
-  //pthread_create(&thread[0], NULL, connecting, NULL);
-  //pthread_create(&thread[1], NULL, connecting, NULL);
 
 
-  time(&horloge);
+  //horloge=localtime((time_t*)time(NULL));
   int i;
   int connect = -1;
   tableauPropre();
   while(1){
-    if(oldSecondes!=horloge)
-      printf("temps:(%li)\n\n",horloge-oldSecondes);
-    else
-      oldSecondes = horloge;
+    date=recupererTemps();
+    printf("TEMPS: %i:%i:%i\n", date->tm_hour,date->tm_min,date->tm_sec);
 
 
     printf("On attente de la connexion d'un client ...\n");
@@ -154,18 +143,16 @@ int main(){
       }
       if(i<CLIENT_MAX) //On a trouvé une place
         pthread_create(&thread[i], NULL, attente, (void*)&listeClient[i]);
-
+      else{
       printf("Utilisateur à essayer de se connecter, mais on a plus de place\n\n");
-      //pas oublier le shutdown
+      shutdown(connect, 2);
+      }
     }else{
       printf("Aucune connexion,, ETRANGE\n\n");
     }
-
-
-    time(&horloge);
     nb_client_total++;
   }
 
 
-
+  free(date);
 }
