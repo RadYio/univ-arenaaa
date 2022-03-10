@@ -9,11 +9,38 @@
 #include "../header/affichages.h"
 
 //fonction d'affichage du background
-void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture img_jeu_Texture){
+void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   // Le fond de la fenêtre sera blanc
   SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255);
 
   SDL_RenderCopy(renderer_jeu, img_jeu_Texture, NULL, NULL);
+}
+
+
+//fonction d'affichages des textes au dessus des 2 grands rectangles
+void affichage_texte(SDL_Renderer* renderer_jeu, SDL_Rect* rect_txt_deck_j, SDL_Texture* txt_titre_joueur_T, SDL_Rect* rect_txt_deck_adv, SDL_Texture* txt_titre_adv_T){
+  //creation texte de deck
+    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
+    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
+}
+
+
+void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur,SDL_Rect* rect_adv){
+  //creation de rectangle du joueur
+  SDL_SetRenderDrawColor( renderer_jeu, 0, 213, 255, 255 ); //renderer passe en bleu pour le rectangle de la zone joueur
+  SDL_RenderDrawRect(renderer_jeu, rect_joueur);
+
+  //creation du rectangle de l'adversaire
+  SDL_SetRenderDrawColor( renderer_jeu, 219, 0, 0, 255 ); //renderer passe en rouge pour le rectangle de la zone adversaire
+  SDL_RenderDrawRect(renderer_jeu, rect_adv);
+}
+
+//fonction d'affichage des rectangles de la main
+void afficher_rectangles_main(SDL_Renderer* renderer_jeu, SDL_Rect tab_rect_main[12]){
+  SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255); //on passe en jaune
+  for(int i = 0; i < 12; i++){
+    SDL_RenderDrawRect(renderer_jeu, &tab_rect_main[i]);
+  }
 }
 
 

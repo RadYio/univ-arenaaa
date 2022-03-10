@@ -140,8 +140,9 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 		exit(EXIT_FAILURE);
 	}
 
-    SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
-    SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire
+  
+  SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
+  SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire
 
     if(!txt_titre_joueur|| !txt_titre_adv){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
@@ -168,33 +169,16 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
     affichage_BG(renderer_jeu, img_jeu_Texture);
     
-    /*// Le fond de la fenêtre sera blanc
-    SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255);
-    SDL_RenderClear(renderer_jeu);
+    affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
 
-    SDL_RenderCopy(renderer_jeu, img_jeu_Texture, NULL, NULL);*/
+    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv);
 
-    //creation texte de deck
-    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
-    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
-
-    //creation de rectangle du joueur
-    SDL_SetRenderDrawColor( renderer_jeu, 0, 213, 255, 255 ); //renderer passe en bleu pour le rectangle de la zone joueur
-    SDL_RenderDrawRect(renderer_jeu, rect_joueur);
-
-    //creation du rectangle de l'adversaire
-    SDL_SetRenderDrawColor( renderer_jeu, 219, 0, 0, 255 ); //renderer passe en rouge pour le rectangle de la zone adversaire
-    SDL_RenderDrawRect(renderer_jeu, rect_adv);
-
-    //affichage des rectangles de formation
     afficher_rectangles_formation(renderer_jeu, tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
 
-    //affichage des rectangles de la main
-    for(int i = 0; i < 12; i++){
-      SDL_RenderDrawRect(renderer_jeu, &tab_rect_main[i]);
-    }
+    afficher_rectangles_main(renderer_jeu, tab_rect_main);
 
-
+    affichage_main(renderer_jeu, deck_main, tab_rect_main);
+    
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);
 
@@ -203,8 +187,6 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
-    affichage_main(renderer_jeu, deck_main, tab_rect_main);
-    SDL_RenderPresent(renderer_jeu);
 
 
     if(pWindow){
