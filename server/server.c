@@ -141,8 +141,10 @@ int main(){
           break; //On break afin de garder l'indice de i;
         }
       }
-      if(i<CLIENT_MAX) //On a trouvé une place
+      if(i<CLIENT_MAX){ //On a trouvé une place
+        printf("Client[%i]: Nouvelle connexion\n",i);
         pthread_create(&thread[i], NULL, attente, (void*)&listeClient[i]);
+      }
       else{
       printf("Utilisateur à essayer de se connecter, mais on a plus de place\n\n");
       shutdown(connect, 2);

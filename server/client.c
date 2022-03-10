@@ -22,10 +22,13 @@ typedef struct sockaddr_in_s{
 void* lecture(void* socket){
   int* socketLecture = (int*)socket;
   char buffer[64];
-  if(recv(*socketLecture, buffer, 32, 0) != SO_ERROR)
-    printf("Recu : %s\n", buffer);
-  else
-    printf("Rien du tout\n");
+  while(1){
+    printf("1");
+    if(recv(*socketLecture, buffer, 32, 0) != SO_ERROR)
+      printf("Recu : %s\n", buffer);
+    else
+      printf("Rien du tout\n");
+  }
   return NULL;
 }
 
@@ -53,6 +56,7 @@ int main(){
   testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
   for(i=1;i<=NB_TENTATIVE && testConnect==-1;i++){
     printf("Nouvelle tentative de connexion (%i)\n",i);
+    sleep(1);
     testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
   }
   if(i>=NB_TENTATIVE){
