@@ -2,18 +2,42 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
+#include "../header/window.h"
 #include "../header/tour.h"
 #include "../header/carte.h"
 #include "../header/affichages.h"
 
-//fonction qui tranfère une carte de la main du joueur sur le plateau
-/*void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15], int colone, int ligne, int indice_main){
-  tab_formation_cartes[colone][ligne] = deck_main[indice_main];
-  deck_main[indice_main] = -1;
+//fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ                                                                                              
+
+
+void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[12], int colone, int ligne, int indice_main){
+  //mises à jour des tableaux
+  if(tab_formation_cartesJ[colone][ligne] == -2){
+    //mise à jour de notre formation,on remplace le -2 (état place libre) par l'id de la carte
+    tab_formation_cartesJ[colone][ligne] = deck_main[indice_main]; 
+    //mise à jour de notre main, on place -1 pour signifier qu'il n'y a plus de carte à cet emplacement
+    deck_main[indice_main] = -1; 
+  }
+  
+  //affichages
+  afficher_main(renderer_jeu, deck_main, tab_rect_main);
+
+
+  void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12])
 
 
 
-}*/
+
+
+
+  carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
+    SDL_FreeSurface(carte_s);
+    SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
+}
+
+
+
+
 
 
 
@@ -36,6 +60,7 @@ void choix_plateau(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab
               //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
               if(e.button.x >= tab_rect_formationJ[0].x && e.button.x <= tab_rect_formationJ[0].x+tab_rect_formationJ[0].w && e.button.y >= tab_rect_formationJ[0].y && e.button.y <= tab_rect_formationJ[0].y+tab_rect_formationJ[0].h){
                 //case colone 0, ligne 0
+                afficher_carte(renderer_jeu,tab_rect_formationJ[0]);
               }else if(e.button.x >= tab_rect_formationJ[1].x && e.button.x <= tab_rect_formationJ[1].x+tab_rect_formationJ[1].w && e.button.y >= tab_rect_formationJ[1].y && e.button.y <= tab_rect_formationJ[1].y+tab_rect_formationJ[1].h){
                 //case colone 0, ligne 1
               }else if(e.button.x >= tab_rect_formationJ[2].x && e.button.x <= tab_rect_formationJ[2].x+tab_rect_formationJ[2].w && e.button.y >= tab_rect_formationJ[2].y && e.button.y <= tab_rect_formationJ[2].y+tab_rect_formationJ[2].h){
@@ -65,6 +90,9 @@ void choix_plateau(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab
               }else if(e.button.x >= tab_rect_formationJ[14].x && e.button.x <= tab_rect_formationJ[14].x+tab_rect_formationJ[14].w && e.button.y >= tab_rect_formationJ[14].y && e.button.y <= tab_rect_formationJ[14].y+tab_rect_formationJ[14].h){
                 //case colone 2, ligne 4
               }
+              else{
+                return;
+              }
               break;
               //---------------------------------rajouter cas si on clique qq part de random---------------
           }
@@ -85,7 +113,7 @@ void choix_plateau(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab
 
 //fonction d'un tour, à répéter jusqu'a victoire, fonction retourne 1 si victoire joueur, -1 si victoire adversaire et 0 si rien, on continue alors
 //a rajouter : cas si on clique sur un truc random qui ne correspond a rien
-int tour(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab_rect_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15]){
+void tour(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab_rect_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15]){
   if(pWindow){
       int running = 1;
       while(running) {
@@ -104,6 +132,7 @@ int tour(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab_rect_main
                       //si on clique sur la case 0 (première à gauche) de la main
                       //Si on clique sur la case 1 de sa main------------------creer fonction tranfert_carte(int id_carte) qui servira de "tampon", il y aura un autre swtich avec les cases sur le plateau, efface carte
                       //dans main, et affiche carte sur le plateau
+                      choix_plateau(renderer_jeu,pWindow,tab_rect_main, tab_formation_cartesJ,tab_rect_formationJ);
                     }else if(e.button.x >= tab_rect_main[1].x && e.button.x <= tab_rect_main[1].x+tab_rect_main[1].w && e.button.y >= tab_rect_main[1].y && e.button.y <= tab_rect_main[1].y+tab_rect_main[1].h){
                       //si on clique sur la case 1 de la main
                     }else if(e.button.x >= tab_rect_main[2].x && e.button.x <= tab_rect_main[2].x+tab_rect_main[2].w && e.button.y >= tab_rect_main[2].y && e.button.y <= tab_rect_main[2].y+tab_rect_main[2].h){
