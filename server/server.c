@@ -62,13 +62,13 @@ void* attente(void* informations){
     printf("Client[%i]: j'attends des informations...\n",client->num);
     verif = read(client->numSock,buffer,32);
     if(verif==0){
-      printf("Client[%i] s'est deconnecté (pas cool)\n",client->num);
+      printf("Client[%i]: s'est deconnecté (pas cool)\n",client->num);
       client->num=-1;
       pthread_exit(pasContent);
       return NULL;
     }
     else{
-      printf("Client[%i] envoie: chaine[%s]\n",client->num,buffer);
+      printf("Client[%i]: envoie: chaine[%s]\n",client->num,buffer);
       if(client->num==1){
         send(listeClient[0].numSock, buffer, 32, 0);
       }
@@ -141,8 +141,10 @@ int main(){
           break; //On break afin de garder l'indice de i;
         }
       }
-      if(i<CLIENT_MAX) //On a trouvé une place
+      if(i<CLIENT_MAX){ //On a trouvé une place
+        printf("Client[%i]: Nouvelle connexion\n",i);
         pthread_create(&thread[i], NULL, attente, (void*)&listeClient[i]);
+      }
       else{
       printf("Utilisateur à essayer de se connecter, mais on a plus de place\n\n");
       shutdown(connect, 2);
