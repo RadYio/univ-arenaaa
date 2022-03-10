@@ -15,6 +15,7 @@ extern void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_
   SDL_Texture* carte_t;
   printf("BBBBBBBBBBBBBB\n");
   switch(carte){
+    case -1 : break; //s'il n'y à aucune carte
     case 0 : carte_s = IMG_Load("../img/img_cartes/carte0.png"); break;
     case 1 : carte_s = IMG_Load("../img/img_cartes/carte1.png"); break;
     case 2 : carte_s = IMG_Load("../img/img_cartes/carte2.png"); break;
@@ -33,4 +34,3 @@ extern void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_
     SDL_FreeSurface(carte_s);
     SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
 }
-

@@ -2,6 +2,7 @@
 #include "../header/carte.h"
 #include "../header/tour.h"
 #include "../header/affichages.h"
+#include "../header/musique.h"
 
 
 #include <SDL2/SDL.h>
@@ -121,6 +122,22 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     SDL_Rect rect_formationJ13 = create_rectangle(517, 378, 144, 132);
     SDL_Rect rect_formationJ14 = create_rectangle(517, 527, 144, 132);
     SDL_Rect rect_formationJ15 = create_rectangle(517, 676, 144, 132);
+    SDL_Rect tab_rect_formationJ[15];
+    tab_rect_formationJ[0] = rect_formationJ1;
+    tab_rect_formationJ[1] = rect_formationJ2;
+    tab_rect_formationJ[2] = rect_formationJ3;
+    tab_rect_formationJ[3] = rect_formationJ4;
+    tab_rect_formationJ[4] = rect_formationJ5;
+    tab_rect_formationJ[5] = rect_formationJ6;
+    tab_rect_formationJ[6] = rect_formationJ7;
+    tab_rect_formationJ[7] = rect_formationJ8;
+    tab_rect_formationJ[8] = rect_formationJ9;
+    tab_rect_formationJ[9] = rect_formationJ10;
+    tab_rect_formationJ[10] = rect_formationJ11;
+    tab_rect_formationJ[11] = rect_formationJ12;
+    tab_rect_formationJ[12] = rect_formationJ13;
+    tab_rect_formationJ[13] = rect_formationJ14;
+    tab_rect_formationJ[14] = rect_formationJ15;
 
     //creation des rectangles pour l'affichage des cartes sur le plateau adversaire
     //cartes de la colonne 1 (de droite à gauche)
@@ -305,7 +322,7 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
     //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
     affichage_main(renderer_jeu, deck_main, tab_rect_main);
     SDL_RenderPresent(renderer_jeu);
-    
+
 
     if(pWindow){
       int running = 1;
@@ -315,9 +332,12 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
               switch(e.type) {
                   case SDL_QUIT: running = 0;
                   break;
-
+                  case SDL_KEYDOWN :
+                  if(e.key.keysym.sym == SDLK_UP){
+                    lancer_musique();
+                  }
+                  break;
               }
-                    break;
           }
         }
     }
