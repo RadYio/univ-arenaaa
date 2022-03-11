@@ -55,7 +55,7 @@ void main(){
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
-    
+    int taille_main = 5;
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
 
     //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
+    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,9 +176,9 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
     afficher_rectangles_formation(renderer_jeu, tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
 
-    afficher_rectangles_main(renderer_jeu, tab_rect_main);
+    afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
 
-    affichage_main(renderer_jeu, deck_main, tab_rect_main);
+    affichage_main(taille_main,renderer_jeu, deck_main, tab_rect_main);
     
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);

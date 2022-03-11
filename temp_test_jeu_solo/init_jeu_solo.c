@@ -44,7 +44,7 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
 }
 
 //initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
-void init_jeu(SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
+void init_jeu(int taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
     
     
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
@@ -166,7 +166,8 @@ void init_jeu(SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[1
     tab_rect_main[10] = rect_main11;
     tab_rect_main[11] = rect_main12;
     */
-    creation_main(0,tab_rect_main);
+   
+    creation_main(taille_main,tab_rect_main);
 
 
     

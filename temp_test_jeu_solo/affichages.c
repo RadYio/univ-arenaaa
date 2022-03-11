@@ -36,9 +36,9 @@ void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur
 }
 
 //fonction d'affichage des rectangles de la main
-void afficher_rectangles_main(SDL_Renderer* renderer_jeu, SDL_Rect tab_rect_main[12]){
+void afficher_rectangles_main(int taille_main,SDL_Renderer* renderer_jeu, SDL_Rect tab_rect_main[12]){
   SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255); //on passe en jaune
-  for(int i = 0; i < 12; i++){
+  for(int i = 0; i < taille_main; i++){
     SDL_RenderDrawRect(renderer_jeu, &tab_rect_main[i]);
   }
 }
@@ -46,9 +46,9 @@ void afficher_rectangles_main(SDL_Renderer* renderer_jeu, SDL_Rect tab_rect_main
 
 
 //affiche les cartes qu'il y a dans la main du joueur != cartes sur le plateau
-void affichage_main(SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12]){
+void affichage_main(int taille_main,SDL_Renderer* renderer_jeu, int deck_main[], SDL_Rect tab_rect_main[12]){
     int i;
-    for(i = 0; i < 12; i++){
+    for(i = 0; i < taille_main; i++){
       printf("i = %i\n", i);
         afficher_carte(renderer_jeu, deck_main[i], tab_rect_main[i]);
     }
