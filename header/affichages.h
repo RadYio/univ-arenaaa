@@ -1,5 +1,5 @@
 
-void affichage_main(int taille_main,SDL_Renderer* renderer_jeu, int deck_main[12], SDL_Rect tab_rect_main[12]);
+void affichage_main(int taille_main,SDL_Renderer* renderer_jeu, int tab_main[12], SDL_Rect tab_rect_main[12]);
 
 
 void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_afficher);
