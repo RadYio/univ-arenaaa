@@ -8,8 +8,8 @@
 #include <pthread.h>
 
 #define PORT 6666
-#define NB_TENTATIVE 500
-#define DELAI 5
+#define NB_TENTATIVE 60
+#define DELAI 1
 
 typedef struct sockaddr_in_s{
     short               sin_family;
@@ -44,17 +44,18 @@ int main(){
 
 
   //Configuration
-  sin.sin_addr.s_addr = inet_addr("172.18.41.113");    //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_addr.s_addr = inet_addr("172.18.41.172");    //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
-  int testConnect=-1;
+  int* testConnect= malloc(sizeof(int));
+  *testConnect = -1;
   int i;
-  testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
-  for(i=1;i<=NB_TENTATIVE && testConnect==-1;i++){
+  *testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+  for(i=1;i<=NB_TENTATIVE && *testConnect==-1;i++){
     printf("Nouvelle tentative de connexion (%i)\n",i);
-    sleep(1);
-    testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
+    sleep(DELAI);
+    *testConnect = connect(clientSocket, (struct sockaddr*)&sin, sizeof(sin));
   }
   if(i>=NB_TENTATIVE){
     printf("Nombre de tentative max atteinte (%i)\n\nEXIT\n",i);
@@ -81,5 +82,5 @@ int main(){
       break;
     }
   }while(choix!=1);
-
+  free(testConnect);
 }

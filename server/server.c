@@ -164,6 +164,8 @@ int main(){
           lien_t* nouvelleConnexion = malloc(sizeof(lien_t));
           nouvelleConnexion->client1=listeClient[i];
           nouvelleConnexion->client2=listeClient[j];
+          pthread_cancel(th_attente[i]);
+          pthread_cancel(th_attente[j]);
           pthread_create(&th_attente[i], NULL, connectes, (void*)nouvelleConnexion);
           nb_client_attente-=2;
           break;
@@ -185,7 +187,7 @@ int main(){
     }
     if(i<CLIENT_MAX){ //On a trouvé une place
       printf("Client[%i]: Nouvelle connexion\n",i);
-      //pthread_create(&th_attente[i], NULL, attente, (void*)&listeClient[i]);
+      pthread_create(&th_attente[i], NULL, attente, (void*)&listeClient[i]);
       listeClient[i].libre=OUI;
       nb_client_attente++;
     }
