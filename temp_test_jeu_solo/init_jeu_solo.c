@@ -8,6 +8,31 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
+void creation_main(int taille_main,SDL_Rect tab[]){
+  int milieu = 800;
+  if (taille_main == 0){
+    return;
+  }
+  //si la main est impaire
+  else if(taille_main%2==1){
+    printf("impair");
+    int x = milieu + 5 - (71 * (taille_main));
+    for(int i=0;i<taille_main;i++){
+      tab[i]=creer_rectangle(x,830,144,132);
+      x += 142;
+    }
+  }
+  else{
+    printf("pair");
+    int x = milieu - 5 - (71 * (taille_main));
+    printf("%i\n\n",x);
+    for(int i=0;i<taille_main;i++){
+      tab[i]=creer_rectangle(x,830,144,132);
+      x += 142;
+    }
+  }
+}
+
 //focntion de creation d'un rectangle prcq sinon ca va devenir le cancer a devoir déclarer 30 rectangles avec 150 lignes rien que pour ca
 SDL_Rect creer_rectangle(int x, int y, int h, int w){
     SDL_Rect rect_temp;
@@ -112,7 +137,7 @@ void init_jeu(SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[1
     tab_rect_formationAdv[13] = rect_formationAdv14;
     tab_rect_formationAdv[14] = rect_formationAdv15;
 
-    
+    /*
     //creation des rectangles pour l'affichage des cartes dans la main du joueur
     SDL_Rect rect_main1 = creer_rectangle(2, 830, 144, 132);
     SDL_Rect rect_main2 = creer_rectangle(135, 830, 144, 132);
@@ -127,6 +152,7 @@ void init_jeu(SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[1
     SDL_Rect rect_main11 = creer_rectangle(1332, 830, 144, 132);
     SDL_Rect rect_main12 = creer_rectangle(1465, 830, 144, 132);
     //tableau qui repertorie les rectangles liés a la main du joueur
+
     tab_rect_main[0] = rect_main1;
     tab_rect_main[1] = rect_main2;
     tab_rect_main[2] = rect_main3;
@@ -139,6 +165,9 @@ void init_jeu(SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[1
     tab_rect_main[9] = rect_main10;
     tab_rect_main[10] = rect_main11;
     tab_rect_main[11] = rect_main12;
+    */
+    creation_main(0,tab_rect_main);
+
 
     
 

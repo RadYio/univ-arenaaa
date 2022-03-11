@@ -9,7 +9,7 @@
 
 //fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ                                                                                              
 
-
+/*
 void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect rect_plateau, int deck_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[12], int colone, int ligne, int indice_main){
   //mises à jour des tableaux
   if(tab_formation_cartesJ[colone][ligne] == -2){
@@ -35,7 +35,7 @@ void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_main, SDL_Rect re
     SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
 }
 
-
+*/
 
 
 
@@ -60,7 +60,7 @@ void choix_plateau(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab
               //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
               if(e.button.x >= tab_rect_formationJ[0].x && e.button.x <= tab_rect_formationJ[0].x+tab_rect_formationJ[0].w && e.button.y >= tab_rect_formationJ[0].y && e.button.y <= tab_rect_formationJ[0].y+tab_rect_formationJ[0].h){
                 //case colone 0, ligne 0
-                afficher_carte(renderer_jeu,tab_rect_formationJ[0]);
+                //afficher_carte(renderer_jeu,&tab_rect_formationJ[0],);
               }else if(e.button.x >= tab_rect_formationJ[1].x && e.button.x <= tab_rect_formationJ[1].x+tab_rect_formationJ[1].w && e.button.y >= tab_rect_formationJ[1].y && e.button.y <= tab_rect_formationJ[1].y+tab_rect_formationJ[1].h){
                 //case colone 0, ligne 1
               }else if(e.button.x >= tab_rect_formationJ[2].x && e.button.x <= tab_rect_formationJ[2].x+tab_rect_formationJ[2].w && e.button.y >= tab_rect_formationJ[2].y && e.button.y <= tab_rect_formationJ[2].y+tab_rect_formationJ[2].h){
@@ -132,7 +132,7 @@ void tour(SDL_Renderer* renderer_jeu, SDL_Window* pWindow, SDL_Rect tab_rect_mai
                       //si on clique sur la case 0 (première à gauche) de la main
                       //Si on clique sur la case 1 de sa main------------------creer fonction tranfert_carte(int id_carte) qui servira de "tampon", il y aura un autre swtich avec les cases sur le plateau, efface carte
                       //dans main, et affiche carte sur le plateau
-                      choix_plateau(renderer_jeu,pWindow,tab_rect_main, tab_formation_cartesJ,tab_rect_formationJ);
+                      //choix_plateau(renderer_jeu,pWindow,tab_rect_main, tab_formation_cartesJ,tab_rect_formationJ);
                     }else if(e.button.x >= tab_rect_main[1].x && e.button.x <= tab_rect_main[1].x+tab_rect_main[1].w && e.button.y >= tab_rect_main[1].y && e.button.y <= tab_rect_main[1].y+tab_rect_main[1].h){
                       //si on clique sur la case 1 de la main
                     }else if(e.button.x >= tab_rect_main[2].x && e.button.x <= tab_rect_main[2].x+tab_rect_main[2].w && e.button.y >= tab_rect_main[2].y && e.button.y <= tab_rect_main[2].y+tab_rect_main[2].h){
