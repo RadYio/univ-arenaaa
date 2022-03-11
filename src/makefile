@@ -14,8 +14,9 @@ PROG=univ-arenaaaa
 all: univ-arenaaaa
 	./univ-arenaaaa
 
-univ-arenaaaa: main.c carte.c jeu_solo.c menu.c window.c collection.c
-	${CC} -o ${PROG} main.c carte.c jeu_solo.c menu.c window.c collection.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
+
+univ-arenaaaa: main.c carte.c jeu_solo.c jeu_multi.c menu.c window.c collection.c affichages1.c init_jeu_solo1.c
+	${CC} -o ${PROG} main.c carte.c jeu_solo.c jeu_multi.c menu.c window.c collection.c affichages1.c init_jeu_solo1.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 clean:
 	rm -f ${PROG}
