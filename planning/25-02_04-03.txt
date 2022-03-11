@@ -1,0 +1,4 @@
+socket / thread
+
+moteur du jeu
+lien entre le menu et le jeu solo
