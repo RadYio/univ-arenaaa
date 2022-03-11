@@ -77,6 +77,8 @@ void* connectes(void* oldJoueurs){
   send(joueur2.numSock, texteJoueur2, 64, 0);
   shutdown(joueur1.numSock, 2);
   shutdown(joueur2.numSock, 2);
+  close(joueur1.numSock);
+  close(joueur2.numSock);
   free(joueurs);
 }
 
@@ -166,6 +168,7 @@ int main(){
           nouvelleConnexion->client2=listeClient[j];
           pthread_cancel(th_attente[i]);
           pthread_cancel(th_attente[j]);
+          printf("Création\n\n");
           pthread_create(&th_attente[i], NULL, connectes, (void*)nouvelleConnexion);
           nb_client_attente-=2;
           break;

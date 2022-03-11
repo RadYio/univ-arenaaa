@@ -22,10 +22,17 @@ typedef struct sockaddr_in_s{
 void* lecture(void* socket){
   int* socketLecture = (int*)socket;
   char buffer[64];
-  if(recv(*socketLecture, buffer, 64, 0) != SO_ERROR)
-    printf("Recu : %s\n", buffer);
-  else
-    printf("Rien du tout\n");
+  ssize_t taille=recv(*socketLecture, buffer, 64, 0);
+
+  do{
+    printf("taille(%ld) // Recu : %s\n", taille, buffer);
+    taille=recv(*socketLecture, buffer, 64, 0);
+  }while(taille > 0);
+
+
+  printf("Deconnexion du serveur\n");
+  shutdown(*socketLecture, 2);
+  close(*socketLecture);
   return NULL;
 }
 
