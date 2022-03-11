@@ -1,6 +1,6 @@
 #include "../header/window.h"
 #include "../header/carte.h"
-//#include "../header/tour.h"
+#include "../header/tour.h"
 #include "../header/affichages.h"
 #include "../header/init_jeu_solo.h"
 
@@ -8,29 +8,16 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
 
 
-//creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
-//vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
-int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
-    {-2, -1, -1},
-    {-1, -2, -1},
-    {-2, -1, -2},
-    {-1, -2, -1},
-    {-2, -1, -1}};
 
-int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
-    {-1, -1, -2},
-    {-1, -2, -1},
-    {-2, -1, -2},
-    {-1, -2, -1},
-    {-1, -1, -2}};
-//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
 
 //tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
-int deck_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
 
 
@@ -54,8 +41,25 @@ void main(){
 
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
-void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
-    int taille_main = 5;
+void jeu_solo(SDL_Window * pWindow, int tab_main[]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+    int* taille_main = malloc(sizeof(int));
+    *taille_main = 5;
+    //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
+  //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
+  int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
+    {-2, -1, -1},
+    {-1, -2, -1},
+    {-2, -1, -2},
+    {-1, -2, -1},
+    {-2, -1, -1}};
+
+int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
+    {-1, -1, -2},
+    {-1, -2, -1},
+    {-2, -1, -2},
+    {-1, -2, -1},
+    {-1, -1, -2}};
+//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -113,7 +117,7 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
 
     //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
+    init_jeu(*taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -176,9 +180,9 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
     afficher_rectangles_formation(renderer_jeu, tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
 
-    afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
+    afficher_rectangles_main(*taille_main,renderer_jeu, tab_rect_main);
 
-    affichage_main(taille_main,renderer_jeu, deck_main, tab_rect_main);
+    affichage_main(*taille_main,renderer_jeu, tab_main, tab_rect_main);
     
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);
@@ -187,30 +191,24 @@ void jeu_solo(SDL_Window * pWindow, int deck_main[12]){ //a rajouter : deck de l
 
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
-
-
+    tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
+   
     if(pWindow){
       int running = 1;
-        while(running) {
-          SDL_Event e;
-          while(SDL_PollEvent(&e)) {
-              switch(e.type) {
-                  case SDL_QUIT: running = 0;
-                  break;
-
-              }
+      while(running){
+        SDL_Event e;
+        while(SDL_PollEvent(&e)){
+          switch(e.type){
+            case SDL_QUIT : running = 0;
+            break;
           }
         }
+      }
     }
 
 
-
-
     //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //Destruction de la fenetre
-    //SDL_DestroyWindow(pWindow);
+    free(taille_main);
     //A SUPPRIMER--------------------------------------------------------------------------------------------------------
     TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
     TTF_Quit();
@@ -248,7 +246,7 @@ int initialiser_fenetre(){
 
     if(pWindow){
       //lancement du jeu si fenetre bien crée-------------------------------------------------
-      jeu_solo(pWindow, deck_main); //on transmet le pointeur de la fenetre pour des utilisations antétieures
+      jeu_solo(pWindow, tab_main); //on transmet le pointeur de la fenetre pour des utilisations antétieures
       SDL_DestroyWindow(pWindow);
     }
     else{

@@ -46,11 +46,11 @@ void afficher_rectangles_main(int taille_main,SDL_Renderer* renderer_jeu, SDL_Re
 
 
 //affiche les cartes qu'il y a dans la main du joueur != cartes sur le plateau
-void affichage_main(int taille_main,SDL_Renderer* renderer_jeu, int deck_main[], SDL_Rect tab_rect_main[12]){
+void affichage_main(int taille_main,SDL_Renderer* renderer_jeu, int tab_main[], SDL_Rect tab_rect_main[12]){
     int i;
     for(i = 0; i < taille_main; i++){
       printf("i = %i\n", i);
-        afficher_carte(renderer_jeu, deck_main[i], tab_rect_main[i]);
+        afficher_carte(renderer_jeu, tab_main[i], tab_rect_main[i]);
     }
 }
 

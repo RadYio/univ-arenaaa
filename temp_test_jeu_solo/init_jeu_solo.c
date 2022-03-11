@@ -1,5 +1,5 @@
 #include "../header/window.h"
-//#include "../header/tour.h"
+#include "../header/tour.h"
 #include "../header/affichages.h"
 #include "../header/init_jeu_solo.h"
 
