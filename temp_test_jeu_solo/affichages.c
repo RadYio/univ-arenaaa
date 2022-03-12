@@ -52,7 +52,7 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, int tab_main[], SDL_Rect tab_rect_main[]){
     int i;
     for(i = 0; i < *taille_main; i++){
-      printf("i = %i\n", i);
+
       afficher_carte(renderer_jeu, tab_main[i], tab_rect_main[i]);
     }
 }
