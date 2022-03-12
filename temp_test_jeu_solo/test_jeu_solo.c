@@ -27,6 +27,9 @@ void main(){
 
 
 
+
+
+
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -43,7 +46,7 @@ void main(){
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_solo(SDL_Window * pWindow, int tab_main[]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     int* taille_main = malloc(sizeof(int));
-    *taille_main = 5;
+    *taille_main = 6;
     //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
   //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
   int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
@@ -116,8 +119,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	}
 
 
-    //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(*taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -166,43 +167,153 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
+    //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
+    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    SDL_RenderClear(renderer_jeu);
 
-    affichage_BG(renderer_jeu, img_jeu_Texture);
-    
-    affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
+    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+    //affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
 
-    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv);
-
-    afficher_rectangles_formation(renderer_jeu, tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
-
-    afficher_rectangles_main(*taille_main,renderer_jeu, tab_rect_main);
-
-    affichage_main(*taille_main,renderer_jeu, tab_main, tab_rect_main);
-    
-    //On fait le rendu !
-    SDL_RenderPresent(renderer_jeu);
-
-
+    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
+    printf("test 3 \n");
+    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
+    printf("test 2\n");
 
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
-    tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
-   
+    //tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
+    int etat = 0;
     if(pWindow){
-      int running = 1;
-      while(running){
+      int *running ;
+      *running = 1;
+      while(*running){
         SDL_Event e;
         while(SDL_PollEvent(&e)){
           switch(e.type){
             case SDL_QUIT : running = 0;
             break;
+            case SDL_MOUSEBUTTONDOWN:
+              //tour(running,renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
+              printf("test nouvelle action\n");
+              //affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+              //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
+              //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              if(e.button.x >= tab_rect_main[0].x && e.button.x <= tab_rect_main[0].x+tab_rect_main[0].w && e.button.y >= tab_rect_main[0].y && e.button.y <= tab_rect_main[0].y+tab_rect_main[0].h){
+                //si on clique sur la case 0 (première à gauche) de la main
+                //choix_plateau(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, 0, taille_main);
+                printf("carte 0\n");
+                etat = 1;                      
+                break;
+              }else if(e.button.x >= tab_rect_main[1].x && e.button.x <= tab_rect_main[1].x+tab_rect_main[1].w && e.button.y >= tab_rect_main[1].y && e.button.y <= tab_rect_main[1].y+tab_rect_main[1].h){
+                //si on clique sur la case 1 de la main
+                printf("carte 1\n");
+                etat = 2;                      
+                break;
+              }else if(e.button.x >= tab_rect_main[2].x && e.button.x <= tab_rect_main[2].x+tab_rect_main[2].w && e.button.y >= tab_rect_main[2].y && e.button.y <= tab_rect_main[2].y+tab_rect_main[2].h){
+                //si on clique sur la case 2 de la main
+                printf("carte 2\n");
+                etat = 3;                      
+                break;
+              }else if(e.button.x >= tab_rect_main[3].x && e.button.x <= tab_rect_main[3].x+tab_rect_main[3].w && e.button.y >= tab_rect_main[3].y && e.button.y <= tab_rect_main[3].y+tab_rect_main[3].h){
+                //si on clique sur la case 3 de la main
+                printf("carte 3\n");
+                etat = 4;                      
+                break;
+              }else if(e.button.x >= tab_rect_main[4].x && e.button.x <= tab_rect_main[4].x+tab_rect_main[4].w && e.button.y >= tab_rect_main[4].y && e.button.y <= tab_rect_main[4].y+tab_rect_main[4].h){
+                //si on clique sur la case 4 de la main
+                printf("carte 4\n");
+                etat = 5;                      
+                break;
+              }else if(e.button.x >= tab_rect_main[5].x && e.button.x <= tab_rect_main[5].x+tab_rect_main[5].w && e.button.y >= tab_rect_main[5].y && e.button.y <= tab_rect_main[5].y+tab_rect_main[5].h){
+                //si on clique sur la case 5 de la main
+                printf("carte 5\n");
+              }else if(e.button.x >= tab_rect_main[6].x && e.button.x <= tab_rect_main[6].x+tab_rect_main[6].w && e.button.y >= tab_rect_main[6].y && e.button.y <= tab_rect_main[6].y+tab_rect_main[6].h){
+                //si on clique sur la case 6 de la main
+                printf("carte 6\n");
+              }else if(e.button.x >= tab_rect_main[7].x && e.button.x <= tab_rect_main[7].x+tab_rect_main[7].w && e.button.y >= tab_rect_main[7].y && e.button.y <= tab_rect_main[7].y+tab_rect_main[7].h){
+                //si on clique sur la case 7 de la main
+                printf("carte 7\n");
+              }else if(e.button.x >= tab_rect_main[8].x && e.button.x <= tab_rect_main[8].x+tab_rect_main[8].w && e.button.y >= tab_rect_main[8].y && e.button.y <= tab_rect_main[8].y+tab_rect_main[8].h){
+                //si on clique sur la case 8 de la main
+                printf("carte 8\n");
+              }else if(e.button.x >= tab_rect_main[9].x && e.button.x <= tab_rect_main[9].x+tab_rect_main[9].w && e.button.y >= tab_rect_main[9].y && e.button.y <= tab_rect_main[9].y+tab_rect_main[9].h){
+                //si on clique sur la case 9 de la main
+                printf("carte 9\n");
+              /*}else if(e.button.x >= tab_rect_main[10].x && e.button.x <= tab_rect_main[10].x+tab_rect_main[10].w && e.button.y >= tab_rect_main[10].y && e.button.y <= tab_rect_main[10].y+tab_rect_main[10].h){
+                //si on clique sur la case 10 de la main
+              }else if(e.button.x >= tab_rect_main[11].x && e.button.x <= tab_rect_main[11].x+tab_rect_main[11].w && e.button.y >= tab_rect_main[11].y && e.button.y <= tab_rect_main[11].y+tab_rect_main[11].h){
+                //si on clique sur la case 11 de la main*/
+              }
+
+
+
+              if(etat > 0 && e.button.x >= tab_rect_formationJ[0].x && e.button.x <= tab_rect_formationJ[0].x+tab_rect_formationJ[0].w && e.button.y >= tab_rect_formationJ[0].y && e.button.y <= tab_rect_formationJ[0].y+tab_rect_formationJ[0].h){
+                //case colone 0, ligne 0
+                printf("colone 0, ligne 0\n");               
+                transfert_carte(renderer_jeu,tab_rect_formationJ[0],tab_main,tab_formation_cartesJ,tab_rect_main,0,0,0,taille_main);
+                affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+
+                printf("je sors\n");
+                break;
+
+              }else if(etat > 0 && e.button.x >= tab_rect_formationJ[1].x && e.button.x <= tab_rect_formationJ[1].x+tab_rect_formationJ[1].w && e.button.y >= tab_rect_formationJ[1].y && e.button.y <= tab_rect_formationJ[1].y+tab_rect_formationJ[1].h){
+                //case colone 0, ligne 1
+                printf("colone 0, ligne 1\n");            
+                transfert_carte(renderer_jeu,tab_rect_formationJ[1],tab_main,tab_formation_cartesJ,tab_rect_main,0,1,0,taille_main);
+                affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+
+                printf("je sors\n");
+                break;
+              }else if(etat > 0 && e.button.x >= tab_rect_formationJ[2].x && e.button.x <= tab_rect_formationJ[2].x+tab_rect_formationJ[2].w && e.button.y >= tab_rect_formationJ[2].y && e.button.y <= tab_rect_formationJ[2].y+tab_rect_formationJ[2].h){
+                //case colone 0, ligne 2
+                printf("colone 0, ligne 2\n");               
+                transfert_carte(renderer_jeu,tab_rect_formationJ[2],tab_main,tab_formation_cartesJ,tab_rect_main,2,0,0,taille_main);
+                affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+
+                printf("je sors\n");
+              }else if(etat > 0 && e.button.x >= tab_rect_formationJ[3].x && e.button.x <= tab_rect_formationJ[3].x+tab_rect_formationJ[3].w && e.button.y >= tab_rect_formationJ[3].y && e.button.y <= tab_rect_formationJ[3].y+tab_rect_formationJ[3].h){
+                //case colone 0, ligne 3
+              }else if(etat > 0 && e.button.x >= tab_rect_formationJ[4].x && e.button.x <= tab_rect_formationJ[4].x+tab_rect_formationJ[4].w && e.button.y >= tab_rect_formationJ[4].y && e.button.y <= tab_rect_formationJ[4].y+tab_rect_formationJ[4].h){
+                //case colone 0 ligne 4
+                transfert_carte(renderer_jeu,tab_rect_formationJ[1],tab_main,tab_formation_cartesJ,tab_rect_main,4,0,0,taille_main);
+                affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+
+                printf("je sors\n");
+              }else if(etat > 0 && e.button.x >= tab_rect_formationJ[5].x && e.button.x <= tab_rect_formationJ[5].x+tab_rect_formationJ[5].w && e.button.y >= tab_rect_formationJ[5].y && e.button.y <= tab_rect_formationJ[5].y+tab_rect_formationJ[5].h){
+                //case colone 1, ligne 0
+              }else if(e.button.x >= tab_rect_formationJ[6].x && e.button.x <= tab_rect_formationJ[6].x+tab_rect_formationJ[6].w && e.button.y >= tab_rect_formationJ[6].y && e.button.y <= tab_rect_formationJ[6].y+tab_rect_formationJ[6].h){
+                //case colone 1, ligne 1
+              }else if(e.button.x >= tab_rect_formationJ[7].x && e.button.x <= tab_rect_formationJ[7].x+tab_rect_formationJ[7].w && e.button.y >= tab_rect_formationJ[7].y && e.button.y <= tab_rect_formationJ[7].y+tab_rect_formationJ[7].h){
+                //case colone 1, ligne 2
+              }else if(e.button.x >= tab_rect_formationJ[8].x && e.button.x <= tab_rect_formationJ[8].x+tab_rect_formationJ[8].w && e.button.y >= tab_rect_formationJ[8].y && e.button.y <= tab_rect_formationJ[8].y+tab_rect_formationJ[8].h){
+                //case colone 1, ligne 3
+              }else if(e.button.x >= tab_rect_formationJ[9].x && e.button.x <= tab_rect_formationJ[9].x+tab_rect_formationJ[9].w && e.button.y >= tab_rect_formationJ[9].y && e.button.y <= tab_rect_formationJ[9].y+tab_rect_formationJ[9].h){
+                //case colone 1, ligne 4
+              }else if(e.button.x >= tab_rect_formationJ[10].x && e.button.x <= tab_rect_formationJ[10].x+tab_rect_formationJ[10].w && e.button.y >= tab_rect_formationJ[10].y && e.button.y <= tab_rect_formationJ[10].y+tab_rect_formationJ[10].h){
+                //case colone 2, ligne 0
+              }else if(e.button.x >= tab_rect_formationJ[11].x && e.button.x <= tab_rect_formationJ[11].x+tab_rect_formationJ[11].w && e.button.y >= tab_rect_formationJ[11].y && e.button.y <= tab_rect_formationJ[11].y+tab_rect_formationJ[11].h){
+                //case colone 2, ligne 1
+              }else if(e.button.x >= tab_rect_formationJ[12].x && e.button.x <= tab_rect_formationJ[12].x+tab_rect_formationJ[12].w && e.button.y >= tab_rect_formationJ[12].y && e.button.y <= tab_rect_formationJ[12].y+tab_rect_formationJ[12].h){
+                //case colone 2, ligne 2
+              }else if(e.button.x >= tab_rect_formationJ[13].x && e.button.x <= tab_rect_formationJ[13].x+tab_rect_formationJ[13].w && e.button.y >= tab_rect_formationJ[13].y && e.button.y <= tab_rect_formationJ[13].y+tab_rect_formationJ[13].h){
+                //case colone 2, ligne 3
+              }else if(e.button.x >= tab_rect_formationJ[14].x && e.button.x <= tab_rect_formationJ[14].x+tab_rect_formationJ[14].w && e.button.y >= tab_rect_formationJ[14].y && e.button.y <= tab_rect_formationJ[14].y+tab_rect_formationJ[14].h){
+                //case colone 2, ligne 4
+              }
+              else{
+                printf("reset etat 1\n");
+                etat = 0;
+
+              }
+            break;
           }
+
         }
+
       }
     }
 

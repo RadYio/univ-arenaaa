@@ -8,25 +8,25 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-void creation_main(int taille_main,SDL_Rect tab[]){
+void creation_main(int * taille_main,SDL_Rect tab[]){
   int milieu = 800;
-  if (taille_main == 0){
+  if (*taille_main == 0){
     return;
   }
   //si la main est impaire
-  else if(taille_main%2==1){
+  else if(*taille_main%2==1){
     printf("impair");
-    int x = milieu + 5 - (71 * (taille_main));
-    for(int i=0;i<taille_main;i++){
+    int x = milieu + 5 - (71 * (*taille_main));
+    for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
       x += 142;
     }
   }
   else{
     printf("pair");
-    int x = milieu - 5 - (71 * (taille_main));
+    int x = milieu - 5 - (71 * (*taille_main));
     printf("%i\n\n",x);
-    for(int i=0;i<taille_main;i++){
+    for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
       x += 142;
     }
@@ -44,7 +44,7 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
 }
 
 //initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
-void init_jeu(int taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
+void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
     
     
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
