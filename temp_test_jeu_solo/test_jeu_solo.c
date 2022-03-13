@@ -3,6 +3,8 @@
 #include "../header/tour.h"
 #include "../header/affichages.h"
 #include "../header/init_jeu_solo.h"
+#include "../header/test_jeu_solo.h"
+
 
 
 #include <SDL2/SDL.h>
@@ -48,6 +50,8 @@ void main(){
 void jeu_solo(SDL_Window * pWindow, int tab_main[]){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
+
+
     //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
   //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
   int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
@@ -252,7 +256,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 ("ou la \n");
 
                 for (int i = 0; i < 15;i++){
-                  if(e.button.x >= tab_rect_formationAdv[i].x+tab_rect_formationAdv[i].w && e.button.y >= tab_rect_formationAdv[i].y && e.button.y <= tab_rect_formationAdv[i].y+tab_rect_formationAdv[i].h){
+                  if(e.button.x >= tab_rect_formationAdv[i].x && e.button.x <= tab_rect_formationAdv[i].x+tab_rect_formationAdv[i].w && e.button.y >= tab_rect_formationAdv[i].y && e.button.y <= tab_rect_formationAdv[i].y+tab_rect_formationAdv[i].h){
                     printf("attaque sur la carte %i de l'adversaire \n\n",i);
                     etat = 0;
                     break;

@@ -5,7 +5,7 @@
 
 #include "../header/window.h"
 #include "../header/carte.h"
-//#include "../header/tour.h"
+#include "../header/tour.h"
 #include "../header/affichages.h"
 
 //fonction d'affichage du background

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../header/carte.h"
+#include "../header/test_jeu_solo.h"
+
 
 
 //fonction de creation de cartes
@@ -19,6 +21,7 @@ carte_t * creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp ,
 }
 
 //fonction d'initialisation de toutes les cartes, 12 en brut car on à que 12 cartes, à modifier si on en rajoute plus
+
 void init_cartes(carte_t * tab_cartes_total[]){
     tab_cartes_total[3] = creer_carte("Allan maître des l'esprit","Allan","../img/.png", 10, 4 , Psy,Poison,3);
     tab_cartes_total[4] = creer_carte("Charly maître du ratio","Charly", "../img/.png",10, 4 , Psy,Poison,4);
