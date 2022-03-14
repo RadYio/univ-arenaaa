@@ -8,6 +8,7 @@
 #include "../header/tour.h"
 #include "../header/affichages.h"
 
+
 //fonction d'affichage du background
 void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   // Le fond de la fenêtre sera blanc

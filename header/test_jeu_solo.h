@@ -1,1 +1,0 @@
-void jeu_solo(SDL_Window * pWindow, int tab_main[]);

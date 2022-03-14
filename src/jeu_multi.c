@@ -1,42 +1,70 @@
 #include "../header/window.h"
 #include "../header/carte.h"
-//#include "../header/tour.h"
+#include "../header/tour.h"
 #include "../header/affichages.h"
 #include "../header/init_jeu_solo.h"
+#include "../header/test_jeu_solo.h"
+
 
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
 
 
-//creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
-//vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
+
+
+//tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
+
+
+
+
+
+
+
+
+
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//code a tester----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
-void jeu_multi(SDL_Window * pWindow,SDL_Renderer* renderer_jeu){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
-    int * taille_main;
-    *taille_main = 10;
-	int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+    int* taille_main = malloc(sizeof(int));
+    *taille_main = 6;
+    int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
-	int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
+
+
+    //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
+  //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
+  int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
     {-2, -1, -1},
     {-1, -2, -1},
     {-2, -1, -2},
     {-1, -2, -1},
     {-2, -1, -1}};
 
-	int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
+int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {-1, -1, -2},
     {-1, -2, -1},
     {-2, -1, -2},
     {-1, -2, -1},
     {-1, -1, -2}};
-
-
+//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,7 +86,7 @@ void jeu_multi(SDL_Window * pWindow,SDL_Renderer* renderer_jeu){ //a rajouter : 
     //declarations des tableaux de rectangles-------------------------------------------------------------------------------------------
     SDL_Rect tab_rect_formationJ[15];
     SDL_Rect tab_rect_formationAdv[15];
-    SDL_Rect tab_rect_main[12];
+    SDL_Rect tab_rect_main[*taille_main];
 
     
     //déclarations de rectangles individuels, des gros rectangles qui n'ont pas d'équivalents et donc pas besoin de tableau-------------------
@@ -93,8 +121,6 @@ void jeu_multi(SDL_Window * pWindow,SDL_Renderer* renderer_jeu){ //a rajouter : 
 	}
 
 
-    //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,55 +169,110 @@ void jeu_multi(SDL_Window * pWindow,SDL_Renderer* renderer_jeu){ //a rajouter : 
 
 
 
+    //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
+    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv);
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    SDL_RenderClear(renderer_jeu);
 
-    affichage_BG(renderer_jeu, img_jeu_Texture);
-    
-    affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
+    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+    //affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
 
-    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv);
-
-    afficher_rectangles_formation(renderer_jeu, tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
-
-    afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
-
-    affichage_main(taille_main,renderer_jeu, tab_main, tab_rect_main);
-    
-    //On fait le rendu !
-    SDL_RenderPresent(renderer_jeu);
-
-	printf("coucou\n\n");
+    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
+    printf("test 3 \n");
+    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
+    printf("test 2\n");
 
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //while(tour(renderer_jeu, pWindow) == 0); // a modifier potentiellement
-
-
+    //tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
+    int etat = 0;
     if(pWindow){
-      int running = 1;
-        while(running) {
-          SDL_Event e;
-          while(SDL_PollEvent(&e)) {
-              switch(e.type) {
-                  case SDL_QUIT: running = 0;
-                  break;
 
+      *running = 1;
+      while(*running){
+        SDL_Event e;
+        while(SDL_PollEvent(&e)){
+          switch(e.type){
+            case SDL_QUIT : running = 0;
+            break;
+            case SDL_MOUSEBUTTONDOWN:
+              //tour(running,renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
+              printf("\ntest nouvelle action\n\n");
+              //affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+              //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
+              //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+              printf("\netat avant = %i\n\n",etat);                     
+              
+              if(etat == 0){
+                  int x = 0,y=0;
+                  for(int i=0;i < 15;i++){
+                    if(x == 4 && y < 2) y++;
+                    x = i%5;
+                    printf("[%i][%i] eme essai \n",x,y);
+                    //cas ou on clique sur une des 10 cartes de la main
+                    if(i <= 10 && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
+                      etat = i + 1; 
+                      break;
+                    }                 
+                    //cas ou on clique sur une carte du plateau
+                    else if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[i].x && e.button.x <= tab_rect_formationJ[i].x+tab_rect_formationJ[i].w && e.button.y >= tab_rect_formationJ[i].y && e.button.y <= tab_rect_formationJ[i].y+tab_rect_formationJ[i].h){
+                      printf("carte [%i][%i] du plateau\n",x,y);
+                      etat = -(i + 1);                   
+                      break;
+                    }
+                  }
+                  break;
               }
+              printf(" etat = %i\n",etat);                     
+
+              if(etat > 0){
+                ("la\n");
+                etat -=1;
+                int x = 0,y=0;
+                for (int i = 0; i < 15;i++){
+                  if(x == 4 && y < 2) y++;
+                  x = i%5;
+                  if(e.button.x >= tab_rect_formationJ[i].x && e.button.x <= tab_rect_formationJ[i].x+tab_rect_formationJ[i].w && e.button.y >= tab_rect_formationJ[i].y && e.button.y <= tab_rect_formationJ[i].y+tab_rect_formationJ[i].h){
+                    printf("colone %i, ligne %i\n",x,y);               
+                    transfert_carte(renderer_jeu,tab_rect_formationJ[0],tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
+                    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+                    printf("la carte a été posée\n");
+                    etat = 0;
+                    break;
+
+                  }
+                }
+                etat = 0;
+                break;
+              }
+
+              else if(etat < 0){
+                ("ou la \n");
+
+                for (int i = 0; i < 15;i++){
+                  if(e.button.x >= tab_rect_formationAdv[i].x && e.button.x <= tab_rect_formationAdv[i].x+tab_rect_formationAdv[i].w && e.button.y >= tab_rect_formationAdv[i].y && e.button.y <= tab_rect_formationAdv[i].y+tab_rect_formationAdv[i].h){
+                    printf("attaque sur la carte %i de l'adversaire \n\n",i);
+                    etat = 0;
+                    break;
+                  }
+                }
+                etat = 0;
+                break;
+              }
+              break;
           }
+
         }
+
+      }
     }
 
 
-
-
     //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    //Destruction de la fenetre
-    //SDL_DestroyWindow(pWindow);
+    free(taille_main);
     //A SUPPRIMER--------------------------------------------------------------------------------------------------------
     TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
     TTF_Quit();

@@ -1,5 +1,5 @@
 #include "../header/window.h"
-//#include "../header/tour.h"
+#include "../header/tour.h"
 #include "../header/affichages.h"
 #include "../header/init_jeu_solo.h"
 
@@ -8,25 +8,27 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-void creation_main(int taille_main,SDL_Rect tab[]){
+void creation_main(int * taille_main,SDL_Rect tab[]){
   int milieu = 800;
-  if (taille_main == 0){
+  if (*taille_main == 0){
     return;
   }
   //si la main est impaire
-  else if(taille_main%2==1){
+  else if(*taille_main%2==1){
     printf("impair");
-    int x = milieu + 5 - (71 * (taille_main));
-    for(int i=0;i<taille_main;i++){
+    int x = milieu + 5 - (71 * (*taille_main));
+    for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
+      printf("recur taille %i\n",i);
       x += 142;
     }
   }
+
   else{
     printf("pair");
-    int x = milieu - 5 - (71 * (taille_main));
+    int x = milieu - 5 - (71 * (*taille_main));
     printf("%i\n\n",x);
-    for(int i=0;i<taille_main;i++){
+    for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
       x += 142;
     }
@@ -44,7 +46,7 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
 }
 
 //initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
-void init_jeu(int *taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
+void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
     
     
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
@@ -136,38 +138,8 @@ void init_jeu(int *taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_re
     tab_rect_formationAdv[12] = rect_formationAdv13;
     tab_rect_formationAdv[13] = rect_formationAdv14;
     tab_rect_formationAdv[14] = rect_formationAdv15;
-
-    /*
-    //creation des rectangles pour l'affichage des cartes dans la main du joueur
-    SDL_Rect rect_main1 = creer_rectangle(2, 830, 144, 132);
-    SDL_Rect rect_main2 = creer_rectangle(135, 830, 144, 132);
-    SDL_Rect rect_main3 = creer_rectangle(268, 830, 144, 132);
-    SDL_Rect rect_main4 = creer_rectangle(401, 830, 144, 132);
-    SDL_Rect rect_main5 = creer_rectangle(534, 830, 144, 132);
-    SDL_Rect rect_main6 = creer_rectangle(667, 830, 144, 132);
-    SDL_Rect rect_main7 = creer_rectangle(800, 830, 144, 132);
-    SDL_Rect rect_main8 = creer_rectangle(933, 830, 144, 132);
-    SDL_Rect rect_main9 = creer_rectangle(1066, 830, 144, 132);
-    SDL_Rect rect_main10 = creer_rectangle(1199, 830, 144, 132);
-    SDL_Rect rect_main11 = creer_rectangle(1332, 830, 144, 132);
-    SDL_Rect rect_main12 = creer_rectangle(1465, 830, 144, 132);
-    //tableau qui repertorie les rectangles liés a la main du joueur
-
-    tab_rect_main[0] = rect_main1;
-    tab_rect_main[1] = rect_main2;
-    tab_rect_main[2] = rect_main3;
-    tab_rect_main[3] = rect_main4;
-    tab_rect_main[4] = rect_main5;
-    tab_rect_main[5] = rect_main6;
-    tab_rect_main[6] = rect_main7;
-    tab_rect_main[7] = rect_main8;
-    tab_rect_main[8] = rect_main9;
-    tab_rect_main[9] = rect_main10;
-    tab_rect_main[10] = rect_main11;
-    tab_rect_main[11] = rect_main12;
-    */
-   
-    creation_main(*taille_main,tab_rect_main);
+    
+    creation_main(taille_main,tab_rect_main);
 
 
     

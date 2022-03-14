@@ -8,8 +8,6 @@
 #include "../header/collection.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
-
-
 #include "../header/window.h"
 #include "../header/carte.h"
 
@@ -32,6 +30,9 @@ int menu(SDL_Window * pWindow){
 
 	// Le pointeur vers notre police
 	TTF_Font* police = NULL;
+	//a déclarer dynamiquement
+	//int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+
 
 
 	//Le pointeur vers la fenetre
@@ -277,7 +278,7 @@ if(pWindow){
 			if(e.button.x >= txt_optn1_R.x && e.button.x <= txt_optn1_R.x+txt_optn1_R.w && e.button.y >= txt_optn1_R.y && e.button.y <= txt_optn1_R.y+txt_optn1_R.h){
 				//Si on clique sur le bouton 1
 				printf("Test clique sur le bouton 1\n\n");
-				jeu_solo(pWindow,renderer_menu);
+				jeu_solo(pWindow,renderer_menu,&running);
 				SDL_PollEvent(&e);
 
 
@@ -285,7 +286,7 @@ if(pWindow){
 			else if(e.button.x >= txt_optn2_R.x && e.button.x <= txt_optn2_R.x+txt_optn2_R.w && e.button.y >= txt_optn2_R.y && e.button.y <= txt_optn2_R.y+txt_optn2_R.h){
 				//Si on clique sur le bouton 2
 				printf("Test clique sur le bouton 1\n\n");
-				jeu_multi(pWindow,renderer_menu);
+				jeu_multi(pWindow,renderer_menu,&running);
 				SDL_PollEvent(&e);
 
 
