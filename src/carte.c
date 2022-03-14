@@ -1,7 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+
+#include "../header/window.h"
 #include "../header/carte.h"
-#include "../header/test_jeu_solo.h"
+#include "../header/jeu_solo.h"
+#include "../header/jeu_multi.h"
+#include "../header/affichage.h"
+#include "../header/init_jeu_solo.h"
+
+
+
+
+
+
+
+
 
 
 
@@ -37,6 +53,7 @@ void init_cartes(carte_t * tab_cartes_total[]){
     tab_cartes_total[11] = creer_carte("Voleur","Voleur B", "../img/.png",4, 4 , Poison,Physique,11);
     tab_cartes_total[12] = creer_carte("Roi Antoine Laurent","A.Laurent", "../img/.png",10, 10 , Psy,Psy,12); //a modifier
 }
+
 
 //si c'est la premiere fois que le joueur se connecte il n'a pas de sauvegarde, il faut la creer
 void creer_sauvegarde(){
@@ -77,8 +94,11 @@ void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]){
 
 
 //fonction de creation du deck lors du lancement d'une game, 12 sera fixe obligatoirement car 12 cartes en main
-void creation_deck(carte_t * deck[12]){
-
-
+void creation_tab_main(carte_t tab_main[],int taille){
+  carte_t * tab_temp[13];
+  init_cartes(tab_temp);
+  for (int i =0;i < taille;i++){
+    tab_main[i] = *tab_temp[i];
+  }
 
 }

@@ -26,5 +26,8 @@ void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]);
 
 void creation_deck(carte_t * deck[12]);
 
+void creation_tab_main(carte_t tab_main[],int taille);
+
+
 
 

@@ -1,7 +1,7 @@
 #include "../header/window.h"
 #include "../header/carte.h"
-#include "../header/tour.h"
-#include "../header/affichages.h"
+
+#include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 #include "../header/test_jeu_solo.h"
 

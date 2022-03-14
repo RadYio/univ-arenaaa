@@ -3,6 +3,8 @@
         "string.h": "c",
         "window.h": "c",
         "carte.h": "c",
-        "init_jeu_solo.h": "c"
+        "init_jeu_solo.h": "c",
+        "affichages.h": "c",
+        "sdl.h": "c"
     }
 }

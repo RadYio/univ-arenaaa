@@ -1,17 +1,15 @@
-#include "../header/window.h"
-#include "../header/carte.h"
-#include "../header/tour.h"
-#include "../header/affichages.h"
-#include "../header/init_jeu_solo.h"
-#include "../header/test_jeu_solo.h"
-
-
-
+#include <stdio.h>
+#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+#include "../header/window.h"
+#include "../header/carte.h"
+#include "../header/jeu_solo.h"
+#include "../header/jeu_multi.h"
+#include "../header/affichage.h"
+#include "../header/init_jeu_solo.h"
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
 
@@ -19,7 +17,6 @@
 
 
 //tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
-
 
 
 
@@ -45,7 +42,13 @@
 void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
-    int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+    carte_t tab_main[*taille_main];
+    //carte_t tab_total[13];
+    creation_tab_main(tab_main,*taille_main);
+    carte_t tab_cartes_total[13];
+
+    creation_tab_main(tab_cartes_total,13);
+
 
 
 
@@ -176,7 +179,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total);
     //affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
 
     SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
@@ -238,7 +241,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   if(e.button.x >= tab_rect_formationJ[i].x && e.button.x <= tab_rect_formationJ[i].x+tab_rect_formationJ[i].w && e.button.y >= tab_rect_formationJ[i].y && e.button.y <= tab_rect_formationJ[i].y+tab_rect_formationJ[i].h){
                     printf("colone %i, ligne %i\n",x,y);               
                     transfert_carte(renderer_jeu,tab_rect_formationJ[0],tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
-                    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
+                    affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, 
+                    tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, 
+                    tab_rect_main, tab_main,tab_cartes_total);
                     printf("la carte a été posée\n");
                     etat = 0;
                     break;
