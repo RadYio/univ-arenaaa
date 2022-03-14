@@ -43,13 +43,13 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
     SDL_Rect rect_temp;
     rect_temp.x = x;
     rect_temp.y = y;
-    rect_temp.w = w;
     rect_temp.h = h;
+    rect_temp.w = w;
     return rect_temp;
 }
 
 //initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
-void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv){
+void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv,SDL_Rect* rect_aff_carte_j ){
     
     
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
@@ -64,7 +64,12 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_
     *rect_txt_deck_j = creer_rectangle(300, 20, 50, 200);
 
     //creation du rectangle pour le texte de deck de l'adversaire
-    *rect_txt_deck_adv = creer_rectangle(1060, 20, 50, 300);
+    *rect_txt_deck_adv = creer_rectangle(1060, 20, 50, 200);
+
+    //creation du rectangle pour le texte de deck de l'adversaire
+    *rect_aff_carte_j = creer_rectangle(675, 20, 350, 250);
+    
+
 
     //creation des rectangles pour l'affichage des cartes sur le plateau du joueur
     //à noter : pour les cartes, hauteur = 144, largeur = 132, 5 de marge en hauteur, 51 de marge en largeur entre les cartes

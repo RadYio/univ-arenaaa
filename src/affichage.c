@@ -22,7 +22,7 @@ void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   SDL_RenderCopy(renderer_jeu, img_jeu_Texture, NULL, NULL);
 }
 
-void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur,SDL_Rect* rect_adv){
+void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur,SDL_Rect* rect_adv,SDL_Rect * rect_aff_carte_j){
   //creation de rectangle du joueur
   SDL_SetRenderDrawColor( renderer_jeu, 0, 213, 255, 255 ); //renderer passe en bleu pour le rectangle de la zone joueur
   SDL_RenderDrawRect(renderer_jeu, rect_joueur);
@@ -30,6 +30,9 @@ void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur
   //creation du rectangle de l'adversaire
   SDL_SetRenderDrawColor( renderer_jeu, 219, 0, 0, 255 ); //renderer passe en rouge pour le rectangle de la zone adversaire
   SDL_RenderDrawRect(renderer_jeu, rect_adv);
+
+  SDL_SetRenderDrawColor( renderer_jeu, 0, 219, 0, 255 ); //renderer passe en vert pour le rectangle de la zone adversaire
+  SDL_RenderDrawRect(renderer_jeu, rect_aff_carte_j);
 }
 
 //fonction d'affichage des rectangles de la main
@@ -52,36 +55,10 @@ void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, carte_t tab_ma
 }
 
 
-//fonction d'affichage d'une carte dans un rectangle donné
-/*
-void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_afficher){
-  SDL_Surface* carte_s;
-  SDL_Texture* carte_t;
-  switch(carte){
-    case -1 : break; //s'il n'y à aucune carte
-    case 0 : carte_s = IMG_Load("../img/img_cartes/carte0.png"); break;
-    case 1 : carte_s = IMG_Load("../img/img_cartes/carte1.png"); break;
-    case 2 : carte_s = IMG_Load("../img/img_cartes/carte2.png"); break;
-    case 3 : carte_s = IMG_Load("../img/img_cartes/carte3.png"); break;
-    case 4 : carte_s = IMG_Load("../img/img_cartes/carte4.png"); break;
-    case 5 : carte_s = IMG_Load("../img/img_cartes/carte5.png"); break;
-    case 6 : carte_s = IMG_Load("../img/img_cartes/carte6.png"); break;
-    case 7 : carte_s = IMG_Load("../img/img_cartes/carte7.png"); break;
-    case 8 : carte_s = IMG_Load("../img/img_cartes/carte8.png"); break;
-    case 9 : carte_s = IMG_Load("../img/img_cartes/carte9.png"); break;
-    case 10 : carte_s = IMG_Load("../img/img_cartes/carte10.png"); break;
-    case 11 : carte_s = IMG_Load("../img/img_cartes/carte11.png"); break;
-    case 12 : carte_s = IMG_Load("../img/img_cartes/carte12.png"); break;
-  }
-    carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
-    SDL_FreeSurface(carte_s);
-    SDL_RenderCopy(renderer_jeu, carte_t, NULL, &rect_afficher);
-}
-*/
+
 void affichage_carte(SDL_Renderer* renderer_jeu,carte_t carte,SDL_Rect rect_afficher){
   SDL_Surface* carte_s;
   SDL_Texture* carte_t;
-  printf("nom de la carte %s\n\n",carte.chemin_carte);
   carte_s = IMG_Load(carte.chemin_carte);
   carte_t = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
   SDL_FreeSurface(carte_s);
@@ -122,7 +99,7 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
 }
 
 
-void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect *rect_txt_deck_j,SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[15],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[15] , int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
+void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[15],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[15] , int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
 
     SDL_RenderClear(renderer_jeu);
 
@@ -132,7 +109,7 @@ void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_
 
 
 
-    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv);
+    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv,rect_aff_carte_j);
 
     afficher_rectangles_formation(renderer_jeu,tab_cartes_total,tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
 
@@ -168,7 +145,10 @@ void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_plateau, carte_t 
   //mises à jour des tableaux
   if(tab_formation_cartesJ[colone][ligne] == -2){ //si on peut placer une carte (-2 représente un endroit où on peut)
     //mise à jour de notre formation,on remplace le -2 par l'id de la carte
+    printf("nb 1 %i\n",tab_formation_cartesJ[colone][ligne]);
     tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_image; 
+    printf("nb 2 %i\n",tab_formation_cartesJ[colone][ligne]);
+
     //mise à jour de notre main, on supprime la carte en question, et on arrete de l'afficher dans la main ainsi que son rectangle avec
     suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main); 
   }

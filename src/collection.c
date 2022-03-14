@@ -207,82 +207,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	creation_R_collec(taille_tab_sauvegarde,tab_nom_carte,tab_sauvegarde);
 
 
-/*
-	SDL_Rect nom_carte1;
-		nom_carte1.x=110;
-		nom_carte1.y=180;
-		nom_carte1.w=(strlen(tab_sauvegarde[0]->nom_collec)* 30 );
-		nom_carte1.h=80;
-
-
-	SDL_Rect nom_carte2;
-		nom_carte2.x=420;
-		nom_carte2.y=180;
-		nom_carte2.w=(strlen(tab_sauvegarde[1]->nom_collec)* 30 );
-		nom_carte2.h=80;
-
-	SDL_Rect nom_carte3;
-		nom_carte3.x=110;
-		nom_carte3.y=270;
-		nom_carte3.w=(strlen(tab_sauvegarde[2]->nom_collec)* 30 );
-		nom_carte3.h=80;  
-
-	SDL_Rect nom_carte4;
-		nom_carte4.x=420;
-		nom_carte4.y=270;
-		nom_carte4.w=(strlen(tab_sauvegarde[3]->nom_collec)* 30 );
-		nom_carte4.h=80;
-
-	SDL_Rect nom_carte5;
-		nom_carte5.x=110;
-		nom_carte5.y=360;
-		nom_carte5.w=(strlen(tab_sauvegarde[4]->nom_collec)* 30 );
-		nom_carte5.h=80;  
-
-	SDL_Rect nom_carte6;
-		nom_carte6.x=420;
-		nom_carte6.y=360;
-		nom_carte6.w=(strlen(tab_sauvegarde[5]->nom_collec)* 30 );
-		nom_carte6.h=80;
-
-	SDL_Rect nom_carte7;
-		nom_carte7.x=110;
-		nom_carte7.y=450;
-		nom_carte7.w=(strlen(tab_sauvegarde[6]->nom_collec)* 30 );
-		nom_carte7.h=80;  
-
-	SDL_Rect nom_carte8;
-		nom_carte8.x=420;
-		nom_carte8.y=450;
-		nom_carte8.w=(strlen(tab_sauvegarde[7]->nom_collec)* 30 );
-		nom_carte8.h=80;
-
-	SDL_Rect nom_carte9;
-		nom_carte9.x=110;
-		nom_carte9.y=540;
-		nom_carte9.w=(strlen(tab_sauvegarde[8]->nom_collec)* 30 );
-		nom_carte9.h=80;
-
-	SDL_Rect nom_carte10;
-		nom_carte10.x=420;
-		nom_carte10.y=540;
-		nom_carte10.w=(strlen(tab_sauvegarde[9]->nom_collec)* 30 );
-		nom_carte10.h=80;
-
-	SDL_Rect nom_carte11;
-		nom_carte11.x=110;
-		nom_carte11.y=610;
-		nom_carte11.w=(strlen(tab_sauvegarde[10]->nom_collec)* 30 );
-		nom_carte11.h=80;
-
-	SDL_Rect nom_carte12;
-		nom_carte12.x=420;
-		nom_carte12.y=610;
-		nom_carte12.w=(strlen(tab_sauvegarde[11]->nom_collec)* 30 );
-		nom_carte12.h=80;
-
-*/
-
 
 
 	//Déclaration du rectangle dans lequel vont être listées les cartes
@@ -293,16 +217,10 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 		Carte_R.h=600;
 
 
-/*
-  //Attention je l'ai placé ici, mais il faudra le déplacer pour faire ce qu'il doit faire
-  SDL_SetRenderDrawColor(renderer_collec, 255, 255, 255, 255);
-  //printf("Test2222\n\n\n\n");
-  SDL_RenderClear(renderer_collec);
-*/
 
 
 
-printf("test4\n");
+
 
 	SDL_Surface* txt_carte1_S = TTF_RenderUTF8_Blended(police, tab_sauvegarde[0]->nom_collec, couleurNoire);
 	SDL_Surface* txt_carte1_Hover_S = TTF_RenderUTF8_Blended(police, tab_sauvegarde[0]->nom_collec, couleurGold);
@@ -442,10 +360,9 @@ printf("test4\n");
 
 
 
-printf("test4\n");
   SDL_RenderCopy(renderer_collec, txt_optn1_Hover_T, NULL, &tab_nom_carte[0]);
   SDL_RenderCopy(renderer_collec, txt_optn1_T, NULL, &tab_nom_carte[0]);
-printf("test5\n");
+
   SDL_RenderCopy(renderer_collec, txt_optn2_Hover_T, NULL, &tab_nom_carte[1]);
   SDL_RenderCopy(renderer_collec, txt_optn2_T, NULL, &tab_nom_carte[1]);
 
