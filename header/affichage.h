@@ -27,4 +27,4 @@ void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main);
 
 void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_rect_main[], int* taille_main);
 
-void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_plateau, carte_t tab_main[12], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[12], int colone, int ligne, int indice_main, int* taille_main);
+void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main);

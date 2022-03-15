@@ -351,6 +351,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	SDL_FreeSurface(retour_menu_S); /* on a la texture, plus besoin du texte via surface */
 	SDL_FreeSurface(retour_menu_Hover_S); /* on a la texture, plus besoin du texte via surface */
 
+
 	SDL_RenderCopy(renderer_collec, img_Collec_BG, NULL, NULL);
 	SDL_RenderCopy(renderer_collec, img_planche_bg1_T, NULL, &planche_R);
 	SDL_RenderCopy(renderer_collec, img_Planche_haut_T, NULL, &planche_haut_R);
