@@ -5,6 +5,7 @@
         "carte.h": "c",
         "init_jeu_solo.h": "c",
         "affichages.h": "c",
-        "sdl.h": "c"
+        "sdl.h": "c",
+        "affichage.h": "c"
     }
 }

@@ -124,7 +124,7 @@ void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_
 
 //a mettre dans fichier séparé
 void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main){
-  for(int i = indice_main - 1; i < *taille_main - 1; i++){
+  for(int i = indice_main - 1; i < *taille_main; i++){
     tab_main[i] = tab_main[i+1];
   }
 }
@@ -141,7 +141,7 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
 
 
 //fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ                                                                                              
-void transfert_carte(SDL_Renderer* renderer_jeu, SDL_Rect rect_plateau, carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main){
+void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main){
   //mises à jour des tableaux
   if(tab_formation_cartesJ[colone][ligne] == -2){ //si on peut placer une carte (-2 représente un endroit où on peut)
     //mise à jour de notre formation,on remplace le -2 par l'id de la carte
