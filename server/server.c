@@ -36,9 +36,6 @@ typedef struct lien_s{
   client_t client2;
 }lien_t;
 
-//HORLOGE
-struct tm* horloge;
-
 //DEFINITION DU CLIENT
 client_t listeClient[CLIENT_MAX];
 int nb_client_attente=0;
@@ -51,7 +48,6 @@ pthread_t th_connectes[CLIENT_MAX];
 
 struct tm* recupererTemps(){
   time_t temp;
-
   time(&temp);
   return localtime(&temp);
 }
@@ -75,37 +71,33 @@ void* connectes(void* oldJoueurs){
   send(joueur1.numSock, texteJoueur1, 64, 0);
   printf("j'envoie à [%i]:\n            la chaine: %s\n", joueur2.numSock, texteJoueur2);
   send(joueur2.numSock, texteJoueur2, 64, 0);
+
   shutdown(joueur1.numSock, 2);
   shutdown(joueur2.numSock, 2);
+
   close(joueur1.numSock);
   close(joueur2.numSock);
+
   free(joueurs);
+  free(oldJoueurs);
+
+  pthread_exit(NULL);
 }
 
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
-  void* pasContent;
   ssize_t verif = -1;
   char* buffer = malloc(sizeof(char)*32+1);
+
   while(verif!=0){
     printf("Client[%i]: j'attends des informations...\n",client->num);
     verif = read(client->numSock,buffer,32);
-    if(verif==0){
-      printf("Client[%i]: s'est deconnecté (pas cool)\n",client->num);
-      client->num=-1;
-      pthread_exit(pasContent);
-      return NULL;
-    }
-    else{
-      printf("Client[%i]: envoie: chaine[%s]\n",client->num,buffer);
-      if(client->num==1){
-        send(listeClient[0].numSock, buffer, 32, 0);
-      }
-      else{
-        send(listeClient[1].numSock, buffer, 32, 0);
-      }
-    }
   }
+  struct tm* dateTh=recupererTemps();
+  printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, client->num);client->num=-1;
+  nb_client_attente--;
+  free(buffer); //free(client);
+  pthread_exit(NULL);
 }
 
 int main(){
@@ -114,6 +106,7 @@ int main(){
   int serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
   socklen_t s_Taille = sizeof(server_Sin);
 
+  client_t client_temporaire;
 
   struct tm* date = recupererTemps(); //stucture date, contenant le temps actuel de l'ordinateur
 
@@ -145,19 +138,15 @@ int main(){
     printf("Sortie à cause d'un bug de listen Socket\n");
     return 1;
   }
+
   free(test);
   printf("Utilisation et écoute du port %d...\n\n", PORT);
 
 
 
-  //horloge=localtime((time_t*)time(NULL));
   int i,j;
-  int connect = -1;
   tableauPropre();
   while(1){
-    date=recupererTemps();
-    printf("TEMPS: %i:%i:%i\n", date->tm_hour,date->tm_min,date->tm_sec);
-
     if(nb_client_attente!=0 && nb_client_attente%2==0){ //deux clients dispos pour jouer
       for(j=0;j<CLIENT_MAX;j++){
         if(listeClient[j].libre == OUI){
@@ -169,7 +158,7 @@ int main(){
           pthread_cancel(th_attente[i]);
           pthread_cancel(th_attente[j]);
           printf("Création\n\n");
-          pthread_create(&th_attente[i], NULL, connectes, (void*)nouvelleConnexion);
+          pthread_create(&th_connectes[i], NULL, connectes, (void*)nouvelleConnexion);
           nb_client_attente-=2;
           break;
         }
@@ -180,25 +169,26 @@ int main(){
 
 
     printf("On attente de la connexion d'un client ...\n");
-
+    client_temporaire.numSock = accept(serverSocket, (struct sockaddr*)&client_temporaire.sin, &client_temporaire.taille);
     for(i=0;i<CLIENT_MAX;i++){
       if(listeClient[i].num==-1){ //Si libre
-        listeClient[i].numSock = accept(serverSocket, (struct sockaddr*)&listeClient[i].sin, &listeClient[i].taille);
+        listeClient[i].sin = client_temporaire.sin;
+        listeClient[i].taille= client_temporaire.taille;
+        listeClient[i].numSock = client_temporaire.numSock;
         listeClient[i].num=i;
         break; //On break afin de garder l'indice de i;
       }
     }
     if(i<CLIENT_MAX){ //On a trouvé une place
-      printf("Client[%i]: Nouvelle connexion\n",i);
+      date=recupererTemps();
+      printf("->%i:%i:%i || client[%i]: nouvelle connexion\n", date->tm_hour, date->tm_min, date->tm_sec, i);
       pthread_create(&th_attente[i], NULL, attente, (void*)&listeClient[i]);
       listeClient[i].libre=OUI;
       nb_client_attente++;
     }
     else{
     printf("Utilisateur à essayer de se connecter, mais on a plus de place\n\n");
-    shutdown(connect, 2);
+    shutdown(client_temporaire.numSock, 2);
     }
-
   }
-  free(date);
 }

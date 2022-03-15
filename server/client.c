@@ -86,6 +86,7 @@ int main(){
         return 1;
       default:
       printf("Mais fréro, tu es cringe\n\n");
+      choix=-1;
       break;
     }
   }while(choix!=1);
