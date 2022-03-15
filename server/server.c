@@ -96,7 +96,7 @@ void* attente(void* informations){
   struct tm* dateTh=recupererTemps();
   printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, client->num);client->num=-1;
   nb_client_attente--;
-  free(buffer); free(client);
+  free(buffer); //free(client);
   pthread_exit(NULL);
 }
 
