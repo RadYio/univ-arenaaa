@@ -49,9 +49,9 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
 }
 
 //initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
-void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_rect_formationAdv[15], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv,SDL_Rect* rect_aff_carte_j ){
-    
-    
+void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[][3], SDL_Rect tab_rect_formationAdv[][3], SDL_Rect tab_rect_main[12], SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv,SDL_Rect* rect_aff_carte_j ){
+
+
     //creation de rectangles pour les zones d'affichage-------------------------------------------------------------
 
     //creation du rectangle pour la zone joueur
@@ -68,7 +68,7 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_
 
     //creation du rectangle pour le texte de deck de l'adversaire
     *rect_aff_carte_j = creer_rectangle(675, 20, 350, 250);
-    
+
 
 
     //creation des rectangles pour l'affichage des cartes sur le plateau du joueur
@@ -91,21 +91,21 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_
     SDL_Rect rect_formationJ13 = creer_rectangle(517, 378, 144, 132);
     SDL_Rect rect_formationJ14 = creer_rectangle(517, 527, 144, 132);
     SDL_Rect rect_formationJ15 = creer_rectangle(517, 676, 144, 132);
-    tab_rect_formationJ[0] = rect_formationJ1;
-    tab_rect_formationJ[1] = rect_formationJ2;
-    tab_rect_formationJ[2] = rect_formationJ3;
-    tab_rect_formationJ[3] = rect_formationJ4;
-    tab_rect_formationJ[4] = rect_formationJ5;
-    tab_rect_formationJ[5] = rect_formationJ6;
-    tab_rect_formationJ[6] = rect_formationJ7;
-    tab_rect_formationJ[7] = rect_formationJ8;
-    tab_rect_formationJ[8] = rect_formationJ9;
-    tab_rect_formationJ[9] = rect_formationJ10;
-    tab_rect_formationJ[10] = rect_formationJ11;
-    tab_rect_formationJ[11] = rect_formationJ12;
-    tab_rect_formationJ[12] = rect_formationJ13;
-    tab_rect_formationJ[13] = rect_formationJ14;
-    tab_rect_formationJ[14] = rect_formationJ15;
+    tab_rect_formationJ[0][0] = rect_formationJ1;
+    tab_rect_formationJ[1][0] = rect_formationJ2;
+    tab_rect_formationJ[2][0] = rect_formationJ3;
+    tab_rect_formationJ[3][0] = rect_formationJ4;
+    tab_rect_formationJ[4][0] = rect_formationJ5;
+    tab_rect_formationJ[0][1] = rect_formationJ6;
+    tab_rect_formationJ[1][1] = rect_formationJ7;
+    tab_rect_formationJ[2][1] = rect_formationJ8;
+    tab_rect_formationJ[3][1] = rect_formationJ9;
+    tab_rect_formationJ[4][1] = rect_formationJ10;
+    tab_rect_formationJ[0][2] = rect_formationJ11;
+    tab_rect_formationJ[1][2] = rect_formationJ12;
+    tab_rect_formationJ[2][2] = rect_formationJ13;
+    tab_rect_formationJ[3][2] = rect_formationJ14;
+    tab_rect_formationJ[4][2] = rect_formationJ15;
 
 
 
@@ -131,26 +131,26 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[15], SDL_Rect tab_
     SDL_Rect rect_formationAdv14 = creer_rectangle(951, 527, 144, 132);
     SDL_Rect rect_formationAdv15 = creer_rectangle(951, 676, 144, 132);
     //à faire, tableau qui repertorie les cartes adversaire
-    tab_rect_formationAdv[0] = rect_formationAdv1;
-    tab_rect_formationAdv[1] = rect_formationAdv2;
-    tab_rect_formationAdv[2] = rect_formationAdv3;
-    tab_rect_formationAdv[3] = rect_formationAdv4;
-    tab_rect_formationAdv[4] = rect_formationAdv5;
-    tab_rect_formationAdv[5] = rect_formationAdv6;
-    tab_rect_formationAdv[6] = rect_formationAdv7;
-    tab_rect_formationAdv[7] = rect_formationAdv8;
-    tab_rect_formationAdv[8] = rect_formationAdv9;
-    tab_rect_formationAdv[9] = rect_formationAdv10;
-    tab_rect_formationAdv[10] = rect_formationAdv11;
-    tab_rect_formationAdv[11] = rect_formationAdv12;
-    tab_rect_formationAdv[12] = rect_formationAdv13;
-    tab_rect_formationAdv[13] = rect_formationAdv14;
-    tab_rect_formationAdv[14] = rect_formationAdv15;
-    
+    tab_rect_formationAdv[0][2] = rect_formationAdv1;
+    tab_rect_formationAdv[1][2] = rect_formationAdv2;
+    tab_rect_formationAdv[2][2] = rect_formationAdv3;
+    tab_rect_formationAdv[3][2] = rect_formationAdv4;
+    tab_rect_formationAdv[4][2] = rect_formationAdv5;
+    tab_rect_formationAdv[0][1] = rect_formationAdv6;
+    tab_rect_formationAdv[1][1] = rect_formationAdv7;
+    tab_rect_formationAdv[2][1] = rect_formationAdv8;
+    tab_rect_formationAdv[3][1] = rect_formationAdv9;
+    tab_rect_formationAdv[4][1] = rect_formationAdv10;
+    tab_rect_formationAdv[0][0] = rect_formationAdv11;
+    tab_rect_formationAdv[1][0] = rect_formationAdv12;
+    tab_rect_formationAdv[2][0] = rect_formationAdv13;
+    tab_rect_formationAdv[3][0] = rect_formationAdv14;
+    tab_rect_formationAdv[4][0] = rect_formationAdv15;
+
     creation_main(taille_main,tab_rect_main);
 
 
-    
+
 
 
 }

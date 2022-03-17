@@ -67,11 +67,11 @@ void affichage_carte(SDL_Renderer* renderer_jeu,carte_t carte,SDL_Rect rect_affi
 
 
 //fonction d'affichage des rectangles de formation
-void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes_total[],int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[15], int tab_formation_cartesADV[5][3], SDL_Rect tab_rect_formationAdv[15]){
+void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes_total[],int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[][3], int tab_formation_cartesADV[5][3], SDL_Rect tab_rect_formationAdv[][3]){
   //creation des rectangles pour les lieux de placement des cartes
     SDL_SetRenderDrawColor(renderer_jeu, 255, 215, 0, 255); //renderer passe en jaune pour ces rectangles
     int x=0,y=0;
-  
+
     //on va parcourir les 2 matrices de formation, et là où il y à un -2, on affichera un rectangle
     //à mettre dans une fonction séparé car long et moche :(
     //affichage colone 1 joueur
@@ -79,27 +79,27 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
       if(x == 4 && y < 2)y++;
       x =  i%5;
       if(tab_formation_cartesJ[x][y] == -2) {
-        SDL_RenderDrawRect(renderer_jeu, &tab_rect_formationJ[i]);
+        SDL_RenderDrawRect(renderer_jeu, &tab_rect_formationJ[x][y]);
       }
       else if(tab_formation_cartesJ[x][y] == -1) {
       }
       else {
         printf("id : %i \n",tab_formation_cartesJ[x][y]);
-        affichage_carte(renderer_jeu,tab_cartes_total[ (tab_formation_cartesJ[x][y]) ],tab_rect_formationJ[i]) ;
+        affichage_carte(renderer_jeu,tab_cartes_total[ (tab_formation_cartesJ[x][y]) ],tab_rect_formationJ[x][y]) ;
       }
       if(tab_formation_cartesADV[x][2-y] == -2) {
-        SDL_RenderDrawRect(renderer_jeu, &tab_rect_formationAdv[i]);
+        SDL_RenderDrawRect(renderer_jeu, &tab_rect_formationAdv[x][2-y]);
       }
       else if(tab_formation_cartesADV[x][2-y] == -1) {
       }
       else{
-        affichage_carte(renderer_jeu,tab_cartes_total[(tab_formation_cartesADV[x][2-y])],tab_rect_formationAdv[i]) ;
+        affichage_carte(renderer_jeu,tab_cartes_total[(tab_formation_cartesADV[x][2-y])],tab_rect_formationAdv[x][2-y]) ;
       }
     }
 }
 
 
-void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[15],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[15] , int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
+void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] , int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
 
     SDL_RenderClear(renderer_jeu);
 
@@ -140,16 +140,16 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
 
 
 
-//fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ                                                                                              
+//fonction qui tranfère une carte de la main du joueur sur le plateau                       //MAJ               //MAJ
 void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main){
   //mises à jour des tableaux
   if(tab_formation_cartesJ[colone][ligne] == -2){ //si on peut placer une carte (-2 représente un endroit où on peut)
     //mise à jour de notre formation,on remplace le -2 par l'id de la carte
     printf("nb 1 %i\n",tab_formation_cartesJ[colone][ligne]);
-    tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_image; 
+    tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_image;
     printf("nb 2 %i\n",tab_formation_cartesJ[colone][ligne]);
 
     //mise à jour de notre main, on supprime la carte en question, et on arrete de l'afficher dans la main ainsi que son rectangle avec
-    suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main); 
+    suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main);
   }
 }
