@@ -87,7 +87,7 @@ void* connectes(void* oldJoueurs){
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
   ssize_t verif = -1;
-  char* buffer = malloc(sizeof(char)*32+1);
+  char buffer[64];
 
   while(verif!=0){
     printf("Client[%i]: j'attends des informations...\n",client->num);
@@ -96,7 +96,6 @@ void* attente(void* informations){
   struct tm* dateTh=recupererTemps();
   printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, client->num);client->num=-1;
   nb_client_attente--;
-  free(buffer); //free(client);
   pthread_exit(NULL);
 }
 

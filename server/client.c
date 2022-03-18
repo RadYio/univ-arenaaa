@@ -1,11 +1,3 @@
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <pthread.h>
 #include "../header/client.h"
 
 
@@ -82,4 +74,5 @@ int main(){
     }
   }while(choix!=1);
   free(testConnect);
+  return 0;
 }
