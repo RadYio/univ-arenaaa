@@ -304,7 +304,7 @@ if(pWindow){
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 					printf("Je boucle tant que pas de joueur\n");
 					while(infoServer.joueurTrouve!=1){
-						//bonhomme qui danse
+						//bonhomme qui danse 
 					}
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
