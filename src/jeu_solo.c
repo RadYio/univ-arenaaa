@@ -270,33 +270,35 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
     int etat = 0;
     int oldHover = 0;
-    //int x1 = 0,y1=0,i1=0;
-    Uint32 minType;
-    Uint32 maxType;
+
 
 
 
 
     pthread_create(&thread,NULL,calcul_temps,(void*)(jeu));
-
     if(pWindow){
 
       *running = 1;
       while(*running){
-        SDL_Event e;
-        if(*jeu == 0){
-          SDL_PumpEvents();
-          SDL_PeepEvents(&e,100,SDL_ADDEVENT
-                   ,minType,  maxType);
-          SDL_FlushEvents(minType, maxType);
-        }
-        while(*jeu == 1 && *running == 1){
+          SDL_Event e;
+          while(*jeu == 0 && SDL_PollEvent(&e)){
+            //if(*jeu == 0){
+              if(e.type == SDL_QUIT){
+
+                *running = 0;
+                printf("on sort mtn 1\n");
+                break;
+              }             
+            }
+            while(*jeu == 1 && SDL_PollEvent(&e)){
 
 
-
-          while(SDL_PollEvent(&e)){
             switch(e.type){
-              case SDL_QUIT : *running = 0 ;
+              case SDL_QUIT : 
+                printf("je suis ici %i\n",e.type);
+
+                *running = 0 ;
+                printf("on sort mtn\n");
 
               break;
 
@@ -395,17 +397,19 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               }
             }
             break;
-    }
+          }
 
   }
 
-}
+//}
 
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(taille_main);
+
   //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
 
   TTF_Quit();
+  return;
   }
 }

@@ -14,12 +14,6 @@
 
 
 
-typedef struct button_s{
-	int x;
-	int y;
-	int hauteur;
-	int largeur;
-}button_t;
 
 int menu(SDL_Window * pWindow){
 
