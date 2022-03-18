@@ -49,7 +49,6 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, carte_t tab_main[], SDL_Rect tab_rect_main[]){
     int i;
     for(i = 0; i < *taille_main; i++){
-
       affichage_carte(renderer_jeu, tab_main[i], tab_rect_main[i]);
     }
 }
@@ -124,7 +123,7 @@ void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_
 
 //a mettre dans fichier séparé
 void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main){
-  for(int i = indice_main - 1; i < *taille_main; i++){
+  for(int i = indice_main ; i < *taille_main; i++){
     tab_main[i] = tab_main[i+1];
   }
 }
