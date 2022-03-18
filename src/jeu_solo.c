@@ -283,7 +283,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       while(*running){
           SDL_Event e;
           while(*jeu == 0 && SDL_PollEvent(&e)){
-            //if(*jeu == 0){
+              etat = 0;
               if(e.type == SDL_QUIT){
 
                 *running = 0;
