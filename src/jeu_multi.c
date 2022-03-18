@@ -14,7 +14,7 @@
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
-
+#include "../header/client.h"
 /*
 pthread_t thread;
 int * jeu;
@@ -83,6 +83,14 @@ int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+
+
+
+
+
+
+
+
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
     carte_t tab_main[*taille_main];
@@ -290,13 +298,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 *running = 0;
                 printf("on sort mtn 1\n");
                 break;
-              }             
+              }
             }
             while(*jeu == 1 && SDL_PollEvent(&e)){
 
 
             switch(e.type){
-              case SDL_QUIT : 
+              case SDL_QUIT :
                 printf("je suis ici %i\n",e.type);
 
                 *running = 0 ;

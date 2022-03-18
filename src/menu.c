@@ -10,6 +10,7 @@
 #include "../header/jeu_multi.h"
 #include "../header/window.h"
 #include "../header/affichage.h"
+#include "../header/client.h"
 
 
 
@@ -280,9 +281,38 @@ if(pWindow){
 			}
 			else if(e.button.x >= txt_optn2_R.x && e.button.x <= txt_optn2_R.x+txt_optn2_R.w && e.button.y >= txt_optn2_R.y && e.button.y <= txt_optn2_R.y+txt_optn2_R.h){
 				//Si on clique sur le bouton 2
-				printf("Test clique sur le bouton 1\n\n");
-				jeu_multi(pWindow,renderer_menu,&running);
+				printf("Test clique sur le bouton 2\n\n");
+
+				pthread_t threadJoueur; /** \brief threadJoueur est un thread permettant de tester la connexion d'un joueur sans bloquer le programme */
+				serverStruct_t infoServer;
+
+				//affichage ecran noir + loading...
+				printf("Je vais dans le truc\n");
+				infoServer.joueurTrouve=0;
+				printf("Je sors du truc\n");
+				infoServer.valSocket=connectC();
+
+
+
+				printf("valSocket = %i\n",infoServer.valSocket);
+				if(infoServer.valSocket==-1){
+					//Tenta maximum atteinte
+					//Afficher erreur
+				}
+				else{
+					printf("Je cree le thread\n");
+					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
+					printf("Je boucle tant que pas de joueur\n");
+					while(infoServer.joueurTrouve!=1){
+						//bonhomme qui danse
+					}
+					//trouve
+					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
+					jeu_multi(pWindow,renderer_menu,&running);
+
+				}
 				SDL_PollEvent(&e);
+
 
 
 			}

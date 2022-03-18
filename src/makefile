@@ -16,11 +16,9 @@ all: univ-arenaaaa
 
 
 
-univ-arenaaaa: main.c carte.c menu.c jeu_solo.c jeu_multi.c  window.c collection.c affichage.c init_jeu_solo.c
-	${CC} -o ${PROG} main.c carte.c menu.c jeu_solo.c jeu_multi.c  window.c collection.c affichage.c init_jeu_solo.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
+univ-arenaaaa: main.c carte.c menu.c jeu_solo.c jeu_multi.c  window.c collection.c affichage.c init_jeu_solo.c client.c
+	${CC} -o ${PROG} main.c carte.c menu.c jeu_solo.c jeu_multi.c window.c collection.c affichage.c init_jeu_solo.c client.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 clean:
 	rm -f ${PROG}
 	rm -f *.o
-
-
