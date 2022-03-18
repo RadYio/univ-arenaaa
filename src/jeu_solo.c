@@ -174,6 +174,36 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	}
 
 
+  SDL_Surface* menu_s;
+  SDL_Surface* passe_s;
+  menu_s = IMG_load("../img/img_menu.png");
+  passe_s = IMG_load("../img/retour_menu.png");
+  SDL_Texture* menu_t;
+  SDL_Texture* passe_t;
+  menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
+  passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
+
+  SDL_FreeSurface(menu_s);
+  SDL_FreeSurface(passe_s);
+
+  SDL_Surface* txt_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
+	SDL_Surface* txt_menu_Hover_S = TTF_RenderUTF8_Blended(police, "Menu", couleurJaune);
+
+	SDL_Texture *txt_menu_t = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
+	SDL_Texture *txt_menu_Hover_t = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
+
+	SDL_FreeSurface(menu_S); /* on a la texture, plus besoin du texte via surface */
+	SDL_FreeSurface(menu_Hover_S);
+
+  SDL_Rect menu_R = creer_rectangle(900,80,60,160);
+  SDL_Rect txt_menu_R = creer_rectangle(800,50,120,300);
+  SDL_Rect passe_R = creer_rectangle(600,80,60,160);
+  SDL_Rect txt_passe_R = creer_rectangle(500,50,120,300);
+  
+  SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
+
+  SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &texte_menu_R);
+  SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &texte_menu_R);
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,17 +258,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	SDL_Texture *retour_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, retour_menu_S);
 	SDL_Texture *retour_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, retour_menu_Hover_S);
 
-  SDL_Rect texte_retour_R;
-		texte_retour_R.x=900;
-		texte_retour_R.y=80;
-		texte_retour_R.w=160;
-		texte_retour_R.h=60;
-
-  SDL_Rect retour_menu_R;
-		retour_menu_R.x=800;
-		retour_menu_R.y=50;
-		retour_menu_R.w=300;
-		retour_menu_R.h=120;
 
 
 	SDL_FreeSurface(retour_menu_S); // on a la texture, plus besoin du texte via surface

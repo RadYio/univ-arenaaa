@@ -44,6 +44,24 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 }
 
 
+//affichage du bouton retour menu et du bouton passage de tour
+void afficher_boutton(SDL_Rect* rect_menu,SDL_Rect* rect_passe,){
+  SDL_Surface* menu_s;
+  SDL_Surface* passe_s;
+  menu_s = IMG_load("../img/img_menu.png");
+  passe_s = IMG_load("../img/retour_menu.png");
+  SDL_Texture* menu_t;
+  SDL_Texture* passe_t;
+  menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
+  passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
+
+  SDL_FreeSurface(menu_s);
+  SDL_FreeSurface(passe_s);
+
+
+
+}
+
 
 //affiche les cartes qu'il y a dans la main du joueur != cartes sur le plateau
 void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, carte_t tab_main[], SDL_Rect tab_rect_main[]){
