@@ -10,7 +10,7 @@ typedef struct carte_s{
   int nb_degats;
   type_t  type_attaque;
   type_t  type_vulnerable;
-  int id_image;
+  int id_carte;
 }carte_t;
 
 

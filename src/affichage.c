@@ -45,11 +45,11 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 
 
 //affichage du bouton retour menu et du bouton passage de tour
-void afficher_boutton(SDL_Rect* rect_menu,SDL_Rect* rect_passe,){
+void afficher_boutton(SDL_Rect* rect_menu,SDL_Rect* rect_passe, SDL_Renderer* renderer_jeu){
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
-  menu_s = IMG_load("../img/img_menu.png");
-  passe_s = IMG_load("../img/retour_menu.png");
+  menu_s = IMG_Load("../img/img_menu.png");
+  passe_s = IMG_Load("../img/retour_menu.png");
   SDL_Texture* menu_t;
   SDL_Texture* passe_t;
   menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
@@ -163,7 +163,7 @@ void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Re
   if(tab_formation_cartesJ[colone][ligne] == -2){ //si on peut placer une carte (-2 représente un endroit où on peut)
     //mise à jour de notre formation,on remplace le -2 par l'id de la carte
     printf("nb 1 %i\n",tab_formation_cartesJ[colone][ligne]);
-    tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_image;
+    tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_carte;
     printf("nb 2 %i\n",tab_formation_cartesJ[colone][ligne]);
     //mise à jour de notre main, on supprime la carte en question, et on arrete de l'afficher dans la main ainsi que son rectangle avec
     suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main);

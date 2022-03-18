@@ -22,7 +22,7 @@
 
 
 //fonction de creation de cartes
-carte_t * creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_image){
+carte_t * creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_carte){
   carte_t * carte;
   carte = malloc(sizeof(carte_t));
   carte->nom = nom;
@@ -32,7 +32,7 @@ carte_t * creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp ,
   carte->nb_degats = nb_degats;
   carte->type_attaque = type_attaque;
   carte->type_vulnerable = type_vulnerable;
-  carte->id_image = id_image;
+  carte->id_carte = id_carte;
   return carte;
 }
 
@@ -70,7 +70,7 @@ void creer_sauvegarde(){
 void maj_sauvergarde(carte_t * carte){
   FILE * fic1;
   fic1 = fopen("../save/sauvergarde.txt","a");
-  fprintf(fic1,"%i",carte->id_image);
+  fprintf(fic1,"%i",carte->id_carte);
   fclose(fic1);
 }
 

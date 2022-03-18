@@ -16,7 +16,7 @@ int parcours_formation(int tab_formation_cartesADV[][3], carte_t main_bot[], int
         for(j = 0; j < 3; j++){
             if(tab_formation_cartesADV[i][j] == -2){
                 //si le bot trouve un emplacement vide il place la premiere carte de sa main là
-                tab_formation_cartesADV[i][j] = main_bot[0].id_image;
+                tab_formation_cartesADV[i][j] = main_bot[0].id_carte;
                 (*taille_main_bot)--;
                 supprimer_carte_tab(main_bot, 0, taille_main_bot);
                 return 1; //on retourne une valeur vraie pour lancer le if dans la fonction bot
