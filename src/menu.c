@@ -4,12 +4,11 @@
 
 #include <time.h>
 
-
+#include "../header/carte.h"
 #include "../header/collection.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/window.h"
-#include "../header/carte.h"
 #include "../header/affichage.h"
 
 
@@ -282,7 +281,7 @@ if(pWindow){
 			else if(e.button.x >= txt_optn2_R.x && e.button.x <= txt_optn2_R.x+txt_optn2_R.w && e.button.y >= txt_optn2_R.y && e.button.y <= txt_optn2_R.y+txt_optn2_R.h){
 				//Si on clique sur le bouton 2
 				printf("Test clique sur le bouton 1\n\n");
-				//jeu_multi(pWindow,renderer_menu,&running);
+				jeu_multi(pWindow,renderer_menu,&running);
 				SDL_PollEvent(&e);
 
 

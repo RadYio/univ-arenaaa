@@ -2,7 +2,7 @@
 
 typedef enum type{Poison, Psy, Physique}type_t;
 
-typedef struct carte{
+typedef struct carte_s{
   char * nom;
   char * nom_collec;
   char * chemin_carte;

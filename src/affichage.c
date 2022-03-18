@@ -148,7 +148,6 @@ void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Re
     printf("nb 1 %i\n",tab_formation_cartesJ[colone][ligne]);
     tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_image;
     printf("nb 2 %i\n",tab_formation_cartesJ[colone][ligne]);
-
     //mise à jour de notre main, on supprime la carte en question, et on arrete de l'afficher dans la main ainsi que son rectangle avec
     suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main);
   }

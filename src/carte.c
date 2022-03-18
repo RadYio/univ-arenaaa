@@ -4,8 +4,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-#include "../header/window.h"
 #include "../header/carte.h"
+#include "../header/window.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"

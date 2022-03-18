@@ -8,16 +8,14 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-#include "../header/window.h"
 #include "../header/carte.h"
+#include "../header/window.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 
 
-pthread_t thread;
-int * jeu;
 
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
@@ -90,8 +88,11 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     carte_t tab_cartes_total[13];
 
     creation_tab_main(tab_cartes_total,13);
+    int * jeu;
+
     jeu = malloc(sizeof(int));
     *jeu = 1;
+    pthread_t thread_tps;
 
 
 
@@ -275,7 +276,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
-    pthread_create(&thread,NULL,calcul_temps,(void*)(jeu));
+    pthread_create(&thread_tps,NULL,calcul_temps,(void*)(jeu));
     if(pWindow){
 
       *running = 1;
@@ -405,7 +406,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(taille_main);
-
+  pthread_cancel(thread_tps);
   //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
 
