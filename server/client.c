@@ -6,17 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include "../header/client.h"
 
-#define PORT 6666
-#define NB_TENTATIVE 60
-#define DELAI 1
-
-typedef struct sockaddr_in_s{
-    short               sin_family;
-    unsigned short      sin_port;
-    struct in_addr      sin_addr;
-    char                sin_zero[8];
-}sockaddr_in_t;
 
 
 void* lecture(void* socket){
@@ -51,7 +42,7 @@ int main(){
 
 
   //Configuration
-  sin.sin_addr.s_addr = inet_addr("172.18.41.172");    //inet_addr("172.18.41.144") afin de connaitre l'adresse ip via ifconfig
+  sin.sin_addr.s_addr = inet_addr("172.18.41.172");    //inet_addr("172.18.41.172") afin de connaitre l'adresse ip via ifconfig
   sin.sin_family = AF_INET;                           //Protocole ici (IP)
   sin.sin_port = htons(PORT);                         //Port
 
