@@ -110,7 +110,7 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {-1, -1, -2},
-    {-1, -2, -1},
+    {-1, 1, -1},
     {0, -1, -2},
     {-1, -2, -1},
     {-1, -1, -2}};
@@ -303,6 +303,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     int etat = 0;
     int oldHover = 0;
+    int coord_x = 0,coord_y = 0;
 
 
 
@@ -376,11 +377,15 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       else if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
                         printf("carte [%i][%i] du plateau allié\n",x,y);
                         etat = -(i + 1);
+                        coord_x = x;
+                        coord_y = y;
                         break;
                       }
                       else if(tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
                         printf("carte [%i][%i] du plateau ennemie\n",x,2-y);
                         etat = i + 11;
+                        coord_x = x;
+                        coord_y = 2-y;
                         break;
                       }
                     }
@@ -389,13 +394,18 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 printf(" etat = %i\n",etat);
 
                 if(etat > 0 && etat < 11){
-                  ("la\n");
-                  double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
                   etat -=1;
                   int x = 0,y=0;
                   for (int i = 0; i < 15;i++){
                     if(x == 4 && y < 2) y++;
                     x = i%5;
+                    //vérifie qu'on reclique sur la même carte
+                    if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
+                        printf("réussi\n");
+                        etat = 0;
+                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        break;
+                    }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
                       printf("colone %i, ligne %i\n",x,y);
                       transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
@@ -413,14 +423,22 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
 
                 else if(etat < 0){
-                  printf("ou la \n");
-                  double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
-
+                  //double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
 
                   for (int i = 0; i < 5;i++){
                     for(int j = 0; j < 3; j++){
+                      if(i == coord_x && j == coord_y && tab_formation_cartesJ[i][j] >= 0  && e.button.x >= tab_rect_formationJ[i][j].x && e.button.x <= tab_rect_formationJ[i][j].x+tab_rect_formationJ[i][j].w && e.button.y >= tab_rect_formationJ[i][j].y && e.button.y <= tab_rect_formationJ[i][j].y+tab_rect_formationJ[i][j].h){
+                        printf("carte [%i][%i] du plateau allié\n",i,j);
+                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        coord_x = 0;
+                        coord_y = 0;
+                        etat = 0;
+                        break;
+                      }
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         printf("attaque sur la carte %i de l'adversaire \n\n",i);
+                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+
                         etat = 0;
                         break;
                       }
@@ -430,11 +448,19 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   break;
                 }
                 else if(etat > 10){
-                  printf("ou la la ici la \n");
-                  double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
-                  etat = 0;
-                  break;
-              }
+                  for (int x = 0; x < 5;x++){
+                    for(int y = 0; y < 3; y++){
+                      if(x == coord_x && y == coord_y && tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
+                        printf("carte [%i][%i] du plateau ennemie\n",x,2-y);
+                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        etat = 0;
+                        coord_x = 0;
+                        coord_y = 0;
+                        break;
+                      }
+                    }
+                  }
+                }
               break;
               case SDL_MOUSEMOTION:
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
