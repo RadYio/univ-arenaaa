@@ -27,15 +27,21 @@ void * calcul_temps(void * val){
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
-  while(1)        //probleme de boucle infinie
+  while(1)        
   {
-
-      if(difftime(t2, t1) == 5){
-        *jeu = (*jeu +1)%2;
-        printf("A joueur %i de jouer\n",*jeu);
+      //un tour de 60 secondes
+      if(difftime(t2, t1) >= 5){
+        *jeu = 0;
+        t1 = time(NULL);
+      }
+      if(*jeu == 0){
         t1 = time(NULL);
       }
       t2 = time(NULL);
+      sleep(1);
+      if(*jeu){
+      printf ("temps %i\n", t2-t1);
+      }
   }
 }
 
@@ -321,8 +327,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
                 *running = 0;
                 printf("on sort mtn 1\n");
-                break;
-              }             
+              } 
+              printf("tour bot début\n");
+              sleep(5);            
+              printf("fin\n");
+              *jeu = 1;
             }
             while(*jeu == 1 && SDL_PollEvent(&e)){
 
@@ -356,8 +365,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
                   printf("on passe le tour\n");
-                  //pthread_cancel(thread_tps);
-
+                  *jeu = 0;
+                  break;
                 }
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
@@ -368,12 +377,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       if(x == 4 && y < 2) y++;
                       x = i%5;
                       printf("[%i][%i] eme essai \n",x,y);
-                      //cas ou on clique sur une des 10 cartes de la main
                       if(i <= 10 && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
                         etat = i + 1;
                         break;
                       }
-                      //cas ou on clique sur une carte du plateau
                       else if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
                         printf("carte [%i][%i] du plateau allié\n",x,y);
                         etat = -(i + 1);
@@ -401,13 +408,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     x = i%5;
                     //vérifie qu'on reclique sur la même carte
                     if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
-                        printf("réussi\n");
                         etat = 0;
                         double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
                         break;
                     }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
-                      printf("colone %i, ligne %i\n",x,y);
                       transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
                       affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                       rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
@@ -423,12 +428,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
 
                 else if(etat < 0){
-                  //double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
 
                   for (int i = 0; i < 5;i++){
                     for(int j = 0; j < 3; j++){
                       if(i == coord_x && j == coord_y && tab_formation_cartesJ[i][j] >= 0  && e.button.x >= tab_rect_formationJ[i][j].x && e.button.x <= tab_rect_formationJ[i][j].x+tab_rect_formationJ[i][j].w && e.button.y >= tab_rect_formationJ[i][j].y && e.button.y <= tab_rect_formationJ[i][j].y+tab_rect_formationJ[i][j].h){
-                        printf("carte [%i][%i] du plateau allié\n",i,j);
                         double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
                         coord_x = 0;
                         coord_y = 0;
@@ -448,10 +451,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   break;
                 }
                 else if(etat > 10){
+
                   for (int x = 0; x < 5;x++){
                     for(int y = 0; y < 3; y++){
-                      if(x == coord_x && y == coord_y && tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-                        printf("carte [%i][%i] du plateau ennemie\n",x,2-y);
+                      if(x == coord_x && 2-y == coord_y && tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
                         double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
                         etat = 0;
                         coord_x = 0;
