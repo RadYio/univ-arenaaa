@@ -1,9 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
-#include "../header/bot.h"
 #include "../header/carte.h"
-#include "../header/attaque.h"
+#include "../header/window.h"
+#include "../header/jeu_solo.h"
+#include "../header/jeu_multi.h"
 #include "../header/affichage.h"
-
+#include "../header/init_jeu_solo.h"
+#include "../header/bot.h"
+#include "../header/attaque.h"
 
 
 //fonction qui parcours la formation du bot, s'il trouve un -2 (endroit où il peut placer une carte)

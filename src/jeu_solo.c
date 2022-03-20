@@ -14,6 +14,8 @@
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
+#include "../header/bot.h"
+
 
 
 
@@ -133,6 +135,10 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     carte_t tab_cartes_deck[13];
 
     creation_tab_main(tab_cartes_deck,13);
+
+    carte_t tab_cartes_deck_bot[13];
+
+    creation_tab_main(tab_cartes_deck_bot,13);
     int * jeu;
 
     jeu = malloc(sizeof(int));
@@ -152,11 +158,11 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     {-2, -1, -1}};
 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
-    {-1, -1, -2},
+    {-1, -1, 1},
     {-1, 1, -1},
-    {0, -1, -2},
-    {-1, -2, -1},
-    {-1, -1, -2}};
+    {0, -1, 0},
+    {-1, 0, -1},
+    {-1, -1, 0}};
 //à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -342,7 +348,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int oldHover = 0;
     int coord_x = 0,coord_y = 0;
 
-
+    int * taille_main_bot = malloc(sizeof(int));
+    *taille_main_bot = 5;
+    carte_t main_bot[13];
+    creation_tab_main(main_bot,*taille_main_bot);
+    int *taille_deck;
+    *taille_deck = 13;
 
 
 
@@ -353,15 +364,21 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       while(*running){
           SDL_Event e;
 
-          while(*jeu == 0 && SDL_PollEvent(&e2)){
+
+          while(*jeu == 0){
               etat = 0;
+
               if(e.type == SDL_QUIT){
 
                 *running = 0;
                 printf("on sort mtn 1\n");
               } 
               printf("tour bot début\n");
-              sleep(5);            
+              //bot(tab_formation_cartesADV,main_bot,taille_main_bot,tab_formation_cartesJ,tab_cartes_deck_bot,tab_cartes_deck,taille_deck);
+              affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+              rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+              menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+              sleep(1);            
               printf("fin\n");
               *jeu = 1;
               SDL_PollEvent(&e);
@@ -384,7 +401,15 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
+                  free(taille_main);
+                  free(taille_main);
+                  free(taille_deck);
+                  free(taille_main_bot);
                   pthread_cancel(thread_tps);
+                  TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
+                  SDL_RenderClear(renderer_jeu);
+                  SDL_DestroyRenderer(renderer_jeu);
+                  TTF_Quit();
                   return;
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
@@ -517,14 +542,18 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   }
 
-//}
+
 
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(taille_main);
+  free(taille_main);
+  free(taille_deck);
+  free(taille_main_bot);
   pthread_cancel(thread_tps);
   //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
-
+  SDL_RenderClear(renderer_jeu);
+  SDL_DestroyRenderer(renderer_jeu);
   TTF_Quit();
   return;
   }

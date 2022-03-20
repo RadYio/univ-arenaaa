@@ -71,11 +71,7 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[][3], SDL_Rect tab
     //creation du rectangle pour le texte de deck de l'adversaire
     *rect_aff_carte_j = creer_rectangle(675, 20, 350, 250);
 
-    //creation du rectangle pour le texte de deck de l'adversaire
-    *rect_aff_att_j = creer_rectangle(700, 325, 30, 20);
 
-    //creation du rectangle pour le texte de deck de l'adversaire
-    *rect_aff_hp_j = creer_rectangle(890, 325, 30, 20);
 
 
 

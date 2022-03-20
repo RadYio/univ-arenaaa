@@ -26,8 +26,7 @@ int menu(SDL_Window * pWindow){
 
 	// Le pointeur vers notre police
 	TTF_Font* police = NULL;
-	//a déclarer dynamiquement
-	//int tab_main[12] = {3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
+	
 
 
 
@@ -80,6 +79,7 @@ int menu(SDL_Window * pWindow){
 		fprintf(stderr, "Erreur à la création du rendu de l'image ''CHOIX'': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
+
 
 
   /* DECLARATION BG_CHOIX*/
@@ -158,6 +158,11 @@ int menu(SDL_Window * pWindow){
 	}
 	SDL_FreeSurface(txt_optn2_S); /* on a la texture, plus besoin du texte via surface */
 	SDL_FreeSurface(txt_optn2_Hover_S); /* on a la texture, plus besoin du texte via surface */
+
+
+
+
+
 
 	SDL_Rect txt_optn2_R;
 	txt_optn2_R.x=320;
@@ -401,10 +406,21 @@ if(pWindow){
 }
 
 //Destruction de la fenetre
-SDL_DestroyWindow(pWindow);
+SDL_DestroyTexture(img_Menu_Texture);
+SDL_DestroyTexture(img_Choix_Texture);
+SDL_DestroyTexture(txt_optn1_T);
+SDL_DestroyTexture(txt_optn1_Hover_T);
+SDL_DestroyTexture(txt_optn2_T);
+SDL_DestroyTexture(txt_optn2_Hover_T);
+SDL_DestroyTexture(txt_optn3_T);
+SDL_DestroyTexture(txt_optn3_Hover_T);
+SDL_DestroyTexture(txt_optn4_T);
+SDL_DestroyTexture(txt_optn4_Hover_T);
 
+SDL_DestroyWindow(pWindow);
+SDL_DestroyRenderer(renderer_menu);
 TTF_CloseFont(police); //Doit être avant TTF_Quit()
 TTF_Quit();
-  SDL_Quit();
+SDL_Quit();
   return 0;
 }

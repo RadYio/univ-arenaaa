@@ -9,6 +9,7 @@
         "affichage.h": "c",
         "jeu_multi.h": "c",
         "jeu_solo.h": "c",
-        "collection.h": "c"
+        "collection.h": "c",
+        "attaque.h": "c"
     }
 }

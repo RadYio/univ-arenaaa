@@ -10,6 +10,9 @@
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
+#include "../header/bot.h"
+#include "../header/attaque.h"
+
 
 
 
