@@ -422,8 +422,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 			if(e.button.x >= texte_retour_R.x && e.button.x <= texte_retour_R.x+texte_retour_R.w && e.button.y >= texte_retour_R.y && e.button.y <= texte_retour_R.y+texte_retour_R.h){
 				//Si on clique sur le bouton 1
 				SDL_RenderClear(renderer_collec);
-
-
 				return 1;
 			}
 			case SDL_MOUSEMOTION:

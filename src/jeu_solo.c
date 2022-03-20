@@ -80,6 +80,8 @@ int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+    printf("test 2");
+
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
     carte_t tab_main[*taille_main];
@@ -173,7 +175,20 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 		exit(EXIT_FAILURE);
 	}
 
+  //manipulations de TTF-----------------------------------------------------------------------------------------------------------------------------------------------------
 
+  /* Initialisation TTF - POLICE */
+	if(TTF_Init() == -1) {
+		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
+		exit(EXIT_FAILURE);
+	}
+
+	/* Choix de la police */
+	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+		fprintf(stderr, "erreur chargement font\n");
+		exit(EXIT_FAILURE);
+	}
+  //cration des boutons de passage de tour et de retour menu 
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
   menu_s = IMG_Load("../img/img_menu.png");
@@ -186,24 +201,45 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
   SDL_FreeSurface(menu_s);
   SDL_FreeSurface(passe_s);
 
-  SDL_Surface* txt_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
+  //création du texte pour le bouton retour menu
+  SDL_Surface * txt_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
 	SDL_Surface* txt_menu_Hover_S = TTF_RenderUTF8_Blended(police, "Menu", couleurJaune);
 
-	SDL_Texture *txt_menu_t = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
-	SDL_Texture *txt_menu_Hover_t = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
+  if(!txt_menu_S|| !txt_menu_Hover_S){
+		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
 
-	SDL_FreeSurface(menu_s); /* on a la texture, plus besoin du texte via surface */
+	SDL_Texture* txt_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
+	SDL_Texture* txt_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
+
+	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface 
 	SDL_FreeSurface(txt_menu_Hover_S);
 
-  SDL_Rect menu_R = creer_rectangle(900,80,60,160);
-  SDL_Rect txt_menu_R = creer_rectangle(800,50,120,300);
-  SDL_Rect passe_R = creer_rectangle(600,80,60,160);
-  SDL_Rect txt_passe_R = creer_rectangle(500,50,120,300);
+  SDL_Rect menu_R = creer_rectangle(1400,0,90,190);
+  SDL_Rect txt_menu_R = creer_rectangle(1440,20,50,(strlen("Menu")*25));
   
-  SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
+  
 
-  SDL_RenderCopy(renderer_jeu, txt_menu_Hover_t, NULL, &txt_menu_R);
-  SDL_RenderCopy(renderer_jeu, txt_menu_t, NULL, &txt_menu_R);
+  //création du texte du bouton de passe tour
+  SDL_Surface * txt_passe_S = TTF_RenderUTF8_Blended(police, "Passe", couleurNoire);
+	SDL_Surface* txt_passe_Hover_S = TTF_RenderUTF8_Blended(police, "Passe", couleurJaune);
+
+  if(!txt_passe_S|| !txt_passe_Hover_S){
+		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
+		exit(EXIT_FAILURE);
+	}
+
+	SDL_Texture* txt_passe_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_S);
+	SDL_Texture* txt_passe_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_Hover_S);
+
+	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface 
+	SDL_FreeSurface(txt_passe_Hover_S);
+
+  SDL_Rect passe_R = creer_rectangle(1400,820,80,180);
+  SDL_Rect txt_passe_R = creer_rectangle(1440,835,45,(strlen("Passe")*20));
+  
+  
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -217,25 +253,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
-    //manipulations de TTF-----------------------------------------------------------------------------------------------------------------------------------------------------
 
-    /* Initialisation TTF - POLICE */
-	if(TTF_Init() == -1) {
-		fprintf(stderr, "Erreur d'initialisation de TTF_Init : %s\n", TTF_GetError());
-		exit(EXIT_FAILURE);
-	}
-
-	/* Choix de la police */
-	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
-		fprintf(stderr, "erreur chargement font\n");
-		exit(EXIT_FAILURE);
-	}
 
 
   SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
   SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire
 
-    if(!txt_titre_joueur|| !txt_titre_adv){
+  if(!txt_titre_joueur|| !txt_titre_adv){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
@@ -249,25 +273,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	}
 	SDL_FreeSurface(txt_titre_joueur); /* on a la texture, plus besoin du texte via surface */
 	SDL_FreeSurface(txt_titre_adv); /* on a la texture, plus besoin du texte via surface */
-/*
-  SDL_Surface* img_retour_menu_S = IMG_Load("../img/retour_menu.png");
-	SDL_Texture* img_retour_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, img_retour_menu_S);
-  SDL_Surface* retour_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
-	SDL_Surface* retour_menu_Hover_S = TTF_RenderUTF8_Blended(police, "Menu", couleurJaune);
-
-	SDL_Texture *retour_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, retour_menu_S);
-	SDL_Texture *retour_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, retour_menu_Hover_S);
-
-
-
-	SDL_FreeSurface(retour_menu_S); // on a la texture, plus besoin du texte via surface
-	SDL_FreeSurface(retour_menu_Hover_S); // on a la texture, plus besoin du texte via surface
-
-	SDL_RenderCopy(renderer_jeu, img_retour_menu_T, NULL, &retour_menu_R);
-
-  SDL_RenderCopy(renderer_jeu, retour_menu_Hover_T, NULL, &texte_retour_R);
-  SDL_RenderCopy(renderer_jeu, retour_menu_T, NULL, &texte_retour_R);
-*/
 
 
     //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -277,17 +282,25 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    affichage_jeu (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total);
+    affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+    rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+
+
+
+
+
+
+
+
+
+
     //affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
 
-    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
-    printf("test 3 \n");
-    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
-    printf("test 2\n");
-
+    
+    
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //tour(renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
     int etat = 0;
     int oldHover = 0;
 
@@ -325,7 +338,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               case SDL_MOUSEBUTTONDOWN :
                 //tour(running,renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
                 printf("\ntest nouvelle action\n\n");
-                //affichage_jeu (renderer_jeu,img_jeu_Texture, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main);
                 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -337,11 +349,19 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   return;
                 }
                 */
+                if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
+                  pthread_cancel(thread_tps);
+                  return;
+                }
+                if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
+                  printf("on passe le tour\n");
+                  //pthread_cancel(thread_tps);
 
+                }
                 if(etat == 0){
-                    affichage_jeu (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv,
-                    tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main,
-                    tab_rect_main, tab_main,tab_cartes_total);
+                    affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                    rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
                     int x = 0,y=0;
                     for(int i=0;i < 15;i++){
                       if(x == 4 && y < 2) y++;
@@ -379,9 +399,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
                       printf("colone %i, ligne %i\n",x,y);
                       transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
-                      affichage_jeu (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,rect_adv,
-                      tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main,
-                      tab_rect_main, tab_main,tab_cartes_total);
+                      affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                      rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                      menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
                       printf("la carte a été posée\n");
                       etat = 0;
                       break;
@@ -415,6 +435,28 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   etat = 0;
                   break;
               }
+              break;
+              case SDL_MOUSEMOTION:
+                if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
+                      SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &txt_menu_R);
+                      SDL_RenderPresent(renderer_jeu);
+                      oldHover = 1;
+                }
+                else if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
+                      SDL_RenderCopy(renderer_jeu, txt_passe_Hover_T, NULL, &txt_passe_R);
+                      SDL_RenderPresent(renderer_jeu);
+                      oldHover = 1;
+
+                }
+                else if(oldHover){
+                  SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
+                  SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
+                  SDL_RenderPresent(renderer_jeu);
+                  oldHover = 0;
+                }
+
+              break;
+
             }
             break;
           }

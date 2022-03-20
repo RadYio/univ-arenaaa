@@ -116,7 +116,10 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
 }
 
 
-void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] , int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
+void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
+SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,
+int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] , 
+int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[]){
 
     SDL_RenderClear(renderer_jeu);
 
@@ -134,6 +137,49 @@ void affichage_jeu (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_
     afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
 
     affichage_main(taille_main,renderer_jeu, tab_main, tab_rect_main);
+    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
+    printf("test 3 \n");
+    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
+    printf("test 2\n");
+
+    //On fait le rendu !
+    SDL_RenderPresent(renderer_jeu);
+}
+
+void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
+SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,
+int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] , 
+int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R
+,SDL_Texture *txt_menu_Hover_T,
+SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
+,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R){
+
+    SDL_RenderClear(renderer_jeu);
+
+
+
+    affichage_BG(renderer_jeu, img_jeu_Texture);
+
+
+
+    affichage_gros_rectangles(renderer_jeu, rect_joueur, rect_adv,rect_aff_carte_j);
+
+    afficher_rectangles_formation(renderer_jeu,tab_cartes_total,tab_formation_cartesJ, tab_rect_formationJ, tab_formation_cartesADV, tab_rect_formationAdv);
+
+
+    afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
+
+    affichage_main(taille_main,renderer_jeu, tab_main, tab_rect_main);
+    SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
+    printf("test 3 \n");
+    SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
+    printf("test 2\n");
+    SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
+    SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &txt_menu_R);
+    SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
+    SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
+    SDL_RenderCopy(renderer_jeu, txt_passe_Hover_T, NULL, &txt_passe_R);
+    SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
 
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);

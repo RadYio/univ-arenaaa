@@ -270,12 +270,16 @@ if(pWindow){
             break;
           }
         case SDL_MOUSEBUTTONDOWN:
+
 			printf("x: %i\ny: %i\n",e.button.x,e.button.y);
 			if(e.button.x >= txt_optn1_R.x && e.button.x <= txt_optn1_R.x+txt_optn1_R.w && e.button.y >= txt_optn1_R.y && e.button.y <= txt_optn1_R.y+txt_optn1_R.h){
 				//Si on clique sur le bouton 1
 				printf("Test clique sur le bouton 1\n\n");
 				jeu_solo(pWindow,renderer_menu,&running);
+				//SDL_RenderPresent(renderer_menu);
+
 				SDL_PollEvent(&e);
+				SDL_RenderPresent(renderer_menu);
 
 
 			}
@@ -324,9 +328,7 @@ if(pWindow){
 				collection(pWindow ,img_Menu_Texture, renderer_menu, &running);
 				//on récupère la nouvelle position du curseur
 				SDL_PollEvent(&e);
-
-
-
+				//SDL_RenderClear(renderer_menu);
 			}
 			else if(e.button.x >= txt_optn4_R.x && e.button.x <= txt_optn4_R.x+txt_optn4_R.w && e.button.y >= txt_optn4_R.y && e.button.y <= txt_optn4_R.y+txt_optn4_R.h){
 				//Si on clique sur le bouton 4
