@@ -261,7 +261,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
     //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv,rect_aff_carte_j);
+    //init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv,rect_aff_carte_j);
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------

@@ -40,9 +40,44 @@ void * calcul_temps(void * val){
       t2 = time(NULL);
       sleep(1);
       if(*jeu){
-      printf ("temps %i\n", t2-t1);
+      printf ("temps %li\n", t2-t1);
       }
   }
+}
+
+void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_deck[],SDL_Rect *rect_aff_carte_j,SDL_Rect *rect_aff_att_j,SDL_Rect *rect_aff_hp_j,TTF_Font* police){
+  SDL_Color couleurBlanche = {255, 255, 255};
+  char attaque[3];
+  char hp[3];
+  snprintf(attaque,sizeof(attaque),"%i",tab_cartes_deck[id_carte].nb_degats);
+  snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
+  printf("att : %d => \"%s\"\n", tab_cartes_deck[id_carte].nb_degats, attaque);  //*attaque = (tab_cartes_deck[id_carte].nb_degats) + '0';
+  printf("pv : %d => \"%s\"\n", tab_cartes_deck[id_carte].hp_carte, hp);
+  
+  SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche); 
+  SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche); 
+
+  SDL_Texture* att_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, att_carte_S);
+  SDL_Texture* hp_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, hp_carte_S);
+
+  //creation du rectangle pour le texte de deck de l'adversaire
+  *rect_aff_att_j = creer_rectangle(700, 325, 30, sizeof(attaque)*8);
+
+  //creation du rectangle pour le texte de deck de l'adversaire
+  *rect_aff_hp_j = creer_rectangle(885, 325, 30, sizeof(hp)*8);
+
+  SDL_FreeSurface(att_carte_S);
+  SDL_FreeSurface(hp_carte_S);
+
+  SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
+  SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
+
+  affichage_carte(renderer_jeu,tab_cartes_deck[id_carte],*rect_aff_carte_j);
+  SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
+  SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
+  SDL_RenderPresent(renderer_jeu);
+  return;
+
 }
 
 int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[],SDL_Rect tab_rect_formationJ[][3],SDL_Rect tab_rect_formationAdv[][3]
@@ -54,7 +89,6 @@ int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[
     x = i%5;
     //cas ou on clique sur une des 10 cartes de la main
     if(i <= 10 && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
-      printf("main %i\n",i);
       affichage_carte(renderer_jeu,tab_main[i],*rect_aff_carte_j);
       SDL_RenderPresent(renderer_jeu);
       return 0;
@@ -63,13 +97,11 @@ int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[
     printf("%i \n",tab_formation_cartesJ[x][y])   ;
     //cas ou on clique sur une carte du plateau
     if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
-      printf("plateau [%i][%i] \n",x,y);
       affichage_carte(renderer_jeu,tab_cartes_total[tab_formation_cartesJ[x][y]],*rect_aff_carte_j);
       SDL_RenderPresent(renderer_jeu);
       return 0;
     }
     if(tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-      printf("plateau [%i][%i] \n",x,y);
       affichage_carte(renderer_jeu,tab_cartes_total[tab_formation_cartesADV[x][2-y]],*rect_aff_carte_j);
       SDL_RenderPresent(renderer_jeu);
       return 0;
@@ -96,6 +128,11 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     carte_t tab_cartes_total[13];
 
     creation_tab_main(tab_cartes_total,13);
+
+
+    carte_t tab_cartes_deck[13];
+
+    creation_tab_main(tab_cartes_deck,13);
     int * jeu;
 
     jeu = malloc(sizeof(int));
@@ -129,7 +166,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //declarations de variables, renderer etc-------------------------------------------------------------------------------------------
     SDL_Color couleurJaune = {255, 215, 0};
     SDL_Color couleurNoire = {0, 0, 0};
-    SDL_Color couleurBlanche = {255, 255, 255};
 
     TTF_Font* police = NULL;
 
@@ -160,8 +196,15 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     //creation du rectangle pour le texte de deck de l'adversaire
     SDL_Rect* rect_txt_deck_adv = malloc(sizeof(SDL_Rect));
 
-    //creation du rectangle pour le texte de deck de l'adversaire
+    //creation du rectangle pour l'affichage de la carte en double clique
     SDL_Rect* rect_aff_carte_j = malloc(sizeof(SDL_Rect));
+
+    //creation du rectangle pour l'affichage de l'attaque de la carte
+    SDL_Rect* rect_aff_att_j = malloc(sizeof(SDL_Rect));
+
+    //creation du rectangle pour l'affichage des points de vie de la carte
+    SDL_Rect* rect_aff_hp_j = malloc(sizeof(SDL_Rect));
+
 
 
 
@@ -282,7 +325,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
     //initialisation des rectangles--------------------------------------------------------------------------------------------------------------------------------------------------------
-    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv,rect_aff_carte_j);
+    init_jeu(taille_main,tab_rect_formationJ ,tab_rect_formationAdv, tab_rect_main, rect_joueur, rect_adv, rect_txt_deck_j, rect_txt_deck_adv,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j);
 
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //affichage de base : le jeu apparaitra comme ceci au debut, s'en suivra les modifs nécessaires par la suite---------------------------------------------------------------------------------------------
@@ -291,18 +334,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
     menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-
-
-
-
-
-
-
-
-
-
-    //affichage_texte(renderer_jeu, rect_txt_deck_j, txt_titre_joueur_T, rect_txt_deck_adv, txt_titre_adv_T);
-
     
     
 
@@ -321,7 +352,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       *running = 1;
       while(*running){
           SDL_Event e;
-          while(*jeu == 0 && SDL_PollEvent(&e)){
+
+          while(*jeu == 0 && SDL_PollEvent(&e2)){
               etat = 0;
               if(e.type == SDL_QUIT){
 
@@ -332,6 +364,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               sleep(5);            
               printf("fin\n");
               *jeu = 1;
+              SDL_PollEvent(&e);
             }
             while(*jeu == 1 && SDL_PollEvent(&e)){
 
@@ -346,19 +379,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               break;
 
               case SDL_MOUSEBUTTONDOWN :
-                //tour(running,renderer_jeu, pWindow, tab_rect_main, tab_formation_cartesJ, tab_rect_formationJ, tab_main, taille_main);
                 printf("\ntest nouvelle action\n\n");
                 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                /*
-                printf("\netat avant = %i\n\n",etat);
-                if(e.button.x >= texte_retour_R.x && e.button.x <= texte_retour_R.x+texte_retour_R.w && e.button.y >= texte_retour_R.y && e.button.y <= texte_retour_R.y+texte_retour_R.h){
-                  //Si on clique sur le bouton 1
-                  SDL_RenderClear(renderer_jeu);
-                  return;
-                }
-                */
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                   pthread_cancel(thread_tps);
                   return;
@@ -409,7 +433,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     //vérifie qu'on reclique sur la même carte
                     if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
                         etat = 0;
-                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        double_clique2(renderer_jeu,tab_main[i].id_carte,tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
+                        //double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);                     
                         break;
                     }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
