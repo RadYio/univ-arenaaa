@@ -332,7 +332,7 @@ if(pWindow){
 
 
 					printf("Affichage\n\n");
-					SDL_Rect rect_Waiting = creer_rectangle(830,650,64,64);
+					SDL_Rect rect_Waiting = creer_rectangle(800-32,600,64,64);
 					SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
 
 
@@ -344,18 +344,20 @@ if(pWindow){
 					printf("Je cree le thread\n");
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 					int animation = 0;
-					Uint32 delai = SDL_GetTicks() / 30;
+					Uint32 delai = SDL_GetTicks() / 25;
+					Uint32 t2 = -1;
 					while(infoServer.joueurTrouve!=1){
+						delai = SDL_GetTicks() / 25;
 						printf("jr trouve: %i",infoServer.joueurTrouve);//bonhomme qui danse
 
-						if(delai%10==0){
+						if(delai!=t2){
 						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation;
 						SDL_RenderClear(renderer_menu);
 						SDL_RenderCopy(renderer_menu, img_Waiting_Texture, &rect_Waiting_Evolution, &rect_Waiting);
 						SDL_RenderPresent(renderer_menu);
 						animation=(animation+1)%27;
 						}
-						delai = SDL_GetTicks() / 30;
+						t2 = delai;
 					}
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
