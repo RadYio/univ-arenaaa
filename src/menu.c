@@ -348,8 +348,6 @@ if(pWindow){
 					Uint32 t2 = -1;
 					while(infoServer.joueurTrouve!=1){
 						delai = SDL_GetTicks() / 25;
-						printf("jr trouve: %i",infoServer.joueurTrouve);//bonhomme qui danse
-
 						if(delai!=t2){
 						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation;
 						SDL_RenderClear(renderer_menu);

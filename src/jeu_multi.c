@@ -87,7 +87,7 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){
 
     printf("Yo le sang\n");
     return;
-
+    ////@@@@@@@ envoie joueur 1 to joueur 2
 
 
 
