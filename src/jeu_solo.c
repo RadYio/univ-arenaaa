@@ -32,7 +32,7 @@ void * calcul_temps(void * val){
   while(1)        
   {
       //un tour de 60 secondes
-      if(difftime(t2, t1) >= 5){
+      if(difftime(t2, t1) >= 10){
         *jeu = 0;
         t1 = time(NULL);
       }
@@ -352,7 +352,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     *taille_main_bot = 5;
     carte_t main_bot[13];
     creation_tab_main(main_bot,*taille_main_bot);
-    int *taille_deck;
+    int *taille_deck = malloc(sizeof(int));
     *taille_deck = 13;
 
 
@@ -402,13 +402,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                   free(taille_main);
-                  free(taille_main);
                   free(taille_deck);
                   free(taille_main_bot);
+                  
                   pthread_cancel(thread_tps);
                   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
                   SDL_RenderClear(renderer_jeu);
-                  SDL_DestroyRenderer(renderer_jeu);
                   TTF_Quit();
                   return;
                 }
@@ -546,14 +545,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(taille_main);
-  free(taille_main);
   free(taille_deck);
   free(taille_main_bot);
   pthread_cancel(thread_tps);
   //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
   SDL_RenderClear(renderer_jeu);
-  SDL_DestroyRenderer(renderer_jeu);
   TTF_Quit();
   return;
   }

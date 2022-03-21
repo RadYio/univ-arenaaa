@@ -416,7 +416,6 @@ SDL_DestroyTexture(txt_optn3_T);
 SDL_DestroyTexture(txt_optn3_Hover_T);
 SDL_DestroyTexture(txt_optn4_T);
 SDL_DestroyTexture(txt_optn4_Hover_T);
-
 SDL_DestroyWindow(pWindow);
 SDL_DestroyRenderer(renderer_menu);
 TTF_CloseFont(police); //Doit être avant TTF_Quit()
