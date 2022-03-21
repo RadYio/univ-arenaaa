@@ -41,22 +41,30 @@ void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_
 
 //foncton gérant le fait que qqn attaque une carte
 void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[], carte_t deck_defense[], int tab_formation_defense[][3], int* taille_deck_defense){
-    int i = 0, j = 0, nb_degats, hp;
+    int i = 0, j = 0, nb_degats, hp_carte;
+    printf("def = %i\n",id_carte_defense);
+
     //parcours du deck de l'attaquant pour trouver la carte correspondante
     printf("test attaque 1\n");
     while(deck_attaque[i].id_carte != id_carte_attaque) i++;
     //on a trouvé la carte correspondante, on recupere donc la valeur d'attaque
     nb_degats = deck_attaque[i].nb_degats;
+    printf("nb dégats : %i\n\n",nb_degats);
+
     //parcours du deck de l'adversaire pour trouver la carte correspondante
-    //while(deck_defense[j].id_carte != id_carte_defense) j++;
-    //hp = deck_defense[j].hp_carte;
+    
+    while(deck_defense[j].id_carte != id_carte_defense){
+        j++;
+        //printf("j = %i\n",j);
+    }
+    hp_carte = deck_defense[j].hp_carte;
 
     //on regarde si on fait une attaque critique : les degats sont multipliés par 2 si c'est le cas
  /*   if(attaque_critique(deck_attaque[i].type_attaque, deck_defense[j].type_vulnerable)){
         nb_degats *= 2;
     }
 */
-    printf("hp : %i et nb dégats : %i\n\n",hp,nb_degats);
+    printf("hp : %i et nb dégats : %i\n\n",hp_carte,nb_degats);
     //on enleve les hp correspondant
     //deck_defense[j].hp_carte = deck_defense[j].hp_carte  - nb_degats;
     printf("hp apres : %i et nb dégats : %i\n\n",deck_defense[j].hp_carte,nb_degats);

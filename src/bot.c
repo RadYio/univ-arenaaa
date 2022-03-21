@@ -40,9 +40,11 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
 
   while(tab_formation_cartesJ[i][j] < 0 && i < 5){ // un emplacement vide est -1 ou -2, s'il y a un nombre positif alors c'est une carte
     j = 0;
+    printf("    valeur 1[%i][%i]= %i\n",i,j,tab_formation_cartesJ[i][j]);
     i++; // i commence à -1 pour conserver le bon indice une fois qu'on à trouvé et qu'on sort de la boucle while dessous
     while(tab_formation_cartesJ[i][j] < 0 && j < 3){
       j++;
+      printf("    valeur 2[%i][%i]= %i\n",i,j,tab_formation_cartesJ[i][j]);
     }
   }
   if(i == 5 && j == 3){ // si i == 5 et j == 3 alors on à parcouru toute la formation sans trouver de carte, la formation du joueur est donc vide, le bot n'attaque donc pas
@@ -56,6 +58,7 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
       y++;
     }
   }
+  
   //une fois trouvé la carte à attaquer et la carte qui va attaquer, on lance la fonction d'attaque
   printf("    phase d'attaque\n");
   attaque(tab_formation_cartesADV[x][y], tab_formation_cartesJ[i][j], deck_bot, deck_joueur, tab_formation_cartesJ, taille_deck_joueur);
