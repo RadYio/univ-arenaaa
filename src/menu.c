@@ -315,16 +315,17 @@ if(pWindow){
 
 					/* DECLARATION waiting*/
 					SDL_Surface* img_Waiting_Surface = IMG_Load("../img/waiting.png");
-
-					if(!img_Waiting_Surface){
+					SDL_Surface* img_Waiting_BG_Surface = IMG_Load("../img/waitingBG.png");
+					if(!img_Waiting_Surface || !img_Waiting_BG_Surface){
 						fprintf(stderr, "Probleme chargement de la surface du waiting: %s\n", SDL_GetError());
 						exit(EXIT_FAILURE);
 					}
 
 				  SDL_Texture* img_Waiting_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Waiting_Surface);
+					SDL_Texture* img_Waiting_BG_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Waiting_BG_Surface);
 				  SDL_FreeSurface(img_Waiting_Surface); /* on a la texture, plus besoin de la surface */
 
-					if(!img_Waiting_Texture){
+					if(!img_Waiting_Texture || !img_Waiting_BG_Texture){
 						fprintf(stderr, "Erreur à la création de la texture ''waiting'' : %s\n", SDL_GetError());
 						exit(EXIT_FAILURE);
 					}
@@ -334,7 +335,7 @@ if(pWindow){
 					printf("Affichage\n\n");
 					SDL_Rect rect_Waiting = creer_rectangle(800-32,600,64,64);
 					SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
-
+					SDL_Rect rect_Waiting_BG_Evolution = creer_rectangle(0,0,368,768);
 
 
 
@@ -343,17 +344,21 @@ if(pWindow){
 
 					printf("Je cree le thread\n");
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
-					int animation = 0;
+					int animation1 = 0;
+					int animation2 = 0;
 					Uint32 delai = SDL_GetTicks() / 25;
 					Uint32 t2 = -1;
 					while(infoServer.joueurTrouve!=1){
 						delai = SDL_GetTicks() / 25;
 						if(delai!=t2){
-						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation;
+						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation1;
+						rect_Waiting_BG_Evolution.x=rect_Waiting_BG_Evolution.w*animation2;
 						SDL_RenderClear(renderer_menu);
+						SDL_RenderCopy(renderer_menu,img_Waiting_BG_Texture, &rect_Waiting_BG_Evolution, NULL);
 						SDL_RenderCopy(renderer_menu, img_Waiting_Texture, &rect_Waiting_Evolution, &rect_Waiting);
 						SDL_RenderPresent(renderer_menu);
-						animation=(animation+1)%27;
+						animation1=(animation1+1)%27;
+						animation2=(animation2+1)%7;
 						}
 						t2 = delai;
 					}
