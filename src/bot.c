@@ -37,6 +37,7 @@ int poser_carte(int tab_formation_cartesADV[][3], carte_t main_bot[], int* taill
 void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cartesJ[][3], carte_t deck_bot[], carte_t deck_joueur[], int* taille_deck_joueur){
   int i = -1, j = 0, x = -1, y = 0;
   //le bot choisit la première carte sur laquelle il tombe dans la formation du joueur pour attaquer
+
   while(tab_formation_cartesJ[i][j] < 0 && i < 5){ // un emplacement vide est -1 ou -2, s'il y a un nombre positif alors c'est une carte
     j = 0;
     i++; // i commence à -1 pour conserver le bon indice une fois qu'on à trouvé et qu'on sort de la boucle while dessous
@@ -56,6 +57,7 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
     }
   }
   //une fois trouvé la carte à attaquer et la carte qui va attaquer, on lance la fonction d'attaque
+  printf("    phase d'attaque\n");
   attaque(tab_formation_cartesADV[x][y], tab_formation_cartesJ[i][j], deck_bot, deck_joueur, tab_formation_cartesJ, taille_deck_joueur);
 }
 
