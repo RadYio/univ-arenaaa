@@ -91,7 +91,6 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){
 
 
 
-
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
     carte_t tab_main[*taille_main];

@@ -11,7 +11,7 @@
 #include "../header/window.h"
 #include "../header/affichage.h"
 #include "../header/client.h"
-
+#include "../header/init_jeu_solo.h"
 
 
 
@@ -309,12 +309,53 @@ if(pWindow){
 					//Afficher erreur
 				}
 				else{
+					printf("Je boucle tant que pas de joueur\n");
+
+
+
+					/* DECLARATION waiting*/
+					SDL_Surface* img_Waiting_Surface = IMG_Load("../img/waiting.png");
+
+					if(!img_Waiting_Surface){
+						fprintf(stderr, "Probleme chargement de la surface du waiting: %s\n", SDL_GetError());
+						exit(EXIT_FAILURE);
+					}
+
+				  SDL_Texture* img_Waiting_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Waiting_Surface);
+				  SDL_FreeSurface(img_Waiting_Surface); /* on a la texture, plus besoin de la surface */
+
+					if(!img_Waiting_Texture){
+						fprintf(stderr, "Erreur à la création de la texture ''waiting'' : %s\n", SDL_GetError());
+						exit(EXIT_FAILURE);
+					}
+
+
+
+					printf("Affichage\n\n");
+					SDL_Rect rect_Waiting = creer_rectangle(830,650,64,64);
+					SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
+
+
+
+
+
+
+
 					printf("Je cree le thread\n");
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
-					printf("Je boucle tant que pas de joueur\n");
+					int animation = 0;
+					Uint32 delai = SDL_GetTicks() / 30;
 					while(infoServer.joueurTrouve!=1){
 						printf("jr trouve: %i",infoServer.joueurTrouve);//bonhomme qui danse
-						sleep(1);
+
+						if(delai%10==0){
+						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation;
+						SDL_RenderClear(renderer_menu);
+						SDL_RenderCopy(renderer_menu, img_Waiting_Texture, &rect_Waiting_Evolution, &rect_Waiting);
+						SDL_RenderPresent(renderer_menu);
+						animation=(animation+1)%27;
+						}
+						delai = SDL_GetTicks() / 30;
 					}
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
@@ -417,10 +458,9 @@ SDL_DestroyTexture(txt_optn3_T);
 SDL_DestroyTexture(txt_optn3_Hover_T);
 SDL_DestroyTexture(txt_optn4_T);
 SDL_DestroyTexture(txt_optn4_Hover_T);
-SDL_DestroyWindow(pWindow);
 SDL_DestroyRenderer(renderer_menu);
 TTF_CloseFont(police); //Doit être avant TTF_Quit()
+
 TTF_Quit();
-SDL_Quit();
   return 0;
 }
