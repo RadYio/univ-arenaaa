@@ -64,13 +64,9 @@ void* connectes(void* oldJoueurs){
   lien_t* joueurs = (lien_t*) oldJoueurs; //On triche, le  thread forcant un param void*
   client_t joueur1 = joueurs->client1;
   client_t joueur2 = joueurs->client2;
-  char temp[10];
-  char texteJoueur1[50] = "Tu viens d'etre connecté avec le joueur: "; sprintf(temp, "%i", joueur2.numSock); strcat(texteJoueur1,temp);
-  char texteJoueur2[50] = "Tu viens d'etre connecté avec le joueur: "; sprintf(temp, "%i", joueur1.numSock); strcat(texteJoueur2,temp);
-  printf("j'envoie à [%i]:\n            la chaine: %s\n", joueur1.numSock, texteJoueur1);
-  send(joueur1.numSock, texteJoueur1, 64, 0);
-  printf("j'envoie à [%i]:\n            la chaine: %s\n", joueur2.numSock, texteJoueur2);
-  send(joueur2.numSock, texteJoueur2, 64, 0);
+
+  send(joueur1.numSock, "CONNEXION", 64, 0);
+  send(joueur2.numSock, "CONNEXION", 64, 0);
 
   shutdown(joueur1.numSock, 2);
   shutdown(joueur2.numSock, 2);
@@ -79,7 +75,6 @@ void* connectes(void* oldJoueurs){
   close(joueur2.numSock);
 
   free(joueurs);
-  free(oldJoueurs);
 
   pthread_exit(NULL);
 }
@@ -91,7 +86,7 @@ void* attente(void* informations){
 
   while(verif!=0){
     printf("Client[%i]: j'attends des informations...\n",client->num);
-    verif = read(client->numSock,buffer,32);
+    verif = read(client->numSock,buffer,64);
   }
   struct tm* dateTh=recupererTemps();
   printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, client->num);client->num=-1;

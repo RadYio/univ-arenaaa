@@ -85,7 +85,8 @@ int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
 
 
-
+    printf("Yo le sang\n");
+    return;
 
 
 

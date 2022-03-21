@@ -26,7 +26,7 @@ int menu(SDL_Window * pWindow){
 
 	// Le pointeur vers notre police
 	TTF_Font* police = NULL;
-	
+
 
 
 
@@ -313,7 +313,8 @@ if(pWindow){
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 					printf("Je boucle tant que pas de joueur\n");
 					while(infoServer.joueurTrouve!=1){
-						//bonhomme qui danse 
+						printf("jr trouve: %i",infoServer.joueurTrouve);//bonhomme qui danse
+						sleep(1);
 					}
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur

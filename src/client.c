@@ -5,7 +5,7 @@
 void* rechercheJoueur(void* infos){
   serverStruct_t* infoServer = (serverStruct_t*)infos;
   char buffer[64];
-  ssize_t taille = recv(&infoServer->valSocket, buffer, 64, 0);
+  ssize_t taille = recv(infoServer->valSocket, buffer, 64, 0);
   if(strcmp(buffer,"CONNEXION") == 0){
     infoServer->joueurTrouve=1;
   }
