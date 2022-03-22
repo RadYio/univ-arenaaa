@@ -43,7 +43,8 @@ void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_
 void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[], carte_t deck_defense[], int tab_formation_defense[][3], int* taille_deck_defense){
     int i = 0, j = 0, nb_degats, hp_carte;
     //parcours du deck de l'attaquant pour trouver la carte correspondante
-    printf("test attaque 1\n");
+    printf("test attaque %i\n",i);
+    printf("id = %i",deck_attaque[i].id_carte );
     while(deck_attaque[i].id_carte != id_carte_attaque) i++;
     //on a trouvé la carte correspondante, on recupere donc la valeur d'attaque
     nb_degats = deck_attaque[i].nb_degats;
