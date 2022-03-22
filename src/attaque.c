@@ -42,8 +42,6 @@ void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_
 //foncton gérant le fait que qqn attaque une carte
 void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[], carte_t deck_defense[], int tab_formation_defense[][3], int* taille_deck_defense){
     int i = 0, j = 0, nb_degats, hp_carte;
-    printf("def = %i\n",id_carte_defense);
-
     //parcours du deck de l'attaquant pour trouver la carte correspondante
     printf("test attaque 1\n");
     while(deck_attaque[i].id_carte != id_carte_attaque) i++;
