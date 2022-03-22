@@ -392,9 +392,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
             while(*jeu == 1){
               SDL_PollEvent(&e);
               if(*maj == 1){
+                /*
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                 rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                 menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                */
                 *maj=0;
               }
               
@@ -529,7 +531,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   }
                 }
               break;
-              case SDL_MOUSEMOTION:
+/*             case SDL_MOUSEMOTION:
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                       SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &txt_menu_R);
                       SDL_RenderPresent(renderer_jeu);
@@ -542,17 +544,14 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
                 }
                 else if(oldHover){
-                  //SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-                  //SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
-                  affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
-                      rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                      menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                  SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
+                  SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
                   SDL_RenderPresent(renderer_jeu);
                   oldHover = 0;
                 }
 
               break;
-
+*/
             }
             break;
           }
