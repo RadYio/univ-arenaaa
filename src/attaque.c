@@ -21,16 +21,11 @@ int attaque_critique(type_t attaque, type_t vulnerable){
 
 //si une carte n'a plus d'hp, on doit l'enlever de la formation et du deck
 void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_defense[][3], int indice_deck, int* taille_deck_defense){
-    int i = -1, j = 0;
+    int i = 0, j = 0;
     //on parcourt la formation de la defense et on trouve l'emplacement de l'id de la carte mort pour la remplacer
     //on utilise 2 while car cela permet de sortir des boucles une fois l'emplacement trouvé sans devoir faire de break
-    while(tab_formation_defense[i][j] != id_carte_defense && i < 5){
-      j = 0;
-      i++; // i commence à -1 pour conserver le bon indice une fois qu'on à trouvé et qu'on sort de la boucle while dessous
-      while(tab_formation_defense[i][j] != id_carte_defense && j < 3){
-        j++;
-      }
-    }
+    for(i = 0; tab_formation_defense[i][j] != id_carte_defense || i < 5; i++){
+      for(j = 0; tab_formation_defense[i][j] != id_carte_defense || j < 3; j++);
     //on a trouvé l'emplacement de l'id de la carte, on la remplace par -2
     tab_formation_defense[i][j] = -2;
     //on supprime la carte du deck
@@ -45,13 +40,16 @@ void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[],
     //parcours du deck de l'attaquant pour trouver la carte correspondante
     printf("test attaque %i\n",i);
     printf("id = %i",deck_attaque[i].id_carte );
-    while(deck_attaque[i].id_carte != id_carte_attaque) i++;
+    for(i = 0; deck_attaque[i].id_carte != id_carte_attaque && i < 13; i++){
+      i++;
+      printf("id = %i et i = %i\n",deck_attaque[i].id_carte, i );
+    }
     //on a trouvé la carte correspondante, on recupere donc la valeur d'attaque
     nb_degats = deck_attaque[i].nb_degats;
     printf("nb dégats : %i\n\n",nb_degats);
 
     //parcours du deck de l'adversaire pour trouver la carte correspondante
-    
+
     while(deck_defense[j].id_carte != id_carte_defense){
         j++;
         //printf("j = %i\n",j);
@@ -59,18 +57,18 @@ void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[],
     hp_carte = deck_defense[j].hp_carte;
 
     //on regarde si on fait une attaque critique : les degats sont multipliés par 2 si c'est le cas
- /*   if(attaque_critique(deck_attaque[i].type_attaque, deck_defense[j].type_vulnerable)){
+ /*  if(attaque_critique(deck_attaque[i].type_attaque, deck_defense[j].type_vulnerable)){
         nb_degats *= 2;
     }
 */
     printf("hp : %i et nb dégats : %i\n\n",hp_carte,nb_degats);
     //on enleve les hp correspondant
-    //deck_defense[j].hp_carte = deck_defense[j].hp_carte  - nb_degats;
+    deck_defense[j].hp_carte = deck_defense[j].hp_carte  - nb_degats;
     printf("hp apres : %i et nb dégats : %i\n\n",deck_defense[j].hp_carte,nb_degats);
 
     //si la carte à plus de hp elle meurt, on l'enleve donc du jeu
- /*   if(deck_defense[j].hp_carte <= 0){
+   if(deck_defense[j].hp_carte <= 0){
         mort_carte(id_carte_defense, deck_defense, tab_formation_defense, j, taille_deck_defense);
     }
-*/
+
 }
