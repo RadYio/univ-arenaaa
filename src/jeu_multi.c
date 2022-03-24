@@ -15,6 +15,7 @@
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 #include "../header/bot.h"
+#include "../header/client.h"
 
 
 
