@@ -285,8 +285,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int etat = 0;
     int oldHover = 0;
     int coord_x = 0,coord_y = 0;
-    int *maj = malloc(sizeof(int));
-    *maj = 1;
 
     int * taille_main_bot = malloc(sizeof(int));
     *taille_main_bot = 5;
@@ -322,19 +320,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               //sleep(1);            
               printf("fin du tour\n");
               *jeu = 1;
-              *maj = 1;
+
               oldHover = 0;
             }
             while(*jeu == 1){
               SDL_PollEvent(&e);
-              if(*maj == 1){
-                /*
-                affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
-                rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-                */
-                *maj=0;
-              }
+
               
             switch(e.type){
               case SDL_QUIT : 
@@ -410,7 +401,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
                         etat = 0;
                         double_clique2(renderer_jeu,tab_main[i].id_carte,tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
-                        //double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);                     
                         break;
                     }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
@@ -433,7 +423,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   for (int i = 0; i < 5;i++){
                     for(int j = 0; j < 3; j++){
                       if(i == coord_x && j == coord_y && tab_formation_cartesJ[i][j] >= 0  && e.button.x >= tab_rect_formationJ[i][j].x && e.button.x <= tab_rect_formationJ[i][j].x+tab_rect_formationJ[i][j].w && e.button.y >= tab_rect_formationJ[i][j].y && e.button.y <= tab_rect_formationJ[i][j].y+tab_rect_formationJ[i][j].h){
-                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        double_clique2(renderer_jeu,tab_formation_cartesJ[coord_x][coord_y],tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         coord_x = 0;
                         coord_y = 0;
                         etat = 0;
@@ -441,8 +431,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       }
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         printf("attaque sur la carte %i de l'adversaire \n\n",i);
-                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
-
                         etat = 0;
                         break;
                       }
@@ -456,7 +444,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   for (int x = 0; x < 5;x++){
                     for(int y = 0; y < 3; y++){
                       if(x == coord_x && 2-y == coord_y && tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-                        double_clique(e,renderer_jeu,tab_rect_main,tab_rect_formationJ,tab_rect_formationAdv,rect_aff_carte_j,tab_cartes_total,tab_main,tab_formation_cartesJ,tab_formation_cartesADV);
+                        double_clique2(renderer_jeu,tab_formation_cartesADV[coord_x][coord_y],tab_cartes_deck_bot,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         etat = 0;
                         coord_x = 0;
                         coord_y = 0;
@@ -466,49 +454,17 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   }
                 }
               break;
-/*
-             case SDL_MOUSEMOTION:
-                if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
-                      SDL_RenderClear(renderer_jeu);
-                      SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R); 
-                      SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
-                      SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-                      SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &txt_menu_R);
-                      affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
-                      rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                      menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-                      oldHover = 1;
-                }
-                else if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
-                      SDL_RenderCopy(renderer_jeu, txt_passe_Hover_T, NULL, &txt_passe_R);
-                      SDL_RenderPresent(renderer_jeu);
-                      oldHover = 1;
 
-                }
-                else if(oldHover){
-                  SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-                  SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
-                  SDL_RenderPresent(renderer_jeu);
-                  oldHover = 0;
-                }
-
-              break;
-*/
             }
             break;
           }
 
   }
-  /*
-    SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
-    SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
-    SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
-  */
 
   printf("fin boucle\n");
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(jeu);
-  free(maj);
+
   free(taille_main);
   free(taille_deck);
   free(taille_main_bot);
