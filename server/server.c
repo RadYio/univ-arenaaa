@@ -64,15 +64,23 @@ void* connectes(void* oldJoueurs){
   lien_t* joueurs = (lien_t*) oldJoueurs; //On triche, le  thread forcant un param void*
   client_t joueur1 = joueurs->client1;
   client_t joueur2 = joueurs->client2;
-
+  char buffer[64];
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
 
-  shutdown(joueur1.numSock, 2);
-  shutdown(joueur2.numSock, 2);
+  ssize_t verif = -1;
+  while(verif!=0){
+    verif = read(joueur1.numSock,buffer,64);
+  }
+  struct tm* dateTh=recupererTemps();
+  printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, joueur1.numSock);
 
-  close(joueur1.numSock);
-  close(joueur2.numSock);
+
+  //shutdown(joueur1.numSock, 2);
+  //shutdown(joueur2.numSock, 2);
+
+  //close(joueur1.numSock);
+  //close(joueur2.numSock);
 
   free(joueurs);
 
@@ -151,7 +159,7 @@ int main(){
           nouvelleConnexion->client2=listeClient[j];
           pthread_cancel(th_attente[i]);
           pthread_cancel(th_attente[j]);
-          printf("Création\n\n");
+          printf("Création de liens\n\n");
           pthread_create(&th_connectes[i], NULL, connectes, (void*)nouvelleConnexion);
           nb_client_attente-=2;
           break;

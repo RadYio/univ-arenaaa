@@ -19,9 +19,9 @@ void gestionPartie(void* infos){
 
   }
   else if(strcmp(buffer,"FIN") == 0){
-    shutdown(*socket,2);
-    close(*socket);
-    *socket=-1;
+    shutdown(infoServer->valSocket,2);
+    close(infoServer->valSocket);
+    infoServer->valSocket=-1;
   }
 }
 

@@ -16,7 +16,7 @@ all: univ-arenaaaa
 
 
 univ-arenaaaa: main.c carte.c menu.c jeu_solo.c jeu_multi.c bot.c window.c collection.c affichage.c init_jeu_solo.c client.c attaque.c
-	${CC} -o ${PROG} main.c carte.c menu.c jeu_solo.c jeu_multi.c bot.c window.c collection.c affichage.c init_jeu_solo.c client.c attaque.c ${LIBS} ${INCLUDES} ${CFLAGS_DEBUG}
+	${CC} -o ${PROG} main.c carte.c menu.c jeu_solo.c jeu_multi.c bot.c window.c collection.c affichage.c init_jeu_solo.c client.c attaque.c ${LIBS} ${INCLUDES} ${CFLAGS_COMPIL}
 
 
 clean:
