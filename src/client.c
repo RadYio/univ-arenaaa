@@ -1,6 +1,10 @@
 #include "../header/client.h"
 
-
+void connectF(int* socket){
+  shutdown(*socket,2);
+  close(*socket);
+  *socket=-1;
+}
 
 void* rechercheJoueur(void* infos){
   serverStruct_t* infoServer = (serverStruct_t*)infos;
