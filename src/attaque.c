@@ -26,6 +26,7 @@ void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_
     //on utilise 2 while car cela permet de sortir des boucles une fois l'emplacement trouvé sans devoir faire de break
     for(i = 0; tab_formation_defense[i][j] != id_carte_defense || i < 5; i++){
       for(j = 0; tab_formation_defense[i][j] != id_carte_defense || j < 3; j++);
+    }
     //on a trouvé l'emplacement de l'id de la carte, on la remplace par -2
     tab_formation_defense[i][j] = -2;
     //on supprime la carte du deck
