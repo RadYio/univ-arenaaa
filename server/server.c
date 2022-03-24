@@ -67,13 +67,15 @@ void* connectes(void* oldJoueurs){
   char buffer[64];
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
-
+  sleep(4);
+  send(joueur2.numSock, "FIN", 64, 0);
+  return NULL;
   ssize_t verif = -1;
   while(verif!=0){
     verif = read(joueur1.numSock,buffer,64);
   }
   struct tm* dateTh=recupererTemps();
-  printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, joueur1.numSock);
+  printf("%i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, joueur1.num);
 
 
   //shutdown(joueur1.numSock, 2);
