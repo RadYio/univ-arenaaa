@@ -49,73 +49,9 @@ void * calcul_temps(void * val){
   }
 }
 
-void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_deck[],SDL_Rect *rect_aff_carte_j,SDL_Rect *rect_aff_att_j,SDL_Rect *rect_aff_hp_j,TTF_Font* police){
-  SDL_Color couleurBlanche = {255, 255, 255};
-  char attaque[3];
-  char hp[3];
-  snprintf(attaque,sizeof(attaque),"%i",tab_cartes_deck[id_carte].nb_degats);
-  snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
-  printf("att : %d => \"%s\"\n", tab_cartes_deck[id_carte].nb_degats, attaque);  //*attaque = (tab_cartes_deck[id_carte].nb_degats) + '0';
-  printf("pv : %d => \"%s\"\n", tab_cartes_deck[id_carte].hp_carte, hp);
-  
-  SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche); 
-  SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche); 
 
-  SDL_Texture* att_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, att_carte_S);
-  SDL_Texture* hp_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, hp_carte_S);
 
-  //creation du rectangle pour le texte de deck de l'adversaire
-  *rect_aff_att_j = creer_rectangle(700, 325, 30, sizeof(attaque)*8);
 
-  //creation du rectangle pour le texte de deck de l'adversaire
-  *rect_aff_hp_j = creer_rectangle(885, 325, 30, sizeof(hp)*8);
-
-  SDL_FreeSurface(att_carte_S);
-  SDL_FreeSurface(hp_carte_S);
-
-  SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
-  SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
-
-  affichage_carte(renderer_jeu,tab_cartes_deck[id_carte],*rect_aff_carte_j);
-  SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
-  SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
-  SDL_RenderPresent(renderer_jeu);
-  return;
-
-}
-
-int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[],SDL_Rect tab_rect_formationJ[][3],SDL_Rect tab_rect_formationAdv[][3]
-,SDL_Rect *rect_aff_carte_j,carte_t tab_cartes_total[13],carte_t tab_main[],int tab_formation_cartesJ[5][3],int tab_formation_cartesADV[5][3]){
-  int x = 0,y=0,i=0;
-
-  while(i < 15){
-    if(x == 4 && y < 2) y++;
-    x = i%5;
-    //cas ou on clique sur une des 10 cartes de la main
-    if(i <= 10 && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
-      affichage_carte(renderer_jeu,tab_main[i],*rect_aff_carte_j);
-      SDL_RenderPresent(renderer_jeu);
-      return 0;
-
-    }
-    printf("%i \n",tab_formation_cartesJ[x][y])   ;
-    //cas ou on clique sur une carte du plateau
-    if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
-      affichage_carte(renderer_jeu,tab_cartes_total[tab_formation_cartesJ[x][y]],*rect_aff_carte_j);
-      SDL_RenderPresent(renderer_jeu);
-      return 0;
-    }
-    if(tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-      affichage_carte(renderer_jeu,tab_cartes_total[tab_formation_cartesADV[x][2-y]],*rect_aff_carte_j);
-      SDL_RenderPresent(renderer_jeu);
-      return 0;
-    }
-
-    i++;
-  }
-  return 1;
-
-}
 //tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
 
 
@@ -160,11 +96,11 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     {-2, -1, -1}};
 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
-    {-1, -1, 0},
-    {-1, 0, -1},
-    {0, -1, 0},
-    {-1, 0, -1},
-    {-1, -1, 0}};
+    {-1, -1, 2},
+    {-1, 1, -1},
+    {0, -1, 3},
+    {-1, 4, -1},
+    {-1, -1, 5}};
 //à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -410,7 +346,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               break;
 
               case SDL_MOUSEBUTTONDOWN :
-                printf("\ntest nouvelle action\n\n");
+                printf("\ntest nouvelle action = %i\n\n",(e.type));
                 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -432,7 +368,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
                   printf("on passe le tour\n");
                   *jeu = 0;
-                  //break;
                 }
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
@@ -531,10 +466,17 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   }
                 }
               break;
-/*             case SDL_MOUSEMOTION:
+/*
+             case SDL_MOUSEMOTION:
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
+                      SDL_RenderClear(renderer_jeu);
+                      SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R); 
+                      SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
+                      SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
                       SDL_RenderCopy(renderer_jeu, txt_menu_Hover_T, NULL, &txt_menu_R);
-                      SDL_RenderPresent(renderer_jeu);
+                      affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                      rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                      menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
                       oldHover = 1;
                 }
                 else if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
@@ -557,7 +499,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
           }
 
   }
-
+  /*
+    SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
+    SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
+    SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
+  */
 
   printf("fin boucle\n");
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
