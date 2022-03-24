@@ -348,9 +348,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 printf("je suis ici %i\n",e.type);
 
                 *running = 0 ;
-                connectF(valSocket);
+                printf("avant shutdown = %i \n\n",*valSocket);
 
-                printf("on sort mtn\n");
+                connectF(valSocket);
+                printf("shutdown = %i \n\n",*valSocket);
+                /*shutdown(*valSocket,2);
+                close(*valSocket);
+                printf("on sort mtn %i\n",*valSocket);*/
 
               break;
 
