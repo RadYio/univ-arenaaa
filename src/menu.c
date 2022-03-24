@@ -3,6 +3,7 @@
 #include <SDL2/SDL_image.h>
 
 #include <time.h>
+//pas tout seul
 
 #include "../header/carte.h"
 #include "../header/collection.h"
