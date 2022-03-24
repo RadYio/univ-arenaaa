@@ -333,7 +333,7 @@ if(pWindow){
 
 
 					printf("Affichage\n\n");
-					SDL_Rect rect_Waiting = creer_rectangle(800-32,600,64,64);
+					SDL_Rect rect_Waiting = creer_rectangle(670-32,800,64,64);
 					SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
 					SDL_Rect rect_Waiting_BG_Evolution = creer_rectangle(0,0,368,768);
 
@@ -346,21 +346,27 @@ if(pWindow){
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 					int animation1 = 0;
 					int animation2 = 0;
-					Uint32 delai = SDL_GetTicks() / 25;
-					Uint32 t2 = -1;
+					Uint32 delai1 = SDL_GetTicks();
+					Uint32 delai2 = SDL_GetTicks();
+					Uint32 diffDelai1 = -1;
+					Uint32 diffDelai2 = -1;
 					while(infoServer.joueurTrouve!=1){
-						delai = SDL_GetTicks() / 25;
-						if(delai!=t2){
+						delai1 = SDL_GetTicks() / 50;
+						delai2 = SDL_GetTicks() / 150;
+						if(delai1!=diffDelai1){
 						rect_Waiting_Evolution.x=rect_Waiting_Evolution.w*animation1;
+						animation1=(animation1+1)%27;
+						}
+						if(delai2!=diffDelai2){
 						rect_Waiting_BG_Evolution.x=rect_Waiting_BG_Evolution.w*animation2;
+						animation2=(animation2+1)%7;
+						}
 						SDL_RenderClear(renderer_menu);
 						SDL_RenderCopy(renderer_menu,img_Waiting_BG_Texture, &rect_Waiting_BG_Evolution, NULL);
 						SDL_RenderCopy(renderer_menu, img_Waiting_Texture, &rect_Waiting_Evolution, &rect_Waiting);
 						SDL_RenderPresent(renderer_menu);
-						animation1=(animation1+1)%27;
-						animation2=(animation2+1)%7;
-						}
-						t2 = delai;
+						diffDelai1 = delai1;
+						diffDelai2 = delai2;
 					}
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
