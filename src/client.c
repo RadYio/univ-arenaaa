@@ -1,9 +1,28 @@
 #include "../header/client.h"
 
 void connectF(int* socket){
+  send(*socket,"FIN",64,0);
   shutdown(*socket,2);
   close(*socket);
   *socket=-1;
+}
+
+void gestionPartie(void* infos){
+  serverStruct_t* infoServer = (serverStruct_t*)infos;
+  char buffer[64];
+  ssize_t taille = recv(infoServer->valSocket, buffer, 64, 0);
+
+  if(strcmp(buffer,"TOUR_TOI") == 0){
+
+  }
+  else if(strcmp(buffer,"TOUR_PASTOI") == 0){
+
+  }
+  else if(strcmp(buffer,"FIN") == 0){
+    shutdown(*socket,2);
+    close(*socket);
+    *socket=-1;
+  }
 }
 
 void* rechercheJoueur(void* infos){

@@ -371,8 +371,9 @@ if(pWindow){
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
 					jeu_multi(pWindow, renderer_menu, &running, &infoServer.valSocket);
+					printf("YOOOOOOOOOO: %i\n\n",infoServer.valSocket);
 					if(infoServer.valSocket!=-1)
-						connectF(infoServer.valSocket);
+						connectF(&infoServer.valSocket);
 
 				}
 				SDL_PollEvent(&e);
