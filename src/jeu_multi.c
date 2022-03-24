@@ -348,6 +348,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 printf("je suis ici %i\n",e.type);
 
                 *running = 0 ;
+                connectF(valSocket);
+
                 printf("on sort mtn\n");
 
               break;
@@ -376,7 +378,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
                   printf("on passe le tour\n");
                   *jeu = 0;
-                  connectF(valSocket);
                 }
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
