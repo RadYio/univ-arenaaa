@@ -25,5 +25,6 @@ typedef struct serverStruct_s{
   int joueurTrouve; /** \brief joueurTrouve est un entier permettant de verifier si on a trouve un joueur */
 }serverStruct_t;
 
+void connectF(int* socket);
 void* rechercheJoueur(void* infos);
 int connectC();
