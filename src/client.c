@@ -7,21 +7,22 @@ void connectF(int* socket){
   *socket=-1;
 }
 
-void gestionPartie(void* infos){
-  serverStruct_t* infoServer = (serverStruct_t*)infos;
+int gestionPartie(void* infos){
+  int* socket = (int*)infos;
   char buffer[64];
-  ssize_t taille = recv(infoServer->valSocket, buffer, 64, 0);
+  ssize_t taille = recv(*socket, buffer, 64, 0);
 
   if(strcmp(buffer,"TOUR_TOI") == 0){
-
+    return 1;
   }
   else if(strcmp(buffer,"TOUR_PASTOI") == 0){
-
+    return 2;
   }
   else if(strcmp(buffer,"FIN") == 0){
-    shutdown(infoServer->valSocket,2);
-    close(infoServer->valSocket);
-    infoServer->valSocket=-1;
+    shutdown(*socket,2);
+    close(*socket);
+    *socket=-1;
+    return -1;
   }
 }
 

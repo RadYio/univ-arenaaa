@@ -31,7 +31,7 @@ void * calcul_temps2(void * val){
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
-  while(1)        
+  while(1)
   {
       //un tour de 60 secondes
       if(difftime(t2, t1) >= 10){
@@ -54,7 +54,9 @@ void * calcul_temps2(void * val){
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
-
+    if(gestionPartie(valSocket)==-1){
+      return;
+    }
     /////@@@@@@@@@@
     /*
     A chaque modification, à l'aide d'un thread,
@@ -186,7 +188,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
-  //cration des boutons de passage de tour et de retour menu 
+  //cration des boutons de passage de tour et de retour menu
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
   menu_s = IMG_Load("../img/img_menu.png");
@@ -211,13 +213,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	SDL_Texture* txt_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
 	SDL_Texture* txt_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
 
-	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface 
+	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface
 	SDL_FreeSurface(txt_menu_Hover_S);
 
   SDL_Rect menu_R = creer_rectangle(1400,0,90,190);
   SDL_Rect txt_menu_R = creer_rectangle(1440,20,50,(strlen("Menu")*25));
-  
-  
+
+
 
   //création du texte du bouton de passe tour
   SDL_Surface * txt_passe_S = TTF_RenderUTF8_Blended(police, "Passe", couleurNoire);
@@ -231,13 +233,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	SDL_Texture* txt_passe_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_S);
 	SDL_Texture* txt_passe_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_Hover_S);
 
-	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface 
+	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface
 	SDL_FreeSurface(txt_passe_Hover_S);
 
   SDL_Rect passe_R = creer_rectangle(1400,820,80,180);
   SDL_Rect txt_passe_R = creer_rectangle(1440,835,45,(strlen("Passe")*20));
-  
-  
+
+
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -283,8 +285,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
     menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-    
-    
+
+
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     int etat = 0;
@@ -325,26 +327,26 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 free(taille_main_bot);
                 free(jeu);
 
-                
+
                 pthread_cancel(thread_tps);
-                TTF_CloseFont(police); 
+                TTF_CloseFont(police);
                 SDL_RenderClear(renderer_jeu);
                 TTF_Quit();
                 connectF(valSocket);
 
                 return;
-              } 
+              }
 /*
               if(flag){
                 affichage();
-              }    
-*/                   
+              }
+*/
             }
             while(*jeu == 1){
               SDL_PollEvent(&e);
 
             switch(e.type){
-              case SDL_QUIT : 
+              case SDL_QUIT :
                 printf("je suis ici %i\n",e.type);
 
                 *running = 0 ;
@@ -371,7 +373,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   free(taille_main_bot);
                   free(jeu);
 
-                  
+
                   pthread_cancel(thread_tps);
                   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
                   SDL_RenderClear(renderer_jeu);
