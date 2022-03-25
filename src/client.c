@@ -1,4 +1,6 @@
+
 #include "../header/client.h"
+
 
 void connectF(int* socket){
   send(*socket,"FIN",64,0);

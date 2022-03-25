@@ -4,6 +4,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
+
 #include "../header/carte.h"
 #include "../header/window.h"
 #include "../header/jeu_solo.h"
@@ -12,7 +13,6 @@
 #include "../header/init_jeu_solo.h"
 #include "../header/bot.h"
 #include "../header/attaque.h"
-
 
 
 

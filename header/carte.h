@@ -1,3 +1,6 @@
+#ifndef _CARTE_H
+#define _CARTE_H
+
 #define N 13 //nombre de cartes dans le jeu au total
 
 typedef enum type{Poison, Psy, Physique}type_t;
@@ -28,6 +31,4 @@ void creation_deck(carte_t * deck[12]);
 
 void creation_tab_main(carte_t tab_main[],int taille);
 
-
-
-
+#endif

@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <pthread.h>
 
+#include "carte.h"
+
 #define PORT 6666
 #define NB_TENTATIVE 60
 #define DELAI 1
@@ -27,11 +29,11 @@ typedef struct serverStruct_s{
 
 typedef struct gestion_s{
   int flag;
-  int mat1[][3];
-  int mat2[][3];
-  carte_t tab1[];
-  carte_t tab2[];
-}gestion_t; 
+  int mat1[5][3];
+  int mat2[5][3];
+  carte_t tab1[10];
+  carte_t tab2[10];
+}gestion_t;
 
 int gestionPartie(void* infos);
 void connectF(int* socket);
