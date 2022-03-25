@@ -15,6 +15,7 @@
 #include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 #include "../header/bot.h"
+#include "../header/attaque.h"
 
 
 
@@ -59,6 +60,7 @@ void * calcul_temps(void * val){
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     printf("test 2");
+
 
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
@@ -431,6 +433,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       }
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         printf("attaque sur la carte %i de l'adversaire \n\n",i);
+                        attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck);
+                        affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                        rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                        menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
                         etat = 0;
                         break;
                       }
