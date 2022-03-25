@@ -25,6 +25,14 @@ typedef struct serverStruct_s{
   int joueurTrouve; /** \brief joueurTrouve est un entier permettant de verifier si on a trouve un joueur */
 }serverStruct_t;
 
+typedef struct gestion_s{
+  int flag;
+  int mat1[][3];
+  int mat2[][3];
+  carte_t tab1[];
+  carte_t tab2[];
+}gestion_t; 
+
 int gestionPartie(void* infos);
 void connectF(int* socket);
 void* rechercheJoueur(void* infos);
