@@ -12,6 +12,7 @@ int gestionPartie(void* infos){
   char buffer[64];
   ssize_t taille = recv(*socket, buffer, 64, 0);
   printf("J'ai recu [%s]",buffer);
+
   if(strcmp(buffer,"TOUR_TOI") == 0){
     return 1;
   }
