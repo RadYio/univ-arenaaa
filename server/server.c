@@ -67,8 +67,12 @@ void* connectes(void* oldJoueurs){
   char buffer[64];
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
+
   sleep(2);
+
+  send(joueur1.numSock, "FIN", 64, 0);
   send(joueur2.numSock, "FIN", 64, 0);
+  
   ssize_t verif = -1;
   while(verif!=0){
     verif = read(joueur1.numSock,buffer,64);

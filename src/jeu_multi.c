@@ -55,7 +55,8 @@ void * calcul_temps2(void * val){
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     if(gestionPartie(valSocket) == -1) printf("toto\n\n");
-    connectF(valSocket);
+    //connectF(valSocket);
+    return;
     /////@@@@@@@@@@
     /*
     A chaque modification, à l'aide d'un thread,
