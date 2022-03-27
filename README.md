@@ -1,8 +1,11 @@
-<h1 align="center">Bienvenue sur UNIV-ARENAAA 👋</h1>
+<h1 align="center">👋 Bienvenue sur UNIV-ARENAAA 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue"/>
 	<img alt="language" src="https://img.shields.io/badge/language-C-success"/>
 	<img alt="année" src="https://img.shields.io/badge/Projet Universitaire-L2-yellow"/>
+	<img alt="nombre de ligne de code" src="https://img.shields.io/tokei/lines/github/RadYio/univ-arenaaa?label=nombre%20de%20ligne"/>
+	<img alt="taille du projet" src="https://img.shields.io/github/languages/code-size/RadYio/univ-arenaaa?label=taille%20du%20projet"/>
+	
 </p>
 
 > univ-arenaaa est un jeu de carte, basé sur des modeles existants, mais remanié avec notre sauce. Pour votre et notre plaisir.
@@ -13,7 +16,7 @@
 git clone https://github.com/RadYio/univ-arenaaa.git
 ```
 
-## Author
+## Auteur
 
 
 <table >
@@ -33,7 +36,7 @@ git clone https://github.com/RadYio/univ-arenaaa.git
 				<img src="https://avatars.githubusercontent.com/u/34213003?v=4" width="175px;" alt="photo de profil {github} du compte"/>
 				<br />
 				<sub>
-					<b>👤 GONIN-SAGET Allan</b>
+					<b>👤 OTTO Jonathan</b>
 				</sub>
 			</a>
 			<br />
