@@ -3,7 +3,6 @@
   <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue"/>
 	<img alt="language" src="https://img.shields.io/badge/language-C-success"/>
 	<img alt="année" src="https://img.shields.io/badge/Projet Universitaire-L2-yellow"/>
-	<img alt="nombre de ligne de code" src="https://img.shields.io/tokei/lines/github/RadYio/univ-arenaaa?label=nombre%20de%20ligne"/>
 	<img alt="taille du projet" src="https://img.shields.io/github/languages/code-size/RadYio/univ-arenaaa?label=taille%20du%20projet"/>
 	
 </p>
