@@ -59,6 +59,5 @@ git clone https://github.com/RadYio/univ-arenaaa.git
 Donnez nous une ⭐️ </br>
 Si le projet vous plait.
 
-test gros ouinouin big ouinouin je suis dangereux
-noot noot
+
 
