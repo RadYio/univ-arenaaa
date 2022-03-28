@@ -35,6 +35,7 @@ typedef struct gestion_s{
   carte_t tab2[10];
 }gestion_t;
 
+void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int socket);
 int gestionPartie(void* infos);
 void connectF(int* socket);
 void* rechercheJoueur(void* infos);
