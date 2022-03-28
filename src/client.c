@@ -1,6 +1,31 @@
-
+/**
+ * @file client.c
+ * @author Allan GONIN-SAGET (allan.gonin-saget.etu@univ-lemans.fr)
+ * @brief  Fichier regroupant les fonctions princpales permettant le lien et le contact avec un serveur
+ * @version 1.0
+ * @date 2022-03-28
+ *
+ */
 #include "../header/client.h"
-
+void* recupererInfo(void* structure){
+  gestion_t* informations = (grestion_t*)structure; //On triche
+  int saveSocket = informations->socket;
+  int taille = recv(saveSocket, informations, sizeof(gestion_t), 0);
+  while(taille>0){
+    taille = recv(saveSocket, informations, sizeof(gestion_t), 0);
+  }
+  printf("A VERIFIER ATTENTION\n\n");
+}
+/**
+ * @brief
+ *
+ * @param futurInfos
+ * @param premiereMat
+ * @param deuxiemeMat
+ * @param premierTab
+ * @param deuxiemeTab
+ * @param socket
+ */
 void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int socket){
   for(int i;i<5;i++){
     for(int j;j<3;j++){
@@ -15,14 +40,23 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
   futurInfos->flag = 1;
   send(socket, futurInfos, sizeof(*futurInfos), 0);
 }
-
+/**
+ * @brief
+ *
+ * @param socket
+ */
 void connectF(int* socket){
   send(*socket,"FIN",64,0);
   shutdown(*socket,2);
   close(*socket);
   *socket=-1;
 }
-
+/**
+ * @brief
+ *
+ * @param infos
+ * @return int
+ */
 int gestionPartie(void* infos){
   int* socket = (int*)infos;
   char buffer[64];
@@ -42,7 +76,12 @@ int gestionPartie(void* infos){
     return -1;
   }
 }
-
+/**
+ * @brief
+ *
+ * @param infos
+ * @return void*
+ */
 void* rechercheJoueur(void* infos){
   serverStruct_t* infoServer = (serverStruct_t*)infos;
   char buffer[64];
@@ -57,7 +96,11 @@ void* rechercheJoueur(void* infos){
   pthread_exit(NULL);
   return NULL;
 }
-
+/**
+ * @brief
+ *
+ * @return int
+ */
 int connectC(){
   sockaddr_in_t sin;
   socklen_t taille = sizeof(sin);

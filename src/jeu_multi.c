@@ -56,6 +56,8 @@ void * calcul_temps2(void * val){
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     gestion_t etatDuJeu;
+    int flagThread=0;
+    pthread_t recuperation;
     if(gestionPartie(valSocket) == -1) printf("toto\n\n");
     //connectF(valSocket);
     return;
@@ -308,6 +310,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
           while(*jeu == 0){
               SDL_PollEvent(&e);
+              if(flagThread==0){
+                flagThread=1;
+                pthread_create(&recuperation,NULL,recupererInfo,(void*)(etatDuJeu));
+              }
               if(e.type == SDL_QUIT ){
 
                 *running = 0;
@@ -337,6 +343,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 tab_formation_cartesADV[][3]
                 tab_cartes_deck[]
                 tab_cartes_deck_bot[]
+                etatDuJeu.flags = 0;
 
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
@@ -346,6 +353,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
             }
             while(*jeu == 1){
                //premiere action de moi
+              flagThread=0;
+
               SDL_PollEvent(&e);
 
             switch(e.type){
@@ -437,7 +446,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-                        printf("la carte a été posée\n");                        
+                        printf("la carte a été posée\n");
                       }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
                       transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_bot, *valSocket);
