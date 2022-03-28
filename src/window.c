@@ -51,4 +51,5 @@ int initialiser_fenetre(){
     }
 
   SDL_Quit();
+  return 1;
 }
