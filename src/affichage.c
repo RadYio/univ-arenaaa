@@ -1,6 +1,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
+
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
@@ -20,6 +24,11 @@ void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255);
 
   SDL_RenderCopy(renderer_jeu, img_jeu_Texture, NULL, NULL);
+}
+
+void affichage_energie(int * nb_actions){
+
+
 }
 
 void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur,SDL_Rect* rect_adv,SDL_Rect * rect_aff_carte_j){
@@ -217,5 +226,66 @@ void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Re
     tab_formation_cartesJ[colone][ligne] = tab_main[indice_main].id_carte;
     //mise à jour de notre main, on supprime la carte en question, et on arrete de l'afficher dans la main ainsi que son rectangle avec
     suppression_carte_main(tab_main, indice_main, tab_rect_main, taille_main);
+  }
+}
+
+/*
+int victoire(carte_t tab_cartes_deck[],carte_t tab_cartes_deck_bot[]){
+  //return 1 si le joueur n'as plus de cartes
+  if(tab_cartes_deck[0].id_carte == NULL)return 1;
+  //return 2 si le bot n'as plus de cartes
+  if(tab_cartes_deck_bot[0].id_carte== NULL)return 2;
+  //return 0 si les 2 joueurs ont encore des cartes
+  return 0;
+}
+*/
+
+int action(int * nb_actions){
+  SDL_Color couleurRouge = {255, 0, 0};
+  if(*nb_actions){
+    *nb_actions = *nb_actions - 1;
+    return 1;
+  }
+  printf("Pas d'actions disponnibles \n\n");
+  
+  return 0;
+}
+
+void nouveau_tour(int * nb_actions, int tab_formation[][3]){
+  *nb_actions = 1;
+  int j;
+  int temp = 1;
+  for(int i=0;i < 3;i++){
+    for( j=0; j < 5 ; j++){
+      if(tab_formation[j][i]==-2)temp = -1;    
+    }
+    if(temp == 1)*nb_actions = *nb_actions + 1;
+    temp = 1;
+  } 
+}
+
+void * calcul_temps(void * val){
+  int * jeu =malloc(sizeof(int));
+  jeu =  (int*)(val);
+
+
+  time_t t1, t2;
+  t1 = time(NULL);
+ 	t2 = time(NULL);
+  while(1)        
+  {
+      //un tour de 60 secondes
+      if(difftime(t2, t1) >= 10){
+        *jeu = 0;
+        t1 = time(NULL);
+      }
+      if(*jeu == 0){
+        printf ("reset temps\n");
+        t1 = time(NULL);
+      }
+      t2 = time(NULL);
+      sleep(1);
+      if(*jeu == 1){
+      }
   }
 }

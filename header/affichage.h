@@ -38,3 +38,10 @@ void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main);
 void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_rect_main[], int* taille_main);
 
 void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main);
+
+int action(int * nb_actions);
+
+void nouveau_tour(int * nb_actions, int tab_formation[][3]);
+
+void * calcul_temps(void * val);
+

@@ -10,12 +10,14 @@
 
 #include "../header/carte.h"
 #include "../header/window.h"
+#include "../header/affichage.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
-#include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 #include "../header/bot.h"
 #include "../header/client.h"
+#include "../header/attaque.h"
+
 
 
 
@@ -48,7 +50,6 @@ void * calcul_temps2(void * val){
 
 
 
-//tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
 
 
 
@@ -95,9 +96,9 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
 
 
 
-    //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
-  //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
-  int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
+//creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
+//vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
+int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
     {-2, -1, -1},
     {-1, -2, -1},
     {-2, -1, -2},
@@ -124,7 +125,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
     //SDL_Renderer* renderer_jeu = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED); //creation d'un nouveau renderer pour le jeu
 
-    if(renderer_jeu == NULL){
+  if(renderer_jeu == NULL){
 		fprintf(stderr, "Erreur à la création du renderer de jeu\n");
 		exit(EXIT_FAILURE);
 	}
@@ -191,14 +192,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 		exit(EXIT_FAILURE);
 	}
   //cration des boutons de passage de tour et de retour menu
-  SDL_Surface* menu_s;
-  SDL_Surface* passe_s;
-  menu_s = IMG_Load("../img/img_menu.png");
-  passe_s = IMG_Load("../img/retour_menu.png");
-  SDL_Texture* menu_t;
-  SDL_Texture* passe_t;
-  menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
-  passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
+  SDL_Surface* menu_s = IMG_Load("../img/img_menu.png");
+  SDL_Surface* passe_s = IMG_Load("../img/retour_menu.png");
+  SDL_Texture* menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
+  SDL_Texture* passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
 
   SDL_FreeSurface(menu_s);
   SDL_FreeSurface(passe_s);
@@ -246,11 +243,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-  //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  //SDL_RenderClear(renderer_menu); //on arrete d'afficher tout ce qu'il est en lien avec le menu
 
 
 
@@ -302,7 +294,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     creation_tab_main(main_bot,*taille_main_bot);
     int *taille_deck = malloc(sizeof(int));
     *taille_deck = 13;
-
+    int * nb_actions = malloc(sizeof(int));
+    *nb_actions = 1;
 
 
     pthread_create(&thread_tps,NULL,calcul_temps2,(void*)(jeu));
@@ -321,7 +314,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 printf("on sort mtn 1\n");
                 connectF(valSocket);
               }
-              if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
+              if(e.type == SDL_MOUSEBUTTONDOWN && e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                 printf("fin menu\n");
 
                 free(taille_main);
@@ -439,12 +432,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         break;
                     }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
-                      transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
-                      affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
-                      rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                      menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-                      printf("la carte a été posée\n");
-
+                      if(action(nb_actions)){
+                        transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
+                        affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                        rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                        menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                        printf("la carte a été posée\n");                        
+                      }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
                       transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_bot, *valSocket);
                       etat = 0;
@@ -468,8 +462,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         break;
                       }
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
-                        printf("attaque sur la carte %i de l'adversaire \n\n",i);
-
+                        if(action(nb_actions)){
+                          printf("attaque sur la carte %i de l'adversaire \n\n",i);
+                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck);
+                          affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
+                          rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
+                          menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                        }
                         //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
                         transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_bot, *valSocket);
                         etat = 0;

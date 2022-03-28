@@ -10,9 +10,9 @@
 
 #include "../header/carte.h"
 #include "../header/window.h"
+#include "../header/affichage.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
-#include "../header/affichage.h"
 #include "../header/init_jeu_solo.h"
 #include "../header/bot.h"
 #include "../header/attaque.h"
@@ -22,68 +22,6 @@
 
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
-
-int victoire(carte_t tab_cartes_deck[],carte_t tab_cartes_deck_bot[]){
-  //return 1 si le joueur n'as plus de cartes
-  if(tab_cartes_deck[0].id_carte == NULL)return 1;
-  //return 2 si le bot n'as plus de cartes
-  if(tab_cartes_deck_bot[0].id_carte== NULL)return 2;
-  //return 0 si les 2 joueurs ont encore des cartes
-  return 0;
-}
-
-int action(int * nb_actions){
-  SDL_Color couleurRouge = {255, 0, 0};
-  if(*nb_actions){
-    *nb_actions = *nb_actions - 1;
-    return 1;
-  }
-  //SDL_Surface * txt_passe_S = TTF_RenderUTF8_Blended(police, "Pas d'actions", couleurNoire);
-  //SDL_Texture* txt_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
-  printf("Pas d'actions disponnibles \n\n");
-  
-  return 0;
-}
-
-void nouveau_tour(int * nb_actions, int tab_formation[][3]){
-  *nb_actions = 1;
-  int j;
-  int temp = 1;
-  for(int i=0;i < 3;i++){
-    for( j=0; j < 5 ; j++){
-      if(tab_formation[j][i]==-2)temp = -1;    
-    }
-    if(temp == 1)*nb_actions = *nb_actions + 1;
-    temp = 1;
-  } 
-}
-
-void * calcul_temps(void * val){
-  int * jeu =malloc(sizeof(int));
-  jeu =  (int*)(val);
-
-
-  time_t t1, t2;
-  t1 = time(NULL);
- 	t2 = time(NULL);
-  while(1)        
-  {
-      //un tour de 60 secondes
-      if(difftime(t2, t1) >= 10){
-        *jeu = 0;
-        t1 = time(NULL);
-      }
-      if(*jeu == 0){
-        printf ("reset temps\n");
-        t1 = time(NULL);
-      }
-      t2 = time(NULL);
-      sleep(1);
-      if(*jeu == 1){
-      }
-  }
-}
-
 
 
 
@@ -360,7 +298,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
               oldHover = 0;
             }
-            
+
             while(*jeu == 1){
               SDL_PollEvent(&e);
 
