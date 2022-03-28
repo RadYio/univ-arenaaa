@@ -300,22 +300,19 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     *nb_actions = 1;
 
 
-    pthread_create(&thread_tps,NULL,calcul_temps2,(void*)(jeu));
+    pthread_create(&thread_tps, NULL, calcul_temps2, (void*)(jeu));
     if(pWindow){
 
       *running = 1;
       while(*running){
           SDL_Event e;
-
-
           while(*jeu == 0){
               SDL_PollEvent(&e);
               if(flagThread==0){
                 flagThread=1;
-                pthread_create(&recuperation,NULL,recupererInfo,(void*)(etatDuJeu));
+                pthread_create(&recuperation, NULL, recupererInfo, (void*)(&etatDuJeu));
               }
-              if(e.type == SDL_QUIT ){
-
+              if(e.type == SDL_QUIT){
                 *running = 0;
                 printf("on sort mtn 1\n");
                 connectF(valSocket);

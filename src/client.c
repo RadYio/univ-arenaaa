@@ -8,7 +8,7 @@
  */
 #include "../header/client.h"
 void* recupererInfo(void* structure){
-  gestion_t* informations = (grestion_t*)structure; //On triche
+  gestion_t* informations = (gestion_t*)structure; //On triche
   int saveSocket = informations->socket;
   int taille = recv(saveSocket, informations, sizeof(gestion_t), 0);
   while(taille>0){

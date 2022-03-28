@@ -134,9 +134,9 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   snprintf(attaque,sizeof(attaque),"%i",tab_cartes_deck[id_carte].nb_degats);
   snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
 
-  
-  SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche); 
-  SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche); 
+
+  SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche);
+  SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche);
 
   SDL_Texture* att_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, att_carte_S);
   SDL_Texture* hp_carte_T = SDL_CreateTextureFromSurface(renderer_jeu, hp_carte_S);
@@ -171,8 +171,8 @@ void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions,TTF_Font* pol
   SDL_Surface* energie_S = IMG_Load("../img/energie.png");
   SDL_Surface* nb_action_S = TTF_RenderUTF8_Blended(police, action, couleurJaune);
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
-  SDL_Texture* nb_action_T = SDL_CreateTextureFromSurface(renderer_jeu, nb_action_S);  
-  
+  SDL_Texture* nb_action_T = SDL_CreateTextureFromSurface(renderer_jeu, nb_action_S);
+
   SDL_FreeSurface(energie_S);
   SDL_FreeSurface(nb_action_S);
 
@@ -211,12 +211,12 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
 
     SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
     SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
-    
+
     SDL_RenderCopy(renderer_jeu, menu_t, NULL, &menu_R);
     SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
     SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
     SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-    
+
     //On fait le rendu !
     SDL_RenderPresent(renderer_jeu);
 }
@@ -268,7 +268,7 @@ int action(int * nb_actions){
     return 1;
   }
   printf("Pas d'actions disponnibles \n\n");
-  
+
   return 0;
 }
 
@@ -278,11 +278,11 @@ void nouveau_tour(int * nb_actions, int tab_formation[][3]){
   int temp = 1;
   for(int i=0;i < 3;i++){
     for( j=0; j < 5 ; j++){
-      if(tab_formation[j][i]==-2)temp = -1;    
+      if(tab_formation[j][i]==-2)temp = -1;
     }
     if(temp == 1)*nb_actions = *nb_actions + 1;
     temp = 1;
-  } 
+  }
 }
 
 void * calcul_temps(void * val){
@@ -293,7 +293,7 @@ void * calcul_temps(void * val){
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
-  while(1)        
+  while(1)
   {
       //un tour de 60 secondes
       if(difftime(t2, t1) >= 10){
