@@ -22,6 +22,16 @@
 
 
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
+
+int victoire(carte_t tab_cartes_deck[],carte_t tab_cartes_deck_bot[]){
+  //return 1 si le joueur n'as plus de cartes
+  if(tab_cartes_deck[0].id_carte == NULL)return 1;
+  //return 2 si le bot n'as plus de cartes
+  if(tab_cartes_deck_bot[0].id_carte== NULL)return 2;
+  //return 0 si les 2 joueurs ont encore des cartes
+  return 0;
+}
+
 int action(int * nb_actions){
   SDL_Color couleurRouge = {255, 0, 0};
   if(*nb_actions){
@@ -99,9 +109,9 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
 
     creation_tab_main(tab_cartes_deck,13);
 
-    carte_t tab_cartes_deck_bot[13];
+    carte_t tab_cartes_deck_bot[1];
 
-    creation_tab_main(tab_cartes_deck_bot,13);
+    creation_tab_main(tab_cartes_deck_bot,1);
     int * jeu;
 
     jeu = malloc(sizeof(int));
@@ -121,11 +131,11 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     {-2, -1, -1}};
 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
-    {-1, -1, 2},
-    {-1, 1, -1},
-    {0, -1, 3},
-    {-1, 4, -1},
-    {-1, -1, 5}};
+    {-1, -1, -2},
+    {-1, -2, -1},
+    {0, -1, -2},
+    {-1, -2, -1},
+    {-1, -1, -2}};
 //à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -350,6 +360,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
               oldHover = 0;
             }
+            
             while(*jeu == 1){
               SDL_PollEvent(&e);
 
@@ -503,3 +514,5 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
   return;
   }
 }
+
+
