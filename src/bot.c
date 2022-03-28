@@ -1,3 +1,11 @@
+/**
+ * @file bot.c
+ * @author Jonathan Otto
+ * @brief ici on gère les actions du bot qui est actif lorsque le joueur joue en solo
+ * @version 1
+ * @date 2022-03-28
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
@@ -16,6 +24,15 @@
 
 //fonction qui parcours la formation du bot, s'il trouve un -2 (endroit où il peut placer une carte)
 //il en place une, sinon il attaque une carte de l'adversaire
+/**
+ * @fn int poser_carte(int tab_formation_cartesADV[][3], carte_t main_bot[], int* taille_main_bot)
+ * @brief fonction qui permet au bot de poser une carte 
+ * 
+ * @param tab_formation_cartesADV tableau qui réportorie où le bot peut poser une carte
+ * @param main_bot tableau qui contient toutes les cartes que le bot peut poser
+ * @param taille_main_bot entier permettat de connaitre la taille de la main du bot
+ * @return int si return 1 : permet de lancer une condition si le bot à réussi à poser une carte, son tour s'arrête donc là ; si return 0 : le bot n'a pas pu poser de carte, il attaque donc
+ */
 int poser_carte(int tab_formation_cartesADV[][3], carte_t main_bot[], int* taille_main_bot){
     int i, j;
     for(i = 0; i < 5; i++){

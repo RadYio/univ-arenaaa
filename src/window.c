@@ -1,3 +1,11 @@
+/**
+ * @file window.c
+ * @author Jonathan Otto
+ * @brief deuxième étape dans le déroulement du programme : initialisation de SDL, creation d'une fenetre et appelle de la suite du programme
+ * @version 1
+ * @date 2022-03-28
+ */
+
 #include "../header/window.h"
 #include "../header/menu.h"
 
@@ -6,21 +14,12 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
-
-
-
-//fonction de creation de fenetre, mise en place de tous les trucs importants de SDL (a documenter plus par la suite)
-/* @FUNC initialiser_fenetre()
-*
-*
-*
-*
-*
-*
-*
-*
-*/
-
+/**
+ * @fn int initialiser_fenetre()
+ * @brief fonction d'initialisation de SDL, creation d'une fenetre et appelle de la suite du programme, puis une fois le programme terminé quitte SDL
+ * 
+ * @return int 
+ */
 int initialiser_fenetre(){
   //initialisation de SDL---------------------------------------------------------------
   if(SDL_Init(SDL_INIT_VIDEO) != 0){

@@ -30,6 +30,9 @@ INCLUDES_SDL=-I${SDLINC_DIR}
 .PHONY: DIRS
 all: $(DIRS) $(TRGS)
 
+doxygen: #creation du doxygen
+	doxygen ./Doxyfile
+
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
 $(BINDIR):
