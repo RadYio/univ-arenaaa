@@ -133,8 +133,7 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   char hp[4];
   snprintf(attaque,sizeof(attaque),"%i",tab_cartes_deck[id_carte].nb_degats);
   snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
-  printf("att : %d => \"%s\"\n", tab_cartes_deck[id_carte].nb_degats, attaque);  //*attaque = (tab_cartes_deck[id_carte].nb_degats) + '0';
-  printf("pv : %d => \"%s\"\n", tab_cartes_deck[id_carte].hp_carte, hp);
+
   
   SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche); 
   SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche); 
@@ -162,6 +161,24 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
 
 }
 
+// allo
+void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions,TTF_Font* police){
+  SDL_Color couleurJaune = {255, 215, 0};
+  char action[5];
+  snprintf(action,sizeof(action),"%i",*nb_actions);
+  SDL_Rect nb_action_R = creer_rectangle(100,800,80,160);
+  SDL_Rect image_action_R = creer_rectangle(260,800,80,160);
+  SDL_Surface* energie_S = IMG_Load("../img/energie.png");
+  SDL_Surface* nb_action_S = TTF_RenderUTF8_Blended(police, action, couleurJaune);
+  SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
+  SDL_Texture* nb_action_T = SDL_CreateTextureFromSurface(renderer_jeu, nb_action_S);  
+  
+  SDL_FreeSurface(energie_S);
+  SDL_FreeSurface(nb_action_S);
+
+  SDL_RenderCopy(renderer_jeu, energie_T, NULL, &nb_action_R);
+  SDL_RenderCopy(renderer_jeu, nb_action_T, NULL, &image_action_R);
+}
 
 
 void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
@@ -170,8 +187,9 @@ int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_format
 int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R
 ,SDL_Texture *txt_menu_Hover_T,
 SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
-,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R){
+,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions){
     printf("on affiche \n\n");
+    TTF_Font* police = NULL;
     SDL_RenderClear(renderer_jeu);
 
 
@@ -188,6 +206,9 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
     afficher_rectangles_main(taille_main,renderer_jeu, tab_rect_main);
 
     affichage_main(taille_main,renderer_jeu, tab_main, tab_rect_main);
+
+    affichage_actions(renderer_jeu,nb_actions,police);
+
     SDL_RenderCopy(renderer_jeu, txt_titre_joueur_T, NULL, rect_txt_deck_j);
     SDL_RenderCopy(renderer_jeu, txt_titre_adv_T, NULL, rect_txt_deck_adv);
     
