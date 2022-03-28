@@ -193,7 +193,6 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
 
 //a mettre dans fichier séparé
 void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main){
-  printf("ici uuuuuuuuuuuuuuuuuuu\n");
   for(int i = indice_main ; i < *taille_main; i++){
     tab_main[i] = tab_main[i+1];
   }

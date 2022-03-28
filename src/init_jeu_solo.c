@@ -18,19 +18,15 @@ void creation_main(int * taille_main,SDL_Rect tab[]){
   }
   //si la main est impaire
   else if(*taille_main%2==1){
-    printf("impair");
     int x = milieu + 5 - (71 * (*taille_main));
     for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
-      printf("recur taille %i\n",i);
       x += 142;
     }
   }
 
   else{
-    printf("pair");
     int x = milieu - 5 - (71 * (*taille_main));
-    printf("%i\n\n",x);
     for(int i=0;i<*taille_main;i++){
       tab[i]=creer_rectangle(x,830,144,132);
       x += 142;
