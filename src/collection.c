@@ -61,7 +61,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 
 
 	/* DECLARATION BG_CHOIX*/
-	SDL_Surface* img_planche_bg1_S = IMG_Load("../img/planche_bg1.png");
+	SDL_Surface* img_planche_bg1_S = IMG_Load("img/planche_bg1.png");
 
 	if(!img_planche_bg1_S){
 		fprintf(stderr, "Erreur à la création du texte ''img_planche_bg1_S'': %s\n", SDL_GetError());
@@ -74,7 +74,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	}
 
 	/* Choix de la police */
-	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+	if((police = TTF_OpenFont("font/ChowFun.ttf", 20)) == NULL){
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
@@ -86,15 +86,15 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 		fprintf(stderr, "Erreur à la création du rendu ''img_planche_bg1_T'' : %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
-	SDL_Surface* img_Planche_haut_S = IMG_Load("../img/panneau_haut.png");
+	SDL_Surface* img_Planche_haut_S = IMG_Load("img/panneau_haut.png");
 	SDL_Texture* img_Planche_haut_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_haut_S);
 	SDL_FreeSurface(img_Planche_haut_S); // on a la texture, plus besoin de l'image
 
-	SDL_Surface* img_Planche_bas_S = IMG_Load("../img/panneau_bas.png");
+	SDL_Surface* img_Planche_bas_S = IMG_Load("img/panneau_bas.png");
 	SDL_Texture* img_Planche_bas_T = SDL_CreateTextureFromSurface(renderer_collec, img_Planche_bas_S);
 	SDL_FreeSurface(img_Planche_bas_S); // on a la texture, plus besoin de l'image
 
-	SDL_Surface* img_retour_menu_S = IMG_Load("../img/retour_menu.png");
+	SDL_Surface* img_retour_menu_S = IMG_Load("img/retour_menu.png");
 	SDL_Texture* img_retour_menu_T = SDL_CreateTextureFromSurface(renderer_collec, img_retour_menu_S);
 	SDL_FreeSurface(img_retour_menu_S); // on a la texture, plus besoin de l'image
 

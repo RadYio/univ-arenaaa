@@ -53,19 +53,19 @@ int menu(SDL_Window * pWindow){
 	printf("Choix random du menu Version:%i\n\n",randomMenu);
 	switch(randomMenu){
 		case 1:
-			img_Menu_Surface = IMG_Load("../img/BG_MENU1.png");
+			img_Menu_Surface = IMG_Load("img/BG_MENU1.png");
 			break;
 		case 2:
-			img_Menu_Surface = IMG_Load("../img/BG_MENU2.png");
+			img_Menu_Surface = IMG_Load("img/BG_MENU2.png");
 			break;
 		case 3:
-			img_Menu_Surface = IMG_Load("../img/BG_MENU3.png");
+			img_Menu_Surface = IMG_Load("img/BG_MENU3.png");
 			break;
 		case 4:
-			img_Menu_Surface = IMG_Load("../img/BG_MENU4.png");
+			img_Menu_Surface = IMG_Load("img/BG_MENU4.png");
 			break;
 		default:
-			img_Menu_Surface = IMG_Load("../img/BG_DEFAULT.png");
+			img_Menu_Surface = IMG_Load("img/BG_DEFAULT.png");
 	}
 
 	if(!img_Menu_Surface){
@@ -84,7 +84,7 @@ int menu(SDL_Window * pWindow){
 
 
   /* DECLARATION BG_CHOIX*/
-	SDL_Surface* img_Choix_Surface = IMG_Load("../img/BG_CHOIX.png");
+	SDL_Surface* img_Choix_Surface = IMG_Load("img/BG_CHOIX.png");
 
 	if(!img_Menu_Surface){
 		fprintf(stderr, "Probleme chargement du choix menu: %s\n", SDL_GetError());
@@ -106,7 +106,7 @@ int menu(SDL_Window * pWindow){
 	}
 
 	/* Choix de la police */
-	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+	if((police = TTF_OpenFont("font/ChowFun.ttf", 20)) == NULL){
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
@@ -315,8 +315,8 @@ if(pWindow){
 
 
 					/* DECLARATION waiting*/
-					SDL_Surface* img_Waiting_Surface = IMG_Load("../img/waiting.png");
-					SDL_Surface* img_Waiting_BG_Surface = IMG_Load("../img/waitingBG.png");
+					SDL_Surface* img_Waiting_Surface = IMG_Load("img/waiting.png");
+					SDL_Surface* img_Waiting_BG_Surface = IMG_Load("img/waitingBG.png");
 					if(!img_Waiting_Surface || !img_Waiting_BG_Surface){
 						fprintf(stderr, "Probleme chargement de la surface du waiting: %s\n", SDL_GetError());
 						exit(EXIT_FAILURE);

@@ -57,8 +57,8 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 void afficher_boutton(SDL_Rect* rect_menu,SDL_Rect* rect_passe, SDL_Renderer* renderer_jeu){
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
-  menu_s = IMG_Load("../img/img_menu.png");
-  passe_s = IMG_Load("../img/retour_menu.png");
+  menu_s = IMG_Load("img/img_menu.png");
+  passe_s = IMG_Load("img/retour_menu.png");
   SDL_Texture* menu_t;
   SDL_Texture* passe_t;
   menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
@@ -168,7 +168,7 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   snprintf(action,sizeof(action),"%i",*nb_actions);
   SDL_Rect nb_action_R = creer_rectangle(100,800,80,160);
   SDL_Rect image_action_R = creer_rectangle(260,800,80,160);
-  SDL_Surface* energie_S = IMG_Load("../img/energie.png");
+  SDL_Surface* energie_S = IMG_Load("img/energie.png");
   SDL_Surface* nb_action_S = TTF_RenderUTF8_Blended(police, action, couleurJaune);
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
   SDL_Texture* nb_action_T = SDL_CreateTextureFromSurface(renderer_jeu, nb_action_S);

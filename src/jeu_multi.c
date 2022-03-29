@@ -165,7 +165,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
   /* DECLARATION BG_JEU*/
-	SDL_Surface* img_jeu_Surface = IMG_Load("../img/BG_JEU.png");
+	SDL_Surface* img_jeu_Surface = IMG_Load("img/BG_JEU.png");
 
 	if(!img_jeu_Surface){
 		fprintf(stderr, "Probleme chargement du background jeu: %s\n", SDL_GetError());
@@ -189,13 +189,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	}
 
 	/* Choix de la police */
-	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+	if((police = TTF_OpenFont("font/ChowFun.ttf", 20)) == NULL){
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
   //cration des boutons de passage de tour et de retour menu
-  SDL_Surface* menu_s = IMG_Load("../img/img_menu.png");
-  SDL_Surface* passe_s = IMG_Load("../img/retour_menu.png");
+  SDL_Surface* menu_s = IMG_Load("img/img_menu.png");
+  SDL_Surface* passe_s = IMG_Load("img/retour_menu.png");
   SDL_Texture* menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
   SDL_Texture* passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
 

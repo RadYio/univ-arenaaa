@@ -126,7 +126,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
   /* DECLARATION BG_JEU*/
-	SDL_Surface* img_jeu_Surface = IMG_Load("../img/BG_JEU.png");
+	SDL_Surface* img_jeu_Surface = IMG_Load("img/BG_JEU.png");
 
 	if(!img_jeu_Surface){
 		fprintf(stderr, "Probleme chargement du background jeu: %s\n", SDL_GetError());
@@ -150,15 +150,15 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	}
 
 	/* Choix de la police */
-	if((police = TTF_OpenFont("../font/ChowFun.ttf", 20)) == NULL){
+	if((police = TTF_OpenFont("font/ChowFun.ttf", 20)) == NULL){
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
-  //cration des boutons de passage de tour et de retour menu 
+  //cration des boutons de passage de tour et de retour menu
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
-  menu_s = IMG_Load("../img/img_menu.png");
-  passe_s = IMG_Load("../img/retour_menu.png");
+  menu_s = IMG_Load("img/img_menu.png");
+  passe_s = IMG_Load("img/retour_menu.png");
   SDL_Texture* menu_t;
   SDL_Texture* passe_t;
   menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
@@ -179,13 +179,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	SDL_Texture* txt_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
 	SDL_Texture* txt_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
 
-	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface 
+	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface
 	SDL_FreeSurface(txt_menu_Hover_S);
 
   SDL_Rect menu_R = creer_rectangle(1400,0,90,190);
   SDL_Rect txt_menu_R = creer_rectangle(1440,20,50,(strlen("Menu")*25));
-  
-  
+
+
 
   //création du texte du bouton de passe tour
   SDL_Surface * txt_passe_S = TTF_RenderUTF8_Blended(police, "Passe", couleurNoire);
@@ -199,13 +199,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 	SDL_Texture* txt_passe_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_S);
 	SDL_Texture* txt_passe_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_Hover_S);
 
-	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface 
+	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface
 	SDL_FreeSurface(txt_passe_Hover_S);
 
   SDL_Rect passe_R = creer_rectangle(1400,820,80,180);
   SDL_Rect txt_passe_R = creer_rectangle(1440,835,45,(strlen("Passe")*20));
-  
-  
+
+
 
   //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   //maniupulations----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,8 +251,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
     menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-    
-    
+
+
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     int etat = 0;
@@ -285,7 +285,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
                 *running = 0;
                 printf("on sort mtn 1\n");
-              } 
+              }
               printf("tour bot début\n");
               bot(tab_formation_cartesADV,main_bot,taille_main_bot,tab_formation_cartesJ,tab_cartes_deck_bot,tab_cartes_deck,taille_deck);
               affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
@@ -302,9 +302,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
             while(*jeu == 1){
               SDL_PollEvent(&e);
 
-              
+
             switch(e.type){
-              case SDL_QUIT : 
+              case SDL_QUIT :
 
                 *running = 0 ;
 
@@ -321,7 +321,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   free(taille_main_bot);
                   free(jeu);
 
-                  
+
                   pthread_cancel(thread_tps);
                   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
                   SDL_RenderClear(renderer_jeu);
@@ -378,7 +378,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
-                        printf("la carte a été posée\n");                        
+                        printf("la carte a été posée\n");
                       }
                       etat = 0;
                       break;
@@ -452,5 +452,3 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
   return;
   }
 }
-
-
