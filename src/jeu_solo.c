@@ -1,3 +1,12 @@
+/**
+ * @file jeu_solo.c
+ * @author Arthur Boullier et Jonathan Otto
+ * @brief 
+ * @version 1
+ * @date 2022-03-30
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -19,17 +28,14 @@
 
 
 
-
-
-//---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
-
-
-
-//tableau de la main du joueur, à passer en parametre au lieu de déclarer ici
-
-
-
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
+/**
+ * @brief troisième fonction lancé dans la hiérarchie du programme lorsque le joueur choisit de joueur en solo : permet tout le jeu en solo avec mise en place d'éléments, la détéctions d'eventements et la gestion des tours
+ * 
+ * @param pWindow la fenetre où se déroule le jeu
+ * @param renderer_jeu notre renderer lié à la fenetre
+ * @param running variable permettant de quitter le programme si le joueur arrête la fenetre
+ */
 void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
 
 
@@ -59,7 +65,7 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
 
 
 
-    //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
+  //creation de la matrice où sera placé les cartes et qui servira pour savoir quoi afficher et ou. ici -1 correspond à une case
   //vide, -2 représente une case où on peut mettre une carte mais où y'a rien dedans encore, ici on est en formation 3-2-1, idem pour l'adversaire
   int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
     {-2, -1, -1},
@@ -74,7 +80,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {0, -1, -2},
     {-1, -2, -1},
     {-1, -1, -2}};
-//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -154,7 +159,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 		fprintf(stderr, "erreur chargement font\n");
 		exit(EXIT_FAILURE);
 	}
-  //cration des boutons de passage de tour et de retour menu
+  //creation des boutons de passage de tour et de retour menu
   SDL_Surface* menu_s;
   SDL_Surface* passe_s;
   menu_s = IMG_Load("img/img_menu.png");
@@ -213,14 +218,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
   //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-  //SDL_RenderClear(renderer_menu); //on arrete d'afficher tout ce qu'il est en lien avec le menu
-
-
-
-
-
-
 
   SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
   SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire

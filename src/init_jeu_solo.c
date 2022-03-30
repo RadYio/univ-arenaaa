@@ -1,3 +1,12 @@
+/**
+ * @file init_jeu_solo.c
+ * @author Jonathan Otto et Arthur Boullier
+ * @brief fonction lancé lorsqu'on commence une partie, met en place les cartes, les rectangles pour l'affichage, les mains etc...
+ * @version 1
+ * @date 2022-03-30
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
@@ -34,6 +43,15 @@ void creation_main(int * taille_main,SDL_Rect tab[]){
   }
 }
 
+/**
+ * @brief fonction de creation d'un rectangle
+ * 
+ * @param x la coordonnée en abscisse du point supérieur gauche du rectangle
+ * @param y la coordonnée en ordonnée du point supérieur gauche du rectangle
+ * @param h la hauteur du rectangle
+ * @param w la largeur du rectangle
+ * @return le rectangle crée
+ */
 //focntion de creation d'un rectangle prcq sinon ca va devenir le cancer a devoir déclarer 30 rectangles avec 150 lignes rien que pour ca
 SDL_Rect creer_rectangle(int x, int y, int h, int w){
     SDL_Rect rect_temp;
@@ -44,7 +62,21 @@ SDL_Rect creer_rectangle(int x, int y, int h, int w){
     return rect_temp;
 }
 
-//initialise les rectangles qu'il faut et les place dans des tableaux qui seront retournés
+/**
+ * @brief initialise les rectangles nécessaires à l'affichage et la gestion des cliques et les place dans des tableaux et crée la main du joueur
+ * 
+ * @param taille_main la taille de la main du joueur à créer
+ * @param tab_rect_formationJ la matrice des rectangles du plateau joueur, les rectangles initialisés pour le joueur seront mis dedans 
+ * @param tab_rect_formationAdv la matrice des rectangles du plateau de l'adversaire, même principe que tab_rect_formationJ
+ * @param tab_rect_main tableau qui contient les rectangles de la main du joueur
+ * @param rect_joueur le grand rectangle pour le plateau du joueur
+ * @param rect_adv le grand rectangle pour le plateau de l'adversaire
+ * @param rect_txt_deck_j le rectangle où se place le texte au dessus du plateau du joueur
+ * @param rect_txt_deck_adv le rectangle où se place le texte au dessus du plateau de l'adversaire
+ * @param rect_aff_carte_j le rectangle où seront affichés les cartes losrqu'on double clique dessus
+ * @param rect_aff_att_j le rectangle où seront affichés les points d'attaque d'une carte 
+ * @param rect_aff_hp_j le rectangle où seront affichés les hp d'une carte
+ */
 void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[][3], SDL_Rect tab_rect_formationAdv[][3], SDL_Rect tab_rect_main[12],
  SDL_Rect* rect_joueur, SDL_Rect* rect_adv, SDL_Rect* rect_txt_deck_j, SDL_Rect* rect_txt_deck_adv,SDL_Rect* rect_aff_carte_j,
  SDL_Rect* rect_aff_att_j ,SDL_Rect* rect_aff_hp_j){
@@ -148,9 +180,4 @@ void init_jeu(int  * taille_main,SDL_Rect tab_rect_formationJ[][3], SDL_Rect tab
     tab_rect_formationAdv[4][0] = rect_formationAdv15;
 
     creation_main(taille_main,tab_rect_main);
-
-
-
-
-
 }

@@ -240,6 +240,37 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   SDL_RenderCopy(renderer_jeu, nb_action_T, NULL, &image_action_R);
 }*/
 
+/**
+ * @brief 
+ * 
+ * @param renderer_jeu 
+ * @param img_jeu_Texture 
+ * @param rect_aff_carte_j 
+ * @param rect_txt_deck_j 
+ * @param txt_titre_joueur_T 
+ * @param rect_txt_deck_adv 
+ * @param txt_titre_adv_T 
+ * @param rect_joueur 
+ * @param rect_adv 
+ * @param tab_formation_cartesJ 
+ * @param tab_rect_formationJ 
+ * @param tab_formation_cartesADV 
+ * @param tab_rect_formationAdv 
+ * @param taille_main 
+ * @param tab_rect_main 
+ * @param tab_main 
+ * @param tab_cartes_total 
+ * @param menu_t 
+ * @param menu_R 
+ * @param txt_menu_Hover_T 
+ * @param txt_menu_R 
+ * @param txt_menu_T 
+ * @param passe_t 
+ * @param passe_R 
+ * @param txt_passe_Hover_T 
+ * @param txt_passe_T 
+ * @param txt_passe_R 
+ */
 
 void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
 SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,
