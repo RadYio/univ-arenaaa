@@ -345,6 +345,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
                 etatDuJeu.flag=0;
                 printf("Je devrais afficher\n\n");
+                for(int p = 0; p < 5; p++){
+                    printf("\n");
+                    for(int l = 0; l < 3; l++){
+                        printf("%i                             %i", tab_formation_cartesADV[p][l], tab_formation_cartesJ[p][l]);
+                    }
+                }
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                     menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
