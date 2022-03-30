@@ -27,8 +27,6 @@
 
 void * calcul_temps2(void * val){
   int * jeu =  (int*)(val);
-
-
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
@@ -36,11 +34,11 @@ void * calcul_temps2(void * val){
   {
       //un tour de 60 secondes
       if(difftime(t2, t1) >= 10){
-        *jeu = 0;
+        *jeu=0;
         printf("passage tour\n");
         return NULL;
       }
-      t2 = time(NULL);
+      t2=time(NULL);
       sleep(1);
       printf ("temps %li\n", t2-t1);
   }
@@ -50,14 +48,12 @@ void * calcul_temps2(void * val){
 
 
 
-
-
-
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     int* jeu = malloc(sizeof(int));
     *jeu = 1;
     gestion_t etatDuJeu;
+    etatDuJeu.flag=0;
     int flagThread=0;
     pthread_t recuperation;
     switch(gestionPartie(valSocket)){
@@ -68,6 +64,7 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
         *jeu=0;
         break;
     }
+    printf("le *jeu[%i]\n",*jeu);
     int* taille_main = malloc(sizeof(int));
     *taille_main = 6;
     carte_t tab_main[*taille_main];
