@@ -30,7 +30,7 @@ int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_format
 int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R
 ,SDL_Texture *txt_menu_Hover_T,
 SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
-,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R);
+,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions);
 
 void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main);
 
@@ -43,5 +43,6 @@ int action(int * nb_actions);
 
 void nouveau_tour(int * nb_actions, int tab_formation[][3]);
 
-void * calcul_temps(void * val);
+int victoire(int* taille_deck_j,int* taille_deck_adv);
 
+void * calcul_temps(void * val);

@@ -22,7 +22,6 @@ int menu(SDL_Window * pWindow){
 	int randomMenu = 0;
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
-	SDL_Color couleurBlanche = {255, 255, 255};
 	SDL_Color couleurGold = {255, 215, 0};
 
 	// Le pointeur vers notre police

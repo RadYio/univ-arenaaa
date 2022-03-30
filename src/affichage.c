@@ -89,20 +89,7 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 }
 
 
-//affichage du bouton retour menu et du bouton passage de tour
-void afficher_boutton(SDL_Rect* rect_menu,SDL_Rect* rect_passe, SDL_Renderer* renderer_jeu){
-  SDL_Surface* menu_s;
-  SDL_Surface* passe_s;
-  menu_s = IMG_Load("img/img_menu.png");
-  passe_s = IMG_Load("img/retour_menu.png");
-  SDL_Texture* menu_t;
-  SDL_Texture* passe_t;
-  menu_t = SDL_CreateTextureFromSurface(renderer_jeu, menu_s);
-  passe_t = SDL_CreateTextureFromSurface(renderer_jeu, passe_s);
 
-  SDL_FreeSurface(menu_s);
-  SDL_FreeSurface(passe_s);
-}
 
 
 
@@ -223,11 +210,11 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
 
 
 void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions){
-  SDL_Surface* energie_S = IMG_Load("img/energie.png");
+  SDL_Surface* energie_S = IMG_Load("img/eclair.png");
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
   for(int i = 0 ; i < *nb_actions ; i++){
     printf("essai %i\n ",i);
-    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,90 );   
+    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,60 );   
     SDL_RenderCopy(renderer_jeu, energie_T, NULL, &image_action_R);
   }
   SDL_FreeSurface(energie_S);
@@ -271,11 +258,10 @@ int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_format
 int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R
 ,SDL_Texture *txt_menu_Hover_T,
 SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
-,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R){
+,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions){
     printf("on affiche \n\n");
     //TTF_Font* police = TTF_OpenFont("font/ChowFun.ttf", 20);
 
-    int nb = 4;
     SDL_RenderClear(renderer_jeu);
 
 
@@ -301,7 +287,7 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
     SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
     SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
     SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-    affichage_actions(renderer_jeu,&nb);
+    affichage_actions(renderer_jeu,nb_actions);
 
 
     //On fait le rendu !
@@ -395,13 +381,11 @@ int victoire(int* taille_deck_j,int* taille_deck_adv){
 
 
 int action(int * nb_actions){
-  SDL_Color couleurRouge = {255, 0, 0};
   if(*nb_actions){
     *nb_actions = *nb_actions - 1;
     return 1;
   }
   printf("Pas d'actions disponnibles \n\n");
-
   return 0;
 }
 

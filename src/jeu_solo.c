@@ -61,6 +61,9 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
     *jeu = 1;
     pthread_t thread_tps;
 
+    int * nb_actions = malloc(sizeof(int));
+    *nb_actions = 1;
+
 
 
 
@@ -246,13 +249,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
 
 
 
     //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     int etat = 0;
-    int oldHover = 0;
     int coord_x = 0,coord_y = 0;
 
     int * taille_main_bot = malloc(sizeof(int));
@@ -263,8 +265,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     *taille_deck = 13;
     int *taille_deck_bot = malloc(sizeof(int));
     *taille_deck_bot = 1;
-    int * nb_actions = malloc(sizeof(int));
-    *nb_actions = 1;
+    
 
 
     pthread_create(&thread_tps,NULL,calcul_temps,(void*)(jeu));
@@ -274,10 +275,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       while(*running){
           SDL_Event e;
 
-          if(victoire(taille_deck, taille_deck_bot) == 1){
-            return;
-          }
-          if(victoire(taille_deck, taille_deck_bot) == 2){
+          if(victoire(taille_deck, taille_deck_bot)){
             return;
           }
           while(*jeu == 0){
@@ -291,15 +289,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               }
               printf("tour bot début\n");
               bot(tab_formation_cartesADV,main_bot,taille_main_bot,tab_formation_cartesJ,tab_cartes_deck_bot,tab_cartes_deck,taille_deck);
+              nouveau_tour(nb_actions,tab_formation_cartesJ);
               affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
               rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-              menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+              menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
               printf("fin du tour\n");
-              nouveau_tour(nb_actions,tab_formation_cartesJ);
               printf("\n    nombre d'actions = %i  \n\n",*nb_actions);
               *jeu = 1;
-
-              oldHover = 0;
             }
 
             while(*jeu == 1){
@@ -338,7 +334,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                     int x = 0,y=0;
                     for(int i=0;i < 15;i++){
                       if(x == 4 && y < 2) y++;
@@ -380,7 +376,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
                         affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                        menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                        menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                         printf("la carte a été posée\n");
                       }
                       etat = 0;
@@ -408,7 +404,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                           attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck_bot);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                          menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
+                          menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                         }
                         etat = 0;
                         break;
