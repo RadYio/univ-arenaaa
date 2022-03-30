@@ -118,6 +118,7 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
 
 
 /**
+ * @fn bot(int tab_formation_cartesADV[][3], carte_t main_bot[], int* taille_main_bot, int tab_formation_cartesJ[][3], carte_t deck_bot[], carte_t deck_joueur[], int* taille_deck_joueur)
  * @brief fonction gérant le tour du bot : soit il pose une carte, soit il attaque, soit il ne fait rien
  * 
  * @param tab_formation_cartesADV la matrice de formation du bot, permet de trouver un emplacement libre pour poser une carte ou de trouver une carte pour attaquer

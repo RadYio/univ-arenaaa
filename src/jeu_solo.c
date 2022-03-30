@@ -1,7 +1,7 @@
 /**
  * @file jeu_solo.c
  * @author Arthur Boullier et Jonathan Otto
- * @brief 
+ * @brief quatrième fichier dans la structure du programme en parallèle avec jeu_multi.c et collection.c, contient tout le code lié au mode de jeu en solo
  * @version 1
  * @date 2022-03-30
  * 
@@ -27,10 +27,9 @@
 #include "../header/attaque.h"
 
 
-
-//fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 /**
- * @brief troisième fonction lancé dans la hiérarchie du programme lorsque le joueur choisit de joueur en solo : permet tout le jeu en solo avec mise en place d'éléments, la détéctions d'eventements et la gestion des tours
+ * @fn jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running)
+ * @brief fonction lancé lorsque le joueur choisit de joueur en solo : permet tout le jeu en solo avec mise en place d'éléments, la détéctions d'eventements et la gestion des tours
  * 
  * @param pWindow la fenetre où se déroule le jeu
  * @param renderer_jeu notre renderer lié à la fenetre
