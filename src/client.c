@@ -11,7 +11,7 @@ void* recupererInfo(void* structure){
   gestion_t* informations = (gestion_t*)structure; //On triche
   int saveSocket = informations->socket;
   int taille = read(saveSocket, informations, sizeof(gestion_t));
-  printf("taille[%i]\n",taille);
+  printf("Socket[%i] // taille[%i]\n", saveSocket, taille);
   while(taille>0){
     taille = read(saveSocket, informations, sizeof(gestion_t));
   }
