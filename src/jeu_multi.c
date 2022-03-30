@@ -52,6 +52,7 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
     *jeu = 1;
     gestion_t etatDuJeu;
     etatDuJeu.flag=0;
+    etatDuJeu.socket=*valSocket;
     int flagThread=-1;
     pthread_t recuperation;
     switch(gestionPartie(valSocket)){
@@ -287,7 +288,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int coord_x = 0,coord_y = 0;
 
 
-    
+
 
 
 
@@ -304,7 +305,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               if(flagThread==0 || flagThread == -1){
                 flagThread=1;
                 pthread_create(&recuperation, NULL, recupererInfo, (void*)(&etatDuJeu));
-                
+
               }
               if(e.type == SDL_QUIT){
                 *running = 0;
@@ -399,7 +400,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   return;
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
-                  printf("on passe le tour\n");                 
+                  printf("on passe le tour\n");
                   pthread_cancel(thread_tps);
                   *jeu = 0;
                 }
