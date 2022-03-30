@@ -307,7 +307,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 pthread_create(&recuperation, NULL, recupererInfo, (void*)(&etatDuJeu));
 
               }
+
               if(etatDuJeu.flag == -100){
+                printf("etatDuJeu.flag[%i]\n",etatDuJeu.flag);
                 *jeu = 1;
               }
               if(e.type == SDL_QUIT){
@@ -333,6 +335,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 return;
               }
               if(etatDuJeu.flag!=0){
+                printf("etatDuJeu.flag[%i]\n",etatDuJeu.flag);
                 for(int i=0;i<5;i++){
                   for(int j=0;j<3;j++){
                     tab_formation_cartesADV[i][j] = etatDuJeu.mat1[i][j];
