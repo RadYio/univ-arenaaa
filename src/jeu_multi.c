@@ -52,7 +52,7 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
     *jeu = 1;
     gestion_t etatDuJeu;
     etatDuJeu.flag=0;
-    int flagThread=0;
+    int flagThread=-1;
     pthread_t recuperation;
     switch(gestionPartie(valSocket)){
       case 1:
@@ -295,7 +295,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
           SDL_Event e;
           while(*jeu == 0){
               SDL_PollEvent(&e);
-              if(flagThread==0){
+              if(flagThread==0 || flagThread == -1){
                 flagThread=1;
                 pthread_create(&recuperation, NULL, recupererInfo, (void*)(&etatDuJeu));
               }
@@ -342,9 +342,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
             while(*jeu == 1){
 
                //premiere action de moi
-              if(flagThread == 1){
+              if(flagThread == 1 || flagThread == -1){
                 flagThread=0;
-
+                printf("thread créer \n\n");
                 pthread_create(&thread_tps, NULL, calcul_temps2, (void*)(jeu));
               }
               SDL_PollEvent(&e);
