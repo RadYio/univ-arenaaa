@@ -333,8 +333,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 return;
               }
               if(etatDuJeu.flag!=0){
-                for(int i;i<5;i++){
-                  for(int j;j<3;j++){
+                for(int i=0;i<5;i++){
+                  for(int j=0;j<3;j++){
                     tab_formation_cartesADV[i][j] = etatDuJeu.mat1[i][j];
                     tab_formation_cartesJ[i][j] = etatDuJeu.mat2[i][j];
                   }

@@ -28,13 +28,13 @@ void* recupererInfo(void* structure){
  * @param socket
  */
 void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int flagC, int socket){
-  for(int i;i<5;i++){
-    for(int j;j<3;j++){
+  for(int i=0;i<5;i++){
+    for(int j=0;j<3;j++){
       futurInfos->mat1[i][j] = premiereMat[i][j];
       futurInfos->mat2[i][j] = deuxiemeMat[i][j];
     }
   }
-  for(int i;i<10;i++){
+  for(int i=0;i<10;i++){
     futurInfos->tab1[i] = premierTab[i];
     futurInfos->tab2[i] = deuxiemeTab[i];
   }
