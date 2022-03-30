@@ -11,6 +11,7 @@ void* recupererInfo(void* structure){
   gestion_t* informations = (gestion_t*)structure; //On triche
   int saveSocket = informations->socket;
   int taille = read(saveSocket, informations, sizeof(gestion_t));
+  printf("taille[%i]\n",taille);
   while(taille>0){
     taille = read(saveSocket, informations, sizeof(gestion_t));
   }
@@ -61,7 +62,7 @@ void connectF(int* socket){
 int gestionPartie(void* infos){
   int* socket = (int*)infos;
   char buffer[64];
-  ssize_t taille = recv(*socket, buffer, 64, 0);
+  recv(*socket, buffer, 64, 0);
   printf("J'ai recu [%s]\n",buffer);
 
   if(strcmp(buffer,"TOUR_TOI") == 0){
