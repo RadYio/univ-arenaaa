@@ -10,9 +10,9 @@
 void* recupererInfo(void* structure){
   gestion_t* informations = (gestion_t*)structure; //On triche
   int saveSocket = informations->socket;
-  int taille = recv(saveSocket, informations, sizeof(gestion_t), 0);
+  int taille = read(saveSocket, informations, sizeof(gestion_t));
   while(taille>0){
-    taille = recv(saveSocket, informations, sizeof(gestion_t), 0);
+    taille = read(saveSocket, informations, sizeof(gestion_t));
   }
   printf("A VERIFIER ATTENTION\n\n");
 }
