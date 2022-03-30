@@ -1,11 +1,11 @@
 # project name (generate executable with this name)
 TARGETS  = univ-arenaaa univ-arenaaa_test
 
-CC       = gcc
+CC       = gcc -g
 # compiling flags here
 CFLAGS   = -std=c99 -Wall -I.
 
-LINKER   = gcc
+LINKER   = gcc -g
 # linking flags here
 LFLAGS   = -Wall -I. -lm
 
@@ -16,7 +16,7 @@ BINDIR   = bin
 HEADERDIR = header
 TRGS	 := $(TARGETS:%=$(BINDIR)/%)
 
-DIRS	 = $(OBJDIR) $(BINDIR) 
+DIRS	 = $(OBJDIR) $(BINDIR)
 
 #SDL---------------------------------------------------------------------
 SDL_DIR=${HOME}/SDL2
@@ -64,6 +64,3 @@ clean:
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGETS)
 	@echo "Executable removed!"
-
-
-
