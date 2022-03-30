@@ -21,15 +21,12 @@ SDL_Rect creation_rectangle(int x, int y, int w, int h){
 }
 
 void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]){
-	printf("test\n");
 	if (taille == 0){
     	return;
 	}else{
 		int y = 180;
 		for(int i=0;i<taille;i++){
-			printf("test2\n");
 			tab[i] = creation_rectangle(110, y ,(strlen(tab_sauvegarde[i]->nom_collec)* 30),80);
-			printf("test3\n");
 			if(i+1 <taille){
 				tab[i+1] = creation_rectangle(420, y ,(strlen(tab_sauvegarde[i+1]->nom_collec)* 30),80);
 				y += 90;
@@ -50,10 +47,10 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	carte_t * tab_sauvegarde[taille_tab_sauvegarde];
 	init_cartes(tab_cartes_total);
 
+
 	recup_sauvegarde(tab_sauvegarde,tab_cartes_total);
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
-	SDL_Color couleurBlanche = {255, 255, 255};
 	SDL_Color couleurGold = {255, 215, 0};
 
 	// Le pointeur vers notre police
@@ -189,11 +186,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 		retour_menu_R.w=300;
 		retour_menu_R.h=120;
 
-	SDL_Rect retour_menu_petit_R;
-		retour_menu_petit_R.x=825;
-		retour_menu_petit_R.y=775;
-		retour_menu_petit_R.w=250;
-		retour_menu_petit_R.h=80;
 
 	SDL_Rect texte_retour_R;
 		texte_retour_R.x=900;
@@ -458,7 +450,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					oldHover=1;
 				}
 				//SOURIS QUI HOVER SUR LA CARTE 5
-				else if(oldHover ==0 && e.button.x >= tab_nom_carte[4].x && e.button.x <= tab_nom_carte[4].x+tab_nom_carte[4].w && e.button.y >= tab_nom_carte[4].y && e.button.y <= tab_nom_carte[4].y+tab_nom_carte[4].h){
+				else if(e.button.x >= tab_nom_carte[4].x && e.button.x <= tab_nom_carte[4].x+tab_nom_carte[4].w && e.button.y >= tab_nom_carte[4].y && e.button.y <= tab_nom_carte[4].y+tab_nom_carte[4].h){
 					SDL_RenderCopy(renderer_collec, txt_optn5_Hover_T, NULL, &tab_nom_carte[4]);
 					SDL_RenderCopy(renderer_collec, img_carte_5_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
@@ -485,7 +477,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					oldHover=1;
 				}
 				//SOURIS QUI HOVER SUR LA CARTE 8
-				else if(oldHover ==0 && e.button.x >= tab_nom_carte[7].x && e.button.x <= tab_nom_carte[7].x+tab_nom_carte[7].w && e.button.y >= tab_nom_carte[7].y && e.button.y <= tab_nom_carte[7].y+tab_nom_carte[7].h){
+				else if(e.button.x >= tab_nom_carte[7].x && e.button.x <= tab_nom_carte[7].x+tab_nom_carte[7].w && e.button.y >= tab_nom_carte[7].y && e.button.y <= tab_nom_carte[7].y+tab_nom_carte[7].h){
 					SDL_RenderCopy(renderer_collec, txt_optn8_Hover_T, NULL, &tab_nom_carte[7]);
 					SDL_RenderCopy(renderer_collec, img_carte_8_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
@@ -509,7 +501,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					oldHover=1;
 				}
 				//SOURIS QUI HOVER SUR LA CARTE 11
-				else if(oldHover ==0 && e.button.x >= tab_nom_carte[10].x && e.button.x <= tab_nom_carte[10].x+tab_nom_carte[10].w && e.button.y >= tab_nom_carte[10].y && e.button.y <= tab_nom_carte[10].y+tab_nom_carte[10].h){
+				else if(e.button.x >= tab_nom_carte[10].x && e.button.x <= tab_nom_carte[10].x+tab_nom_carte[10].w && e.button.y >= tab_nom_carte[10].y && e.button.y <= tab_nom_carte[10].y+tab_nom_carte[10].h){
 					SDL_RenderCopy(renderer_collec, txt_optn11_Hover_T, NULL, &tab_nom_carte[10]);
 					SDL_RenderCopy(renderer_collec, img_carte_11_T, NULL, &Carte_R);
 					SDL_RenderPresent(renderer_collec);
@@ -557,15 +549,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					SDL_RenderCopy(renderer_collec, retour_menu_Hover_T, NULL, &texte_retour_R);
 					SDL_RenderCopy(renderer_collec, retour_menu_T, NULL, &texte_retour_R);
 
-
-/*
-					//OPTION 2
-					SDL_RenderCopy(renderer_menu, txt_optn2_T, NULL, &txt_optn2_R);
-					//OPTION 3
-					SDL_RenderCopy(renderer_menu, txt_optn3_T, NULL, &txt_optn3_R);
-					//OPTION 4
-					SDL_RenderCopy(renderer_menu, txt_optn4_T, NULL, &txt_optn4_R);
-*/
 					//On fait le rendu !
 					SDL_RenderPresent(renderer_collec);
 					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
@@ -578,5 +561,5 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
           }
         }
       }
-
+	return 1;
 	}

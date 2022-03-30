@@ -26,8 +26,7 @@
 //---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
 
 void * calcul_temps2(void * val){
-  int * jeu =malloc(sizeof(int));
-  jeu =  (int*)(val);
+  int * jeu =  (int*)(val);
 
 
   time_t t1, t2;
@@ -37,9 +36,9 @@ void * calcul_temps2(void * val){
   {
       //un tour de 60 secondes
       if(difftime(t2, t1) >= 10){
-        *jeu = (*jeu+1)%2;
+        *jeu = 0;
         printf("passage tour\n");
-        t1 = time(NULL);
+        return;
       }
       t2 = time(NULL);
       sleep(1);
@@ -55,6 +54,9 @@ void * calcul_temps2(void * val){
 
 //fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
 void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+    int * jeu;
+    jeu = malloc(sizeof(int));
+    *jeu = 1;
     gestion_t etatDuJeu;
     int flagThread=0;
     pthread_t recuperation;
@@ -89,10 +91,7 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
     carte_t tab_cartes_deck_bot[13];
 
     creation_tab_main(tab_cartes_deck_bot,13);
-    int * jeu;
 
-    jeu = malloc(sizeof(int));
-    *jeu = 1;
     pthread_t thread_tps;
 
 
@@ -299,8 +298,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int * nb_actions = malloc(sizeof(int));
     *nb_actions = 1;
 
-
-    pthread_create(&thread_tps, NULL, calcul_temps2, (void*)(jeu));
+    
     if(pWindow){
 
       *running = 1;
@@ -349,9 +347,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 */
             }
             while(*jeu == 1){
-               //premiere action de moi
-              flagThread=0;
 
+               //premiere action de moi
+              if(flagThread == 1){
+                flagThread=0;
+                
+                pthread_create(&thread_tps, NULL, calcul_temps2, (void*)(jeu));
+              }
               SDL_PollEvent(&e);
 
             switch(e.type){
@@ -393,6 +395,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
                   printf("on passe le tour\n");
                   *jeu = 0;
+                  pthread_cancel(calcul_temps2);
                 }
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
