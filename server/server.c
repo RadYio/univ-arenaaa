@@ -9,6 +9,8 @@
 #include <time.h>
 #include <string.h>
 
+#include "../header/carte.h"
+
 
 
 #define PORT 6666
@@ -35,6 +37,15 @@ typedef struct lien_s{
   client_t client1;
   client_t client2;
 }lien_t;
+
+typedef struct gestion_s{
+  int flag;
+  int mat1[5][3];
+  int mat2[5][3];
+  carte_t tab1[10];
+  carte_t tab2[10];
+  int socket;
+}gestion_t;
 
 //DEFINITION DU CLIENT
 client_t listeClient[CLIENT_MAX];
@@ -67,18 +78,55 @@ void* connectes(void* oldJoueurs){
   char buffer[64];
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
-
+  srand(time(NULL));
   sleep(2);
+
+  int j1;
+  int j2;
+  int qui=rand();
+  if(qui%2==1){
+    //J1 FIRST
+    send(joueur1.numSock, "TOUR_TOI", 64, 0);
+    send(joueur2.numSock, "TOUR_PASTOI", 64, 0);
+    j1=1;
+    j2=0;
+  }
+  else{
+    //J2 FIRST
+    send(joueur2.numSock, "TOUR_TOI", 64, 0);
+    send(joueur1.numSock, "TOUR_PASTOI", 64, 0);
+    j1=0;
+    j2=1;
+  }
+  gestion_t paquet;
+  while(1){
+    while(j1){
+      j1=recv(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
+
+      //Si serveur n'a rien recu
+      if(j1==0){
+        paquet.flag=-666;
+      }
+      send(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
+      j1=0;
+      j2=1;
+    }
+    while(j2){
+      j2=recv(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
+
+      //Si serveur n'a rien recu
+      if(j2==0){
+        paquet.flag=-666;
+      }
+      send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
+      j1=1;
+      j2=0;
+    }
+  }
 
   send(joueur1.numSock, "FIN", 64, 0);
   send(joueur2.numSock, "FIN", 64, 0);
-  
-  ssize_t verif = -1;
-  while(verif!=0){
-    verif = read(joueur1.numSock,buffer,64);
-  }
-  struct tm* dateTh=recupererTemps();
-  printf("2] %i:%i:%i || client[%i]: deconnexion\n", dateTh->tm_hour, dateTh->tm_min, dateTh->tm_sec, joueur1.num);
+
 
 
   //shutdown(joueur1.numSock, 2);

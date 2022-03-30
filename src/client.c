@@ -26,7 +26,7 @@ void* recupererInfo(void* structure){
  * @param deuxiemeTab
  * @param socket
  */
-void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int socket){
+void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int flagC, int socket){
   for(int i;i<5;i++){
     for(int j;j<3;j++){
       futurInfos->mat1[i][j] = premiereMat[i][j];
@@ -37,8 +37,9 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
     futurInfos->tab1[i] = premierTab[i];
     futurInfos->tab2[i] = deuxiemeTab[i];
   }
-  futurInfos->flag = 1;
+  futurInfos->flag = flagC;
   send(socket, futurInfos, sizeof(*futurInfos), 0);
+  futurInfos->flag = 0;
 }
 /**
  * @brief
