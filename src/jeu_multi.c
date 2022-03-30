@@ -401,6 +401,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
                   printf("on passe le tour\n");
+                  transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, -100, *valSocket);
                   pthread_cancel(thread_tps);
                   *jeu = 0;
                 }
