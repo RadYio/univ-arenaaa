@@ -105,6 +105,7 @@ void* connectes(void* oldJoueurs){
     while(j1){
       j1=read(joueur1.numSock, &paquet, sizeof(gestion_t));
       printf("j1[%i]\n",j1);
+      
       //Si serveur n'a rien recu
       if(j1==0){
         paquet.flag=-666;
@@ -127,6 +128,7 @@ void* connectes(void* oldJoueurs){
     j1=1;
     j2=0;
   }
+  printf("Je sors maggle\n\n");
 
   send(joueur1.numSock, "FIN", 64, 0);
   send(joueur2.numSock, "FIN", 64, 0);
