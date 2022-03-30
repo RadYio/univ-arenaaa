@@ -343,7 +343,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   tab_cartes_deck_bot[i] = etatDuJeu.tab1[i];
                   tab_cartes_deck[i] = etatDuJeu.tab2[i];
                 }
-                etatDuJeu.flags = 0;
+                etatDuJeu.flag= 0;
 
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
