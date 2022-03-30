@@ -103,19 +103,19 @@ void* connectes(void* oldJoueurs){
   while(1){
     printf("Je rentre dans while j1\n");
     while(j1){
-      j1=recv(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
+      j1=read(joueur1.numSock, &paquet, sizeof(gestion_t));
       printf("j1[%i]\n",j1);
       //Si serveur n'a rien recu
       if(j1==0){
         paquet.flag=-666;
       }
       send(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
-      j1=0;
-      j2=1;
     }
+    j1=0;
+    j2=1;
     printf("Je rentre dans while j2\n");
     while(j2){
-      j2=recv(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
+      j2=read(joueur2.numSock, &paquet, sizeof(gestion_t));
       printf("j2[%i]\n",j2);
 
       //Si serveur n'a rien recu
@@ -123,9 +123,9 @@ void* connectes(void* oldJoueurs){
         paquet.flag=-666;
       }
       send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
-      j1=1;
-      j2=0;
     }
+    j1=1;
+    j2=0;
   }
 
   send(joueur1.numSock, "FIN", 64, 0);
