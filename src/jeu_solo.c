@@ -261,6 +261,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     creation_tab_main(main_bot,*taille_main_bot);
     int *taille_deck = malloc(sizeof(int));
     *taille_deck = 13;
+    int *taille_deck_bot = malloc(sizeof(int));
+    *taille_deck_bot = 1;
     int * nb_actions = malloc(sizeof(int));
     *nb_actions = 1;
 
@@ -272,7 +274,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       while(*running){
           SDL_Event e;
 
-
+          if(victoire(taille_deck, taille_deck_bot) == 1){
+            return;
+          }
+          if(victoire(taille_deck, taille_deck_bot) == 2){
+            return;
+          }
           while(*jeu == 0){
               SDL_PollEvent(&e);
               etat = 0;
@@ -398,7 +405,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         if(action(nb_actions)){
                           printf("attaque sur la carte %i de l'adversaire \n\n",i);
-                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck);
+                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck_bot);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                           menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);

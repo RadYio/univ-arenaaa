@@ -365,16 +365,34 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
   }
 }
 
-/*
-int victoire(carte_t tab_cartes_deck[],carte_t tab_cartes_deck_bot[]){
-  //return 1 si le joueur n'as plus de cartes
-  if(tab_cartes_deck[0].id_carte == NULL)return 1;
-  //return 2 si le bot n'as plus de cartes
-  if(tab_cartes_deck_bot[0].id_carte== NULL)return 2;
-  //return 0 si les 2 joueurs ont encore des cartes
+/**
+ * @fn victoire(int* taille_deck_j,int* taille_deck_adv)
+ * @brief fonction de vérification si quelqu'un à gagné la partie
+ * 
+ * @param taille_deck_j taille du deck du joueur, si égal à 0 alors le joueur à perdu 
+ * @param taille_deck_adv taille du deck de l'adversaire, si égal à 0 alors l'adversaire à perdu
+ * @return 1 si le joueur perd, 2 si le joueur gagne, 0 si on continue la partie
+ */
+int victoire(int* taille_deck_j,int* taille_deck_adv){
+  //le joueur perd, on return 1
+  if(*taille_deck_j <= 0 && *taille_deck_adv > 0){
+    printf("defaite du joueur\n");
+    return 1;
+  }
+  //le joueur gagne, on return 2
+  if(*taille_deck_j > 0 && *taille_deck_adv <= 0){
+    printf("victoire du joueur\n");
+    return 2;
+  }
+  //si les 2 sont égal à 0 en meme temps alors il y a eu un bug, on return -1
+  if(*taille_deck_j <= 0 && *taille_deck_adv <= 0){
+    printf("bug dans la taille des deck, dans fonction victoire\n");
+    return -1;
+  }
+  //sinon personne gagne, on return 0
   return 0;
 }
-*/
+
 
 int action(int * nb_actions){
   SDL_Color couleurRouge = {255, 0, 0};
