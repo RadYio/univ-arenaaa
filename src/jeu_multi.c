@@ -62,26 +62,34 @@ void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,i
         *jeu=0;
         break;
     }
-    printf("le *jeu[%i]\n",*jeu);
+
+    int * taille_deck_adv = malloc(sizeof(int));
+    *taille_deck_adv = 10;
+
+    int *taille_deck_j = malloc(sizeof(int));
+    *taille_deck_j = 10;
+
     int* taille_main = malloc(sizeof(int));
-    *taille_main = 6;
+    *taille_main = 10;
+
     carte_t tab_main[*taille_main];
-    //carte_t tab_total[13];
     creation_tab_main(tab_main,*taille_main);
-    carte_t tab_cartes_total[13];
 
-    creation_tab_main(tab_cartes_total,13);
+    carte_t tab_cartes_total[10];
+
+    creation_tab_main(tab_cartes_total,10);
 
 
-    carte_t tab_cartes_deck[13];
+    carte_t tab_cartes_deck[*taille_deck_j];
 
-    creation_tab_main(tab_cartes_deck,13);
+    creation_tab_main(tab_cartes_deck,*taille_deck_j);
 
-    carte_t tab_cartes_deck_bot[13];
+    carte_t tab_cartes_deck_adv[*taille_deck_adv];
 
-    creation_tab_main(tab_cartes_deck_bot,13);
+    creation_tab_main(tab_cartes_deck_adv,*taille_deck_adv);
 
     pthread_t thread_tps;
+
 
 
 
@@ -101,7 +109,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {-2, -1, -2},
     {-1, -2, -1},
     {-2, -1, -1}};
-//à modifier : faire une fonction de choix de formation (si y'a le time) et passer ce tableau en parametre à jeu_solo
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -278,12 +285,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int coord_x = 0,coord_y = 0;
 
 
-    int * taille_main_bot = malloc(sizeof(int));
-    *taille_main_bot = 5;
-    carte_t main_bot[13];
-    creation_tab_main(main_bot,*taille_main_bot);
-    int *taille_deck = malloc(sizeof(int));
-    *taille_deck = 13;
+    
     int * nb_actions = malloc(sizeof(int));
     *nb_actions = 1;
 
@@ -307,10 +309,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               if(e.type == SDL_MOUSEBUTTONDOWN && e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                 printf("fin menu\n");
 
-                free(taille_main);
-                free(taille_deck);
-                free(taille_main_bot);
                 free(jeu);
+                free(taille_main);
+                free(taille_deck_j);
+                free(taille_deck_adv);
 
 
                 pthread_cancel(thread_tps);
@@ -329,7 +331,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   }
                 }
                 for(int i;i<10;i++){
-                  tab_cartes_deck_bot[i] = etatDuJeu.tab1[i];
+                  tab_cartes_deck_adv[i] = etatDuJeu.tab1[i];
                   tab_cartes_deck[i] = etatDuJeu.tab2[i];
                 }
                 etatDuJeu.flag= 0;
@@ -372,10 +374,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
                   printf("fin menu\n");
 
-                  free(taille_main);
-                  free(taille_deck);
-                  free(taille_main_bot);
-                  free(jeu);
+                free(jeu);
+                free(taille_main);
+                free(taille_deck_j);
+                free(taille_deck_adv);
+
+
 
 
                   pthread_cancel(thread_tps);
@@ -442,7 +446,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         printf("la carte a été posée\n");
                       }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
-                      transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_bot, 1, *valSocket);
+                      transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
                       etat = 0;
                       break;
 
@@ -466,13 +470,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         if(action(nb_actions)){
                           printf("attaque sur la carte %i de l'adversaire \n\n",i);
-                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck);
+                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_adv, tab_formation_cartesADV, taille_deck_adv);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                           menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R);
                         }
                         //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
-                        transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_bot, 2, *valSocket);
+                        transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 2, *valSocket);
                         etat = 0;
                         // attaque d'une carte
 
@@ -488,7 +492,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   for (int x = 0; x < 5;x++){
                     for(int y = 0; y < 3; y++){
                       if(x == coord_x && 2-y == coord_y && tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-                        double_clique2(renderer_jeu,tab_formation_cartesADV[coord_x][coord_y],tab_cartes_deck_bot,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
+                        double_clique2(renderer_jeu,tab_formation_cartesADV[coord_x][coord_y],tab_cartes_deck_adv,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         etat = 0;
                         coord_x = 0;
                         coord_y = 0;
@@ -505,14 +509,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   }
 
-  printf("fin boucle\n");
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(jeu);
   free(taille_main);
-  free(taille_deck);
-  free(taille_main_bot);
+  free(taille_deck_j);
+  free(taille_deck_adv);
   pthread_cancel(thread_tps);
-  //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
   SDL_RenderClear(renderer_jeu);
   TTF_Quit();
