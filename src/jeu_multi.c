@@ -307,6 +307,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 pthread_create(&recuperation, NULL, recupererInfo, (void*)(&etatDuJeu));
 
               }
+              if(etatDuJeu.flag == -100){
+                *jeu = 1;
+              }
               if(e.type == SDL_QUIT){
                 *running = 0;
                 printf("on sort mtn 1\n");
@@ -321,7 +324,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 free(taille_deck_adv);
 
 
-                pthread_cancel(thread_tps);
+                //pthread_cancel(thread_tps);
                 TTF_CloseFont(police);
                 SDL_RenderClear(renderer_jeu);
                 TTF_Quit();
