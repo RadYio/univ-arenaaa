@@ -71,6 +71,7 @@ int gestionPartie(void* infos){
     return 2;
   }
   else if(strcmp(buffer,"FIN") == 0){
+    printf("J'ai recu une dinguerie\n\n");
     shutdown(*socket,2);
     close(*socket);
     *socket=-1;
