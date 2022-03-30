@@ -7,10 +7,10 @@ SERVER=server_test
 all: clean ${SERVER} ${CLIENT}
 
 ${SERVER}: server.c
-	${CC} -o ${SERVER} server.c ${CFLAGS_COMPIL} -lpthread
+	${CC} -g -o ${SERVER} server.c -lpthread
 
 ${CLIENT}: client.c
-	${CC} -o ${CLIENT} client.c ${CFLAGS_COMPIL} -lpthread
+	${CC} -g -o ${CLIENT} client.c -lpthread
 
 clean:
 	rm -f ${SERVER}
