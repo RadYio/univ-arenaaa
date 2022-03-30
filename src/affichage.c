@@ -223,14 +223,14 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
 
 
 void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions){
+  SDL_Surface* energie_S = IMG_Load("img/energie.png");
+  SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
   for(int i = 0 ; i < *nb_actions ; i++){
     printf("essai %i\n ",i);
-    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,90 );
-    SDL_Surface* energie_S = IMG_Load("img/energie.png");
-    SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
-    SDL_FreeSurface(energie_S);
+    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,90 );   
     SDL_RenderCopy(renderer_jeu, energie_T, NULL, &image_action_R);
   }
+  SDL_FreeSurface(energie_S);
 }
 
 /**
@@ -301,7 +301,7 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
     SDL_RenderCopy(renderer_jeu, txt_menu_T, NULL, &txt_menu_R);
     SDL_RenderCopy(renderer_jeu, passe_t, NULL, &passe_R);
     SDL_RenderCopy(renderer_jeu, txt_passe_T, NULL, &txt_passe_R);
-    //affichage_actions(renderer_jeu,&nb);
+    affichage_actions(renderer_jeu,&nb);
 
 
     //On fait le rendu !
