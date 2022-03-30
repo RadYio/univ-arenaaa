@@ -1,3 +1,11 @@
+/**
+ * @file attaque.c
+ * @author Jonathan Otto
+ * @brief ensemble des fonctions gérant le système d'attaque : l'attaque d'une carte, la mise a jour des hp et enlevement de cartes si nécessaire
+ * @version 1
+ * @date 2022-03-30 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
@@ -13,13 +21,28 @@
 #include "../header/bot.h"
 #include "../header/attaque.h"
 
-//fonction qui vérifie si celui qui défend est vulnerable au type d'attaque, renvoi 1 si c'est le cas, 0 sinon
+/**
+ * @brief fonction qui vérifie si celui qui défend est vulnerable au type d'attaque
+ * 
+ * @param attaque le type d'attaque de la carte d'attaque
+ * @param vulnerable le type de vulnérabilité de la carte de défense
+ * @return renvoi 1 s'il s'agit d'une attaque critique, 0 sinon
+ */
 int attaque_critique(type_t attaque, type_t vulnerable){
     //Poison est vulnérable à Physique, Psy est vulnérable contre Poison et Physique est vulnérable à Psy
     return((attaque == Physique && vulnerable == Poison) || (attaque == Poison && vulnerable == Psy) || (attaque == Psy && vulnerable == Physique));
 }
 
-//si une carte n'a plus d'hp, on doit l'enlever de la formation et du deck
+/**
+ * @brief fonction qui vérifie la mort d'un carte : si une carte n'a plus d'hp, on doit l'enlever de la formation et du deck
+ * 
+ * @param id_carte_defense 
+ * @param deck_defense 
+ * @param tab_formation_defense 
+ * @param indice_deck 
+ * @param taille_deck_defense 
+ */
+
 void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_defense[][3], int indice_deck, int* taille_deck_defense){
     int i = 0, j = 0, trouve = 0;
     printf("on rentre dans mort carte\n");
@@ -74,10 +97,9 @@ void attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[],
     hp_carte = deck_defense[j].hp_carte;
 
     //on regarde si on fait une attaque critique : les degats sont multipliés par 2 si c'est le cas
- /*  if(attaque_critique(deck_attaque[i].type_attaque, deck_defense[j].type_vulnerable)){
+    if(attaque_critique(deck_attaque[i].type_attaque, deck_defense[j].type_vulnerable)){
         nb_degats *= 2;
     }
-*/
     printf("hp : %i et nb dégats : %i\n\n",hp_carte,nb_degats);
     //on enleve les hp correspondant
     deck_defense[j].hp_carte = deck_defense[j].hp_carte  - nb_degats;
