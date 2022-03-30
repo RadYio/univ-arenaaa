@@ -348,7 +348,14 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 for(int p = 0; p < 5; p++){
                     printf("\n");
                     for(int l = 0; l < 3; l++){
-                        printf("%i                             %i", tab_formation_cartesADV[p][l], tab_formation_cartesJ[p][l]);
+                        printf("%i", tab_formation_cartesADV[p][l]);
+                    }
+                }
+                printf("\n\n");
+                for(int p = 0; p < 5; p++){
+                    printf("\n");
+                    for(int l = 0; l < 3; l++){
+                        printf("%i", tab_formation_cartesJ[p][l]);
                     }
                 }
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
