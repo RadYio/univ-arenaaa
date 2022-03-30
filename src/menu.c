@@ -322,6 +322,7 @@ if(pWindow){
 						exit(EXIT_FAILURE);
 					}
 
+
 				  SDL_Texture* img_Waiting_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Waiting_Surface);
 					SDL_Texture* img_Waiting_BG_Texture = SDL_CreateTextureFromSurface(renderer_menu, img_Waiting_BG_Surface);
 				  SDL_FreeSurface(img_Waiting_Surface); /* on a la texture, plus besoin de la surface */
@@ -334,11 +335,11 @@ if(pWindow){
 
 
 					printf("Affichage\n\n");
-					SDL_Rect rect_Waiting = creer_rectangle(670-32,800,64,64);
+					SDL_Rect rect_Waiting = creer_rectangle(670-64,800,64,64);
 					SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
 					SDL_Rect rect_Waiting_BG_Evolution = creer_rectangle(0,0,368,768);
 
-
+					
 
 
 
@@ -347,6 +348,7 @@ if(pWindow){
 					pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 					int animation1 = 0;
 					int animation2 = 0;
+					int cancel = 0;
 					Uint32 delai1 = SDL_GetTicks();
 					Uint32 delai2 = SDL_GetTicks();
 					Uint32 diffDelai1 = -1;
@@ -368,9 +370,30 @@ if(pWindow){
 						SDL_RenderPresent(renderer_menu);
 						diffDelai1 = delai1;
 						diffDelai2 = delai2;
+
+						SDL_PollEvent(&e);
+					
+						if(e.type == SDL_QUIT){
+							printf("on quitte pas cool\n");
+							cancel = 1;
+							running = 0;
+							break;
+						}
+						if(e.type == SDL_MOUSEBUTTONDOWN && e.button.x >= rect_Waiting.x && e.button.x <= rect_Waiting.x+rect_Waiting.w && e.button.y >= rect_Waiting.y && e.button.y <= rect_Waiting.y+rect_Waiting.h){
+							printf("fin de recherche retour menu\n");
+							cancel = 1;
+							break;
+						}
 					}
+						
+					
 					//trouve
 					pthread_cancel(threadJoueur); //On bloque la recherche d'un joueur
+					if(cancel){
+						printf("je veux quitter \n\n");
+						connectF(&infoServer.valSocket);
+						break;
+					}
 					jeu_multi(pWindow, renderer_menu, &running, &infoServer.valSocket);
 					printf("YOOOOOOOOOO: %i\n\n",infoServer.valSocket);
 					if(infoServer.valSocket!=-1)
