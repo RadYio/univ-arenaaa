@@ -33,7 +33,7 @@ void * calcul_temps2(void * val){
   while(1)
   {
       //un tour de 60 secondes
-      if(difftime(t2, t1) >= 10){
+      if(difftime(t2, t1) >= 60){
         *jeu=0;
         printf("passage tour\n");
         return NULL;
