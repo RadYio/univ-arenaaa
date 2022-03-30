@@ -291,12 +291,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
-
+    SDL_Event e;
     if(pWindow){
 
       *running = 1;
       while(*running){
-          SDL_Event e;
+
           if(victoire(taille_deck_j, taille_deck_adv)){
             return;
           }
@@ -474,9 +474,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                         printf("la carte a été posée\n");
+                        transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
                       }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
-                      transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
                       etat = 0;
                       break;
 
@@ -504,12 +504,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                           menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+                          transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 2, *valSocket);
                         }
                         //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
-                        transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 2, *valSocket);
                         etat = 0;
                         // attaque d'une carte
-
                         break;
                       }
                     }
