@@ -18,7 +18,7 @@
  * @fn int initialiser_fenetre()
  * @brief fonction d'initialisation de SDL, creation d'une fenetre et appelle de la suite du programme, puis une fois le programme terminé quitte SDL
  * 
- * @return int 
+ * @return 1 si tout s'est bien déroulé
  */
 int initialiser_fenetre(){
   //initialisation de SDL---------------------------------------------------------------

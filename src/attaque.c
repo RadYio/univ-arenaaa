@@ -22,6 +22,7 @@
 #include "../header/attaque.h"
 
 /**
+ * @fn attaque_critique(type_t attaque, type_t vulnerable)
  * @brief fonction qui vérifie si celui qui défend est vulnerable au type d'attaque
  * 
  * @param attaque le type d'attaque de la carte d'attaque
@@ -34,6 +35,7 @@ int attaque_critique(type_t attaque, type_t vulnerable){
 }
 
 /**
+ * @fn mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_defense[][3], int indice_deck, int* taille_deck_defense)
  * @brief fonction qui vérifie la mort d'un carte : si une carte n'a plus d'hp, on doit l'enlever de la formation et du deck
  * 
  * @param id_carte_defense id de la carte qui défend, pris depuis la matrice de formation de celui qui défend
@@ -72,6 +74,7 @@ void mort_carte(int id_carte_defense, carte_t deck_defense[], int tab_formation_
 } 
 
 /**
+ * @fn attaque(int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[], carte_t deck_defense[], int tab_formation_defense[][3], int* taille_deck_defense)
  * @brief fonction gérant le fait que quelqu'un attaque une carte
  * 
  * @param id_carte_attaque identifiant de la carte qui attaque, pris depuis la matrice de formation de celui qui attaque
