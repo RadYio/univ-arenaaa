@@ -475,6 +475,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                         printf("la carte a été posée\n");
                         transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
+                        printf("on a transfert\n");
                       }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
                       etat = 0;
