@@ -103,9 +103,9 @@ void* rechercheJoueur(void* infos){
   return NULL;
 }
 /**
- * @brief
+ * @brief genere une connexion avec le serveur
  *
- * @return int
+ * @return int renvoie le socket, apres la connexion avec le serveur
  */
 int connectC(){
   sockaddr_in_t sin;
