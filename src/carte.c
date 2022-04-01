@@ -51,10 +51,10 @@ void init_cartes(carte_t * tab_cartes_total[]){
     tab_cartes_total[6] = creer_carte("Kyliane soldat de l'est","Kyliane", "img/img_cartes/kyky.png",5, 3 , Physique,Psy,6);
     tab_cartes_total[7] = creer_carte("Noème Prêtresse Crapaud","Noême", "img/img_cartes/carte_noeme.png",5, 3 , Physique,Psy,7);
     tab_cartes_total[8] = creer_carte("Léo l'escroc","Léo e.", "img/img_cartes/leo2.png",3, 5 , Psy,Poison,8);
-    tab_cartes_total[9] = creer_carte("Mage","Mage B", "img/.png",3, 5 , Psy,Poison,9);
-    tab_cartes_total[10] = creer_carte("Voleur","Voleur A", "img/.png",4, 4 , Poison,Physique,10);
-    tab_cartes_total[11] = creer_carte("Voleur","Voleur B", "img/.png",4, 4 , Poison,Physique,11);
-    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent","A.Laurent", "img/.png",10, 10 , Psy,Psy,12); //a modifier
+    tab_cartes_total[9] = creer_carte("Mage","Mage B", "img/img_cartes/Carte_Alexis.png",3, 5 , Psy,Poison,9);
+    tab_cartes_total[10] = creer_carte("Voleur","Voleur A", "img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,10);
+    tab_cartes_total[11] = creer_carte("Voleur","Voleur B", "img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,11);
+    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent","A.Laurent", "img/img_cartes/Carte_Alexis.png",10, 10 , Psy,Psy,12); //a modifier
 }
 
 
