@@ -1,0 +1,64 @@
+\hypertarget{jeu__solo_8c}{}\doxysection{Référence du fichier src/jeu\+\_\+solo.c}
+\label{jeu__solo_8c}\index{src/jeu\_solo.c@{src/jeu\_solo.c}}
+
+
+quatrième fichier dans la structure du programme en parallèle avec jeu\+\_\+multi.\+c et collection.\+c, contient tout le code lié au mode de jeu en solo  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/bot.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/attaque.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{jeu__solo_8c_a363b875aed8767e5bbee0d1f80e73e29}{jeu\+\_\+solo}} (SDL\+\_\+\+Window $\ast$p\+Window, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int $\ast$running)
+\begin{DoxyCompactList}\small\item\em fonction lancé lorsque le joueur choisit de joueur en solo \+: permet tout le jeu en solo avec mise en place d\textquotesingle{}éléments, la détéctions d\textquotesingle{}eventements et la gestion des tours \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+quatrième fichier dans la structure du programme en parallèle avec jeu\+\_\+multi.\+c et collection.\+c, contient tout le code lié au mode de jeu en solo 
+
+\begin{DoxyAuthor}{Auteur}
+Arthur Boullier et Jonathan Otto 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/30 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{jeu__solo_8c_a363b875aed8767e5bbee0d1f80e73e29}\label{jeu__solo_8c_a363b875aed8767e5bbee0d1f80e73e29}} 
+\index{jeu\_solo.c@{jeu\_solo.c}!jeu\_solo@{jeu\_solo}}
+\index{jeu\_solo@{jeu\_solo}!jeu\_solo.c@{jeu\_solo.c}}
+\doxysubsubsection{\texorpdfstring{jeu\_solo()}{jeu\_solo()}}
+{\footnotesize\ttfamily jeu\+\_\+solo (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{int $\ast$}]{running }\end{DoxyParamCaption})}
+
+
+
+fonction lancé lorsque le joueur choisit de joueur en solo \+: permet tout le jeu en solo avec mise en place d\textquotesingle{}éléments, la détéctions d\textquotesingle{}eventements et la gestion des tours 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & la fenetre où se déroule le jeu \\
+\hline
+{\em renderer\+\_\+jeu} & notre renderer lié à la fenetre \\
+\hline
+{\em running} & variable permettant de quitter le programme si le joueur arrête la fenetre \\
+\hline
+\end{DoxyParams}

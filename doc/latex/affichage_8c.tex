@@ -1,0 +1,353 @@
+\hypertarget{affichage_8c}{}\doxysection{Référence du fichier src/affichage.c}
+\label{affichage_8c}\index{src/affichage.c@{src/affichage.c}}
+
+
+fichier contenant les fonctions d\textquotesingle{}affichage du jeu ainsi que certaines fonctions essentielles à la mise à jour de tableaux qui seront affichés ensuite  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu\+\_\+solo.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{affichage_8c_ad85c60f86e62fb73c696d96bc41b40e1}{affichage\+\_\+\+BG}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Texture $\ast$img\+\_\+jeu\+\_\+\+Texture)
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage du fond lors du jeu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{affichage_8c_af4865bc2538880700a80700f96784bb2}\label{affichage_8c_af4865bc2538880700a80700f96784bb2}} 
+void {\bfseries affichage\+\_\+energie} (int $\ast$nb\+\_\+actions)
+\item 
+void \mbox{\hyperlink{affichage_8c_ad45c04655c3f02c9e1ed34fe5dcc4364}{affichage\+\_\+gros\+\_\+rectangles}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Rect $\ast$rect\+\_\+joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+adv, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j)
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage des grands rectangles qui séparent le coté joueur du coté adversaire \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_adfb3e6c518eb95bec99efc14b8dabdb6}{afficher\+\_\+rectangles\+\_\+main}} (int $\ast$taille\+\_\+main, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage des rectangles autour des cartes dans la main du joueur \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_a8419d8dd4e49ce616ae2ede0692927a3}{affichage\+\_\+main}} (int $\ast$taille\+\_\+main, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, carte\+\_\+t tab\+\_\+main\mbox{[}$\,$\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage des cartes de la main du joueur \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_a5f03c9d3b99c7a2bc75bcc9a2615758c}{affichage\+\_\+carte}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, carte\+\_\+t carte, SDL\+\_\+\+Rect rect\+\_\+afficher)
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage d\textquotesingle{}une carte donnée dans un rectangle donnée \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_adf1d6fb624c75dddffa863e8883baee4}{afficher\+\_\+rectangles\+\_\+formation}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, carte\+\_\+t tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage des rectangles de la formationd du joueur en parcourant la matrice associé et en mettant un rectangle lorsqu\textquotesingle{}il y à un -\/2 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{affichage_8c_a680797501a173f41cf119a93f6a6041c}\label{affichage_8c_a680797501a173f41cf119a93f6a6041c}} 
+void {\bfseries double\+\_\+clique2} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int id\+\_\+carte, carte\+\_\+t tab\+\_\+cartes\+\_\+deck\mbox{[}$\,$\mbox{]}, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+att\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+hp\+\_\+j, TTF\+\_\+\+Font $\ast$police)
+\item 
+\mbox{\Hypertarget{affichage_8c_aed0a17425a603dcc23e3004d9d67d76f}\label{affichage_8c_aed0a17425a603dcc23e3004d9d67d76f}} 
+void {\bfseries affichage\+\_\+actions} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int $\ast$nb\+\_\+actions)
+\item 
+void \mbox{\hyperlink{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}{affichage\+\_\+jeu2}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Texture $\ast$img\+\_\+jeu\+\_\+\+Texture, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+j, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+joueur\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+adv, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+adv\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+adv, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int $\ast$taille\+\_\+main, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]}, carte\+\_\+t tab\+\_\+main\mbox{[}$\,$\mbox{]}, carte\+\_\+t tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]}, SDL\+\_\+\+Texture $\ast$menu\+\_\+t, SDL\+\_\+\+Rect menu\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+menu\+\_\+\+Hover\+\_\+T, SDL\+\_\+\+Rect txt\+\_\+menu\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+menu\+\_\+T, SDL\+\_\+\+Texture $\ast$passe\+\_\+t, SDL\+\_\+\+Rect passe\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+passe\+\_\+\+Hover\+\_\+T, SDL\+\_\+\+Texture $\ast$txt\+\_\+passe\+\_\+T, SDL\+\_\+\+Rect txt\+\_\+passe\+\_\+R, int $\ast$nb\+\_\+actions)
+\item 
+void \mbox{\hyperlink{affichage_8c_aa271a4a6d364cb514acaf556588caca5}{supprimer\+\_\+carte\+\_\+tab}} (carte\+\_\+t tab\+\_\+main\mbox{[}$\,$\mbox{]}, int indice\+\_\+main, int $\ast$taille\+\_\+main)
+\begin{DoxyCompactList}\small\item\em fonction de suppression d\textquotesingle{}une carte dans un tableau \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_abd469ce9b24c42434a962d83969f73de}{suppression\+\_\+carte\+\_\+main}} (carte\+\_\+t tab\+\_\+main\mbox{[}$\,$\mbox{]}, int indice\+\_\+main, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main)
+\begin{DoxyCompactList}\small\item\em fonction de suppression d\textquotesingle{}une carte dans la main du joueur \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{affichage_8c_ad7fdc0aa6874c677d6c1c4093ea7d367}{transfert\+\_\+carte}} (carte\+\_\+t tab\+\_\+main\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]}, int colone, int ligne, int indice\+\_\+main, int $\ast$taille\+\_\+main)
+\begin{DoxyCompactList}\small\item\em fonction qui transfère une carte de la main du joueur sur le plateau \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{affichage_8c_a1deea671febb6a7c970596b6d5c2ae88}{victoire}} (int $\ast$taille\+\_\+deck\+\_\+j, int $\ast$taille\+\_\+deck\+\_\+adv)
+\begin{DoxyCompactList}\small\item\em fonction de vérification si quelqu\textquotesingle{}un à gagné la partie \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{affichage_8c_ac9cb947ef91e32fbe91529d57d164efe}\label{affichage_8c_ac9cb947ef91e32fbe91529d57d164efe}} 
+int {\bfseries action} (int $\ast$nb\+\_\+actions)
+\item 
+\mbox{\Hypertarget{affichage_8c_a33275b67ad1ce94d9d6073c2ac87fdbe}\label{affichage_8c_a33275b67ad1ce94d9d6073c2ac87fdbe}} 
+void {\bfseries nouveau\+\_\+tour} (int $\ast$nb\+\_\+actions, int tab\+\_\+formation\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]})
+\item 
+\mbox{\Hypertarget{affichage_8c_a25b1f8bbb63d34ef9b6a4efc6658e842}\label{affichage_8c_a25b1f8bbb63d34ef9b6a4efc6658e842}} 
+void $\ast$ {\bfseries calcul\+\_\+temps} (void $\ast$val)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+fichier contenant les fonctions d\textquotesingle{}affichage du jeu ainsi que certaines fonctions essentielles à la mise à jour de tableaux qui seront affichés ensuite 
+
+\begin{DoxyAuthor}{Auteur}
+Jonathan Otto et Arthur Boullier 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/28 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{affichage_8c_ad85c60f86e62fb73c696d96bc41b40e1}\label{affichage_8c_ad85c60f86e62fb73c696d96bc41b40e1}} 
+\index{affichage.c@{affichage.c}!affichage\_BG@{affichage\_BG}}
+\index{affichage\_BG@{affichage\_BG}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{affichage\_BG()}{affichage\_BG()}}
+{\footnotesize\ttfamily void affichage\+\_\+\+BG (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{SDL\+\_\+\+Texture $\ast$}]{img\+\_\+jeu\+\_\+\+Texture }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage du fond lors du jeu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em img\+\_\+jeu\+\_\+\+Texture} & la texture contenant l\textquotesingle{}image à afficher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_a5f03c9d3b99c7a2bc75bcc9a2615758c}\label{affichage_8c_a5f03c9d3b99c7a2bc75bcc9a2615758c}} 
+\index{affichage.c@{affichage.c}!affichage\_carte@{affichage\_carte}}
+\index{affichage\_carte@{affichage\_carte}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{affichage\_carte()}{affichage\_carte()}}
+{\footnotesize\ttfamily void affichage\+\_\+carte (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{carte\+\_\+t}]{carte,  }\item[{SDL\+\_\+\+Rect}]{rect\+\_\+afficher }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage d\textquotesingle{}une carte donnée dans un rectangle donnée 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em carte} & la carte à afficher \\
+\hline
+{\em rect\+\_\+afficher} & le rectangle où afficher la carte en question \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_ad45c04655c3f02c9e1ed34fe5dcc4364}\label{affichage_8c_ad45c04655c3f02c9e1ed34fe5dcc4364}} 
+\index{affichage.c@{affichage.c}!affichage\_gros\_rectangles@{affichage\_gros\_rectangles}}
+\index{affichage\_gros\_rectangles@{affichage\_gros\_rectangles}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{affichage\_gros\_rectangles()}{affichage\_gros\_rectangles()}}
+{\footnotesize\ttfamily void affichage\+\_\+gros\+\_\+rectangles (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+joueur,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+adv,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+carte\+\_\+j }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage des grands rectangles qui séparent le coté joueur du coté adversaire 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em rect\+\_\+joueur} & le grand rectangle du joueur \\
+\hline
+{\em rect\+\_\+adv} & le grand rectangle de l\textquotesingle{}adversaire \\
+\hline
+{\em rect\+\_\+aff\+\_\+carte\+\_\+j} & rectangle d\textquotesingle{}affichage pour la zone d\textquotesingle{}affichage en gros d\textquotesingle{}une carte \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}\label{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}} 
+\index{affichage.c@{affichage.c}!affichage\_jeu2@{affichage\_jeu2}}
+\index{affichage\_jeu2@{affichage\_jeu2}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{affichage\_jeu2()}{affichage\_jeu2()}}
+{\footnotesize\ttfamily void affichage\+\_\+jeu2 (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{SDL\+\_\+\+Texture $\ast$}]{img\+\_\+jeu\+\_\+\+Texture,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+carte\+\_\+j,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+j,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+titre\+\_\+joueur\+\_\+T,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+adv,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+titre\+\_\+adv\+\_\+T,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+joueur,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+adv,  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main,  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]},  }\item[{carte\+\_\+t}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]},  }\item[{SDL\+\_\+\+Texture $\ast$}]{menu\+\_\+t,  }\item[{SDL\+\_\+\+Rect}]{menu\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+menu\+\_\+\+Hover\+\_\+T,  }\item[{SDL\+\_\+\+Rect}]{txt\+\_\+menu\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+menu\+\_\+T,  }\item[{SDL\+\_\+\+Texture $\ast$}]{passe\+\_\+t,  }\item[{SDL\+\_\+\+Rect}]{passe\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+passe\+\_\+\+Hover\+\_\+T,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+passe\+\_\+T,  }\item[{SDL\+\_\+\+Rect}]{txt\+\_\+passe\+\_\+R,  }\item[{int $\ast$}]{nb\+\_\+actions }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer\+\_\+jeu} & \\
+\hline
+{\em img\+\_\+jeu\+\_\+\+Texture} & \\
+\hline
+{\em rect\+\_\+aff\+\_\+carte\+\_\+j} & \\
+\hline
+{\em rect\+\_\+txt\+\_\+deck\+\_\+j} & \\
+\hline
+{\em txt\+\_\+titre\+\_\+joueur\+\_\+T} & \\
+\hline
+{\em rect\+\_\+txt\+\_\+deck\+\_\+adv} & \\
+\hline
+{\em txt\+\_\+titre\+\_\+adv\+\_\+T} & \\
+\hline
+{\em rect\+\_\+joueur} & \\
+\hline
+{\em rect\+\_\+adv} & \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartesJ} & \\
+\hline
+{\em tab\+\_\+rect\+\_\+formationJ} & \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartes\+ADV} & \\
+\hline
+{\em tab\+\_\+rect\+\_\+formation\+Adv} & \\
+\hline
+{\em taille\+\_\+main} & \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & \\
+\hline
+{\em tab\+\_\+main} & \\
+\hline
+{\em tab\+\_\+cartes\+\_\+total} & \\
+\hline
+{\em menu\+\_\+t} & \\
+\hline
+{\em menu\+\_\+R} & \\
+\hline
+{\em txt\+\_\+menu\+\_\+\+Hover\+\_\+T} & \\
+\hline
+{\em txt\+\_\+menu\+\_\+R} & \\
+\hline
+{\em txt\+\_\+menu\+\_\+T} & \\
+\hline
+{\em passe\+\_\+t} & \\
+\hline
+{\em passe\+\_\+R} & \\
+\hline
+{\em txt\+\_\+passe\+\_\+\+Hover\+\_\+T} & \\
+\hline
+{\em txt\+\_\+passe\+\_\+T} & \\
+\hline
+{\em txt\+\_\+passe\+\_\+R} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_a8419d8dd4e49ce616ae2ede0692927a3}\label{affichage_8c_a8419d8dd4e49ce616ae2ede0692927a3}} 
+\index{affichage.c@{affichage.c}!affichage\_main@{affichage\_main}}
+\index{affichage\_main@{affichage\_main}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{affichage\_main()}{affichage\_main()}}
+{\footnotesize\ttfamily void affichage\+\_\+main (\begin{DoxyParamCaption}\item[{int $\ast$}]{taille\+\_\+main,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{carte\+\_\+t}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage des cartes de la main du joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille\+\_\+main} & variable qui repertorie la taille de la main, permet un affichage dynamique en fonction du nombre de cartes \\
+\hline
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em tab\+\_\+main} & tableau qui repertorie quelles cartes possède le joueur dans sa main \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & tableau qui repertorie les rectangles de la main pour savoir où afficher les cartes\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{affichage_8c_adf1d6fb624c75dddffa863e8883baee4}\label{affichage_8c_adf1d6fb624c75dddffa863e8883baee4}} 
+\index{affichage.c@{affichage.c}!afficher\_rectangles\_formation@{afficher\_rectangles\_formation}}
+\index{afficher\_rectangles\_formation@{afficher\_rectangles\_formation}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_rectangles\_formation()}{afficher\_rectangles\_formation()}}
+{\footnotesize\ttfamily void afficher\+\_\+rectangles\+\_\+formation (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{carte\+\_\+t}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage des rectangles de la formationd du joueur en parcourant la matrice associé et en mettant un rectangle lorsqu\textquotesingle{}il y à un -\/2 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em tab\+\_\+cartes\+\_\+total} & tableau qui repertorie toutes les cartes du jeu, permet de faire corresponndre une id de carte que possède le joueur aux reste des informations de la carte \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartesJ} & tableau correspondant à la formation du joueur, -\/2 correspond à un emplacement où l\textquotesingle{}on peut poser une carte, -\/1 est un emplacement où on à rien, et tout chiffre $>$= 0 est une carte \\
+\hline
+{\em tab\+\_\+rect\+\_\+formationJ} & tableau correspondant aux rectangles de la formation du joueur, permet de connaitre où on pose les cartes \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartes\+ADV} & tableau qui reprend le meme principe que tab\+\_\+formation\+\_\+cartesJ\mbox{[}\mbox{]}\mbox{[}3\mbox{]} mais pour le coté adversaire \\
+\hline
+{\em tab\+\_\+rect\+\_\+formation\+Adv} & tableau qui reprend le meme principe que tab\+\_\+rect\+\_\+formationJ\mbox{[}\mbox{]}\mbox{[}3\mbox{]} mais pour le coté adversaire \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_adfb3e6c518eb95bec99efc14b8dabdb6}\label{affichage_8c_adfb3e6c518eb95bec99efc14b8dabdb6}} 
+\index{affichage.c@{affichage.c}!afficher\_rectangles\_main@{afficher\_rectangles\_main}}
+\index{afficher\_rectangles\_main@{afficher\_rectangles\_main}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{afficher\_rectangles\_main()}{afficher\_rectangles\_main()}}
+{\footnotesize\ttfamily void afficher\+\_\+rectangles\+\_\+main (\begin{DoxyParamCaption}\item[{int $\ast$}]{taille\+\_\+main,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage des rectangles autour des cartes dans la main du joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille\+\_\+main} & variable qui repertorie la taille de la main, permet un affichage dynamique en fonction du nombre de carte \\
+\hline
+{\em renderer\+\_\+jeu} & notre renderer \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & repertorie les rectangles de la main du joueur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_abd469ce9b24c42434a962d83969f73de}\label{affichage_8c_abd469ce9b24c42434a962d83969f73de}} 
+\index{affichage.c@{affichage.c}!suppression\_carte\_main@{suppression\_carte\_main}}
+\index{suppression\_carte\_main@{suppression\_carte\_main}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{suppression\_carte\_main()}{suppression\_carte\_main()}}
+{\footnotesize\ttfamily void suppression\+\_\+carte\+\_\+main (\begin{DoxyParamCaption}\item[{carte\+\_\+t}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{int}]{indice\+\_\+main,  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main }\end{DoxyParamCaption})}
+
+
+
+fonction de suppression d\textquotesingle{}une carte dans la main du joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+main} & tableau de la main où il faut supprimer un élément \\
+\hline
+{\em indice\+\_\+main} & indice de l\textquotesingle{}élément à supprimer dans le tableau \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & tableau de la main du joueur qui possède un élément à supprimer \\
+\hline
+{\em taille\+\_\+main} & la taille de la main qui devra être mis à jour après avoir supprimé un élément \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_aa271a4a6d364cb514acaf556588caca5}\label{affichage_8c_aa271a4a6d364cb514acaf556588caca5}} 
+\index{affichage.c@{affichage.c}!supprimer\_carte\_tab@{supprimer\_carte\_tab}}
+\index{supprimer\_carte\_tab@{supprimer\_carte\_tab}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{supprimer\_carte\_tab()}{supprimer\_carte\_tab()}}
+{\footnotesize\ttfamily void supprimer\+\_\+carte\+\_\+tab (\begin{DoxyParamCaption}\item[{carte\+\_\+t}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{int}]{indice\+\_\+main,  }\item[{int $\ast$}]{taille\+\_\+main }\end{DoxyParamCaption})}
+
+
+
+fonction de suppression d\textquotesingle{}une carte dans un tableau 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+main} & le tableau qui contient l\textquotesingle{}élément à supprimer \\
+\hline
+{\em indice\+\_\+main} & l\textquotesingle{}indice de l\textquotesingle{}élément à supprimer dans le tableau \\
+\hline
+{\em taille\+\_\+main} & taille du tableau \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_ad7fdc0aa6874c677d6c1c4093ea7d367}\label{affichage_8c_ad7fdc0aa6874c677d6c1c4093ea7d367}} 
+\index{affichage.c@{affichage.c}!transfert\_carte@{transfert\_carte}}
+\index{transfert\_carte@{transfert\_carte}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{transfert\_carte()}{transfert\_carte()}}
+{\footnotesize\ttfamily void transfert\+\_\+carte (\begin{DoxyParamCaption}\item[{carte\+\_\+t}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{int}]{colone,  }\item[{int}]{ligne,  }\item[{int}]{indice\+\_\+main,  }\item[{int $\ast$}]{taille\+\_\+main }\end{DoxyParamCaption})}
+
+
+
+fonction qui transfère une carte de la main du joueur sur le plateau 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+main} & tableau de la main dont il faut transférer une carte \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartesJ} & tableau qui répértorie où on peut poser une carte, sera mis à jour avec l\textquotesingle{}id de la carte nouvellement placé à l\textquotesingle{}endroit voulu \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & tableau des rectangles de la main, sert à savoir sur quelle carte de la main on à cliqué \\
+\hline
+{\em colone} & sert de coordonnée dans la formation \\
+\hline
+{\em ligne} & sert de coordonnée dans la formation \\
+\hline
+{\em taille\+\_\+main} & taille de la main qui doit être mis à jour \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{affichage_8c_a1deea671febb6a7c970596b6d5c2ae88}\label{affichage_8c_a1deea671febb6a7c970596b6d5c2ae88}} 
+\index{affichage.c@{affichage.c}!victoire@{victoire}}
+\index{victoire@{victoire}!affichage.c@{affichage.c}}
+\doxysubsubsection{\texorpdfstring{victoire()}{victoire()}}
+{\footnotesize\ttfamily victoire (\begin{DoxyParamCaption}\item[{int $\ast$}]{taille\+\_\+deck\+\_\+j,  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+adv }\end{DoxyParamCaption})}
+
+
+
+fonction de vérification si quelqu\textquotesingle{}un à gagné la partie 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille\+\_\+deck\+\_\+j} & taille du deck du joueur, si égal à 0 alors le joueur à perdu \\
+\hline
+{\em taille\+\_\+deck\+\_\+adv} & taille du deck de l\textquotesingle{}adversaire, si égal à 0 alors l\textquotesingle{}adversaire à perdu \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+1 si le joueur perd, 2 si le joueur gagne, 0 si on continue la partie 
+\end{DoxyReturn}
