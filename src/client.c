@@ -16,16 +16,17 @@ void* recupererInfo(void* structure){
     taille = read(saveSocket, informations, sizeof(gestion_t));
   }
   printf("A VERIFIER ATTENTION\n\n");
+  return NULL;
 }
 /**
- * @brief
+ * @brief Fonction permettant de prendre les données des joueurs et les transferer au joueur qui attend son tour
  *
- * @param futurInfos
- * @param premiereMat
- * @param deuxiemeMat
- * @param premierTab
- * @param deuxiemeTab
- * @param socket
+ * @param futurInfos: structure gestion_t
+ * @param premiereMat matrice contenant l'etat du plateau du joueur actuel
+ * @param deuxiemeMat matrice contenant l'etat du plateau du joueur adverse
+ * @param premierTab tableau de carte_t, contenant l'état des cartes du joueur
+ * @param deuxiemeTab tableau de carte_t, contenant l'état des cartes de l'adversaire
+ * @param socket entier contenant le socket du serveur
  */
 void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[][3], carte_t premierTab[], carte_t deuxiemeTab[], int flagC, int socket){
   for(int i=0;i<5;i++){
@@ -44,9 +45,9 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
   futurInfos->flag = 0;
 }
 /**
- * @brief
+ * @brief termine la connexion avec le serveur
  *
- * @param socket
+ * @param socket pointeur vers le socket du serveur
  */
 void connectF(int* socket){
   send(*socket,"FIN",64,0);
@@ -55,10 +56,10 @@ void connectF(int* socket){
   *socket=-1;
 }
 /**
- * @brief
+ * @brief fonction qui repere l'information du serveur, pour connaitre qui commence
  *
- * @param infos
- * @return int
+ * @param infos pointeur générique, qu'on cast en int, afin d'avoir le socket du serveur
+ * @return int [1] si tour du joueur, [2] si pas le tour du joueur, [-1] si on recoit une deconnexion, [0], si aucun cas
  */
 int gestionPartie(void* infos){
   int* socket = (int*)infos;
@@ -79,6 +80,7 @@ int gestionPartie(void* infos){
     *socket=-1;
     return -1;
   }
+  return 0;
 }
 /**
  * @brief
@@ -89,7 +91,7 @@ int gestionPartie(void* infos){
 void* rechercheJoueur(void* infos){
   serverStruct_t* infoServer = (serverStruct_t*)infos;
   char buffer[64];
-  ssize_t taille = recv(infoServer->valSocket, buffer, 64, 0);
+  recv(infoServer->valSocket, buffer, 64, 0);
   if(strcmp(buffer,"CONNEXION") == 0){
     infoServer->joueurTrouve=1;
   }
@@ -107,8 +109,6 @@ void* rechercheJoueur(void* infos){
  */
 int connectC(){
   sockaddr_in_t sin;
-  socklen_t taille = sizeof(sin);
-  pthread_t thread;
 
   //On crée notre socket
   int clientSocket = socket(AF_INET, SOCK_STREAM, 0);
