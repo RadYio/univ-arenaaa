@@ -344,8 +344,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
 
                 for(int i =0;i<10;i++){
-                  tab_cartes_deck_adv[i] = etatDuJeu.tab1[i];
-                  tab_cartes_deck[i] = etatDuJeu.tab2[i];
+                  tab_cartes_deck_adv[i].hp_carte = etatDuJeu.tab1[i].hp_carte;
+                  tab_cartes_deck[i].hp_carte = etatDuJeu.tab2[i].hp_carte;
                 }
 
                 etatDuJeu.flag=0;

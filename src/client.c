@@ -38,8 +38,8 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
     }
   }
   for(int i=0;i<10;i++){
-    futurInfos->tab1[i] = premierTab[i];
-    futurInfos->tab2[i] = deuxiemeTab[i];
+    futurInfos->tab1[i].hp_carte = premierTab[i].hp_carte;
+    futurInfos->tab2[i].hp_carte = deuxiemeTab[i].hp_carte;
   }
   futurInfos->flag = flagC;
   send(socket, futurInfos, sizeof(*futurInfos), 0);
