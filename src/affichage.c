@@ -123,6 +123,7 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
 void affichage_carte(SDL_Renderer* renderer_jeu,carte_t tab_carte[],int id_carte,SDL_Rect rect_afficher){
   SDL_Surface* carte_s;
   SDL_Texture* cartes_T;
+  fprintf(stderr,"\n\nnom du fichier : %s\n\n",tab_carte[id_carte].chemin_carte);
   carte_s = IMG_Load(tab_carte[id_carte].chemin_carte);
   cartes_T = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
   SDL_FreeSurface(carte_s);
