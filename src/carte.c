@@ -42,19 +42,19 @@ carte_t * creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp ,
 //fonction d'initialisation de toutes les cartes, 12 en brut car on à que 12 cartes, à modifier si on en rajoute plus
 
 void init_cartes(carte_t * tab_cartes_total[]){
-    tab_cartes_total[3] = creer_carte("Allan maître de l'esprit","Allan","img/img_cartes/allan.png", 10, 4 , Psy,Poison,3);
-    tab_cartes_total[4] = creer_carte("Charly maître du ratio","Charly", "img/img_cartes/charly1.png",10, 4 , Psy,Poison,4);
-    tab_cartes_total[1] = creer_carte("Jonathan maître du temps","Jonathan","img/img_cartes/jo1.png", 10, 4 , Psy,Poison,1);
-    tab_cartes_total[0] = creer_carte("Léo maître de la bagarre","Léo","img/img_cartes/leo1.png", 10, 4 , Physique,Psy,0);
-    tab_cartes_total[2] = creer_carte("Alexis maître du sel","Alexis","img/img_cartes/Carte_Alexis.png", 10, 4 , Poison,Physique,2);
-    tab_cartes_total[5] = creer_carte("Arthur maître du silence","Arthur", "img/Carte_Leo.png",10, 4 , Poison,Physique,5);
-    tab_cartes_total[6] = creer_carte("Kyliane soldat de l'est","Kyliane", "img/img_cartes/kyky.png",5, 3 , Physique,Psy,6);
-    tab_cartes_total[7] = creer_carte("Noème Prêtresse Crapaud","Noême", "img/img_cartes/carte_noeme.png",5, 3 , Physique,Psy,7);
-    tab_cartes_total[8] = creer_carte("Léo l'escroc","Léo e.", "img/img_cartes/leo2.png",3, 5 , Psy,Poison,8);
-    tab_cartes_total[9] = creer_carte("Mage","Mage B", "img/img_cartes/Carte_Alexis.png",3, 5 , Psy,Poison,9);
-    tab_cartes_total[10] = creer_carte("Voleur","Voleur A", "img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,10);
-    tab_cartes_total[11] = creer_carte("Voleur","Voleur B", "img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,11);
-    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent","A.Laurent", "img/img_cartes/Carte_Alexis.png",10, 10 , Psy,Psy,12); //a modifier
+    tab_cartes_total[3] = creer_carte("Allan maître de l'esprit","Allan","../img/img_cartes/allan.png", 10, 4 , Psy,Poison,3);
+    tab_cartes_total[4] = creer_carte("Charly maître du ratio","Charly", "../img/img_cartes/charly1.png",10, 4 , Psy,Poison,4);
+    tab_cartes_total[1] = creer_carte("Jonathan maître du temps","Jonathan","../img/img_cartes/jo1.png", 10, 4 , Psy,Poison,1);
+    tab_cartes_total[0] = creer_carte("Léo maître de la bagarre","Léo","../img/img_cartes/leo1.png", 10, 4 , Physique,Psy,0);
+    tab_cartes_total[2] = creer_carte("Alexis maître du sel","Alexis","../img/img_cartes/Carte_Alexis.png", 10, 4 , Poison,Physique,2);
+    tab_cartes_total[5] = creer_carte("Arthur maître du silence","Arthur", "../img/Carte_Leo.png",10, 4 , Poison,Physique,5);
+    tab_cartes_total[6] = creer_carte("Kyliane soldat de l'est","Kyliane", "../img/img_cartes/kyky.png",5, 3 , Physique,Psy,6);
+    tab_cartes_total[7] = creer_carte("Noème Prêtresse Crapaud","Noême", "../img/img_cartes/carte_noeme.png",5, 3 , Physique,Psy,7);
+    tab_cartes_total[8] = creer_carte("Léo l'escroc","Léo e.", "../img/img_cartes/leo2.png",3, 5 , Psy,Poison,8);
+    tab_cartes_total[9] = creer_carte("Mage","Mage B", "../img/img_cartes/Carte_Alexis.png",3, 5 , Psy,Poison,9);
+    tab_cartes_total[10] = creer_carte("Voleur","Voleur A", "../img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,10);
+    tab_cartes_total[11] = creer_carte("Voleur","Voleur B", "../img/img_cartes/Carte_Alexis.png",4, 4 , Poison,Physique,11);
+    tab_cartes_total[12] = creer_carte("Roi Antoine Laurent","A.Laurent", "../img/img_cartes/Carte_Alexis.png",10, 10 , Psy,Psy,12); //a modifier
 }
 
 
