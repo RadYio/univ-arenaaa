@@ -182,7 +182,8 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
   printf("\n\n\nhp = %i\n\n\n",tab_cartes_deck[id_carte].hp_carte);
 
-
+  carte_t * tab_carte_temp[12];
+  init_cartes(tab_carte_temp);
   SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche);
   SDL_Surface * hp_carte_S = TTF_RenderUTF8_Blended(police, hp, couleurBlanche);
 
@@ -201,7 +202,7 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
   SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
 
-  affichage_carte(renderer_jeu,tab_cartes_deck,id_carte,*rect_aff_carte_j);
+  affichage_carte(renderer_jeu,*tab_carte_temp,id_carte,*rect_aff_carte_j);
   SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
   SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
   SDL_RenderPresent(renderer_jeu);
