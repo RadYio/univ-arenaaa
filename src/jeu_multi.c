@@ -108,11 +108,11 @@ int tab_formation_cartesJ[5][3] = { //ceci est le tableau du joueur
     {-2, -1, -1}};
 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
-    {-2, -1, -1},
+    {-1, -1, -2},
     {-1, -2, -1},
     {-2, -1, -2},
     {-1, -2, -1},
-    {-2, -1, -1}};
+    {-1, -1, -2}};
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //déclarations--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -338,10 +338,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 printf("etatDuJeu.flag[%i]\n",etatDuJeu.flag);
                 for(int i=0;i<5;i++){
                   for(int j=0;j<3;j++){
-                    tab_formation_cartesADV[i][j] = etatDuJeu.mat1[i][j];
-                    tab_formation_cartesJ[i][j] = etatDuJeu.mat2[i][j];
+                    tab_formation_cartesADV[i][2-j] = etatDuJeu.mat1[i][j];
+                    tab_formation_cartesJ[i][2-j] = etatDuJeu.mat2[i][j];
                   }
                 }
+
                 for(int i;i<10;i++){
                   tab_cartes_deck_adv[i] = etatDuJeu.tab1[i];
                   tab_cartes_deck[i] = etatDuJeu.tab2[i];
@@ -475,6 +476,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                         printf("la carte a été posée\n");
                         transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
+                        printf("Envoi :");
+
 
                       }
                       //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
@@ -501,11 +504,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
                         if(action(nb_actions)){
                           printf("attaque sur la carte %i de l'adversaire \n\n",i);
-                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_adv, tab_formation_cartesADV, taille_deck_adv);
+                          attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, 
+                          tab_cartes_deck_adv, tab_formation_cartesADV, taille_deck_adv);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                           menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                           transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 2, *valSocket);
+                          
                         }
                         //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
                         etat = 0;

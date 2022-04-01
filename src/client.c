@@ -40,6 +40,7 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
   }
   futurInfos->flag = flagC;
   send(socket, futurInfos, sizeof(*futurInfos), 0);
+  printf("Le flag est de %i\n\n",futurInfos->flag);
   futurInfos->flag = 0;
 }
 /**
