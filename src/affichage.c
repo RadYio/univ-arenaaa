@@ -106,7 +106,7 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
  void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, carte_t tab_main[], SDL_Rect tab_rect_main[]){
     int i;
     for(i = 0; i < *taille_main; i++){
-      affichage_carte(renderer_jeu, tab_main[i], tab_rect_main[i]);
+      affichage_carte(renderer_jeu, tab_main,i, tab_rect_main[i]);
     }
 }
 
@@ -120,10 +120,10 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
  *
  * 
  */
-void affichage_carte(SDL_Renderer* renderer_jeu,carte_t carte,SDL_Rect rect_afficher){
+void affichage_carte(SDL_Renderer* renderer_jeu,carte_t tab_carte[],int id_carte,SDL_Rect rect_afficher){
   SDL_Surface* carte_s;
   SDL_Texture* cartes_T;
-  carte_s = IMG_Load(carte.chemin_carte);
+  carte_s = IMG_Load(tab_carte[id_carte].chemin_carte);
   cartes_T = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
   SDL_FreeSurface(carte_s);
   SDL_RenderCopy(renderer_jeu, cartes_T, NULL, &rect_afficher);
@@ -158,7 +158,7 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
       else if(tab_formation_cartesJ[x][y] == -1) {
       }
       else {
-        affichage_carte(renderer_jeu,tab_cartes_total[ (tab_formation_cartesJ[x][y]) ],tab_rect_formationJ[x][y]) ;
+        affichage_carte(renderer_jeu,tab_cartes_total,tab_formation_cartesJ[x][y],tab_rect_formationJ[x][y]) ;
       }
       if(tab_formation_cartesADV[x][2-y] == -2) {
         SDL_RenderDrawRect(renderer_jeu, &tab_rect_formationAdv[x][2-y]);
@@ -166,7 +166,7 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
       else if(tab_formation_cartesADV[x][2-y] == -1) {
       }
       else{
-        affichage_carte(renderer_jeu,tab_cartes_total[(tab_formation_cartesADV[x][2-y])],tab_rect_formationAdv[x][2-y]) ;
+        affichage_carte(renderer_jeu,tab_cartes_total,tab_formation_cartesADV[x][2-y],tab_rect_formationAdv[x][2-y]) ;
       }
     }
 }
@@ -201,7 +201,7 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
   SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
 
-  affichage_carte(renderer_jeu,tab_cartes_deck[id_carte],*rect_aff_carte_j);
+  affichage_carte(renderer_jeu,tab_cartes_deck,id_carte,*rect_aff_carte_j);
   SDL_RenderCopy(renderer_jeu, att_carte_T, NULL, rect_aff_att_j);
   SDL_RenderCopy(renderer_jeu, hp_carte_T, NULL, rect_aff_hp_j);
   SDL_RenderPresent(renderer_jeu);
