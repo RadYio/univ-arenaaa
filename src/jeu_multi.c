@@ -342,18 +342,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     tab_formation_cartesJ[i][2-j] = etatDuJeu.mat2[i][j];
                   }
                 }
-                printf("avant récep\n\n");
-                for(int i=0;i < *taille_deck_adv;i++){
-                  printf("Hp de la carte %i = %i\n",i,tab_cartes_deck_adv[i].hp_carte);
-                }
 
-                for(int i;i<10;i++){
+                for(int i =0;i<10;i++){
                   tab_cartes_deck_adv[i] = etatDuJeu.tab1[i];
                   tab_cartes_deck[i] = etatDuJeu.tab2[i];
-                }
-                printf("apres récep\n\n");
-                for(int i=0;i < *taille_deck_adv;i++){
-                  printf("Hp de la carte %i = %i\n",i,tab_cartes_deck_adv[i].hp_carte);
                 }
 
                 etatDuJeu.flag=0;
@@ -474,6 +466,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     //vérifie qu'on reclique sur la même carte
                     if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
                         etat = 0;
+
                         double_clique2(renderer_jeu,tab_main[i].id_carte,tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         break;
                     }
@@ -504,6 +497,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   for (int i = 0; i < 5;i++){
                     for(int j = 0; j < 3; j++){
                       if(i == coord_x && j == coord_y && tab_formation_cartesJ[i][j] >= 0  && e.button.x >= tab_rect_formationJ[i][j].x && e.button.x <= tab_rect_formationJ[i][j].x+tab_rect_formationJ[i][j].w && e.button.y >= tab_rect_formationJ[i][j].y && e.button.y <= tab_rect_formationJ[i][j].y+tab_rect_formationJ[i][j].h){
+                        printf("\n\n\nhp avant = %i\n\n\n",tab_cartes_deck[tab_formation_cartesJ[coord_x][coord_y]].hp_carte);
+
                         double_clique2(renderer_jeu,tab_formation_cartesJ[coord_x][coord_y],tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         coord_x = 0;
                         coord_y = 0;
@@ -522,6 +517,10 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                           printf("a l'envoi\n\n");
                           for(int i=0;i < *taille_deck_adv;i++){
                             printf("Hp de la carte %i = %i\n",i,tab_cartes_deck_adv[i].hp_carte);
+                          }
+                          printf("tab J\n\n");
+                          for(int i=0;i < *taille_deck_j;i++){
+                            printf("Hp de la carte %i = %i\n",i,tab_cartes_deck[i].hp_carte);
                           }
                         }
                         //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]

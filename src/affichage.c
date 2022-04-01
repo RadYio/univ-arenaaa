@@ -180,6 +180,7 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
   char hp[4];
   snprintf(attaque,sizeof(attaque),"%i",tab_cartes_deck[id_carte].nb_degats);
   snprintf(hp,sizeof(hp),"%i",tab_cartes_deck[id_carte].hp_carte);
+  printf("\n\n\nhp = %i\n\n\n",tab_cartes_deck[id_carte].hp_carte);
 
 
   SDL_Surface * att_carte_S = TTF_RenderUTF8_Blended(police, attaque, couleurBlanche);
