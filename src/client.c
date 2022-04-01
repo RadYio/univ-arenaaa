@@ -7,6 +7,8 @@
  *
  */
 #include "../header/client.h"
+
+
 void* recupererInfo(void* structure){
   gestion_t* informations = (gestion_t*)structure; //On triche
   int saveSocket = informations->socket;
@@ -21,7 +23,7 @@ void* recupererInfo(void* structure){
 /**
  * @brief Fonction permettant de prendre les données des joueurs et les transferer au joueur qui attend son tour
  *
- * @param futurInfos: structure gestion_t
+ * @param futurInfos structure gestion_t
  * @param premiereMat matrice contenant l'etat du plateau du joueur actuel
  * @param deuxiemeMat matrice contenant l'etat du plateau du joueur adverse
  * @param premierTab tableau de carte_t, contenant l'état des cartes du joueur

@@ -32,7 +32,7 @@
  * @param renderer_jeu notre renderer
  * @param img_jeu_Texture la texture contenant l'image à afficher
  *
- * 
+ *
  */
 void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   // Le fond de la fenêtre sera blanc
@@ -56,7 +56,7 @@ void affichage_energie(int * nb_actions){
  * @param rect_adv le grand rectangle de l'adversaire
  * @param rect_aff_carte_j rectangle d'affichage pour la zone d'affichage en gros d'une carte
  *
- * 
+ *
  */
 void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur,SDL_Rect* rect_adv,SDL_Rect * rect_aff_carte_j){
   //creation de rectangle du joueur
@@ -79,7 +79,7 @@ void affichage_gros_rectangles(SDL_Renderer* renderer_jeu, SDL_Rect* rect_joueur
  * @param renderer_jeu notre renderer
  * @param tab_rect_main repertorie les rectangles de la main du joueur
  *
- * 
+ *
  */
 void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_Rect tab_rect_main[12]){
   SDL_SetRenderDrawColor(renderer_jeu, 255, 255, 255, 255); //on passe en jaune
@@ -118,12 +118,11 @@ void afficher_rectangles_main(int * taille_main,SDL_Renderer* renderer_jeu, SDL_
  * @param carte la carte à afficher
  * @param rect_afficher le rectangle où afficher la carte en question
  *
- * 
+ *
  */
 void affichage_carte(SDL_Renderer* renderer_jeu,carte_t tab_carte[],int id_carte,SDL_Rect rect_afficher){
   SDL_Surface* carte_s;
   SDL_Texture* cartes_T;
-  fprintf(stderr,"\n\nnom du fichier : %s\n\n",tab_carte[id_carte].chemin_carte);
   carte_s = IMG_Load(tab_carte[id_carte].chemin_carte);
   cartes_T = SDL_CreateTextureFromSurface(renderer_jeu, carte_s);
   SDL_FreeSurface(carte_s);
@@ -216,42 +215,42 @@ void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions){
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
   for(int i = 0 ; i < *nb_actions ; i++){
     printf("essai %i\n ",i);
-    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,60 );   
+    SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,60 );
     SDL_RenderCopy(renderer_jeu, energie_T, NULL, &image_action_R);
   }
   SDL_FreeSurface(energie_S);
 }
 
 /**
- * @brief 
- * 
- * @param renderer_jeu 
- * @param img_jeu_Texture 
- * @param rect_aff_carte_j 
- * @param rect_txt_deck_j 
- * @param txt_titre_joueur_T 
- * @param rect_txt_deck_adv 
- * @param txt_titre_adv_T 
- * @param rect_joueur 
- * @param rect_adv 
- * @param tab_formation_cartesJ 
- * @param tab_rect_formationJ 
- * @param tab_formation_cartesADV 
- * @param tab_rect_formationAdv 
- * @param taille_main 
- * @param tab_rect_main 
- * @param tab_main 
- * @param tab_cartes_total 
- * @param menu_t 
- * @param menu_R 
- * @param txt_menu_Hover_T 
- * @param txt_menu_R 
- * @param txt_menu_T 
- * @param passe_t 
- * @param passe_R 
- * @param txt_passe_Hover_T 
- * @param txt_passe_T 
- * @param txt_passe_R 
+ * @brief
+ *
+ * @param renderer_jeu
+ * @param img_jeu_Texture
+ * @param rect_aff_carte_j
+ * @param rect_txt_deck_j
+ * @param txt_titre_joueur_T
+ * @param rect_txt_deck_adv
+ * @param txt_titre_adv_T
+ * @param rect_joueur
+ * @param rect_adv
+ * @param tab_formation_cartesJ
+ * @param tab_rect_formationJ
+ * @param tab_formation_cartesADV
+ * @param tab_rect_formationAdv
+ * @param taille_main
+ * @param tab_rect_main
+ * @param tab_main
+ * @param tab_cartes_total
+ * @param menu_t
+ * @param menu_R
+ * @param txt_menu_Hover_T
+ * @param txt_menu_R
+ * @param txt_menu_T
+ * @param passe_t
+ * @param passe_R
+ * @param txt_passe_Hover_T
+ * @param txt_passe_T
+ * @param txt_passe_R
  */
 
 void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
@@ -304,7 +303,7 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
  * @param indice_main l'indice de l'élément à supprimer dans le tableau
  * @param taille_main taille du tableau
  *
- * 
+ *
  */
  void supprimer_carte_tab(carte_t tab_main[], int indice_main, int* taille_main){
   for(int i = indice_main ; i < *taille_main; i++){
@@ -320,7 +319,7 @@ SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_
  * @param tab_rect_main tableau de la main du joueur qui possède un élément à supprimer
  * @param taille_main la taille de la main qui devra être mis à jour après avoir supprimé un élément
  *
- * 
+ *
  */
 void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_rect_main[], int* taille_main){
   //suppression de la carte dans tab_main
@@ -341,7 +340,7 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
  * @param ligne sert de coordonnée dans la formation
  * @param taille_main taille de la main qui doit être mis à jour
  *
- * 
+ *
  */
  void transfert_carte(carte_t tab_main[], int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_main[], int colone, int ligne, int indice_main, int* taille_main){
   //mises à jour des tableaux
@@ -356,8 +355,8 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
 /**
  * @fn victoire(int* taille_deck_j,int* taille_deck_adv)
  * @brief fonction de vérification si quelqu'un à gagné la partie
- * 
- * @param taille_deck_j taille du deck du joueur, si égal à 0 alors le joueur à perdu 
+ *
+ * @param taille_deck_j taille du deck du joueur, si égal à 0 alors le joueur à perdu
  * @param taille_deck_adv taille du deck de l'adversaire, si égal à 0 alors l'adversaire à perdu
  * @return 1 si le joueur perd, 2 si le joueur gagne, 0 si on continue la partie
  */

@@ -1,3 +1,11 @@
+/**
+ * @file client.h
+ * @author Allan (allan.gonin-saget.etu@univ-lemans.fr)
+ * @brief header du client.c
+ * @version 0.1
+ * @date 2022-04-01
+ * 
+ */
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -10,7 +18,7 @@
 
 #include "carte.h"
 
-#define PORT 6666
+#define PORT 6666 
 #define NB_TENTATIVE 60
 #define DELAI 1
 
