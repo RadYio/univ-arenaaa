@@ -1,11 +1,11 @@
 # project name (generate executable with this name)
 TARGETS  = univ-arenaaa univ-arenaaa_test
 
-CC       = gcc -g
+CC       = gcc
 # compiling flags here
 CFLAGS   = -std=c99 -Wall -I.
 
-LINKER   = gcc -g
+LINKER   = gcc
 # linking flags here
 LFLAGS   = -Wall -I. -lm
 
@@ -16,7 +16,7 @@ BINDIR   = bin
 HEADERDIR = header
 TRGS	 := $(TARGETS:%=$(BINDIR)/%)
 
-DIRS	 = $(OBJDIR) $(BINDIR)
+DIRS	 = $(OBJDIR) $(BINDIR) 
 
 #SDL---------------------------------------------------------------------
 SDL_DIR=${HOME}/SDL2
@@ -31,7 +31,7 @@ INCLUDES_SDL=-I${SDLINC_DIR}
 all: $(DIRS) $(TRGS)
 
 doxygen: #creation du doxygen
-	doxygen ./Doxyfile
+	doxygen ./doc/ProjetL2ConfigDoxygen
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -64,3 +64,6 @@ clean:
 remove: clean
 	@$(rm) $(BINDIR)/$(TARGETS)
 	@echo "Executable removed!"
+
+
+

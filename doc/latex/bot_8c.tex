@@ -1,0 +1,118 @@
+\hypertarget{bot_8c}{}\doxysection{Référence du fichier src/bot.c}
+\label{bot_8c}\index{src/bot.c@{src/bot.c}}
+
+
+ici on gère les actions du bot qui est actif lorsque le joueur joue en solo  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/bot.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/attaque.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{bot_8c_a1d9c8039dea2d808377d654b77973fe6}{poser\+\_\+carte}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot)
+\begin{DoxyCompactList}\small\item\em fonction qui permet au bot de poser une carte \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bot_8c_a66de0aea99603f913111f433c7a9807c}{attaquer\+\_\+carte\+\_\+bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t deck\+\_\+bot\mbox{[}$\,$\mbox{]}, carte\+\_\+t deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
+\begin{DoxyCompactList}\small\item\em fonction permettant au bot d\textquotesingle{}attaquer une carte du joueur \+: parcourt la matrice du joueur, dès qu\textquotesingle{}il trouve une carte il l\textquotesingle{}attaque, s\textquotesingle{}il trouve rien il fait rien \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{bot_8c_a6ad28cc957bd390c6989ff3c91a787be}{bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t deck\+\_\+bot\mbox{[}$\,$\mbox{]}, carte\+\_\+t deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
+\begin{DoxyCompactList}\small\item\em fonction gérant le tour du bot \+: soit il pose une carte, soit il attaque, soit il ne fait rien \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+ici on gère les actions du bot qui est actif lorsque le joueur joue en solo 
+
+\begin{DoxyAuthor}{Auteur}
+Jonathan Otto 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/28 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{bot_8c_a66de0aea99603f913111f433c7a9807c}\label{bot_8c_a66de0aea99603f913111f433c7a9807c}} 
+\index{bot.c@{bot.c}!attaquer\_carte\_bot@{attaquer\_carte\_bot}}
+\index{attaquer\_carte\_bot@{attaquer\_carte\_bot}!bot.c@{bot.c}}
+\doxysubsubsection{\texorpdfstring{attaquer\_carte\_bot()}{attaquer\_carte\_bot()}}
+{\footnotesize\ttfamily void attaquer\+\_\+carte\+\_\+bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
+
+
+
+fonction permettant au bot d\textquotesingle{}attaquer une carte du joueur \+: parcourt la matrice du joueur, dès qu\textquotesingle{}il trouve une carte il l\textquotesingle{}attaque, s\textquotesingle{}il trouve rien il fait rien 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+formation\+\_\+cartes\+ADV} & la matrice de formation du bot, permet de trouver une carte avec laquelle attaquer \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartesJ} & la matrice de formation du joueur, permet de trouver une carte à attaquer \\
+\hline
+{\em deck\+\_\+bot} & le deck du bot \+: la matrice de formation ne contient que les id des cartes, le deck fait donc correspondre ces id à des cartes pour retrouver les hp et le nombre de dégats \\
+\hline
+{\em deck\+\_\+joueur} & deck du joueur \+: reprend le même principe que deck\+\_\+bot mais pour le joueur \\
+\hline
+{\em taille\+\_\+deck\+\_\+joueur} & taille du deck du joueur, permet la mise à jour du deck lorsque le joueur perd une carte qui à été attaquée \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bot_8c_a6ad28cc957bd390c6989ff3c91a787be}\label{bot_8c_a6ad28cc957bd390c6989ff3c91a787be}} 
+\index{bot.c@{bot.c}!bot@{bot}}
+\index{bot@{bot}!bot.c@{bot.c}}
+\doxysubsubsection{\texorpdfstring{bot()}{bot()}}
+{\footnotesize\ttfamily bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot,  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
+
+
+
+fonction gérant le tour du bot \+: soit il pose une carte, soit il attaque, soit il ne fait rien 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+formation\+\_\+cartes\+ADV} & la matrice de formation du bot, permet de trouver un emplacement libre pour poser une carte ou de trouver une carte pour attaquer \\
+\hline
+{\em main\+\_\+bot} & la main du bot, repertorie toutes les cartes qu\textquotesingle{}il n\textquotesingle{}a pas encore posé sur le plateau \\
+\hline
+{\em taille\+\_\+main\+\_\+bot} & taille de la main du bot, permet la mise à jour de main\+\_\+bot lorsqu\textquotesingle{}il pose une carte \\
+\hline
+{\em tab\+\_\+formation\+\_\+cartesJ} & la matrice de formation du joueur, permet de trouver une carte à attaquer \\
+\hline
+{\em deck\+\_\+bot} & le deck du bot, permet de faire correspondre un id de carte (présent sur le plateau) et ses attributs comme les hp ou le nombre de dégats \\
+\hline
+{\em deck\+\_\+joueur} & le deck du joueur, reprend le même principe que deck\+\_\+bot mais pour le joueur \\
+\hline
+{\em taille\+\_\+deck\+\_\+joueur} & la taille du deck du joueur, permet la mise à jour du deck du joueur lorsqu\textquotesingle{}il perd une carte suite à une attaque du bot \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{bot_8c_a1d9c8039dea2d808377d654b77973fe6}\label{bot_8c_a1d9c8039dea2d808377d654b77973fe6}} 
+\index{bot.c@{bot.c}!poser\_carte@{poser\_carte}}
+\index{poser\_carte@{poser\_carte}!bot.c@{bot.c}}
+\doxysubsubsection{\texorpdfstring{poser\_carte()}{poser\_carte()}}
+{\footnotesize\ttfamily int poser\+\_\+carte (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot }\end{DoxyParamCaption})}
+
+
+
+fonction qui permet au bot de poser une carte 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em tab\+\_\+formation\+\_\+cartes\+ADV} & tableau qui réportorie où le bot peut poser une carte \\
+\hline
+{\em main\+\_\+bot} & tableau qui contient toutes les cartes que le bot peut poser \\
+\hline
+{\em taille\+\_\+main\+\_\+bot} & entier permettat de connaitre la taille de la main du bot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+si return 1 \+: permet de lancer une condition si le bot à réussi à poser une carte, son tour s\textquotesingle{}arrête donc là ; si return 0 \+: le bot n\textquotesingle{}a pas pu poser de carte, il attaque donc 
+\end{DoxyReturn}
