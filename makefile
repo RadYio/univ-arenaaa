@@ -1,22 +1,25 @@
 # project name (generate executable with this name)
-TARGETS  = univ-arenaaa univ-arenaaa_test
+TARGETS  = univ-arenaaa #univ-arenaaa_test
+
 
 CC       = gcc
 # compiling flags here
-CFLAGS   = -std=c99 -Wall -I.
+CFLAGS   = -std=c99 -Wall -I. #-g
+
 
 LINKER   = gcc
 # linking flags here
 LFLAGS   = -Wall -I. -lm
 
-# change these to proper directories where each file should be
+#file directories
 SRCDIR   = src
 OBJDIR   = obj
 BINDIR   = bin
 HEADERDIR = header
 TRGS	 := $(TARGETS:%=$(BINDIR)/%)
 
-DIRS	 = $(OBJDIR) $(BINDIR) 
+
+DIRS	 = $(OBJDIR) $(BINDIR)
 
 #SDL---------------------------------------------------------------------
 SDL_DIR=${HOME}/SDL2
@@ -32,6 +35,7 @@ all: $(DIRS) $(TRGS)
 
 doxygen: #creation du doxygen
 	doxygen ./doc/ProjetL2ConfigDoxygen
+	firefox doc/html/index.html
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
@@ -46,7 +50,7 @@ OBJS	 := $(filter-out $(MAINS),$(OBJECTS))
 rm       = rm -f
 
 
-#$(BINDIR)/$(TARGET): $(OBJECTS)
+$(BINDIR)/$(TARGET): $(OBJECTS)
 $(TRGS): $(OBJECTS)
 	@$(LINKER) $(OBJS) $(LFLAGS) -o $@ ${LIBS} ${INCLUDES_SDL}
 	@echo "Linking complete!"
@@ -57,6 +61,7 @@ $(OBJECTS): $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 .PHONY: clean
 clean:
+	@$(rm) $(BINDIR)/*
 	@$(rm) $(OBJECTS)
 	@echo "Cleanup complete!"
 
