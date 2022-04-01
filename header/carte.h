@@ -17,9 +17,9 @@ typedef struct carte_s{
 }carte_t;
 
 
-carte_t * creer_carte(char * nom, char * nom_collec,char * chemin_carte,int hp , int attaque , type_t type_attaque , type_t type_vulnerable, int id);
-
-void init_cartes(carte_t * tab_cartes_total[]);
+carte_t * creer_carte(char* nom, char * nom_collec,char * chemin_carte,int hp , int attaque , type_t type_attaque , type_t type_vulnerable, int id);
+carte_t creer_carte2(char* nom, char* nom_collec, char* chemin_carte, int hp, int nb_degats, type_t type_attaque, type_t type_vulnerable, int id_carte); //aled
+void init_cartes(carte_t tab_cartes_total[]);
 
 void creer_sauvegarde();
 

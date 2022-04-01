@@ -41,14 +41,14 @@ void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]){
 
 
 int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* renderer_collec, int * running){
-	carte_t * tab_cartes_total[13];
+	carte_t tab_cartes_total[13];
 	int taille_tab_sauvegarde = 13;
 
-	carte_t * tab_sauvegarde[taille_tab_sauvegarde];
+	carte_t* tab_sauvegarde[taille_tab_sauvegarde];
 	init_cartes(tab_cartes_total);
 
 
-	recup_sauvegarde(tab_sauvegarde,tab_cartes_total);
+	recup_sauvegarde(tab_sauvegarde, tab_cartes_total);
 	// Variable de couleur
 	SDL_Color couleurNoire = {0, 0, 0};
 	SDL_Color couleurGold = {255, 215, 0};
