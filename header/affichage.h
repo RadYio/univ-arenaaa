@@ -4,7 +4,7 @@ void affichage_main(int * taille_main,SDL_Renderer* renderer_jeu, carte_t tab_ma
 
 void afficher_carte(SDL_Renderer* renderer_jeu, int carte, SDL_Rect rect_afficher);
 
-void affichage_carte(SDL_Renderer* renderer_jeu,carte_t carte,SDL_Rect rect_afficher);
+void affichage_carte(SDL_Renderer* renderer_jeu,carte_t tab_carte[],int id_carte,SDL_Rect rect_afficher);
 
 void afficher_rectangles_formation(SDL_Renderer* renderer_jeu, carte_t tab_cartes_total[],int tab_formation_cartesJ[5][3], SDL_Rect tab_rect_formationJ[][3], int tab_formation_cartesADV[5][3], SDL_Rect tab_rect_formationAdv[][3]);
 
