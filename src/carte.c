@@ -24,8 +24,8 @@
 
 
 
-//fonction de creation de cartes
-carte_t* creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_carte){
+//fonction de creation de cartes qui bug de fou wtffff
+/*carte_t* creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_carte){
   carte_t* carte;
   carte = malloc(sizeof(carte_t));
   carte->nom = nom;
@@ -37,7 +37,7 @@ carte_t* creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , 
   carte->type_vulnerable = type_vulnerable;
   carte->id_carte = id_carte;
   return carte;
-}
+}*/
 
 carte_t creer_carte2(char * nom, char * nom_collec, char * chemin_carte, int hp, int nb_degats, type_t type_attaque, type_t type_vulnerable, int id_carte){
   carte_t carte;
