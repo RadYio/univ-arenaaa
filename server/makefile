@@ -6,7 +6,7 @@ SERVER=server_test
 all: clean ${SERVER}
 
 ${SERVER}: server.c
-	${CC} ${CFLAGS_DEBUG} -o ${SERVER} server.c -lpthread 2>./log.txt
+	${CC} ${CFLAGS_DEBUG} -o ${SERVER} server.c -lpthread 2> ./log.txt
 
 clean:
 	rm -f ${SERVER}
