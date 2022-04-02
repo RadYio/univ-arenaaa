@@ -17,8 +17,6 @@
 #define PORT 6666
 #define CLIENT_MAX 32
 
-
-
 typedef enum estLibre{OUI,NON}estLibre_t;
 typedef enum partie{EN_COURS,TERMINEE}partie_t;
 
@@ -59,8 +57,7 @@ int nb_client_attente=0;
 pthread_t th_attente[CLIENT_MAX];
 pthread_t th_connectes[CLIENT_MAX];
 
-//FICHIER LOG
-FILE* FICHIER_LOG;
+
 
 struct tm* recupererTemps(){
   time_t temp;
@@ -107,7 +104,6 @@ void* connectes(void* oldJoueurs){
   while(information_de_la_partie == EN_COURS){
 
     printf("[j1]:   Debut de son tour de jeu\n");
-    fprintf(FICHIER_LOG, "[j1]:   Debut de son tour de jeu\n");
     while(j1 && information_de_la_partie==EN_COURS){
 
       j1=recv(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
@@ -122,15 +118,12 @@ void* connectes(void* oldJoueurs){
       switch(paquet.flag){
         case 1:
           printf("[j1]:   Joue une carte\n");
-          fprintf(FICHIER_LOG, "[j1]:   Joue une carte\n");
           break;
         case 2:
           printf("[j1]:   Attaque\n");
-          fprintf(FICHIER_LOG, "[j1]:   Attaque\n");
-          break;
+              break;
         case -100:
           printf("[j1]:   Passe\n");
-          fprintf(FICHIER_LOG, "[j1]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -140,7 +133,6 @@ void* connectes(void* oldJoueurs){
     j2=1;
 
     printf("[j2]:   Debut de son tour de jeu\n");
-    fprintf(FICHIER_LOG,"[j2]:   Debut de son tour de jeu\n");
     while(j2 && information_de_la_partie==EN_COURS){
       j2=recv(joueur2.numSock, &paquet, sizeof(gestion_t),0);
 
@@ -155,15 +147,12 @@ void* connectes(void* oldJoueurs){
       switch(paquet.flag){
         case 1:
           printf("[j2]:   Joue une carte\n");
-          fprintf(FICHIER_LOG, "[j2]:   Joue une carte\n");
           break;
         case 2:
           printf("[j2]:   Attaque\n");
-          fprintf(FICHIER_LOG, "[j2]:   Attaque\n");
-          break;
+              break;
         case -100:
           printf("[j2]:   Passe\n");
-          fprintf(FICHIER_LOG, "[j2]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -172,11 +161,10 @@ void* connectes(void* oldJoueurs){
     j2=0;
   }
   printf("FIN DE LA PARTIE\n\n");
-  fprintf(FICHIER_LOG, "FIN DE LA PARTIE\n\n");
 
   send(joueur1.numSock, "FIN", 65, 0);
   send(joueur2.numSock, "FIN", 65, 0);
-
+  
   listeClient[joueur1.num].libre=OUI;
   listeClient[joueur1.num].num=-1;
 
@@ -204,8 +192,6 @@ void* attente(void* informations){
 }
 
 int main(){
-  //OUVERTURE DU FICHIER_LOG
-  FICHIER_LOG = fopen("log.txt","a+");
   //DEFINITION DU SERVEUR
   sockaddr_in_t server_Sin;                               //Socket address IN
   int serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
@@ -298,5 +284,4 @@ int main(){
     shutdown(client_temporaire.numSock, 2);
     }
   }
-  fclose(FICHIER_LOG);
 }
