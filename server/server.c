@@ -122,14 +122,15 @@ void* connectes(void* oldJoueurs){
       switch(paquet.flag){
         case 1:
           printf("[j1]:   Joue une carte\n");
-          fprintf(FICHIER_LOG,"[j1]:   Joue une carte\n");
+          fprintf(FICHIER_LOG, "[j1]:   Joue une carte\n");
           break;
         case 2:
           printf("[j1]:   Attaque\n");
-          fprintf(FICHIER_LOG,"[j1]:   Attaque\n");
+          fprintf(FICHIER_LOG, "[j1]:   Attaque\n");
+          break;
         case -100:
           printf("[j1]:   Passe\n");
-          fprintf(FICHIER_LOG,"[j1]:   Passe\n");
+          fprintf(FICHIER_LOG, "[j1]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -154,14 +155,15 @@ void* connectes(void* oldJoueurs){
       switch(paquet.flag){
         case 1:
           printf("[j2]:   Joue une carte\n");
-          fprintf(FICHIER_LOG,"[j2]:   Joue une carte\n");
+          fprintf(FICHIER_LOG, "[j2]:   Joue une carte\n");
           break;
         case 2:
           printf("[j2]:   Attaque\n");
-          fprintf(FICHIER_LOG,"[j2]:   Attaque\n");
+          fprintf(FICHIER_LOG, "[j2]:   Attaque\n");
+          break;
         case -100:
           printf("[j2]:   Passe\n");
-          fprintf(FICHIER_LOG,"[j2]:   Passe\n");
+          fprintf(FICHIER_LOG, "[j2]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -170,7 +172,7 @@ void* connectes(void* oldJoueurs){
     j2=0;
   }
   printf("FIN DE LA PARTIE\n\n");
-  fprintf(FICHIER_LOG,"FIN DE LA PARTIE\n\n");
+  fprintf(FICHIER_LOG, "FIN DE LA PARTIE\n\n");
 
   send(joueur1.numSock, "FIN", 65, 0);
   send(joueur2.numSock, "FIN", 65, 0);
