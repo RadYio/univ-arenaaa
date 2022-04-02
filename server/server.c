@@ -111,7 +111,7 @@ void* connectes(void* oldJoueurs){
       //Si serveur n'a rien recu
       if(j1==0){
         paquet.flag=-666;
-        information_de_la_partie == TERMINEE;
+        information_de_la_partie=TERMINEE;
         break;
       }
       send(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
@@ -139,7 +139,7 @@ void* connectes(void* oldJoueurs){
       //Si serveur n'a rien recu
       if(j2==0){
         paquet.flag=-666;
-        information_de_la_partie == TERMINEE;
+        information_de_la_partie=TERMINEE;
         break;
       }
       send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
