@@ -18,6 +18,7 @@
 #define CLIENT_MAX 32
 
 typedef enum estLibre{OUI,NON}estLibre_t;
+typedef enum partie{EN_COURS,TERMINEE}partie_t;
 
 typedef struct sockaddr_in_s{
     short               sin_family;
@@ -80,7 +81,7 @@ void* connectes(void* oldJoueurs){
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
   srand(time(NULL));
-  sleep(2);
+  partie_t information_de_la_partie = EN_COURS;
 
   int j1;
   int j2;
@@ -101,7 +102,7 @@ void* connectes(void* oldJoueurs){
   }
   gestion_t paquet;
   printf("Je rentre dedans\n");
-  while((j1 != 0) || (j2 != 0)){
+  while(information_de_la_partie == EN_COURS){
 
     printf("Je rentre dans while j1\n");
     while(j1){
@@ -115,8 +116,20 @@ void* connectes(void* oldJoueurs){
       //Si serveur n'a rien recu
       if(j1==0){
         paquet.flag=-666;
+        information_de_la_partie == TERMINEE;
+        break;
       }
       send(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
+      switch(paquet.flag){
+        case 1:
+          printf("[j1]:   Joue une carte");
+          break;
+        case 2:
+          printf("[j1]:   Attaque");
+        case -100:
+          printf("[j1]:   Passe");
+          break;
+      }
       if(paquet.flag==-100) break;
     }
 
@@ -126,16 +139,25 @@ void* connectes(void* oldJoueurs){
     printf("Je rentre dans while j2\n");
     while(j2){
       j2=recv(joueur2.numSock, &paquet, sizeof(gestion_t),0);
-      printf("j2[%i]\n",j2);
 
-      for(int i=0;i<10;i++){
-        printf("[j2]%i:%i\n",i,paquet.tab2[i].hp_carte);
-      }
+
       //Si serveur n'a rien recu
       if(j2==0){
         paquet.flag=-666;
+        information_de_la_partie == TERMINEE;
+        break;
       }
       send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
+      switch(paquet.flag){
+        case 1:
+          printf("[j2]:   Joue une carte");
+          break;
+        case 2:
+          printf("[j2]:   Attaque");
+        case -100:
+          printf("[j2]:   Passe");
+          break;
+      }
       if(paquet.flag==-100) break;
     }
     j1=1;
