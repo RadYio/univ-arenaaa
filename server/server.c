@@ -8,6 +8,7 @@
 #include <pthread.h>
 #include <time.h>
 #include <string.h>
+#include <signal.h>
 
 #include "../header/carte.h"
 
@@ -180,6 +181,8 @@ int main(){
   socklen_t s_Taille = sizeof(server_Sin);
 
   client_t client_temporaire;
+
+  sigaction(SIGPIPE, &(struct sigaction){SIG_IGN}, NULL);
 
   struct tm* date = recupererTemps(); //stucture date, contenant le temps actuel de l'ordinateur
 
