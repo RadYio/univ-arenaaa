@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS_DEBUG	=	-g -Wextra
+CFLAGS_DEBUG	=	-g
 
 SERVER=server_test
 
