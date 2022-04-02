@@ -203,7 +203,7 @@ void* attente(void* informations){
 
 int main(){
   //OUVERTURE DU FICHIER_LOG
-  FICHIER_LOG fopen("log.txt","a+");
+  FICHIER_LOG = fopen("log.txt","a+");
   //DEFINITION DU SERVEUR
   sockaddr_in_t server_Sin;                               //Socket address IN
   int serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
