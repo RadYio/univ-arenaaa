@@ -36,8 +36,8 @@ typedef struct client_s{
 }client_t;
 
 typedef struct lien_s{
-  client_t client1;
-  client_t client2;
+  client_t* client1;
+  client_t* client2;
 }lien_t;
 
 typedef struct gestion_s{
@@ -75,8 +75,8 @@ void tableauPropre(){
 
 void* connectes(void* oldJoueurs){
   lien_t* joueurs = (lien_t*) oldJoueurs; //On triche, le  thread forcant un param void*
-  client_t joueur1 = joueurs->client1;
-  client_t joueur2 = joueurs->client2;
+  client_t joueur1 = *joueurs->client1;
+  client_t joueur2 = *joueurs->client2;
   char buffer[64];
   send(joueur1.numSock, "CONNEXION", 64, 0);
   send(joueur2.numSock, "CONNEXION", 64, 0);
@@ -117,12 +117,12 @@ void* connectes(void* oldJoueurs){
       send(joueur2.numSock, &paquet, sizeof(gestion_t), 0);
       switch(paquet.flag){
         case 1:
-          printf("[j1]:   Joue une carte");
+          printf("[j1]:   Joue une carte\n");
           break;
         case 2:
-          printf("[j1]:   Attaque");
+          printf("[j1]:   Attaque\n");
         case -100:
-          printf("[j1]:   Passe");
+          printf("[j1]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -145,12 +145,12 @@ void* connectes(void* oldJoueurs){
       send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
       switch(paquet.flag){
         case 1:
-          printf("[j2]:   Joue une carte");
+          printf("[j1]:   Joue une carte\n");
           break;
         case 2:
-          printf("[j2]:   Attaque");
+          printf("[j1]:   Attaque\n");
         case -100:
-          printf("[j2]:   Passe");
+          printf("[j1]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -158,19 +158,14 @@ void* connectes(void* oldJoueurs){
     j1=1;
     j2=0;
   }
-  printf("Je sors maggle\n\n");
+  printf("FIN DE LA PARTIE\n\n");
 
   send(joueur1.numSock, "FIN", 65, 0);
   send(joueur2.numSock, "FIN", 65, 0);
-
-
-
-  //shutdown(joueur1.numSock, 2);
-  //shutdown(joueur2.numSock, 2);
-
-  //close(joueur1.numSock);
-  //close(joueur2.numSock);
-
+  joueur1.numSock=-1;
+  joueur2.numSock=-1;
+  joueur1.libre=OUI;
+  joueur2.libre=OUI;
   free(joueurs);
 
   pthread_exit(NULL);
@@ -246,8 +241,8 @@ int main(){
           listeClient[i].libre=NON;
           listeClient[j].libre=NON;
           lien_t* nouvelleConnexion = malloc(sizeof(lien_t));
-          nouvelleConnexion->client1=listeClient[i];
-          nouvelleConnexion->client2=listeClient[j];
+          nouvelleConnexion->client1=&listeClient[i];
+          nouvelleConnexion->client2=&listeClient[j];
           pthread_cancel(th_attente[i]);
           pthread_cancel(th_attente[j]);
           printf("Création de liens\n\n");
