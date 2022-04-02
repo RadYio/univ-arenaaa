@@ -60,7 +60,7 @@ pthread_t th_attente[CLIENT_MAX];
 pthread_t th_connectes[CLIENT_MAX];
 
 //FICHIER LOG
-FILE* FICHIER_LOG = fopen("log.txt","a+");
+FILE* FICHIER_LOG;
 
 struct tm* recupererTemps(){
   time_t temp;
@@ -202,6 +202,8 @@ void* attente(void* informations){
 }
 
 int main(){
+  //OUVERTURE DU FICHIER_LOG
+  FICHIER_LOG fopen("log.txt","a+");
   //DEFINITION DU SERVEUR
   sockaddr_in_t server_Sin;                               //Socket address IN
   int serverSocket = socket(AF_INET, SOCK_STREAM, 0);     //serverSocket
