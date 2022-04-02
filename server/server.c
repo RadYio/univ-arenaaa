@@ -294,4 +294,5 @@ int main(){
     shutdown(client_temporaire.numSock, 2);
     }
   }
+  fclose(FICHIER_LOG);
 }
