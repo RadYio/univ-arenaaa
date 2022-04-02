@@ -145,12 +145,12 @@ void* connectes(void* oldJoueurs){
       send(joueur1.numSock, &paquet, sizeof(gestion_t), 0);
       switch(paquet.flag){
         case 1:
-          printf("[j1]:   Joue une carte\n");
+          printf("[j2]:   Joue une carte\n");
           break;
         case 2:
-          printf("[j1]:   Attaque\n");
+          printf("[j2]:   Attaque\n");
         case -100:
-          printf("[j1]:   Passe\n");
+          printf("[j2]:   Passe\n");
           break;
       }
       if(paquet.flag==-100) break;
@@ -162,10 +162,13 @@ void* connectes(void* oldJoueurs){
 
   send(joueur1.numSock, "FIN", 65, 0);
   send(joueur2.numSock, "FIN", 65, 0);
-  joueur1.numSock=-1;
-  joueur2.numSock=-1;
-  joueur1.libre=OUI;
-  joueur2.libre=OUI;
+  
+  listeClient[joueur1.num].libre=OUI;
+  listeClient[joueur1.num].num=-1;
+
+  listeClient[joueur2.num].libre=OUI;
+  listeClient[joueur2.num].num=-1;
+
   free(joueurs);
 
   pthread_exit(NULL);
