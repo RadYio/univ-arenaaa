@@ -101,7 +101,7 @@ void* connectes(void* oldJoueurs){
   }
   gestion_t paquet;
   printf("Je rentre dedans\n");
-  while(1){
+  while((j1 != 0) || (j2 != 0)){
 
     printf("Je rentre dans while j1\n");
     while(j1){
