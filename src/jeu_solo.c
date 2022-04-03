@@ -275,7 +275,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
       while(*running){
           SDL_Event e;
 
-          if(victoire(taille_deck, taille_deck_bot)){
+          if(victoire(renderer_jeu,taille_deck, taille_deck_bot)){
             return;
           }
           while(*jeu == 0){

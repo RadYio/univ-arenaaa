@@ -91,7 +91,7 @@ void maj_sauvergarde(carte_t * carte){
 }
 
 //fonction de récupération des cartes que possède le joueur selon son fichier de sauvegarde
-void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]){
+void recup_sauvegarde(carte_t *tab_sauvegarde[], carte_t tab_cartes_total[]){
     FILE * fic1;
     int id;
     int i = 0;
@@ -101,7 +101,7 @@ void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]){
     }
     while(!feof(fic1)){
       fscanf(fic1, "%i", &id);
-      tab_sauvegarde[i] = tab_cartes_total[id];
+      tab_sauvegarde[i] = &tab_cartes_total[id];
       i++;
     }
     fclose(fic1);

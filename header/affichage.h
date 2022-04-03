@@ -43,6 +43,9 @@ int action(int * nb_actions);
 
 void nouveau_tour(int * nb_actions, int tab_formation[][3]);
 
-int victoire(int* taille_deck_j,int* taille_deck_adv);
+int victoire(SDL_Renderer* renderer_jeu,int* taille_deck_j,int* taille_deck_adv);
+
+void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire);
+
 
 void * calcul_temps(void * val);

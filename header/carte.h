@@ -25,7 +25,7 @@ void creer_sauvegarde();
 
 void maj_sauvergarde(carte_t * carte);
 
-void recup_sauvegarde(carte_t * tab_sauvegarde[], carte_t * tab_cartes_total[]);
+void recup_sauvegarde(carte_t *tab_sauvegarde[], carte_t tab_cartes_total[]);
 
 void creation_deck(carte_t * deck[12]);
 

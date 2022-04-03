@@ -41,10 +41,6 @@ void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){
   SDL_RenderCopy(renderer_jeu, img_jeu_Texture, NULL, NULL);
 }
 
-void affichage_energie(int * nb_actions){
-
-
-}
 
 
 /**
@@ -267,7 +263,6 @@ int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_car
 SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
 ,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions){
     printf("on affiche \n\n");
-    //TTF_Font* police = TTF_OpenFont("font/ChowFun.ttf", 20);
 
     SDL_RenderClear(renderer_jeu);
 
@@ -366,26 +361,67 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
  * @param taille_deck_adv taille du deck de l'adversaire, si égal à 0 alors l'adversaire à perdu
  * @return 1 si le joueur perd, 2 si le joueur gagne, 0 si on continue la partie
  */
-int victoire(int* taille_deck_j,int* taille_deck_adv){
+int victoire(SDL_Renderer* renderer_jeu,int* taille_deck_j,int* taille_deck_adv){
   //le joueur perd, on return 1
   if(*taille_deck_j <= 0 && *taille_deck_adv > 0){
     printf("defaite du joueur\n");
+    affichage_victoire(renderer_jeu,1);
+
     return 1;
   }
   //le joueur gagne, on return 2
   if(*taille_deck_j > 0 && *taille_deck_adv <= 0){
     printf("victoire du joueur\n");
+    affichage_victoire(renderer_jeu,2);
     return 2;
   }
   //si les 2 sont égal à 0 en meme temps alors il y a eu un bug, on return -1
   if(*taille_deck_j <= 0 && *taille_deck_adv <= 0){
     printf("bug dans la taille des deck, dans fonction victoire\n");
+    affichage_victoire(renderer_jeu,-1);
+
     return -1;
   }
   //sinon personne gagne, on return 0
   return 0;
 }
 
+void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire){
+  SDL_SetRenderDrawBlendMode(renderer_jeu, SDL_BLENDMODE_BLEND);
+  SDL_Color couleurBlanche = {255, 255, 255};
+  char * texte_victoire = malloc(sizeof(texte_victoire));
+  TTF_Font* police = TTF_OpenFont("font/ChowFun.ttf", 20);  
+  if (police == NULL) {
+    fprintf(stderr, "error: font not found\n");
+    printf("\n%s\n",TTF_GetError());
+    exit(EXIT_FAILURE);
+  }
+  SDL_Surface * texte_victoire_S ;
+  switch(victoire){
+    case 2:
+      snprintf(texte_victoire, sizeof("Vous avez Gagné !"), "%s", "Vous avez Gagné !");
+      break;
+    case 1:
+      snprintf(texte_victoire, sizeof("Vous avez Perdu !"), "%s", "Vous avez Perdu !");
+      break;
+    case -1:
+      snprintf(texte_victoire, sizeof("Égalité !"), "%s", "Égalité !");
+      break;
+  }
+  texte_victoire_S = TTF_RenderUTF8_Blended(police,texte_victoire , couleurBlanche);
+  SDL_Rect texte_victoire_R = creer_rectangle(800-(sizeof(*texte_victoire)/2),500,50,sizeof(*texte_victoire)*200);
+  SDL_Texture * texte_victoire_T = SDL_CreateTextureFromSurface(renderer_jeu,texte_victoire_S);
+  SDL_FreeSurface(texte_victoire_S);
+  free(texte_victoire);
+  for(int i = 1;i < 5 ; i++){
+    SDL_SetRenderDrawColor(renderer_jeu, 0, 0, 0, 62.5 * i);
+    SDL_RenderFillRect(renderer_jeu, NULL);
+    SDL_RenderCopy(renderer_jeu,texte_victoire_T,NULL,&texte_victoire_R);
+    SDL_RenderPresent(renderer_jeu);
+    sleep(1);
+  }
+
+}
 
 int action(int * nb_actions){
   if(*nb_actions){

@@ -44,7 +44,7 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 	carte_t tab_cartes_total[13];
 	int taille_tab_sauvegarde = 13;
 
-	carte_t* tab_sauvegarde[taille_tab_sauvegarde];
+	carte_t * tab_sauvegarde[taille_tab_sauvegarde];
 	init_cartes(tab_cartes_total);
 
 
