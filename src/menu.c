@@ -1,10 +1,19 @@
+/**
+ * @file menu.c
+ * @author Allan GONIN-SAGET (allan.gonin-saget.etu@univ-lemans.fr)
+ * @brief  fichier qui s'occupe intégralement du menu
+ * @version 1.0
+ * @date 2022-04-03
+ *
+ */
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_image.h>
 
 #include <time.h>
 //pas tout seul
-
+#include "../header/menu.h"
 #include "../header/carte.h"
 #include "../header/collection.h"
 #include "../header/jeu_solo.h"
@@ -14,7 +23,12 @@
 #include "../header/client.h"
 #include "../header/init_jeu_solo.h"
 
-
+/**
+ * @brief fonction qui gere l'intégralité de la gestion et affichage du menu
+ *
+ * @param pWindow pointeur de (SDL_Window*), permettant de garder la fênetre afficher pour le joueur.
+ * @return int [0] si tout c'est bien passé
+ */
 int menu(SDL_Window* pWindow){
 
   //initialisations de base------------------------------------------------------------------------------------------------------
