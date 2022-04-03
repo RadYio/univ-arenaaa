@@ -36,7 +36,7 @@
  * @return void* NULL
  */
 void* calcul_temps2(void * val){
-  int * jeu =  (int*)(val);
+  int* jeu =  (int*)(val);
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
