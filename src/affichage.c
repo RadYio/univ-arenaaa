@@ -169,7 +169,18 @@ void afficher_rectangles_formation(SDL_Renderer* renderer_jeu,carte_t tab_cartes
 
 
 
-
+/**
+ * @fn void double_clique2(SDL_Renderer *renderer_jeu, int id_carte, carte_t tab_cartes_deck[], SDL_Rect *rect_aff_carte_j, SDL_Rect *rect_aff_att_j, SDL_Rect *rect_aff_hp_j, TTF_Font* police)
+ * @brief fonction d'affichage des cartes en plus grand et des points de vie et d'attaque ce cette même carte
+ * 
+ * @param renderer_jeu notre renderer
+ * @param id_carte identifiant d'une carte de type carte_t
+ * @param tab_cartes_deck tableau de carte_t permettant de trouver la carte que l'on veut afficher à partir de son identifiant
+ * @param rect_aff_carte_j rectangle où l'on affiche l'image de la carte
+ * @param rect_aff_att_j rectangle où l'on affiche l'attaque de la carte
+ * @param rect_aff_hp_j rectangle où l'on affiche les points de vie de la carte
+ * @param police police SDL correspondant à la police utilisée ultérieurement
+ */
 void double_clique2(SDL_Renderer *renderer_jeu, int id_carte, carte_t tab_cartes_deck[], SDL_Rect *rect_aff_carte_j, SDL_Rect *rect_aff_att_j, SDL_Rect *rect_aff_hp_j, TTF_Font* police){
   SDL_Color couleurBlanche = {255, 255, 255};
   char attaque[4];
@@ -211,7 +222,13 @@ void double_clique2(SDL_Renderer *renderer_jeu, int id_carte, carte_t tab_cartes
 
 }
 
-
+/**
+ * @brief void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions)
+ * @fn fonction d'affichage du nombre d'action dont le joueur dispose dans son tour
+ * 
+ * @param renderer_jeu notre renderer
+ * @param nb_actions le nombre d'actions dont le joueur dispose pendant un tour
+ */
 void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions){
   SDL_Surface* energie_S = IMG_Load("img/eclair.png");
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
@@ -385,7 +402,12 @@ int victoire(SDL_Renderer* renderer_jeu,int* taille_deck_j,int* taille_deck_adv)
   //sinon personne gagne, on return 0
   return 0;
 }
-
+/**
+ * @brief void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire)
+ * @fn fonction d'affichage en fin de partie indiquant si le joueur a gagné , perdu ou si il y a eu match nul
+ * @param renderer_jeu notre renderer
+ * @param victoire entier qui vaut 1 si l'adversaire a gagné , 2 si le joueur a gagné et -1 si il y a match nul
+ */
 void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire){
   SDL_SetRenderDrawBlendMode(renderer_jeu, SDL_BLENDMODE_BLEND);
   SDL_Color couleurBlanche = {255, 255, 255};
@@ -422,6 +444,13 @@ void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire){
   }
 
 }
+/**
+ * @brief int action(int * nb_actions)
+
+ * @fn fonction qui vérifie si le joueur a des points d'actions disponible et si oui lui en retire un
+ * @param nb_actions nombre d'actions dont le joueur dispose dans un tour
+ * @return int return 1 si le joueur avait une action disponnible et en a donc perdu une et 0 si il n'avait pas d'action disponnible
+ */
 
 int action(int * nb_actions){
   if(*nb_actions){
@@ -432,6 +461,12 @@ int action(int * nb_actions){
   return 0;
 }
 
+/**
+ * @brief void nouveau_tour(int * nb_actions, int tab_formation[][3])
+ * @fn fonction qui calcul le nombre de d'action attribuées au joueur pour le tour à venir, au minimum 1 incrémenté pour toute colonne de son plateau remplie de carte
+ * @param nb_actions nombre d'actions dont le joueur dispose dans un tour
+ * @param tab_formation matrice d'entier correspondant au plateau du joueur nous permettant de connaître sa composition de carte présentes sur le plateau 
+ */
 void nouveau_tour(int * nb_actions, int tab_formation[][3]){
   *nb_actions = 1;
   int j;
@@ -445,6 +480,14 @@ void nouveau_tour(int * nb_actions, int tab_formation[][3]){
   }
 }
 
+/**
+ * @brief void * calcul_temps(void * val)
+
+ * @fn thread changeant la valeur de jeu toute les 60 secondes pour limiter le temps de tour du joueur et ne bouclant pas quand jeu vaut 0
+ * 
+ * @param val pointeur sur la valeur de jeu qui vaut 1 quand c'est le tour du joueur et 0 pour le tour du bot
+ * @return void* 
+ */
 void * calcul_temps(void * val){
   int * jeu =malloc(sizeof(int));
   jeu =  (int*)(val);
@@ -456,7 +499,7 @@ void * calcul_temps(void * val){
   while(1)
   {
       //un tour de 60 secondes
-      if(difftime(t2, t1) >= 10){
+      if(difftime(t2, t1) >= 60){
         *jeu = 0;
         t1 = time(NULL);
       }
@@ -465,8 +508,5 @@ void * calcul_temps(void * val){
         t1 = time(NULL);
       }
       t2 = time(NULL);
-      sleep(1);
-      if(*jeu == 1){
-      }
   }
 }
