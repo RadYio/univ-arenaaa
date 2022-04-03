@@ -1,3 +1,11 @@
+/**
+ * @file jeu_multi.c
+ * @author Allan GONIN-SAGET (allan.gonin-saget.etu@univ-lemans.fr)
+ * @brief  Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur grace à un serveur allumé
+ * @version 1.0
+ * @date 2022-04-03
+ *
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -21,11 +29,13 @@
 
 
 
-
-
-//---------------------------------------------NE PAS OUBLIER LES FREE APRES LES MALLOC !!!!!!!!!!!!!!!!!!!!!!!!!--------------------------------------------------------------
-
-void * calcul_temps2(void * val){
+/**
+ * @brief (utilisation via un thread, sinon fonction bloquante) teste le delai de 60 secondes pour le tour du joueur et modifie la valeur si délai est dépassé
+ *
+ * @param pointeur générique (thread): cast en int
+ * @return void* NULL
+ */
+void* calcul_temps2(void * val){
   int * jeu =  (int*)(val);
   time_t t1, t2;
   t1 = time(NULL);
@@ -46,8 +56,15 @@ void * calcul_temps2(void * val){
 
 
 
-//fonction de jeu en solo, a programmer : les méchaniques de jeu, le bot
-void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running,int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+/**
+ * @brief fonction lancé lorsque le joueur choisit de joueur en multijoueur : permet tout le jeu en multijoueur en lien avec client.c et la connexion au serveur ?/server/
+ *
+ * @param pWindow la fenetre où se déroule le jeu
+ * @param renderer_jeu notre renderer lié à la fenetre
+ * @param running variable: permettant de quitter le programme si le joueur decide de quitter le jeu
+ * @param valSocket pointeur: permettant de garder la connexion établie entre le menu et l'instance du jeu multijoueur
+ */
+void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu, int * running, int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
     int* jeu = malloc(sizeof(int));
     *jeu = 1;
     gestion_t etatDuJeu;
@@ -309,17 +326,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               }
 
               if(etatDuJeu.flag == -100){
-                printf("etatDuJeu.flag[%i]\n",etatDuJeu.flag);
                 *jeu = 1;
               }
               if(e.type == SDL_QUIT){
                 *running = 0;
-                printf("on sort mtn 1\n");
                 connectF(valSocket);
               }
               if(e.type == SDL_MOUSEBUTTONDOWN && e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
-                printf("fin menu\n");
-
                 free(jeu);
                 free(taille_main);
                 free(taille_deck_j);
@@ -335,7 +348,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 return;
               }
               if(etatDuJeu.flag!=0){
-                printf("etatDuJeu.flag[%i]\n",etatDuJeu.flag);
                 for(int i=0;i<5;i++){
                   for(int j=0;j<3;j++){
                     tab_formation_cartesADV[i][2-j] = etatDuJeu.mat1[i][j];
@@ -349,20 +361,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
 
                 etatDuJeu.flag=0;
-                printf("Je devrais afficher\n\n");
-                for(int p = 0; p < 5; p++){
-                    printf("\n");
-                    for(int l = 0; l < 3; l++){
-                        printf("%i", tab_formation_cartesADV[p][l]);
-                    }
-                }
-                printf("\n\n");
-                for(int p = 0; p < 5; p++){
-                    printf("\n");
-                    for(int l = 0; l < 3; l++){
-                        printf("%i", tab_formation_cartesJ[p][l]);
-                    }
-                }
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                     menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
@@ -373,7 +371,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                //premiere action lors d'un nouveau tour
               if(flagThread == 1 || flagThread == -1){
                 flagThread=0;
-                printf("thread créer \n\n");
                 pthread_create(&thread_tps, NULL, calcul_temps2, (void*)(jeu));
                 nouveau_tour(nb_actions,tab_formation_cartesJ);
                 affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
@@ -385,35 +382,18 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
             switch(e.type){
               case SDL_QUIT :
-                printf("je suis ici %i\n",e.type);
-
                 *running = 0 ;
-                printf("avant shutdown = %i \n\n",*valSocket);
-
                 connectF(valSocket);
-                printf("shutdown = %i \n\n",*valSocket);
-                /*shutdown(*valSocket,2);
-                close(*valSocket);
-                printf("on sort mtn %i\n",*valSocket);*/
-
-              break;
-
+                break;
               case SDL_MOUSEBUTTONDOWN :
-                printf("\ntest nouvelle action = %i\n\n",(e.type));
                 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //gestion des cartes dans la main---------------------------------------------------------------------------------------------------------------------------------------------------------------
                 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 if(e.button.x >= menu_R.x && e.button.x <= menu_R.x+menu_R.w && e.button.y >= menu_R.y && e.button.y <= menu_R.y+menu_R.h){
-                  printf("fin menu\n");
-
-                free(jeu);
-                free(taille_main);
-                free(taille_deck_j);
-                free(taille_deck_adv);
-
-
-
-
+                  free(jeu);
+                  free(taille_main);
+                  free(taille_deck_j);
+                  free(taille_deck_adv);
                   pthread_cancel(thread_tps);
                   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
                   SDL_RenderClear(renderer_jeu);
@@ -422,7 +402,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   return;
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
-                  printf("on passe le tour\n");
                   transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, -100, *valSocket);
                   pthread_cancel(thread_tps);
                   *jeu = 0;
@@ -440,14 +419,12 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         break;
                       }
                       else if(tab_formation_cartesJ[x][y] >= 0  && e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
-                        printf("carte [%i][%i] du plateau allié\n",x,y);
                         etat = -(i + 1);
                         coord_x = x;
                         coord_y = y;
                         break;
                       }
                       else if(tab_formation_cartesADV[x][2-y] >= 0  && e.button.x >= tab_rect_formationAdv[x][2-y].x && e.button.x <= tab_rect_formationAdv[x][2-y].x+tab_rect_formationAdv[x][2-y].w && e.button.y >= tab_rect_formationAdv[x][2-y].y && e.button.y <= tab_rect_formationAdv[x][2-y].y+tab_rect_formationAdv[x][2-y].h){
-                        printf("carte [%i][%i] du plateau ennemie\n",x,2-y);
                         etat = i + 11;
                         coord_x = x;
                         coord_y = 2-y;
@@ -456,7 +433,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     }
                     break;
                 }
-                printf("etat = %i\n",etat);
 
                 if(etat > 0 && etat < 11){
                   etat -=1;
@@ -467,26 +443,20 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                     //vérifie qu'on reclique sur la même carte
                     if(i == etat && e.button.x >= tab_rect_main[i].x && e.button.x <= tab_rect_main[i].x+tab_rect_main[i].w && e.button.y >= tab_rect_main[i].y && e.button.y <= tab_rect_main[i].y+tab_rect_main[i].h){
                         etat = 0;
-                        printf("%s\n",tab_cartes_deck[tab_main[i].id_carte].chemin_carte);
                         double_clique2(renderer_jeu,tab_main[i].id_carte,tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         break;
                     }
                     if(e.button.x >= tab_rect_formationJ[x][y].x && e.button.x <= tab_rect_formationJ[x][y].x+tab_rect_formationJ[x][y].w && e.button.y >= tab_rect_formationJ[x][y].y && e.button.y <= tab_rect_formationJ[x][y].y+tab_rect_formationJ[x][y].h){
+                      //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
                       if(action(nb_actions)){
                         transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
                         affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                         menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
-                        printf("la carte a été posée\n");
                         transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 1, *valSocket);
-                        printf("Envoi :");
-
-
                       }
-                      //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [JOUER UNE CARTE]
                       etat = 0;
                       break;
-
                     }
                   }
                   etat = 0;
@@ -494,13 +464,9 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 }
 
                 else if(etat < 0){
-
                   for (int i = 0; i < 5;i++){
                     for(int j = 0; j < 3; j++){
                       if(i == coord_x && j == coord_y && tab_formation_cartesJ[i][j] >= 0  && e.button.x >= tab_rect_formationJ[i][j].x && e.button.x <= tab_rect_formationJ[i][j].x+tab_rect_formationJ[i][j].w && e.button.y >= tab_rect_formationJ[i][j].y && e.button.y <= tab_rect_formationJ[i][j].y+tab_rect_formationJ[i][j].h){
-                        printf("\n\n\nhp avant = %i\n\n\n",tab_cartes_deck[tab_formation_cartesJ[coord_x][coord_y]].hp_carte);
-
-                        printf("%s\n",tab_cartes_deck[tab_formation_cartesJ[coord_x][coord_y]].chemin_carte);
                         double_clique2(renderer_jeu,tab_formation_cartesJ[coord_x][coord_y],tab_cartes_deck,rect_aff_carte_j,rect_aff_att_j,rect_aff_hp_j,police);
                         coord_x = 0;
                         coord_y = 0;
@@ -508,24 +474,16 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         break;
                       }
                       if(e.button.x >= tab_rect_formationAdv[i][j].x && e.button.x <= tab_rect_formationAdv[i][j].x+tab_rect_formationAdv[i][j].w && e.button.y >= tab_rect_formationAdv[i][j].y && e.button.y <= tab_rect_formationAdv[i][j].y+tab_rect_formationAdv[i][j].h){
+                        //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
                         if(action(nb_actions)){
-                          printf("attaque sur la carte %i de l'adversaire \n\n",i);
                           attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck,
                           tab_cartes_deck_adv, tab_formation_cartesADV, taille_deck_adv);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
                           menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
                           transfertInfo(&etatDuJeu, tab_formation_cartesJ, tab_formation_cartesADV, tab_cartes_deck, tab_cartes_deck_adv, 2, *valSocket);
-                          printf("a l'envoi\n\n");
-                          for(int i=0;i < *taille_deck_adv;i++){
-                            printf("Hp de la carte %i = %i\n",i,tab_cartes_deck_adv[i].hp_carte);
-                          }
-                          printf("tab J\n\n");
-                          for(int i=0;i < *taille_deck_j;i++){
-                            printf("Hp de la carte %i = %i\n",i,tab_cartes_deck[i].hp_carte);
-                          }
                         }
-                        //MODE MULTIJOUEUR ON ENVOIE VIA LA FONCTION SUIVANTE [ATTAQUER UNE CARTE]
+
                         etat = 0;
                         // attaque d'une carte
                         break;
