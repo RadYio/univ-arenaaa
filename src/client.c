@@ -46,6 +46,7 @@ void transfertInfo(gestion_t* futurInfos, int premiereMat[][3], int deuxiemeMat[
   printf("Le flag est de %i\n\n",futurInfos->flag);
   futurInfos->flag = 0;
 }
+
 /**
  * @brief termine la connexion avec le serveur
  *
@@ -85,10 +86,10 @@ int gestionPartie(void* infos){
   return 0;
 }
 /**
- * @brief
+ * @brief (utilisation via un thread, sinon fonction bloquante) reste en attente de la réponse du serveur annoncant une connexion établie avec un autre joueur
  *
- * @param infos
- * @return void*
+ * @param pointeur générique (thread): cast en serverStruct_t
+ * @return void* NULL
  */
 void* rechercheJoueur(void* infos){
   serverStruct_t* infoServer = (serverStruct_t*)infos;
@@ -104,6 +105,7 @@ void* rechercheJoueur(void* infos){
   pthread_exit(NULL);
   return NULL;
 }
+
 /**
  * @brief genere une connexion avec le serveur
  *
