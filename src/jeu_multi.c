@@ -26,7 +26,7 @@
 #include "../header/client.h"
 #include "../header/attaque.h"
 
-
+#define TEMPS_DE_JEU 60
 
 
 /**
@@ -36,14 +36,14 @@
  * @return void* NULL
  */
 void* calcul_temps2(void * val){
-  int * jeu =  (int*)(val);
+  int* jeu =  (int*)(val);
   time_t t1, t2;
   t1 = time(NULL);
  	t2 = time(NULL);
   while(1)
   {
       //un tour de 60 secondes
-      if(difftime(t2, t1) >= 60){
+      if(difftime(t2, t1) >= TEMPS_DE_JEU){
         *jeu=0;
         printf("passage tour\n");
         return NULL;
