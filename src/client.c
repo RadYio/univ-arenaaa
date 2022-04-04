@@ -1,11 +1,12 @@
 /**
  * @file client.c
  * @author Allan GONIN-SAGET (allan.gonin-saget.etu@univ-lemans.fr)
- * @brief  Fichier regroupant les fonctions princpales permettant le lien et le contact avec un serveur
+ * @brief  Fichier regroupant les fonctions princpales permettant le lien et le contact avec un serveur (cf. server.c)
  * @version 1.0
  * @date 2022-03-28
  *
  */
+
 #include "../header/client.h"
 
 

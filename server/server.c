@@ -1,4 +1,11 @@
-#include <sys/types.h>
+/**
+ * @file server.c
+ * @author Allan GONIN-SAGET (allan.gonin-saget.etu@univ-lemans.fr)
+ * @brief  Fichier.c qui regroupe l'intégralité du code pour le serveur
+ * @version 1.0
+ * @date 2022-04-04
+ *
+ */
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -17,9 +24,21 @@
 #define PORT 6666
 #define CLIENT_MAX 32
 
+/**
+ * @enum estLibre
+ * 
+ */
 typedef enum estLibre{OUI,NON}estLibre_t;
+
+/**
+ * @enum partie 
+ * @brief information sur l'état de la partie: (EN_COURS ou TERMINEE)
+ */
 typedef enum partie{EN_COURS,TERMINEE}partie_t;
 
+/**
+ * @struct sockaddr_in_s
+ */
 typedef struct sockaddr_in_s{
     short               sin_family;
     unsigned short      sin_port;
@@ -27,14 +46,25 @@ typedef struct sockaddr_in_s{
     char                sin_zero[8];
 }sockaddr_in_t;
 
+/**
+ * @struct  client_s
+ * @brief   structure contenant toutes les informations d'un client
+ * 
+ */
 typedef struct client_s{
   int num;
+  
   estLibre_t libre;
   int numSock;
-  sockaddr_in_t sin; //Socket address IN
+  sockaddr_in_t sin;
   socklen_t taille;
 }client_t;
 
+
+/**
+ * @struct lien_s 
+ * @brief contient deux structures client_s
+ */
 typedef struct lien_s{
   client_t* client1;
   client_t* client2;
@@ -58,13 +88,21 @@ pthread_t th_attente[CLIENT_MAX];
 pthread_t th_connectes[CLIENT_MAX];
 
 
-
+/**
+ * @fn recupererTemps() 
+ * @brief on recupere le temps sous forme de structure
+ * @return struct tm* On recupere un pointeur de structure contenant l' heure sous forme de hour, min, sec
+ */
 struct tm* recupererTemps(){
   time_t temp;
   time(&temp);
   return localtime(&temp);
 }
 
+/**
+ * @brief on nettoie le tableau de notre liste de clients, en initialisant num=-1, libre=NON, numSocket=-1
+ * 
+ */
 void tableauPropre(){
   int i;
   for(i=0;i<CLIENT_MAX;i++)
@@ -73,14 +111,21 @@ void tableauPropre(){
     listeClient[i].numSock=-1;
 }
 
+
+/**
+ * @brief Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure gestion_s, envoyé par le client
+ * @param oldJoueurs pointeur générique (thread): cast en lien_t
+ * @return void* pointeur générique (thread): NULL
+ */
 void* connectes(void* oldJoueurs){
   lien_t* joueurs = (lien_t*) oldJoueurs; //On triche, le  thread forcant un param void*
   client_t joueur1 = *joueurs->client1;
   client_t joueur2 = *joueurs->client2;
-  char buffer[64];
-  send(joueur1.numSock, "CONNEXION", 64, 0);
-  send(joueur2.numSock, "CONNEXION", 64, 0);
+
+  send(joueur1.numSock, "CONNEXION", 65, 0);
+  send(joueur2.numSock, "CONNEXION", 65, 0);
   srand(time(NULL));
+
   partie_t information_de_la_partie = EN_COURS;
 
   int j1;
@@ -88,15 +133,15 @@ void* connectes(void* oldJoueurs){
   int qui=rand();
   if(qui%2==1){
     //J1 FIRST
-    send(joueur1.numSock, "TOUR_TOI", 64, 0);
-    send(joueur2.numSock, "TOUR_PASTOI", 64, 0);
+    send(joueur1.numSock, "TOUR_TOI", 63, 0);
+    send(joueur2.numSock, "TOUR_PASTOI", 63, 0);
     j1=1;
     j2=0;
   }
   else{
     //J2 FIRST
-    send(joueur2.numSock, "TOUR_TOI", 64, 0);
-    send(joueur1.numSock, "TOUR_PASTOI", 64, 0);
+    send(joueur2.numSock, "TOUR_TOI", 63, 0);
+    send(joueur1.numSock, "TOUR_PASTOI", 63, 0);
     j1=0;
     j2=1;
   }
@@ -164,7 +209,7 @@ void* connectes(void* oldJoueurs){
 
   send(joueur1.numSock, "FIN", 65, 0);
   send(joueur2.numSock, "FIN", 65, 0);
-  
+
   listeClient[joueur1.num].libre=OUI;
   listeClient[joueur1.num].num=-1;
 
@@ -175,7 +220,12 @@ void* connectes(void* oldJoueurs){
 
   pthread_exit(NULL);
 }
-
+/**
+ * @brief Fonction qui maintient le joueur en connexion, verifie sa deconnexion et si un autre joueur est détecté on utiliser la fonction [void* connectes()]
+ * 
+ * @param informations pointeur générique (thread): cast en client_t
+ * @return void* pointeur générique (thread): NULL 
+ */
 void* attente(void* informations){
   client_t* client = (client_t*) informations; //On triche, le  thread forcant un param void*
   ssize_t verif = -1;
@@ -190,7 +240,11 @@ void* attente(void* informations){
   nb_client_attente--;
   pthread_exit(NULL);
 }
-
+/**
+ * @brief fonction main qui lance le serveur et gere la connexion des joueurs de univ-arenaaa
+ * 
+ * @return int [0] si tout c'est bien passé, [1] si erreur
+ */
 int main(){
   //DEFINITION DU SERVEUR
   sockaddr_in_t server_Sin;                               //Socket address IN
@@ -284,4 +338,5 @@ int main(){
     shutdown(client_temporaire.numSock, 2);
     }
   }
+  return 0;
 }
