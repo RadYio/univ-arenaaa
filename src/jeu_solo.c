@@ -255,7 +255,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     carte_t main_bot[13];
     creation_tab_main(main_bot,*taille_main_bot);
     int *taille_deck = malloc(sizeof(int));
-    *taille_deck = 13;
+    *taille_deck = 6;
     int *taille_deck_bot = malloc(sizeof(int));
     *taille_deck_bot = 1;
     
@@ -288,6 +288,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
               printf("fin du tour\n");
               printf("\n    nombre d'actions = %i  \n\n",*nb_actions);
+              printf("\n    taille deck joueur = %i  \n\n",*taille_deck);
               *jeu = 1;
             }
 

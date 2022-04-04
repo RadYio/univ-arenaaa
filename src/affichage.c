@@ -235,7 +235,7 @@ void suppression_carte_main(carte_t tab_main[], int indice_main, SDL_Rect tab_re
 
 int victoire(SDL_Renderer* renderer_jeu,int* taille_deck_j,int* taille_deck_adv){
   //le joueur perd, on return 1
-  if(*taille_deck_j <= 0 && *taille_deck_adv > 0){
+  if(*taille_deck_j <= 0 && *taille_deck_adv >= 0){
     printf("defaite du joueur\n");
     affichage_victoire(renderer_jeu,1);
 
