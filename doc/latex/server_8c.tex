@@ -1,0 +1,180 @@
+\hypertarget{server_8c}{}\doxysection{Référence du fichier server/server.c}
+\label{server_8c}\index{server/server.c@{server/server.c}}
+
+
+Fichier.\+c qui regroupe l\textquotesingle{}intégralité du code pour le serveur.  
+
+
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+\doxysubsection*{Structures de données}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsockaddr__in__s}{sockaddr\+\_\+in\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em cf. $<$sys/socket.\+h$>$ \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structclient__s}{client\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em structure contenant toutes les informations d\textquotesingle{}un client \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structlien__s}{lien\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em contient deux structures \mbox{\hyperlink{structclient__s}{client\+\_\+s}} \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em structure qui contient les informations du plateau qu\textquotesingle{}on envoie à travers le serveur d\textquotesingle{}un client à un autre \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_a614217d263be1fb1a5f76e2ff7be19a2}\label{server_8c_a614217d263be1fb1a5f76e2ff7be19a2}} 
+\#define {\bfseries PORT}~6666
+\item 
+\mbox{\Hypertarget{server_8c_a639e903af28852be931e027ddd3b4783}\label{server_8c_a639e903af28852be931e027ddd3b4783}} 
+\#define {\bfseries CLIENT\+\_\+\+MAX}~32
+\end{DoxyCompactItemize}
+\doxysubsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_aef7b62a3eb4cb2cdc3e860c75fdc35ed}\label{server_8c_aef7b62a3eb4cb2cdc3e860c75fdc35ed}} 
+typedef enum est\+Libre {\bfseries est\+Libre\+\_\+t}
+\item 
+\mbox{\Hypertarget{server_8c_a6a8f0cfead26647699b6952332feb74a}\label{server_8c_a6a8f0cfead26647699b6952332feb74a}} 
+typedef enum \mbox{\hyperlink{server_8c_a73d180df0d16e43a0015933c9aecdf85}{partie}} {\bfseries partie\+\_\+t}
+\item 
+\mbox{\Hypertarget{server_8c_ac568a628784f86297f0bfbe80b24a8fd}\label{server_8c_ac568a628784f86297f0bfbe80b24a8fd}} 
+typedef struct \mbox{\hyperlink{structsockaddr__in__s}{sockaddr\+\_\+in\+\_\+s}} {\bfseries sockaddr\+\_\+in\+\_\+t}
+\item 
+\mbox{\Hypertarget{server_8c_a7bfebc8e763f36d1870198931d6b5eb1}\label{server_8c_a7bfebc8e763f36d1870198931d6b5eb1}} 
+typedef struct \mbox{\hyperlink{structclient__s}{client\+\_\+s}} {\bfseries client\+\_\+t}
+\item 
+\mbox{\Hypertarget{server_8c_a2552ffd2b689f3297edfb5d2b2d860cd}\label{server_8c_a2552ffd2b689f3297edfb5d2b2d860cd}} 
+typedef struct \mbox{\hyperlink{structlien__s}{lien\+\_\+s}} {\bfseries lien\+\_\+t}
+\item 
+\mbox{\Hypertarget{server_8c_a6828cd1700d708b044aa22420612a0da}\label{server_8c_a6828cd1700d708b044aa22420612a0da}} 
+typedef struct \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}} {\bfseries gestion\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_ad04852276f9b4b3966896f6e7d843325}\label{server_8c_ad04852276f9b4b3966896f6e7d843325}} 
+enum {\bfseries est\+Libre} \{ {\bfseries OUI}
+, {\bfseries NON}
+ \}
+\item 
+\mbox{\Hypertarget{server_8c_a73d180df0d16e43a0015933c9aecdf85}\label{server_8c_a73d180df0d16e43a0015933c9aecdf85}} 
+enum \mbox{\hyperlink{server_8c_a73d180df0d16e43a0015933c9aecdf85}{partie}} \{ {\bfseries EN\+\_\+\+COURS}
+, {\bfseries TERMINEE}
+ \}
+\begin{DoxyCompactList}\small\item\em information sur l\textquotesingle{}état de la partie\+: (EN\+\_\+\+COURS ou TERMINEE) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+struct tm $\ast$ \mbox{\hyperlink{server_8c_aa40fd363f230f2f7a2e096a5747b5045}{recuperer\+Temps}} ()
+\begin{DoxyCompactList}\small\item\em on recupere le temps sous forme de structure \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{server_8c_a4fb69c29c68ff9f148845194447e1d0d}\label{server_8c_a4fb69c29c68ff9f148845194447e1d0d}} 
+void \mbox{\hyperlink{server_8c_a4fb69c29c68ff9f148845194447e1d0d}{tableau\+Propre}} ()
+\begin{DoxyCompactList}\small\item\em on nettoie le tableau de notre liste de clients, en initialisant num=-\/1, libre=NON, num\+Socket=-\/1 \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{server_8c_a4837518826a05c6c8f6a42ac2698775a}{connectes}} (void $\ast$old\+Joueurs)
+\begin{DoxyCompactList}\small\item\em Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}}, envoyé par le client. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{server_8c_a5ecb3223ded41088118f1e14aa9a1676}{attente}} (void $\ast$informations)
+\begin{DoxyCompactList}\small\item\em Fonction qui maintient le joueur en connexion, verifie sa deconnexion et si un autre joueur est détecté on utiliser la fonction \mbox{[}void$\ast$ \mbox{\hyperlink{server_8c_a4837518826a05c6c8f6a42ac2698775a}{connectes()}}\mbox{]}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{server_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em fonction main qui lance le serveur et gere la connexion des joueurs de univ-\/arenaaa \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{server_8c_ab0f184fb9049d8590ff30bb5e181193a}\label{server_8c_ab0f184fb9049d8590ff30bb5e181193a}} 
+\mbox{\hyperlink{structclient__s}{client\+\_\+t}} {\bfseries liste\+Client} \mbox{[}CLIENT\+\_\+\+MAX\mbox{]}
+\item 
+\mbox{\Hypertarget{server_8c_a6f6e00742714405cec1099e1990fb89e}\label{server_8c_a6f6e00742714405cec1099e1990fb89e}} 
+int {\bfseries nb\+\_\+client\+\_\+attente} =0
+\item 
+\mbox{\Hypertarget{server_8c_a0d1eed1bb58b8f890362edf1172ff1eb}\label{server_8c_a0d1eed1bb58b8f890362edf1172ff1eb}} 
+pthread\+\_\+t {\bfseries th\+\_\+attente} \mbox{[}CLIENT\+\_\+\+MAX\mbox{]}
+\item 
+\mbox{\Hypertarget{server_8c_ad179e9470b8d644429abdd9869b28d07}\label{server_8c_ad179e9470b8d644429abdd9869b28d07}} 
+pthread\+\_\+t {\bfseries th\+\_\+connectes} \mbox{[}CLIENT\+\_\+\+MAX\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier.\+c qui regroupe l\textquotesingle{}intégralité du code pour le serveur. 
+
+\begin{DoxyAuthor}{Auteur}
+Allan GONIN-\/\+SAGET (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{server_8c_a5ecb3223ded41088118f1e14aa9a1676}\label{server_8c_a5ecb3223ded41088118f1e14aa9a1676}} 
+\index{server.c@{server.c}!attente@{attente}}
+\index{attente@{attente}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{attente()}{attente()}}
+{\footnotesize\ttfamily void$\ast$ attente (\begin{DoxyParamCaption}\item[{void $\ast$}]{informations }\end{DoxyParamCaption})}
+
+
+
+Fonction qui maintient le joueur en connexion, verifie sa deconnexion et si un autre joueur est détecté on utiliser la fonction \mbox{[}void$\ast$ \mbox{\hyperlink{server_8c_a4837518826a05c6c8f6a42ac2698775a}{connectes()}}\mbox{]}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em informations} & pointeur générique (thread)\+: cast en client\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void$\ast$ pointeur générique (thread)\+: NULL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{server_8c_a4837518826a05c6c8f6a42ac2698775a}\label{server_8c_a4837518826a05c6c8f6a42ac2698775a}} 
+\index{server.c@{server.c}!connectes@{connectes}}
+\index{connectes@{connectes}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{connectes()}{connectes()}}
+{\footnotesize\ttfamily void$\ast$ connectes (\begin{DoxyParamCaption}\item[{void $\ast$}]{old\+Joueurs }\end{DoxyParamCaption})}
+
+
+
+Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}}, envoyé par le client. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em old\+Joueurs} & pointeur générique (thread)\+: cast en lien\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void$\ast$ pointeur générique (thread)\+: NULL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{server_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{server_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{server.c@{server.c}!main@{main}}
+\index{main@{main}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+fonction main qui lance le serveur et gere la connexion des joueurs de univ-\/arenaaa 
+
+\begin{DoxyReturn}{Renvoie}
+int \mbox{[}0\mbox{]} si tout c\textquotesingle{}est bien passé, \mbox{[}1\mbox{]} si erreur 
+\end{DoxyReturn}
+\mbox{\Hypertarget{server_8c_aa40fd363f230f2f7a2e096a5747b5045}\label{server_8c_aa40fd363f230f2f7a2e096a5747b5045}} 
+\index{server.c@{server.c}!recupererTemps@{recupererTemps}}
+\index{recupererTemps@{recupererTemps}!server.c@{server.c}}
+\doxysubsubsection{\texorpdfstring{recupererTemps()}{recupererTemps()}}
+{\footnotesize\ttfamily recuperer\+Temps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+on recupere le temps sous forme de structure 
+
+\begin{DoxyReturn}{Renvoie}
+struct tm$\ast$ On recupere un pointeur de structure contenant l\textquotesingle{} heure sous forme de hour, min, sec 
+\end{DoxyReturn}

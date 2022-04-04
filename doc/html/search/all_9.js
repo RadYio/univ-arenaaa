@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['suppression_5fcarte_5fmain_29',['suppression_carte_main',['../affichage_8c.html#abd469ce9b24c42434a962d83969f73de',1,'affichage.c']]],
-  ['supprimer_5fcarte_5ftab_30',['supprimer_carte_tab',['../affichage_8c.html#aa271a4a6d364cb514acaf556588caca5',1,'affichage.c']]]
+  ['partie_54',['partie',['../server_8c.html#a73d180df0d16e43a0015933c9aecdf85',1,'server.c']]],
+  ['poser_5fcarte_55',['poser_carte',['../bot_8c.html#a1d9c8039dea2d808377d654b77973fe6',1,'poser_carte(int tab_formation_cartesADV[][3], carte_t main_bot[], int *taille_main_bot):&#160;bot.c'],['../bot_8h.html#a1d9c8039dea2d808377d654b77973fe6',1,'poser_carte(int tab_formation_cartesADV[][3], carte_t main_bot[], int *taille_main_bot):&#160;bot.c']]]
 ];

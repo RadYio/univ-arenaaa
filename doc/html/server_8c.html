@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>univ-arenaaa: Référence du fichier server/server.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom_dark_theme.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">univ-arenaaa
+   </div>
+   <div id="projectbrief">Jeu de carte crée pour notre projet de L2</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('server_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Structures de données</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Définitions de type</a> &#124;
+<a href="#enum-members">Énumérations</a> &#124;
+<a href="#func-members">Fonctions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Référence du fichier server.c</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichier.c qui regroupe l'intégralité du code pour le serveur.  
+<a href="#details">Plus de détails...</a></p>
+<div class="textblock"><code>#include &lt;sys/socket.h&gt;</code><br />
+<code>#include &lt;netinet/in.h&gt;</code><br />
+<code>#include &lt;arpa/inet.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;pthread.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &quot;<a class="el" href="carte_8h_source.html">../header/carte.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Structures de données</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structsockaddr__in__s.html">sockaddr_in_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">cf. &lt;sys/socket.h&gt;  <a href="structsockaddr__in__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structclient__s.html">client_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure contenant toutes les informations d'un client  <a href="structclient__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structlien__s.html">lien_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">contient deux structures <a class="el" href="structclient__s.html" title="structure contenant toutes les informations d&#39;un client">client_s</a>  <a href="structlien__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structgestion__s.html">gestion_s</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">structure qui contient les informations du plateau qu'on envoie à travers le serveur d'un client à un autre  <a href="structgestion__s.html#details">Plus de détails...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memItemLeft" align="right" valign="top"><a id="a614217d263be1fb1a5f76e2ff7be19a2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PORT</b>&#160;&#160;&#160;6666</td></tr>
+<tr class="separator:a614217d263be1fb1a5f76e2ff7be19a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a639e903af28852be931e027ddd3b4783"><td class="memItemLeft" align="right" valign="top"><a id="a639e903af28852be931e027ddd3b4783"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CLIENT_MAX</b>&#160;&#160;&#160;32</td></tr>
+<tr class="separator:a639e903af28852be931e027ddd3b4783"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Définitions de type</h2></td></tr>
+<tr class="memitem:aef7b62a3eb4cb2cdc3e860c75fdc35ed"><td class="memItemLeft" align="right" valign="top"><a id="aef7b62a3eb4cb2cdc3e860c75fdc35ed"></a>
+typedef enum estLibre&#160;</td><td class="memItemRight" valign="bottom"><b>estLibre_t</b></td></tr>
+<tr class="separator:aef7b62a3eb4cb2cdc3e860c75fdc35ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8f0cfead26647699b6952332feb74a"><td class="memItemLeft" align="right" valign="top"><a id="a6a8f0cfead26647699b6952332feb74a"></a>
+typedef enum <a class="el" href="server_8c.html#a73d180df0d16e43a0015933c9aecdf85">partie</a>&#160;</td><td class="memItemRight" valign="bottom"><b>partie_t</b></td></tr>
+<tr class="separator:a6a8f0cfead26647699b6952332feb74a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac568a628784f86297f0bfbe80b24a8fd"><td class="memItemLeft" align="right" valign="top"><a id="ac568a628784f86297f0bfbe80b24a8fd"></a>
+typedef struct <a class="el" href="structsockaddr__in__s.html">sockaddr_in_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>sockaddr_in_t</b></td></tr>
+<tr class="separator:ac568a628784f86297f0bfbe80b24a8fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bfebc8e763f36d1870198931d6b5eb1"><td class="memItemLeft" align="right" valign="top"><a id="a7bfebc8e763f36d1870198931d6b5eb1"></a>
+typedef struct <a class="el" href="structclient__s.html">client_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>client_t</b></td></tr>
+<tr class="separator:a7bfebc8e763f36d1870198931d6b5eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2552ffd2b689f3297edfb5d2b2d860cd"><td class="memItemLeft" align="right" valign="top"><a id="a2552ffd2b689f3297edfb5d2b2d860cd"></a>
+typedef struct <a class="el" href="structlien__s.html">lien_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>lien_t</b></td></tr>
+<tr class="separator:a2552ffd2b689f3297edfb5d2b2d860cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6828cd1700d708b044aa22420612a0da"><td class="memItemLeft" align="right" valign="top"><a id="a6828cd1700d708b044aa22420612a0da"></a>
+typedef struct <a class="el" href="structgestion__s.html">gestion_s</a>&#160;</td><td class="memItemRight" valign="bottom"><b>gestion_t</b></td></tr>
+<tr class="separator:a6828cd1700d708b044aa22420612a0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Énumérations</h2></td></tr>
+<tr class="memitem:ad04852276f9b4b3966896f6e7d843325"><td class="memItemLeft" align="right" valign="top"><a id="ad04852276f9b4b3966896f6e7d843325"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>estLibre</b> { <b>OUI</b>
+, <b>NON</b>
+ }</td></tr>
+<tr class="separator:ad04852276f9b4b3966896f6e7d843325"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73d180df0d16e43a0015933c9aecdf85"><td class="memItemLeft" align="right" valign="top"><a id="a73d180df0d16e43a0015933c9aecdf85"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a73d180df0d16e43a0015933c9aecdf85">partie</a> { <b>EN_COURS</b>
+, <b>TERMINEE</b>
+ }</td></tr>
+<tr class="memdesc:a73d180df0d16e43a0015933c9aecdf85"><td class="mdescLeft">&#160;</td><td class="mdescRight">information sur l'état de la partie: (EN_COURS ou TERMINEE) <br /></td></tr>
+<tr class="separator:a73d180df0d16e43a0015933c9aecdf85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Fonctions</h2></td></tr>
+<tr class="memitem:aa40fd363f230f2f7a2e096a5747b5045"><td class="memItemLeft" align="right" valign="top">struct tm *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#aa40fd363f230f2f7a2e096a5747b5045">recupererTemps</a> ()</td></tr>
+<tr class="memdesc:aa40fd363f230f2f7a2e096a5747b5045"><td class="mdescLeft">&#160;</td><td class="mdescRight">on recupere le temps sous forme de structure  <a href="server_8c.html#aa40fd363f230f2f7a2e096a5747b5045">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa40fd363f230f2f7a2e096a5747b5045"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fb69c29c68ff9f148845194447e1d0d"><td class="memItemLeft" align="right" valign="top"><a id="a4fb69c29c68ff9f148845194447e1d0d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a4fb69c29c68ff9f148845194447e1d0d">tableauPropre</a> ()</td></tr>
+<tr class="memdesc:a4fb69c29c68ff9f148845194447e1d0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">on nettoie le tableau de notre liste de clients, en initialisant num=-1, libre=NON, numSocket=-1 <br /></td></tr>
+<tr class="separator:a4fb69c29c68ff9f148845194447e1d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4837518826a05c6c8f6a42ac2698775a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a4837518826a05c6c8f6a42ac2698775a">connectes</a> (void *oldJoueurs)</td></tr>
+<tr class="memdesc:a4837518826a05c6c8f6a42ac2698775a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure <a class="el" href="structgestion__s.html" title="structure qui contient les informations du plateau qu&#39;on envoie à travers le serveur d&#39;un client à un...">gestion_s</a>, envoyé par le client.  <a href="server_8c.html#a4837518826a05c6c8f6a42ac2698775a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4837518826a05c6c8f6a42ac2698775a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ecb3223ded41088118f1e14aa9a1676"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#a5ecb3223ded41088118f1e14aa9a1676">attente</a> (void *informations)</td></tr>
+<tr class="memdesc:a5ecb3223ded41088118f1e14aa9a1676"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fonction qui maintient le joueur en connexion, verifie sa deconnexion et si un autre joueur est détecté on utiliser la fonction [void* <a class="el" href="server_8c.html#a4837518826a05c6c8f6a42ac2698775a" title="Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure gest...">connectes()</a>].  <a href="server_8c.html#a5ecb3223ded41088118f1e14aa9a1676">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5ecb3223ded41088118f1e14aa9a1676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction main qui lance le serveur et gere la connexion des joueurs de univ-arenaaa  <a href="server_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ab0f184fb9049d8590ff30bb5e181193a"><td class="memItemLeft" align="right" valign="top"><a id="ab0f184fb9049d8590ff30bb5e181193a"></a>
+<a class="el" href="structclient__s.html">client_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>listeClient</b> [CLIENT_MAX]</td></tr>
+<tr class="separator:ab0f184fb9049d8590ff30bb5e181193a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f6e00742714405cec1099e1990fb89e"><td class="memItemLeft" align="right" valign="top"><a id="a6f6e00742714405cec1099e1990fb89e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>nb_client_attente</b> =0</td></tr>
+<tr class="separator:a6f6e00742714405cec1099e1990fb89e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d1eed1bb58b8f890362edf1172ff1eb"><td class="memItemLeft" align="right" valign="top"><a id="a0d1eed1bb58b8f890362edf1172ff1eb"></a>
+pthread_t&#160;</td><td class="memItemRight" valign="bottom"><b>th_attente</b> [CLIENT_MAX]</td></tr>
+<tr class="separator:a0d1eed1bb58b8f890362edf1172ff1eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad179e9470b8d644429abdd9869b28d07"><td class="memItemLeft" align="right" valign="top"><a id="ad179e9470b8d644429abdd9869b28d07"></a>
+pthread_t&#160;</td><td class="memItemRight" valign="bottom"><b>th_connectes</b> [CLIENT_MAX]</td></tr>
+<tr class="separator:ad179e9470b8d644429abdd9869b28d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
+<div class="textblock"><p >Fichier.c qui regroupe l'intégralité du code pour le serveur. </p>
+<dl class="section author"><dt>Auteur</dt><dd>Allan GONIN-SAGET (<a href="#" onclick="location.href='mai'+'lto:'+'all'+'an'+'.go'+'ni'+'n-s'+'ag'+'et.'+'et'+'u@u'+'ni'+'v-l'+'em'+'ans'+'.f'+'r'; return false;">allan<span style="display: none;">.nosp@m.</span>.gon<span style="display: none;">.nosp@m.</span>in-sa<span style="display: none;">.nosp@m.</span>get.<span style="display: none;">.nosp@m.</span>etu@u<span style="display: none;">.nosp@m.</span>niv-<span style="display: none;">.nosp@m.</span>leman<span style="display: none;">.nosp@m.</span>s.fr</a>) </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2022-04-04 </dd></dl>
+</div><h2 class="groupheader">Documentation des fonctions</h2>
+<a id="a5ecb3223ded41088118f1e14aa9a1676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ecb3223ded41088118f1e14aa9a1676">&#9670;&nbsp;</a></span>attente()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* attente </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>informations</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui maintient le joueur en connexion, verifie sa deconnexion et si un autre joueur est détecté on utiliser la fonction [void* <a class="el" href="server_8c.html#a4837518826a05c6c8f6a42ac2698775a" title="Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure gest...">connectes()</a>]. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">informations</td><td>pointeur générique (thread): cast en client_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void* pointeur générique (thread): NULL </dd></dl>
+
+</div>
+</div>
+<a id="a4837518826a05c6c8f6a42ac2698775a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4837518826a05c6c8f6a42ac2698775a">&#9670;&nbsp;</a></span>connectes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* connectes </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>oldJoueurs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fonction qui maintient la connexion entre deux joueurs, en recevant et envoyant chaque structure <a class="el" href="structgestion__s.html" title="structure qui contient les informations du plateau qu&#39;on envoie à travers le serveur d&#39;un client à un...">gestion_s</a>, envoyé par le client. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldJoueurs</td><td>pointeur générique (thread): cast en lien_t </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void* pointeur générique (thread): NULL </dd></dl>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>fonction main qui lance le serveur et gere la connexion des joueurs de univ-arenaaa </p>
+<dl class="section return"><dt>Renvoie</dt><dd>int [0] si tout c'est bien passé, [1] si erreur </dd></dl>
+
+</div>
+</div>
+<a id="aa40fd363f230f2f7a2e096a5747b5045"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa40fd363f230f2f7a2e096a5747b5045">&#9670;&nbsp;</a></span>recupererTemps()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">recupererTemps </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>on recupere le temps sous forme de structure </p>
+<dl class="section return"><dt>Renvoie</dt><dd>struct tm* On recupere un pointeur de structure contenant l' heure sous forme de hour, min, sec </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_41e1742e44e2de38b3bc91f993fed282.html">server</a></li><li class="navelem"><a class="el" href="server_8c.html">server.c</a></li>
+    <li class="footer">Généré par <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -25,11 +25,20 @@
 var NAVTREE =
 [
   [ "univ-arenaaa", "index.html", [
+    [ "Structures de données", "annotated.html", [
+      [ "Structures de données", "annotated.html", "annotated_dup" ],
+      [ "Index des structures de données", "classes.html", null ],
+      [ "Champs de donnée", "functions.html", [
+        [ "Tout", "functions.html", null ],
+        [ "Variables", "functions_vars.html", null ]
+      ] ]
+    ] ],
     [ "Fichiers", "files.html", [
       [ "Liste des fichiers", "files.html", "files_dup" ],
       [ "Variables globale", "globals.html", [
         [ "Tout", "globals.html", null ],
-        [ "Fonctions", "globals_func.html", null ]
+        [ "Fonctions", "globals_func.html", null ],
+        [ "Énumérations", "globals_enum.html", null ]
       ] ]
     ] ]
   ] ]

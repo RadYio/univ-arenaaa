@@ -1,0 +1,93 @@
+\hypertarget{jeu__multi_8c}{}\doxysection{Référence du fichier src/jeu\+\_\+multi.c}
+\label{jeu__multi_8c}\index{src/jeu\_multi.c@{src/jeu\_multi.c}}
+
+
+Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur grace à un serveur allumé  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/bot.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/attaque.\+h\char`\"{}}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{jeu__multi_8c_a3d67f12ffa30ed89a0f6e2286e260ddf}\label{jeu__multi_8c_a3d67f12ffa30ed89a0f6e2286e260ddf}} 
+\#define {\bfseries TEMPS\+\_\+\+DE\+\_\+\+JEU}~60
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{jeu__multi_8c_a77db1514c174c4dc461d13c1b58b93d7}{calcul\+\_\+temps2}} (void $\ast$val)
+\begin{DoxyCompactList}\small\item\em (utilisation via un thread, sinon fonction bloquante) teste le delai de 60 secondes pour le tour du joueur et modifie la valeur si délai est dépassé \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{jeu__multi_8c_ad63b343e712a278eb3771fc773f13016}{jeu\+\_\+multi}} (SDL\+\_\+\+Window $\ast$p\+Window, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int $\ast$running, int $\ast$val\+Socket)
+\begin{DoxyCompactList}\small\item\em fonction lancé lorsque le joueur choisit de joueur en multijoueur \+: permet tout le jeu en multijoueur en lien avec \mbox{\hyperlink{client_8c}{client.\+c}} et la connexion au serveur ?/server/ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur grace à un serveur allumé 
+
+\begin{DoxyAuthor}{Auteur}
+Allan GONIN-\/\+SAGET (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/03 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{jeu__multi_8c_a77db1514c174c4dc461d13c1b58b93d7}\label{jeu__multi_8c_a77db1514c174c4dc461d13c1b58b93d7}} 
+\index{jeu\_multi.c@{jeu\_multi.c}!calcul\_temps2@{calcul\_temps2}}
+\index{calcul\_temps2@{calcul\_temps2}!jeu\_multi.c@{jeu\_multi.c}}
+\doxysubsubsection{\texorpdfstring{calcul\_temps2()}{calcul\_temps2()}}
+{\footnotesize\ttfamily void$\ast$ calcul\+\_\+temps2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+(utilisation via un thread, sinon fonction bloquante) teste le delai de 60 secondes pour le tour du joueur et modifie la valeur si délai est dépassé 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pointeur} & générique (thread)\+: cast en int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void$\ast$ NULL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{jeu__multi_8c_ad63b343e712a278eb3771fc773f13016}\label{jeu__multi_8c_ad63b343e712a278eb3771fc773f13016}} 
+\index{jeu\_multi.c@{jeu\_multi.c}!jeu\_multi@{jeu\_multi}}
+\index{jeu\_multi@{jeu\_multi}!jeu\_multi.c@{jeu\_multi.c}}
+\doxysubsubsection{\texorpdfstring{jeu\_multi()}{jeu\_multi()}}
+{\footnotesize\ttfamily void jeu\+\_\+multi (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{int $\ast$}]{running,  }\item[{int $\ast$}]{val\+Socket }\end{DoxyParamCaption})}
+
+
+
+fonction lancé lorsque le joueur choisit de joueur en multijoueur \+: permet tout le jeu en multijoueur en lien avec \mbox{\hyperlink{client_8c}{client.\+c}} et la connexion au serveur ?/server/ 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & la fenetre où se déroule le jeu \\
+\hline
+{\em renderer\+\_\+jeu} & notre renderer lié à la fenetre \\
+\hline
+{\em running} & variable\+: permettant de quitter le programme si le joueur decide de quitter le jeu \\
+\hline
+{\em val\+Socket} & pointeur\+: permettant de garder la connexion établie entre le menu et l\textquotesingle{}instance du jeu multijoueur \\
+\hline
+\end{DoxyParams}
