@@ -2,7 +2,7 @@
 \label{attaque_8c}\index{src/attaque.c@{src/attaque.c}}
 
 
-ensemble des fonctions gérant le système d\textquotesingle{}attaque \+: l\textquotesingle{}attaque d\textquotesingle{}une carte, la mise a jour des hp et enlevement de cartes si nécessaire  
+header de \mbox{\hyperlink{attaque_8c}{attaque.\+c}}  
 
 
 {\ttfamily \#include $<$stdio.\+h$>$}\newline
@@ -21,16 +21,16 @@ ensemble des fonctions gérant le système d\textquotesingle{}attaque \+: l\text
 \doxysubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{attaque_8c_a2c46b8f271661759db4b1764730d3120}{attaque\+\_\+critique}} (type\+\_\+t \mbox{\hyperlink{attaque_8c_a1c525981a94b9501ddd6669a76a426fd}{attaque}}, type\+\_\+t vulnerable)
+int \mbox{\hyperlink{attaque_8c_a2c46b8f271661759db4b1764730d3120}{attaque\+\_\+critique}} (type\+\_\+t \mbox{\hyperlink{attaque_8h_aabedd4c5e5e45dced9b336ab800bf1cc}{attaque}}, type\+\_\+t vulnerable)
 \begin{DoxyCompactList}\small\item\em fonction qui vérifie si celui qui défend est vulnerable au type d\textquotesingle{}attaque \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{attaque_8c_a565b457e99e4c6e6251a660ea7627f3f}{mort\+\_\+carte}} (int id\+\_\+carte\+\_\+defense, carte\+\_\+t deck\+\_\+defense\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int indice\+\_\+deck, int $\ast$taille\+\_\+deck\+\_\+defense)
+void \mbox{\hyperlink{attaque_8c_a565b457e99e4c6e6251a660ea7627f3f}{mort\+\_\+carte}} (int id\+\_\+carte\+\_\+defense, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+defense\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int indice\+\_\+deck, int $\ast$taille\+\_\+deck\+\_\+defense)
 \begin{DoxyCompactList}\small\item\em fonction qui vérifie la mort d\textquotesingle{}un carte \+: si une carte n\textquotesingle{}a plus d\textquotesingle{}hp, on doit l\textquotesingle{}enlever de la formation et du deck \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{attaque_8c_a1c525981a94b9501ddd6669a76a426fd}{attaque}} (int id\+\_\+carte\+\_\+attaque, int id\+\_\+carte\+\_\+defense, carte\+\_\+t deck\+\_\+attaque\mbox{[}$\,$\mbox{]}, carte\+\_\+t deck\+\_\+defense\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+defense)
+void \mbox{\hyperlink{attaque_8c_a1c525981a94b9501ddd6669a76a426fd}{attaque}} (int id\+\_\+carte\+\_\+attaque, int id\+\_\+carte\+\_\+defense, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+attaque\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+defense\mbox{[}$\,$\mbox{]}, int tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+defense)
 \begin{DoxyCompactList}\small\item\em fonction gérant le fait que quelqu\textquotesingle{}un attaque une carte \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Description détaillée}
-ensemble des fonctions gérant le système d\textquotesingle{}attaque \+: l\textquotesingle{}attaque d\textquotesingle{}une carte, la mise a jour des hp et enlevement de cartes si nécessaire 
+header de \mbox{\hyperlink{attaque_8c}{attaque.\+c}} 
 
 \begin{DoxyAuthor}{Auteur}
 Jonathan Otto 
@@ -48,7 +48,7 @@ Jonathan Otto
 \index{attaque.c@{attaque.c}!attaque@{attaque}}
 \index{attaque@{attaque}!attaque.c@{attaque.c}}
 \doxysubsubsection{\texorpdfstring{attaque()}{attaque()}}
-{\footnotesize\ttfamily attaque (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+carte\+\_\+attaque,  }\item[{int}]{id\+\_\+carte\+\_\+defense,  }\item[{carte\+\_\+t}]{deck\+\_\+attaque\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+defense\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+defense }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily attaque (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+carte\+\_\+attaque,  }\item[{int}]{id\+\_\+carte\+\_\+defense,  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+attaque\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+defense\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+defense }\end{DoxyParamCaption})}
 
 
 
@@ -93,7 +93,7 @@ renvoi 1 s\textquotesingle{}il s\textquotesingle{}agit d\textquotesingle{}une at
 \index{attaque.c@{attaque.c}!mort\_carte@{mort\_carte}}
 \index{mort\_carte@{mort\_carte}!attaque.c@{attaque.c}}
 \doxysubsubsection{\texorpdfstring{mort\_carte()}{mort\_carte()}}
-{\footnotesize\ttfamily mort\+\_\+carte (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+carte\+\_\+defense,  }\item[{carte\+\_\+t}]{deck\+\_\+defense\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{indice\+\_\+deck,  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+defense }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily mort\+\_\+carte (\begin{DoxyParamCaption}\item[{int}]{id\+\_\+carte\+\_\+defense,  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+defense\mbox{[}$\,$\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+defense\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{indice\+\_\+deck,  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+defense }\end{DoxyParamCaption})}
 
 
 

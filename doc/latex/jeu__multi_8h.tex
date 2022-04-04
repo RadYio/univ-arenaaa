@@ -1,0 +1,70 @@
+\hypertarget{jeu__multi_8h}{}\doxysection{Référence du fichier header/jeu\+\_\+multi.h}
+\label{jeu__multi_8h}\index{header/jeu\_multi.h@{header/jeu\_multi.h}}
+
+
+header de \mbox{\hyperlink{jeu__multi_8c}{jeu\+\_\+multi.\+c}}  
+
+
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{jeu__multi_8h_a77db1514c174c4dc461d13c1b58b93d7}{calcul\+\_\+temps2}} (void $\ast$val)
+\begin{DoxyCompactList}\small\item\em (utilisation via un thread, sinon fonction bloquante) teste le delai de 60 secondes pour le tour du joueur et modifie la valeur si délai est dépassé \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{jeu__multi_8h_ad63b343e712a278eb3771fc773f13016}{jeu\+\_\+multi}} (SDL\+\_\+\+Window $\ast$p\+Window, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int $\ast$running, int $\ast$val\+Socket)
+\begin{DoxyCompactList}\small\item\em fonction lancé lorsque le joueur choisit de joueur en multijoueur \+: permet tout le jeu en multijoueur en lien avec \mbox{\hyperlink{client_8c}{client.\+c}} et la connexion au serveur ?/server/ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+header de \mbox{\hyperlink{jeu__multi_8c}{jeu\+\_\+multi.\+c}} 
+
+\begin{DoxyAuthor}{Auteur}
+ALLAN GONIN-\/\+SAGET (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{jeu__multi_8h_a77db1514c174c4dc461d13c1b58b93d7}\label{jeu__multi_8h_a77db1514c174c4dc461d13c1b58b93d7}} 
+\index{jeu\_multi.h@{jeu\_multi.h}!calcul\_temps2@{calcul\_temps2}}
+\index{calcul\_temps2@{calcul\_temps2}!jeu\_multi.h@{jeu\_multi.h}}
+\doxysubsubsection{\texorpdfstring{calcul\_temps2()}{calcul\_temps2()}}
+{\footnotesize\ttfamily void$\ast$ calcul\+\_\+temps2 (\begin{DoxyParamCaption}\item[{void $\ast$}]{val }\end{DoxyParamCaption})}
+
+
+
+(utilisation via un thread, sinon fonction bloquante) teste le delai de 60 secondes pour le tour du joueur et modifie la valeur si délai est dépassé 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pointeur} & générique (thread)\+: cast en int \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void$\ast$ NULL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{jeu__multi_8h_ad63b343e712a278eb3771fc773f13016}\label{jeu__multi_8h_ad63b343e712a278eb3771fc773f13016}} 
+\index{jeu\_multi.h@{jeu\_multi.h}!jeu\_multi@{jeu\_multi}}
+\index{jeu\_multi@{jeu\_multi}!jeu\_multi.h@{jeu\_multi.h}}
+\doxysubsubsection{\texorpdfstring{jeu\_multi()}{jeu\_multi()}}
+{\footnotesize\ttfamily void jeu\+\_\+multi (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{int $\ast$}]{running,  }\item[{int $\ast$}]{val\+Socket }\end{DoxyParamCaption})}
+
+
+
+fonction lancé lorsque le joueur choisit de joueur en multijoueur \+: permet tout le jeu en multijoueur en lien avec \mbox{\hyperlink{client_8c}{client.\+c}} et la connexion au serveur ?/server/ 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & la fenetre où se déroule le jeu \\
+\hline
+{\em renderer\+\_\+jeu} & notre renderer lié à la fenetre \\
+\hline
+{\em running} & variable\+: permettant de quitter le programme si le joueur decide de quitter le jeu \\
+\hline
+{\em val\+Socket} & pointeur\+: permettant de garder la connexion établie entre le menu et l\textquotesingle{}instance du jeu multijoueur \\
+\hline
+\end{DoxyParams}

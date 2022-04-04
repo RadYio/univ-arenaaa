@@ -1,0 +1,51 @@
+\hypertarget{menu_8c}{}\doxysection{Référence du fichier src/menu.c}
+\label{menu_8c}\index{src/menu.c@{src/menu.c}}
+
+
+fichier qui s\textquotesingle{}occupe intégralement du menu  
+
+
+{\ttfamily \#include \char`\"{}../header/menu.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{menu_8c_a75f187a2a1a1d0fad4af46bba79ca678}{menu}} (SDL\+\_\+\+Window $\ast$p\+Window)
+\begin{DoxyCompactList}\small\item\em fonction qui gere l\textquotesingle{}intégralité de la gestion et affichage du menu \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+fichier qui s\textquotesingle{}occupe intégralement du menu 
+
+\begin{DoxyAuthor}{Auteur}
+Allan GONIN-\/\+SAGET (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/03 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{menu_8c_a75f187a2a1a1d0fad4af46bba79ca678}\label{menu_8c_a75f187a2a1a1d0fad4af46bba79ca678}} 
+\index{menu.c@{menu.c}!menu@{menu}}
+\index{menu@{menu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{menu()}{menu()}}
+{\footnotesize\ttfamily int menu (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window }\end{DoxyParamCaption})}
+
+
+
+fonction qui gere l\textquotesingle{}intégralité de la gestion et affichage du menu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & pointeur de (SDL\+\_\+\+Window$\ast$), permettant de garder la fênetre afficher pour le joueur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int \mbox{[}0\mbox{]} si tout c\textquotesingle{}est bien passé 
+\end{DoxyReturn}
+on récupère la nouvelle position du curseur et on met à jour nos events
+
+thread\+Joueur est un thread permettant de tester la connexion d\textquotesingle{}un joueur sans bloquer le programme

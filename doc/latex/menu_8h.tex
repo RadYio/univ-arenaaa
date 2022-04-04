@@ -1,0 +1,76 @@
+\hypertarget{menu_8h}{}\doxysection{Référence du fichier header/menu.h}
+\label{menu_8h}\index{header/menu.h@{header/menu.h}}
+
+
+header de \mbox{\hyperlink{menu_8c}{menu.\+c}}  
+
+
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/collection.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu.\+h\char`\"{}}\newline
+\doxysubsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menu_8h_ab53c0cc980ee350f25fd46d81446e1ca}\label{menu_8h_ab53c0cc980ee350f25fd46d81446e1ca}} 
+typedef enum \mbox{\hyperlink{menu_8h_a268d66b4d5cc9c06a91c0b4ec6a6f5df}{hover}} {\bfseries hover\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Énumérations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{menu_8h_a268d66b4d5cc9c06a91c0b4ec6a6f5df}\label{menu_8h_a268d66b4d5cc9c06a91c0b4ec6a6f5df}} 
+enum \mbox{\hyperlink{menu_8h_a268d66b4d5cc9c06a91c0b4ec6a6f5df}{hover}} \{ {\bfseries HOVER}
+, {\bfseries PAS\+\_\+\+HOVER}
+ \}
+\begin{DoxyCompactList}\small\item\em contient l\textquotesingle{}état du menu, si on a deja effectué un HOVER ou PAS\+\_\+\+HOVER \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{menu_8h_a75f187a2a1a1d0fad4af46bba79ca678}{menu}} (SDL\+\_\+\+Window $\ast$p\+Window)
+\begin{DoxyCompactList}\small\item\em fonction qui gere l\textquotesingle{}intégralité de la gestion et affichage du menu \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+header de \mbox{\hyperlink{menu_8c}{menu.\+c}} 
+
+\begin{DoxyAuthor}{Auteur}
+ALLAN GONIN-\/\+SAGET (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{menu_8h_a75f187a2a1a1d0fad4af46bba79ca678}\label{menu_8h_a75f187a2a1a1d0fad4af46bba79ca678}} 
+\index{menu.h@{menu.h}!menu@{menu}}
+\index{menu@{menu}!menu.h@{menu.h}}
+\doxysubsubsection{\texorpdfstring{menu()}{menu()}}
+{\footnotesize\ttfamily int menu (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window }\end{DoxyParamCaption})}
+
+
+
+fonction qui gere l\textquotesingle{}intégralité de la gestion et affichage du menu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & pointeur de (SDL\+\_\+\+Window$\ast$), permettant de garder la fênetre afficher pour le joueur. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int \mbox{[}0\mbox{]} si tout c\textquotesingle{}est bien passé 
+\end{DoxyReturn}
+on récupère la nouvelle position du curseur et on met à jour nos events
+
+thread\+Joueur est un thread permettant de tester la connexion d\textquotesingle{}un joueur sans bloquer le programme

@@ -1,0 +1,93 @@
+\hypertarget{init__jeu_8h}{}\doxysection{Référence du fichier header/init\+\_\+jeu.h}
+\label{init__jeu_8h}\index{header/init\_jeu.h@{header/init\_jeu.h}}
+
+
+header de \mbox{\hyperlink{init__jeu_8c}{init\+\_\+jeu.\+c}}  
+
+
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+SDL\+\_\+\+Rect \mbox{\hyperlink{init__jeu_8h_ae8da859835187dfc4c65fcc6f3697a89}{creer\+\_\+rectangle}} (int x, int y, int h, int w)
+\begin{DoxyCompactList}\small\item\em fonction de creation d\textquotesingle{}un rectangle \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{init__jeu_8h_a728937353b16c198305a9d9a9df4357a}{init\+\_\+jeu}} (int $\ast$taille\+\_\+main, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]}, SDL\+\_\+\+Rect $\ast$rect\+\_\+joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+adv, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+adv, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+att\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+hp\+\_\+j)
+\begin{DoxyCompactList}\small\item\em initialise les rectangles nécessaires à l\textquotesingle{}affichage et la gestion des cliques et les place dans des tableaux et crée la main du joueur \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{init__jeu_8h_ace724b2479467b69068acad58806a3ad}\label{init__jeu_8h_ace724b2479467b69068acad58806a3ad}} 
+void {\bfseries creation\+\_\+main} (int $\ast$taille\+\_\+main, SDL\+\_\+\+Rect tab\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+header de \mbox{\hyperlink{init__jeu_8c}{init\+\_\+jeu.\+c}} 
+
+\begin{DoxyAuthor}{Auteur}
+Jonathan Otto et Arthur Boullier 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/30 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{init__jeu_8h_ae8da859835187dfc4c65fcc6f3697a89}\label{init__jeu_8h_ae8da859835187dfc4c65fcc6f3697a89}} 
+\index{init\_jeu.h@{init\_jeu.h}!creer\_rectangle@{creer\_rectangle}}
+\index{creer\_rectangle@{creer\_rectangle}!init\_jeu.h@{init\_jeu.h}}
+\doxysubsubsection{\texorpdfstring{creer\_rectangle()}{creer\_rectangle()}}
+{\footnotesize\ttfamily SDL\+\_\+\+Rect creer\+\_\+rectangle (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{h,  }\item[{int}]{w }\end{DoxyParamCaption})}
+
+
+
+fonction de creation d\textquotesingle{}un rectangle 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em x} & la coordonnée en abscisse du point supérieur gauche du rectangle \\
+\hline
+{\em y} & la coordonnée en ordonnée du point supérieur gauche du rectangle \\
+\hline
+{\em h} & la hauteur du rectangle \\
+\hline
+{\em w} & la largeur du rectangle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+le rectangle crée 
+\end{DoxyReturn}
+\mbox{\Hypertarget{init__jeu_8h_a728937353b16c198305a9d9a9df4357a}\label{init__jeu_8h_a728937353b16c198305a9d9a9df4357a}} 
+\index{init\_jeu.h@{init\_jeu.h}!init\_jeu@{init\_jeu}}
+\index{init\_jeu@{init\_jeu}!init\_jeu.h@{init\_jeu.h}}
+\doxysubsubsection{\texorpdfstring{init\_jeu()}{init\_jeu()}}
+{\footnotesize\ttfamily void init\+\_\+jeu (\begin{DoxyParamCaption}\item[{int $\ast$}]{taille\+\_\+main,  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]},  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+joueur,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+adv,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+j,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+adv,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+carte\+\_\+j,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+att\+\_\+j,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+hp\+\_\+j }\end{DoxyParamCaption})}
+
+
+
+initialise les rectangles nécessaires à l\textquotesingle{}affichage et la gestion des cliques et les place dans des tableaux et crée la main du joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille\+\_\+main} & la taille de la main du joueur à créer \\
+\hline
+{\em tab\+\_\+rect\+\_\+formationJ} & la matrice des rectangles du plateau joueur, les rectangles initialisés pour le joueur seront mis dedans \\
+\hline
+{\em tab\+\_\+rect\+\_\+formation\+Adv} & la matrice des rectangles du plateau de l\textquotesingle{}adversaire, même principe que tab\+\_\+rect\+\_\+formationJ \\
+\hline
+{\em tab\+\_\+rect\+\_\+main} & tableau qui contient les rectangles de la main du joueur \\
+\hline
+{\em rect\+\_\+joueur} & le grand rectangle pour le plateau du joueur \\
+\hline
+{\em rect\+\_\+adv} & le grand rectangle pour le plateau de l\textquotesingle{}adversaire \\
+\hline
+{\em rect\+\_\+txt\+\_\+deck\+\_\+j} & le rectangle où se place le texte au dessus du plateau du joueur \\
+\hline
+{\em rect\+\_\+txt\+\_\+deck\+\_\+adv} & le rectangle où se place le texte au dessus du plateau de l\textquotesingle{}adversaire \\
+\hline
+{\em rect\+\_\+aff\+\_\+carte\+\_\+j} & le rectangle où seront affichés les cartes losrqu\textquotesingle{}on double clique dessus \\
+\hline
+{\em rect\+\_\+aff\+\_\+att\+\_\+j} & le rectangle où seront affichés les points d\textquotesingle{}attaque d\textquotesingle{}une carte \\
+\hline
+{\em rect\+\_\+aff\+\_\+hp\+\_\+j} & le rectangle où seront affichés les hp d\textquotesingle{}une carte \\
+\hline
+\end{DoxyParams}

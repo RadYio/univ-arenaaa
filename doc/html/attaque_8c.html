@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('attaque_8c.html',''); initResizable();
 </div><!--header-->
 <div class="contents">
 
-<p>ensemble des fonctions gérant le système d'attaque : l'attaque d'une carte, la mise a jour des hp et enlevement de cartes si nécessaire  
+<p>header de <a class="el" href="attaque_8c.html" title="header de attaque.c">attaque.c</a>  
 <a href="#details">Plus de détails...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -100,26 +100,26 @@ $(document).ready(function(){initNavTree('attaque_8c.html',''); initResizable();
 <code>#include &quot;../header/carte.h&quot;</code><br />
 <code>#include &quot;../header/window.h&quot;</code><br />
 <code>#include &quot;../header/jeu_solo.h&quot;</code><br />
-<code>#include &quot;../header/jeu_multi.h&quot;</code><br />
-<code>#include &quot;../header/affichage.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="jeu__multi_8h_source.html">../header/jeu_multi.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="affichage_8h_source.html">../header/affichage.h</a>&quot;</code><br />
 <code>#include &quot;../header/init_jeu_solo.h&quot;</code><br />
-<code>#include &quot;../header/bot.h&quot;</code><br />
-<code>#include &quot;../header/attaque.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="bot_8h_source.html">../header/bot.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="attaque_8h_source.html">../header/attaque.h</a>&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Fonctions</h2></td></tr>
-<tr class="memitem:a2c46b8f271661759db4b1764730d3120"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a2c46b8f271661759db4b1764730d3120">attaque_critique</a> (type_t <a class="el" href="attaque_8c.html#a1c525981a94b9501ddd6669a76a426fd">attaque</a>, type_t vulnerable)</td></tr>
+<tr class="memitem:a2c46b8f271661759db4b1764730d3120"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a2c46b8f271661759db4b1764730d3120">attaque_critique</a> (type_t <a class="el" href="attaque_8h.html#aabedd4c5e5e45dced9b336ab800bf1cc">attaque</a>, type_t vulnerable)</td></tr>
 <tr class="memdesc:a2c46b8f271661759db4b1764730d3120"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui vérifie si celui qui défend est vulnerable au type d'attaque  <a href="attaque_8c.html#a2c46b8f271661759db4b1764730d3120">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a2c46b8f271661759db4b1764730d3120"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a565b457e99e4c6e6251a660ea7627f3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a565b457e99e4c6e6251a660ea7627f3f">mort_carte</a> (int id_carte_defense, carte_t deck_defense[], int tab_formation_defense[][3], int indice_deck, int *taille_deck_defense)</td></tr>
+<tr class="memitem:a565b457e99e4c6e6251a660ea7627f3f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a565b457e99e4c6e6251a660ea7627f3f">mort_carte</a> (int id_carte_defense, <a class="el" href="structcarte__s.html">carte_t</a> deck_defense[], int tab_formation_defense[][3], int indice_deck, int *taille_deck_defense)</td></tr>
 <tr class="memdesc:a565b457e99e4c6e6251a660ea7627f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction qui vérifie la mort d'un carte : si une carte n'a plus d'hp, on doit l'enlever de la formation et du deck  <a href="attaque_8c.html#a565b457e99e4c6e6251a660ea7627f3f">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a565b457e99e4c6e6251a660ea7627f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c525981a94b9501ddd6669a76a426fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a1c525981a94b9501ddd6669a76a426fd">attaque</a> (int id_carte_attaque, int id_carte_defense, carte_t deck_attaque[], carte_t deck_defense[], int tab_formation_defense[][3], int *taille_deck_defense)</td></tr>
+<tr class="memitem:a1c525981a94b9501ddd6669a76a426fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html#a1c525981a94b9501ddd6669a76a426fd">attaque</a> (int id_carte_attaque, int id_carte_defense, <a class="el" href="structcarte__s.html">carte_t</a> deck_attaque[], <a class="el" href="structcarte__s.html">carte_t</a> deck_defense[], int tab_formation_defense[][3], int *taille_deck_defense)</td></tr>
 <tr class="memdesc:a1c525981a94b9501ddd6669a76a426fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction gérant le fait que quelqu'un attaque une carte  <a href="attaque_8c.html#a1c525981a94b9501ddd6669a76a426fd">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1c525981a94b9501ddd6669a76a426fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >ensemble des fonctions gérant le système d'attaque : l'attaque d'une carte, la mise a jour des hp et enlevement de cartes si nécessaire </p>
+<div class="textblock"><p >header de <a class="el" href="attaque_8c.html" title="header de attaque.c">attaque.c</a> </p>
 <dl class="section author"><dt>Auteur</dt><dd>Jonathan Otto </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-03-30 </dd></dl>
@@ -145,13 +145,13 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">carte_t&#160;</td>
+          <td class="paramtype"><a class="el" href="structcarte__s.html">carte_t</a>&#160;</td>
           <td class="paramname"><em>deck_attaque</em>[], </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">carte_t&#160;</td>
+          <td class="paramtype"><a class="el" href="structcarte__s.html">carte_t</a>&#160;</td>
           <td class="paramname"><em>deck_defense</em>[], </td>
         </tr>
         <tr>
@@ -242,7 +242,7 @@ Fonctions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">carte_t&#160;</td>
+          <td class="paramtype"><a class="el" href="structcarte__s.html">carte_t</a>&#160;</td>
           <td class="paramname"><em>deck_defense</em>[], </td>
         </tr>
         <tr>

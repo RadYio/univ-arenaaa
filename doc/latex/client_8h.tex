@@ -1,0 +1,172 @@
+\hypertarget{client_8h}{}\doxysection{Référence du fichier header/client.h}
+\label{client_8h}\index{header/client.h@{header/client.h}}
+
+
+header du \mbox{\hyperlink{client_8c}{client.\+c}}  
+
+
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$netinet/in.\+h$>$}\newline
+{\ttfamily \#include $<$arpa/inet.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}carte.\+h\char`\"{}}\newline
+\doxysubsection*{Structures de données}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structsockaddr__in__s}{sockaddr\+\_\+in\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em cf. $<$sys/socket.\+h$>$ \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structserverStruct__s}{server\+Struct\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em structure contenant le socket de connexion et un entier(utilisé comme bool), qui permet de connaitre si un joueur est trouvé \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em structure qui contient les informations du plateau qu\textquotesingle{}on envoie à travers le serveur d\textquotesingle{}un client à un autre \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_a614217d263be1fb1a5f76e2ff7be19a2}\label{client_8h_a614217d263be1fb1a5f76e2ff7be19a2}} 
+\#define {\bfseries PORT}~6666
+\item 
+\mbox{\Hypertarget{client_8h_a7b735a83ec6143cd2fec11b0da9a7b30}\label{client_8h_a7b735a83ec6143cd2fec11b0da9a7b30}} 
+\#define {\bfseries NB\+\_\+\+TENTATIVE}~60
+\item 
+\mbox{\Hypertarget{client_8h_a0f922e5657f0a4ca19607f0e3028eac2}\label{client_8h_a0f922e5657f0a4ca19607f0e3028eac2}} 
+\#define {\bfseries DELAI}~1
+\end{DoxyCompactItemize}
+\doxysubsection*{Définitions de type}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_ac568a628784f86297f0bfbe80b24a8fd}\label{client_8h_ac568a628784f86297f0bfbe80b24a8fd}} 
+typedef struct \mbox{\hyperlink{structsockaddr__in__s}{sockaddr\+\_\+in\+\_\+s}} {\bfseries sockaddr\+\_\+in\+\_\+t}
+\item 
+\mbox{\Hypertarget{client_8h_a269dcb8de6e2e114e02c3c15c9d63dfd}\label{client_8h_a269dcb8de6e2e114e02c3c15c9d63dfd}} 
+typedef struct \mbox{\hyperlink{structserverStruct__s}{server\+Struct\+\_\+s}} {\bfseries server\+Struct\+\_\+t}
+\item 
+\mbox{\Hypertarget{client_8h_a6828cd1700d708b044aa22420612a0da}\label{client_8h_a6828cd1700d708b044aa22420612a0da}} 
+typedef struct \mbox{\hyperlink{structgestion__s}{gestion\+\_\+s}} {\bfseries gestion\+\_\+t}
+\end{DoxyCompactItemize}
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{client_8h_af6bac9e4fa4d637c583f6c923b5ea384}\label{client_8h_af6bac9e4fa4d637c583f6c923b5ea384}} 
+void $\ast$ {\bfseries recuperer\+Info} (void $\ast$structure)
+\item 
+void \mbox{\hyperlink{client_8h_a83cf700f2e1a45b9e55e4828464dd0a2}{transfert\+Info}} (\mbox{\hyperlink{structgestion__s}{gestion\+\_\+t}} $\ast$futur\+Infos, int premiere\+Mat\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int deuxieme\+Mat\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} premier\+Tab\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deuxieme\+Tab\mbox{[}$\,$\mbox{]}, int flagC, int socket)
+\begin{DoxyCompactList}\small\item\em Fonction permettant de prendre les données des joueurs et les transferer au joueur qui attend son tour. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{client_8h_ab351345d481e52cc7129a69a89aa13fc}{gestion\+Partie}} (void $\ast$infos)
+\begin{DoxyCompactList}\small\item\em fonction qui repere l\textquotesingle{}information du serveur, pour connaitre qui commence \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{client_8h_abddb505d90c1c6a1c4a171369cb54307}{connectF}} (int $\ast$socket)
+\begin{DoxyCompactList}\small\item\em termine la connexion avec le serveur \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{client_8h_ab2c77e6112e8c0a6bbc6dc4e9b28838a}{recherche\+Joueur}} (void $\ast$infos)
+\begin{DoxyCompactList}\small\item\em (utilisation via un thread, sinon fonction bloquante) reste en attente de la réponse du serveur annoncant une connexion établie avec un autre joueur \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{client_8h_a644c9976ea14606ddcfbef3e5e582007}{connectC}} ()
+\begin{DoxyCompactList}\small\item\em genere une connexion avec le serveur \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+header du \mbox{\hyperlink{client_8c}{client.\+c}} 
+
+\begin{DoxyAuthor}{Auteur}
+Allan (\href{mailto:allan.gonin-saget.etu@univ-lemans.fr}{\texttt{ allan.\+gonin-\/saget.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/04 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{client_8h_a644c9976ea14606ddcfbef3e5e582007}\label{client_8h_a644c9976ea14606ddcfbef3e5e582007}} 
+\index{client.h@{client.h}!connectC@{connectC}}
+\index{connectC@{connectC}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{connectC()}{connectC()}}
+{\footnotesize\ttfamily int connectC (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+genere une connexion avec le serveur 
+
+\begin{DoxyReturn}{Renvoie}
+int renvoie le socket, apres la connexion avec le serveur 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8h_abddb505d90c1c6a1c4a171369cb54307}\label{client_8h_abddb505d90c1c6a1c4a171369cb54307}} 
+\index{client.h@{client.h}!connectF@{connectF}}
+\index{connectF@{connectF}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{connectF()}{connectF()}}
+{\footnotesize\ttfamily void connectF (\begin{DoxyParamCaption}\item[{int $\ast$}]{socket }\end{DoxyParamCaption})}
+
+
+
+termine la connexion avec le serveur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em socket} & pointeur vers le socket du serveur \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8h_ab351345d481e52cc7129a69a89aa13fc}\label{client_8h_ab351345d481e52cc7129a69a89aa13fc}} 
+\index{client.h@{client.h}!gestionPartie@{gestionPartie}}
+\index{gestionPartie@{gestionPartie}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{gestionPartie()}{gestionPartie()}}
+{\footnotesize\ttfamily int gestion\+Partie (\begin{DoxyParamCaption}\item[{void $\ast$}]{infos }\end{DoxyParamCaption})}
+
+
+
+fonction qui repere l\textquotesingle{}information du serveur, pour connaitre qui commence 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em infos} & pointeur générique, qu\textquotesingle{}on cast en int, afin d\textquotesingle{}avoir le socket du serveur \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int \mbox{[}1\mbox{]} si tour du joueur, \mbox{[}2\mbox{]} si pas le tour du joueur, \mbox{[}-\/1\mbox{]} si on recoit une deconnexion, \mbox{[}0\mbox{]}, si aucun cas 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8h_ab2c77e6112e8c0a6bbc6dc4e9b28838a}\label{client_8h_ab2c77e6112e8c0a6bbc6dc4e9b28838a}} 
+\index{client.h@{client.h}!rechercheJoueur@{rechercheJoueur}}
+\index{rechercheJoueur@{rechercheJoueur}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{rechercheJoueur()}{rechercheJoueur()}}
+{\footnotesize\ttfamily void$\ast$ recherche\+Joueur (\begin{DoxyParamCaption}\item[{void $\ast$}]{infos }\end{DoxyParamCaption})}
+
+
+
+(utilisation via un thread, sinon fonction bloquante) reste en attente de la réponse du serveur annoncant une connexion établie avec un autre joueur 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em pointeur} & générique (thread)\+: cast en server\+Struct\+\_\+t \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+void$\ast$ NULL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8h_a83cf700f2e1a45b9e55e4828464dd0a2}\label{client_8h_a83cf700f2e1a45b9e55e4828464dd0a2}} 
+\index{client.h@{client.h}!transfertInfo@{transfertInfo}}
+\index{transfertInfo@{transfertInfo}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{transfertInfo()}{transfertInfo()}}
+{\footnotesize\ttfamily void transfert\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structgestion__s}{gestion\+\_\+t}} $\ast$}]{futur\+Infos,  }\item[{int}]{premiere\+Mat\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{deuxieme\+Mat\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{premier\+Tab\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deuxieme\+Tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{flagC,  }\item[{int}]{socket }\end{DoxyParamCaption})}
+
+
+
+Fonction permettant de prendre les données des joueurs et les transferer au joueur qui attend son tour. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em futur\+Infos} & structure gestion\+\_\+t \\
+\hline
+{\em premiere\+Mat} & matrice contenant l\textquotesingle{}etat du plateau du joueur actuel \\
+\hline
+{\em deuxieme\+Mat} & matrice contenant l\textquotesingle{}etat du plateau du joueur adverse \\
+\hline
+{\em premier\+Tab} & tableau de carte\+\_\+t, contenant l\textquotesingle{}état des cartes du joueur \\
+\hline
+{\em deuxieme\+Tab} & tableau de carte\+\_\+t, contenant l\textquotesingle{}état des cartes de l\textquotesingle{}adversaire \\
+\hline
+{\em socket} & entier contenant le socket du serveur \\
+\hline
+\end{DoxyParams}

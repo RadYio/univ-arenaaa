@@ -15,17 +15,17 @@ ici on gère les actions du bot qui est actif lorsque le joueur joue en solo
 {\ttfamily \#include \char`\"{}../header/jeu\+\_\+solo.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../header/jeu\+\_\+multi.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../header/affichage.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu\+\_\+solo.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../header/bot.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}../header/attaque.\+h\char`\"{}}\newline
 \doxysubsection*{Fonctions}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{bot_8c_a1d9c8039dea2d808377d654b77973fe6}{poser\+\_\+carte}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot)
+int \mbox{\hyperlink{bot_8c_a1d9c8039dea2d808377d654b77973fe6}{poser\+\_\+carte}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot)
 \begin{DoxyCompactList}\small\item\em fonction qui permet au bot de poser une carte \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{bot_8c_a66de0aea99603f913111f433c7a9807c}{attaquer\+\_\+carte\+\_\+bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t deck\+\_\+bot\mbox{[}$\,$\mbox{]}, carte\+\_\+t deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
+void \mbox{\hyperlink{bot_8c_a66de0aea99603f913111f433c7a9807c}{attaquer\+\_\+carte\+\_\+bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+bot\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
 \begin{DoxyCompactList}\small\item\em fonction permettant au bot d\textquotesingle{}attaquer une carte du joueur \+: parcourt la matrice du joueur, dès qu\textquotesingle{}il trouve une carte il l\textquotesingle{}attaque, s\textquotesingle{}il trouve rien il fait rien \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{bot_8c_a6ad28cc957bd390c6989ff3c91a787be}{bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, carte\+\_\+t deck\+\_\+bot\mbox{[}$\,$\mbox{]}, carte\+\_\+t deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
+void \mbox{\hyperlink{bot_8c_a6ad28cc957bd390c6989ff3c91a787be}{bot}} (int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} main\+\_\+bot\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+main\+\_\+bot, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+bot\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} deck\+\_\+joueur\mbox{[}$\,$\mbox{]}, int $\ast$taille\+\_\+deck\+\_\+joueur)
 \begin{DoxyCompactList}\small\item\em fonction gérant le tour du bot \+: soit il pose une carte, soit il attaque, soit il ne fait rien \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -48,7 +48,7 @@ Jonathan Otto
 \index{bot.c@{bot.c}!attaquer\_carte\_bot@{attaquer\_carte\_bot}}
 \index{attaquer\_carte\_bot@{attaquer\_carte\_bot}!bot.c@{bot.c}}
 \doxysubsubsection{\texorpdfstring{attaquer\_carte\_bot()}{attaquer\_carte\_bot()}}
-{\footnotesize\ttfamily void attaquer\+\_\+carte\+\_\+bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void attaquer\+\_\+carte\+\_\+bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
 
 
 
@@ -71,7 +71,7 @@ fonction permettant au bot d\textquotesingle{}attaquer une carte du joueur \+: p
 \index{bot.c@{bot.c}!bot@{bot}}
 \index{bot@{bot}!bot.c@{bot.c}}
 \doxysubsubsection{\texorpdfstring{bot()}{bot()}}
-{\footnotesize\ttfamily bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot,  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{carte\+\_\+t}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily bot (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot,  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{deck\+\_\+joueur\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+deck\+\_\+joueur }\end{DoxyParamCaption})}
 
 
 
@@ -98,7 +98,7 @@ fonction gérant le tour du bot \+: soit il pose une carte, soit il attaque, soi
 \index{bot.c@{bot.c}!poser\_carte@{poser\_carte}}
 \index{poser\_carte@{poser\_carte}!bot.c@{bot.c}}
 \doxysubsubsection{\texorpdfstring{poser\_carte()}{poser\_carte()}}
-{\footnotesize\ttfamily int poser\+\_\+carte (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{carte\+\_\+t}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int poser\+\_\+carte (\begin{DoxyParamCaption}\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{main\+\_\+bot\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main\+\_\+bot }\end{DoxyParamCaption})}
 
 
 
