@@ -51,7 +51,7 @@ void init_cartes(carte_t tab_cartes_total[]){
     tab_cartes_total[9] = creer_carte2("Mage","Mage B", "img/img_cartes/Carte_Alexis.png", 3, 5, Psy, Poison, 9);
     tab_cartes_total[10] = creer_carte2("Voleur","Voleur A", "img/img_cartes/Carte_Alexis.png", 4, 4, Poison, Physique, 10);
     tab_cartes_total[11] = creer_carte2("Voleur","Voleur B", "img/img_cartes/Carte_Alexis.png", 4, 4, Poison, Physique, 11);
-    tab_cartes_total[12] = creer_carte2("Roi Antoine Laurent","A.Laurent", "img/img_cartes/Carte_Alexis.png", 10, 10, Psy, Psy, 12); //a modifier
+    tab_cartes_total[12] = creer_carte2("Roi Antoine Laurent","A.Laurent", "img/img_cartes/Antoine-Laurent.png", 2, 999, Psy, Psy, 12);
 }
 
 

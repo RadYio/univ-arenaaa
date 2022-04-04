@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
+#include <string.h>
 
 
 #include <SDL2/SDL.h>
@@ -281,7 +282,7 @@ void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire){
       break;
   }
   texte_victoire_S = TTF_RenderUTF8_Blended(police,texte_victoire , couleurBlanche);
-  SDL_Rect texte_victoire_R = creer_rectangle(800-(sizeof(*texte_victoire)/2),500,50,sizeof(*texte_victoire)*200);
+  SDL_Rect texte_victoire_R = creer_rectangle(800-(strlen(texte_victoire)/2)*11,500,50,sizeof(*texte_victoire)*200);
   SDL_Texture * texte_victoire_T = SDL_CreateTextureFromSurface(renderer_jeu,texte_victoire_S);
   SDL_FreeSurface(texte_victoire_S);
   free(texte_victoire);
