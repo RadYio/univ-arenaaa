@@ -25,7 +25,7 @@ int initialiser_fenetre(){
     //creation de la fenetre-------------------------------------------------------------
     SDL_Window* pWindow = NULL;
     pWindow = SDL_CreateWindow(
-      "UnivArena", //nom fenetre
+      "Univ-Arenaaa", //nom fenetre
       SDL_WINDOWPOS_CENTERED, //x fenetre centré
       SDL_WINDOWPOS_CENTERED, //y fenetre centré
       1600, //largeur fenetre
