@@ -8,7 +8,7 @@
 	
 </p>
 
-> univ-arenaaa est un jeu de carte, basé sur des modeles existants, mais remanié avec notre sauce. Pour votre et notre plaisir.
+> univ-arenaaa est un jeu de carte, basé sur des modeles existants, mais remanié à notre sauce. Pour votre et notre plaisir !
 
 ## Installation
 
