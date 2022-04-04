@@ -1,9 +1,21 @@
-//#include "~/SDL2/include/SDL2/SDL.h"
+/**
+ * @file jeu_solo.h
+ * @author Arthur Boullier et Jonathan Otto
+ * @brief header de jeu_solo.h
+ * @version 1
+ * @date 2022-03-30
+ * 
+ */
 
+/**
+ * @fn jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running)
+ * @brief fonction lancé lorsque le joueur choisit de joueur en solo : permet tout le jeu en solo avec mise en place d'éléments, la détéctions d'eventements et la gestion des tours
+ * 
+ * @param pWindow la fenetre où se déroule le jeu
+ * @param renderer_jeu notre renderer lié à la fenetre
+ * @param running variable permettant de quitter le programme si le joueur arrête la fenetre
+ */
 void jeu_solo(SDL_Window * pWindow,SDL_Renderer* renderer_jeu,int * running);
 
-void * calcul_temps(void * val);
 
-int double_clique(SDL_Event e,SDL_Renderer *renderer_jeu,SDL_Rect tab_rect_main[],SDL_Rect tab_rect_formationJ[][3],SDL_Rect tab_rect_formationAdv[][3]
-,SDL_Rect *rect_aff_carte_j,carte_t tab_cartes_total[13],carte_t tab_main[],int tab_formation_cartesJ[5][3],int tab_formation_cartesADV[5][3]);
 

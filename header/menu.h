@@ -20,7 +20,7 @@
 #include "../header/window.h"
 #include "../header/affichage.h"
 #include "../header/client.h"
-#include "../header/init_jeu_solo.h"
+#include "../header/init_jeu.h"
 
 
 /**

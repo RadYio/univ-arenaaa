@@ -22,7 +22,7 @@
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
-#include "../header/init_jeu_solo.h"
+#include "../header/init_jeu.h"
 
 
 void affichage_BG(SDL_Renderer* renderer_jeu, SDL_Texture* img_jeu_Texture){

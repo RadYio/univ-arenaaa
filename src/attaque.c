@@ -17,7 +17,7 @@
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
-#include "../header/init_jeu_solo.h"
+#include "../header/init_jeu.h"
 #include "../header/bot.h"
 #include "../header/attaque.h"
 

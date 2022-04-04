@@ -1,5 +1,5 @@
 /**
- * @file attaque.c
+ * @file attaque.h
  * @author Jonathan Otto
  * @brief header de attaque.c
  * @version 1

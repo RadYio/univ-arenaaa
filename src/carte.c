@@ -1,3 +1,12 @@
+/**
+ * @file carte.c
+ * @author Jonathan Otto et Arthur Boullier
+ * @brief fonction de gestion de la carte : ici on initialise les tableaux de cartes et on gère un système de sauvegarde
+ * @version 1
+ * @date 2022-04-04
+ * 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
@@ -10,34 +19,10 @@
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
 #include "../header/affichage.h"
-#include "../header/init_jeu_solo.h"
+#include "../header/init_jeu.h"
 #include "../header/bot.h"
 #include "../header/attaque.h"
 
-
-
-
-
-
-
-
-
-
-
-//fonction de creation de cartes qui bug de fou wtffff
-/*carte_t* creer_carte(char * nom,char * nom_collec ,char * chemin_carte,int hp , int nb_degats , type_t type_attaque , type_t type_vulnerable, int id_carte){
-  carte_t* carte;
-  carte = malloc(sizeof(carte_t));
-  carte->nom = nom;
-  carte->nom_collec= nom_collec;
-  carte->chemin_carte=chemin_carte;
-  carte->hp_carte = hp;
-  carte->nb_degats = nb_degats;
-  carte->type_attaque = type_attaque;
-  carte->type_vulnerable = type_vulnerable;
-  carte->id_carte = id_carte;
-  return carte;
-}*/
 
 carte_t creer_carte2(char * nom, char * nom_collec, char * chemin_carte, int hp, int nb_degats, type_t type_attaque, type_t type_vulnerable, int id_carte){
   carte_t carte;
@@ -52,7 +37,6 @@ carte_t creer_carte2(char * nom, char * nom_collec, char * chemin_carte, int hp,
   return carte;
 }
 
-//fonction d'initialisation de toutes les cartes, 12 en brut car on à que 12 cartes, à modifier si on en rajoute plus
 
 void init_cartes(carte_t tab_cartes_total[]){
     tab_cartes_total[0] = creer_carte2("Léo maître de la bagarre","Léo","img/img_cartes/leo1.png", 10, 4, Physique, Psy, 0);
@@ -71,7 +55,7 @@ void init_cartes(carte_t tab_cartes_total[]){
 }
 
 
-//si c'est la premiere fois que le joueur se connecte il n'a pas de sauvegarde, il faut la creer
+
 void creer_sauvegarde(){
   FILE * fic1;
   int i;
@@ -82,7 +66,7 @@ void creer_sauvegarde(){
   fclose(fic1);
 }
 
-//fonction de mise à jour de la sauvergarde du joueur si il obtient une nouvelle carte
+
 void maj_sauvergarde(carte_t * carte){
   FILE * fic1;
   fic1 = fopen("save/sauvergarde.txt","a");
@@ -90,7 +74,7 @@ void maj_sauvergarde(carte_t * carte){
   fclose(fic1);
 }
 
-//fonction de récupération des cartes que possède le joueur selon son fichier de sauvegarde
+
 void recup_sauvegarde(carte_t *tab_sauvegarde[], carte_t tab_cartes_total[]){
     FILE * fic1;
     int id;
@@ -109,7 +93,6 @@ void recup_sauvegarde(carte_t *tab_sauvegarde[], carte_t tab_cartes_total[]){
 
 
 
-//fonction de creation du deck lors du lancement d'une game, 12 sera fixe obligatoirement car 12 cartes en main
 void creation_tab_main(carte_t tab_main[],int taille){
   carte_t tab_temp[13];
 

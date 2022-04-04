@@ -22,19 +22,12 @@
 #include "../header/affichage.h"
 #include "../header/jeu_solo.h"
 #include "../header/jeu_multi.h"
-#include "../header/init_jeu_solo.h"
+#include "../header/init_jeu.h"
 #include "../header/bot.h"
 #include "../header/attaque.h"
 
 
-/**
- * @fn jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running)
- * @brief fonction lancé lorsque le joueur choisit de joueur en solo : permet tout le jeu en solo avec mise en place d'éléments, la détéctions d'eventements et la gestion des tours
- * 
- * @param pWindow la fenetre où se déroule le jeu
- * @param renderer_jeu notre renderer lié à la fenetre
- * @param running variable permettant de quitter le programme si le joueur arrête la fenetre
- */
+
 void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
 
 
