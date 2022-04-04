@@ -1,5 +1,5 @@
 /**
- * @file window.c
+ * @file window.h
  * @author Jonathan Otto
  * @brief header de window.c
  * @version 1
