@@ -32,22 +32,21 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
 
 
     int* taille_main = malloc(sizeof(int));
-    *taille_main = 6;
+    *taille_main = 9;
     carte_t tab_main[*taille_main];
-    //carte_t tab_total[13];
     creation_tab_main(tab_main,*taille_main);
-    carte_t tab_cartes_total[13];
+    carte_t tab_cartes_total[9];
 
-    creation_tab_main(tab_cartes_total,13);
+    creation_tab_main(tab_cartes_total,9);
 
 
-    carte_t tab_cartes_deck[13];
+    carte_t tab_cartes_deck[9];
 
-    creation_tab_main(tab_cartes_deck,13);
+    creation_tab_main(tab_cartes_deck,9);
 
-    carte_t tab_cartes_deck_bot[1];
+    carte_t tab_cartes_deck_bot[9];
 
-    creation_tab_main(tab_cartes_deck_bot,1);
+    creation_tab_main(tab_cartes_deck_bot,9);
     int * jeu;
 
     jeu = malloc(sizeof(int));
@@ -72,7 +71,7 @@ void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ 
 int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     {-1, -1, -2},
     {-1, -2, -1},
-    {0, -1, -2},
+    {-2, -1, -2},
     {-1, -2, -1},
     {-1, -1, -2}};
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -251,13 +250,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     int coord_x = 0,coord_y = 0;
 
     int * taille_main_bot = malloc(sizeof(int));
-    *taille_main_bot = 5;
-    carte_t main_bot[13];
+    *taille_main_bot = 9;
+    carte_t main_bot[9];
     creation_tab_main(main_bot,*taille_main_bot);
     int *taille_deck = malloc(sizeof(int));
-    *taille_deck = 6;
+    *taille_deck = 9;
     int *taille_deck_bot = malloc(sizeof(int));
-    *taille_deck_bot = 1;
+    *taille_deck_bot = 9;
     
 
 

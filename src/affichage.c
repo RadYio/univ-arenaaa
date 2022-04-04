@@ -331,8 +331,8 @@ void * calcul_temps(void * val){
  	t2 = time(NULL);
   while(1)
   {
-      //un tour de 60 secondes
-      if(difftime(t2, t1) >= 60){
+      //un tour de 90 secondes
+      if(difftime(t2, t1) >= 90){
         *jeu = 0;
         t1 = time(NULL);
       }
