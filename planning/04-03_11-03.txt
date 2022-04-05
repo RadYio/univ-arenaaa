@@ -1,5 +1,0 @@
-socket: gerer la deco et l'envoie/reception d'information
-
-collection
-affichage jeu solo
-lien entre le menu et le reste des options

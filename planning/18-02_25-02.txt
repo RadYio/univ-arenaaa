@@ -1,2 +1,0 @@
-terminer le menu et son affichage avec hover et choix de l'user
-création de toutes les cartes
