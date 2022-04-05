@@ -168,18 +168,15 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   //création du texte pour le bouton retour menu
   SDL_Surface * txt_menu_S = TTF_RenderUTF8_Blended(police, "Menu", couleurNoire);
-	SDL_Surface* txt_menu_Hover_S = TTF_RenderUTF8_Blended(police, "Menu", couleurJaune);
 
-  if(!txt_menu_S|| !txt_menu_Hover_S){
+  if(!txt_menu_S){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
 
 	SDL_Texture* txt_menu_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_S);
-	SDL_Texture* txt_menu_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_menu_Hover_S);
 
 	SDL_FreeSurface(txt_menu_S); // on a la texture, plus besoin du texte via surface
-	SDL_FreeSurface(txt_menu_Hover_S);
 
   SDL_Rect menu_R = creer_rectangle(1400,0,90,190);
   SDL_Rect txt_menu_R = creer_rectangle(1440,20,50,(strlen("Menu")*25));
@@ -188,18 +185,14 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   //création du texte du bouton de passe tour
   SDL_Surface * txt_passe_S = TTF_RenderUTF8_Blended(police, "Passe", couleurNoire);
-	SDL_Surface* txt_passe_Hover_S = TTF_RenderUTF8_Blended(police, "Passe", couleurJaune);
 
-  if(!txt_passe_S|| !txt_passe_Hover_S){
+  if(!txt_passe_S){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
 		exit(EXIT_FAILURE);
 	}
 
 	SDL_Texture* txt_passe_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_S);
-	SDL_Texture* txt_passe_Hover_T = SDL_CreateTextureFromSurface(renderer_jeu, txt_passe_Hover_S);
-
 	SDL_FreeSurface(txt_passe_S); // on a la texture, plus besoin du texte via surface
-	SDL_FreeSurface(txt_passe_Hover_S);
 
   SDL_Rect passe_R = creer_rectangle(1400,820,80,180);
   SDL_Rect txt_passe_R = creer_rectangle(1440,835,45,(strlen("Passe")*20));
@@ -241,7 +234,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+    menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
 
 
 
@@ -284,7 +277,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               nouveau_tour(nb_actions,tab_formation_cartesJ);
               affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
               rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-              menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+              menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
               printf("fin du tour\n");
               printf("\n    nombre d'actions = %i  \n\n",*nb_actions);
               printf("\n    taille deck joueur = %i  \n\n",*taille_deck);
@@ -327,7 +320,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                 if(etat == 0){
                     affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                     rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                    menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+                    menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
                     int x = 0,y=0;
                     for(int i=0;i < 15;i++){
                       if(x == 4 && y < 2) y++;
@@ -369,7 +362,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                         transfert_carte(tab_main,tab_formation_cartesJ,tab_rect_main,x,y,etat,taille_main);
                         affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                         rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                        menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+                        menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
                         printf("la carte a été posée\n");
                       }
                       etat = 0;
@@ -397,7 +390,7 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                           attaque(tab_formation_cartesJ[coord_x][coord_y], tab_formation_cartesADV[i][j], tab_cartes_deck, tab_cartes_deck_bot, tab_formation_cartesADV, taille_deck_bot);
                           affichage_jeu2 (renderer_jeu,img_jeu_Texture,rect_aff_carte_j, rect_txt_deck_j,txt_titre_joueur_T,rect_txt_deck_adv,txt_titre_adv_T,rect_joueur,
                           rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
-                          menu_t,menu_R,txt_menu_Hover_T,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_Hover_T,txt_passe_T,txt_passe_R,nb_actions);
+                          menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
                         }
                         etat = 0;
                         break;

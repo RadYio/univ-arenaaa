@@ -101,42 +101,46 @@ void double_clique2(SDL_Renderer *renderer_jeu,int id_carte,carte_t tab_cartes_d
 
 
 /**
- * @brief
- *
- * @param renderer_jeu
- * @param img_jeu_Texture
- * @param rect_aff_carte_j
- * @param rect_txt_deck_j
- * @param txt_titre_joueur_T
- * @param rect_txt_deck_adv
- * @param txt_titre_adv_T
- * @param rect_joueur
- * @param rect_adv
- * @param tab_formation_cartesJ
- * @param tab_rect_formationJ
- * @param tab_formation_cartesADV
- * @param tab_rect_formationAdv
- * @param taille_main
- * @param tab_rect_main
- * @param tab_main
- * @param tab_cartes_total
- * @param menu_t
- * @param menu_R
- * @param txt_menu_Hover_T
- * @param txt_menu_R
- * @param txt_menu_T
- * @param passe_t
- * @param passe_R
- * @param txt_passe_Hover_T
- * @param txt_passe_T
- * @param txt_passe_R
- */
-void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
+ * @fn void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
 SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,
 int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] ,
 int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R
 ,SDL_Texture *txt_menu_Hover_T,
 SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R,SDL_Texture *txt_passe_Hover_T
+,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions);
+ * @brief fonction qui fait appel à toutes les fonctions d'affichages pour permettre un nouvel affichage à chaque action du joueur
+ *
+ * @param renderer_jeu notre renderer
+ * @param img_jeu_Texture la texture contenant l'image à afficher en fond d'écran
+ * @param rect_aff_carte_j rectangle où l'on affiche la carte en grand lors d'un double clique
+ * @param rect_txt_deck_j  rectangle dans lequel le nom du joueur est affiché
+ * @param txt_titre_joueur_T texture contenant le nom de joueur 
+ * @param rect_txt_deck_adv rectangle dans lequel le nom de l'adversaire est affiché 
+ * @param txt_titre_adv_T texture contenant le nom de l'adversaire
+ * @param rect_joueur rectangle délimitant le plateau de joueur
+ * @param rect_adv  recrangle délimitant le plateau de l'adversaire
+ * @param tab_formation_cartesJ matrice représentant le plateau du joueur et contenant des entiers : -2 pour une case vide jouable, -1 pour une case injouable et >= 0 pour l'id de la carte posée dans cette case 
+ * @param tab_rect_formationJ tableau de SDL_rect contenant les rectangles où les cartes peuvent être posées pour le joueur
+ * @param tab_formation_cartesADV matrice représentant le plateau de l'adversaire et contenant des entiers : -2 pour une case vide jouable, -1 pour une case injouable et >= 0 pour l'id de la carte posée dans cette case 
+ * @param tab_rect_formationAdv tableau de SDL_rect contenant les rectangles où les cartes peuvent être posées pour l'adversaire
+ * @param taille_main pointeur sur un entier de valeur de la taille de la main
+ * @param tab_rect_main tableau de SDL_rect contenant les rectangles où les cartes de la main du joueur vont apparaitre
+ * @param tab_main tableau de carte_t contenant les cartes de la main du joueur
+ * @param tab_cartes_total tableau de carte_t contenant toutes les cartes disponnibles dans le jeu
+ * @param menu_t texture contenant l'image du bouton de retour menu
+ * @param menu_R rectangle dans lequel va être affiché le bouton de retour menu
+ * @param txt_menu_R rectangle dans lequel va être affiché le texte du bouton de retour menu
+ * @param txt_menu_T texture contenant le texte du bouton de retour menu
+ * @param passe_t texture contenant l'image du bouton de passage de tour
+ * @param passe_R rectangle dans lequel va être affiché le bouton de passage de tour
+ * @param txt_passe_T texture contenant le texte du bouton de passage de tour
+ * @param txt_passe_R rectangle dans lequel va être affiché le texte du bouton de retour menu
+ */
+void affichage_jeu2 (SDL_Renderer* renderer_jeu,SDL_Texture* img_jeu_Texture,SDL_Rect * rect_aff_carte_j,SDL_Rect *rect_txt_deck_j,
+SDL_Texture *txt_titre_joueur_T,SDL_Rect *rect_txt_deck_adv,SDL_Texture *txt_titre_adv_T,SDL_Rect *rect_joueur,SDL_Rect *rect_adv,
+int tab_formation_cartesJ[5][3],SDL_Rect tab_rect_formationJ[][3],int tab_formation_cartesADV[5][3],SDL_Rect tab_rect_formationAdv[][3] ,
+int * taille_main, SDL_Rect tab_rect_main[12],carte_t tab_main[],carte_t tab_cartes_total[],SDL_Texture *menu_t,SDL_Rect menu_R,
+SDL_Rect txt_menu_R,SDL_Texture *txt_menu_T,SDL_Texture *passe_t,SDL_Rect passe_R
 ,SDL_Texture *txt_passe_T,SDL_Rect txt_passe_R,int * nb_actions);
 
 
