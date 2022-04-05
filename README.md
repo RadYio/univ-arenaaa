@@ -17,7 +17,7 @@ git clone https://github.com/RadYio/univ-arenaaa.git
 ```
 ## Éxécution
 ```sh
-./bin/univ-arenaaa
+make; ./bin/univ-arenaaa
 ```
 ## Auteur
 
