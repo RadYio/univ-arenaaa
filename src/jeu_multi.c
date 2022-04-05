@@ -50,7 +50,7 @@ void* calcul_temps2(void * val){
 }
 
 
-void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu, int * running, int *valSocket){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+void jeu_multi(SDL_Window * pWindow, SDL_Renderer* renderer_jeu, int * running, int *valSocket){
     int* jeu = malloc(sizeof(int));
     *jeu = 1;
     gestion_t etatDuJeu;
@@ -127,7 +127,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
     TTF_Font* police = NULL;
 
-    //SDL_Renderer* renderer_jeu = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED); //creation d'un nouveau renderer pour le jeu
 
   if(renderer_jeu == NULL){
 		fprintf(stderr, "Erreur à la création du renderer de jeu\n");
@@ -247,8 +246,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
-  SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
-  SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire
+  SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - JOUEUR  1 - - -", couleurJaune); //surface pour le texte du joueur
+  SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - - JOUEUR  2 - - -", couleurJaune); //surface pour le texte adversaire
 
   if(!txt_titre_joueur|| !txt_titre_adv){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
@@ -279,14 +278,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
 
 
-    //on joue un tour, si victoire joueur/adversaire tour renvoi 1 ou -1, 0 si on continue à jouer------------------------------------------------------------------------------------------------------------------------------------------------------------
     int etat = 0;
     int coord_x = 0,coord_y = 0;
 
 
 
 
-
+    //moteur du jeu---------------------------------------------------------------------------------------------
     SDL_Event e;
     if(pWindow){
 

@@ -411,7 +411,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
             case SDL_QUIT: *running = 0;
             break;
 			case SDL_MOUSEBUTTONDOWN:
-			printf("x: %i\ny: %i\n",e.button.x,e.button.y);
 			if(e.button.x >= texte_retour_R.x && e.button.x <= texte_retour_R.x+texte_retour_R.w && e.button.y >= texte_retour_R.y && e.button.y <= texte_retour_R.y+texte_retour_R.h){
 				//Si on clique sur le bouton 1
 				SDL_RenderClear(renderer_collec);
@@ -554,7 +553,6 @@ int collection(SDL_Window * pWindow, SDL_Texture* img_Collec_BG, SDL_Renderer* r
 					SDL_RenderPresent(renderer_collec);
 					//oldHover: Variable qui permet d'éviter de render toutes les frames, si pas besoin
 					oldHover=0;
-					printf("Reset actuel\n\n\n");
 				}
 
 			break;

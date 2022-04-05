@@ -241,7 +241,6 @@ int menu(SDL_Window* pWindow){
 						break;
 					}
 					case SDL_MOUSEBUTTONDOWN:
-					printf("x: %i\ny: %i\n",e.button.x,e.button.y); /* Detection // Affichage des coordonnées du clique de la souris */
 					if(e.button.x >= txt_optn1_R.x && e.button.x <= txt_optn1_R.x+txt_optn1_R.w && e.button.y >= txt_optn1_R.y && e.button.y <= txt_optn1_R.y+txt_optn1_R.h){
 						//Si on clique sur le bouton 1
 
@@ -285,7 +284,6 @@ int menu(SDL_Window* pWindow){
 							SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
 							SDL_Rect rect_Waiting_BG_Evolution = creer_rectangle(0,0,368,768);
 
-							printf("Je cree le thread\n");
 							pthread_create(&threadJoueur, NULL, rechercheJoueur, (void*)&infoServer);
 
 							int animation1 = 0;

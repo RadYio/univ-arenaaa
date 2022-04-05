@@ -4,7 +4,7 @@
  * @brief quatrième fichier dans la structure du programme en parallèle avec jeu_multi.c et collection.c, contient tout le code lié au mode de jeu en solo
  * @version 1
  * @date 2022-03-30
- * 
+ *
  */
 
 #include <stdio.h>
@@ -28,7 +28,7 @@
 
 
 
-void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){ //a rajouter : deck de la main, TTF_FONT à passer en parametre pour etre utilisé ici
+void jeu_solo(SDL_Window * pWindow, SDL_Renderer* renderer_jeu ,int * running){
 
 
     int* taille_main = malloc(sizeof(int));
@@ -84,8 +84,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     SDL_Color couleurNoire = {0, 0, 0};
 
     TTF_Font* police = NULL;
-
-    //SDL_Renderer* renderer_jeu = SDL_CreateRenderer(pWindow, -1, SDL_RENDERER_ACCELERATED); //creation d'un nouveau renderer pour le jeu
 
     if(renderer_jeu == NULL){
 		fprintf(stderr, "Erreur à la création du renderer de jeu\n");
@@ -206,8 +204,8 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   //manipulations de renderer-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - TON  DECK  :) - - -", couleurJaune); //surface pour le texte du joueur
-  SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - -DECK  ADVERSAIRE  :( - - -", couleurJaune); //surface pour le texte adversaire
+  SDL_Surface* txt_titre_joueur = TTF_RenderUTF8_Blended(police, "- - - JOUEUR - - -", couleurJaune); //surface pour le texte du joueur
+  SDL_Surface* txt_titre_adv = TTF_RenderUTF8_Blended(police, "- - - BOT - - -", couleurJaune); //surface pour le texte adversaire
 
   if(!txt_titre_joueur|| !txt_titre_adv){
 		fprintf(stderr, "Erreur à la création du texte '' titre de deck '': %s\n", SDL_GetError());
@@ -250,12 +248,13 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
     *taille_deck = 9;
     int *taille_deck_bot = malloc(sizeof(int));
     *taille_deck_bot = 9;
-    
+
 
 
     pthread_create(&thread_tps,NULL,calcul_temps,(void*)(jeu));
-    if(pWindow){
 
+    //moteur du jeu---------------------------------------------------------------------------------------------
+    if(pWindow){
       *running = 1;
       while(*running){
           SDL_Event e;
@@ -264,13 +263,11 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
             return;
           }
           while(*jeu == 0){
-              //SDL_PollEvent(&e);
               etat = 0;
 
               if(e.type == SDL_QUIT ){
 
                 *running = 0;
-                printf("on sort mtn 1\n");
               }
               printf("tour bot début\n");
               bot(tab_formation_cartesADV,main_bot,taille_main_bot,tab_formation_cartesJ,tab_cartes_deck_bot,tab_cartes_deck,taille_deck);
@@ -279,8 +276,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
               rect_adv, tab_formation_cartesJ, tab_rect_formationJ,tab_formation_cartesADV,tab_rect_formationAdv ,taille_main, tab_rect_main, tab_main,tab_cartes_total,
               menu_t,menu_R,txt_menu_R,txt_menu_T,passe_t,passe_R,txt_passe_T,txt_passe_R,nb_actions);
               printf("fin du tour\n");
-              printf("\n    nombre d'actions = %i  \n\n",*nb_actions);
-              printf("\n    taille deck joueur = %i  \n\n",*taille_deck);
               *jeu = 1;
             }
 
@@ -314,7 +309,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
                   return;
                 }
                 if(e.button.x >= passe_R.x && e.button.x <= passe_R.x+passe_R.w && e.button.y >= passe_R.y && e.button.y <= passe_R.y+passe_R.h){
-                  printf("on passe le tour\n");
                   *jeu = 0;
                 }
                 if(etat == 0){
@@ -422,7 +416,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
 
   }
 
-  printf("fin boucle\n");
   //à la fin du jeu------------------------------------------------------------------------------------------------------------------------------------------------------------------
   free(jeu);
 
@@ -430,7 +423,6 @@ int tab_formation_cartesADV[5][3] = { //ceci est le tableau de l'adversaire
   free(taille_deck);
   free(taille_main_bot);
   pthread_cancel(thread_tps);
-  //A SUPPRIMER--------------------------------------------------------------------------------------------------------
   TTF_CloseFont(police); /* Doit être avant TTF_Quit() */
   SDL_RenderClear(renderer_jeu);
   TTF_Quit();

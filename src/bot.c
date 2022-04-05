@@ -51,7 +51,6 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
     j = 0;
     while(trouve == 0 && j < 3){
       if(tab_formation_cartesJ[i][j] >= 0){
-        printf("j'ai trouve un leo : %i, i = %i, j = %i\n", tab_formation_cartesJ[i][j], i, j);
         trouve = 1;
       }
       if(trouve == 0){
@@ -59,14 +58,12 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
       }
     }
     if(trouve == 0){
-      i++; 
+      i++;
     }
   }
-  
+
   if(trouve == 0){ // si on a pas trouvé de carte
     printf("pas d'attaque J\n");
-    printf("i = %i, j = %i\n", i, j);
-
     return;
   }
   //sinon le bot attaque avec la première carte qu'il trouve chez lui, on doit donc la trouver
@@ -75,7 +72,6 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
     y = 0;
     while(trouve == 0 && y < 3){
       if(tab_formation_cartesADV[x][y] >= 0){
-        printf("j'ai trouve un leo ADV : %i, x = %i, y = %i\n", tab_formation_cartesADV[x][y], x, y);
         trouve = 1;
       }
       if(trouve == 0){
@@ -94,8 +90,6 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
 
   //une fois trouvé la carte à attaquer et la carte qui va attaquer, on lance la fonction d'attaque
   printf("    phase d'attaque\n");
-  printf("def = %i pour i = %i et j = %i\n",tab_formation_cartesJ[i][j],i,j);
-
   attaque(tab_formation_cartesADV[x][y], tab_formation_cartesJ[i][j], deck_bot, deck_joueur, tab_formation_cartesJ, taille_deck_joueur);
 }
 
@@ -103,7 +97,6 @@ void attaquer_carte_bot(int tab_formation_cartesADV[][3], int tab_formation_cart
 
 void bot(int tab_formation_cartesADV[][3], carte_t main_bot[], int* taille_main_bot, int tab_formation_cartesJ[][3], carte_t deck_bot[], carte_t deck_joueur[], int* taille_deck_joueur){
     //on regarde si le bot peut placer une carte, si la main est vide il reste plus rien a placer il attaque donc
-    printf("On est dans la fonction bot\n");
     if((*taille_main_bot != 0) && (poser_carte(tab_formation_cartesADV, main_bot, taille_main_bot))){
         return;
     }

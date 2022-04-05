@@ -153,7 +153,6 @@ void affichage_actions(SDL_Renderer *renderer_jeu,int * nb_actions){
   SDL_Surface* energie_S = IMG_Load("img/eclair.png");
   SDL_Texture* energie_T = SDL_CreateTextureFromSurface(renderer_jeu, energie_S);
   for(int i = 0 ; i < *nb_actions ; i++){
-    printf("essai %i\n ",i);
     SDL_Rect image_action_R = creer_rectangle(50 + (70*i),830,60,60 );
     SDL_RenderCopy(renderer_jeu, energie_T, NULL, &image_action_R);
   }
@@ -262,7 +261,7 @@ void affichage_victoire(SDL_Renderer* renderer_jeu,int victoire){
   SDL_SetRenderDrawBlendMode(renderer_jeu, SDL_BLENDMODE_BLEND);
   SDL_Color couleurBlanche = {255, 255, 255};
   char * texte_victoire = malloc(sizeof(texte_victoire));
-  TTF_Font* police = TTF_OpenFont("font/ChowFun.ttf", 20);  
+  TTF_Font* police = TTF_OpenFont("font/ChowFun.ttf", 20);
   if (police == NULL) {
     fprintf(stderr, "error: font not found\n");
     printf("\n%s\n",TTF_GetError());
@@ -336,7 +335,6 @@ void * calcul_temps(void * val){
         t1 = time(NULL);
       }
       if(*jeu == 0){
-        printf ("reset temps\n");
         t1 = time(NULL);
       }
       t2 = time(NULL);
