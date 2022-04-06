@@ -11,3 +11,13 @@
  * @return int 
  */
 int collection(SDL_Window* pWindow, SDL_Texture* img_Collec_Texture, SDL_Renderer* renderer_collec, int* running);
+
+/**
+ * @brief fonction de création des rectangles dans lesquels les noms des cartes vont apparaitres
+ * @fn void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[])
+
+ * @param taille entier donnant le nombre de rectangle à créer
+ * @param tab tableau de SDL_Rect contenant tout les rectangles créés
+ * @param tab_sauvegarde tableau de carte_t contenant les cartes devant apparaitre dans la collection
+ */
+void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]);

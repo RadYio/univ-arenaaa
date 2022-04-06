@@ -11,15 +11,8 @@
 #include "../header/window.h"
 #include "../header/carte.h"
 #include "../header/collection.h"
+#include "../header/init_jeu.h"
 
-SDL_Rect creation_rectangle(int x, int y, int w, int h){
-    SDL_Rect rect_temp;
-    rect_temp.x = x;
-    rect_temp.y = y;
-    rect_temp.w= w;
-    rect_temp.h = h;
-    return rect_temp;
-}
 
 void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]){
 	if (taille == 0){
@@ -27,9 +20,9 @@ void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]){
 	}else{
 		int y = 180;
 		for(int i=0;i<taille;i++){
-			tab[i] = creation_rectangle(110, y ,(strlen(tab_sauvegarde[i]->nom_collec)* 30),80);
+			tab[i] = creer_rectangle(110, y ,80,(strlen(tab_sauvegarde[i]->nom_collec)* 30));
 			if(i+1 <taille){
-				tab[i+1] = creation_rectangle(420, y ,(strlen(tab_sauvegarde[i+1]->nom_collec)* 30),80);
+				tab[i+1] = creer_rectangle(420, y ,80,(strlen(tab_sauvegarde[i+1]->nom_collec)* 30));
 				y += 90;
 				i++;
 			}
