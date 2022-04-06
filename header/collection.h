@@ -1,4 +1,12 @@
-//#include "~/SDL2/include/SDL2/SDL.h"
+/**
+ * @file collection.h
+ * @author Arthur (arthur.boullier.etu@univ-lemans.fr)
+ * @brief header de collection.c
+ * @version 1.0
+ * @date 2022-04-06
+ */
+
+
 
 /**
  * @brief fonction d'affichage de la collection appelée dans le menu
