@@ -1,0 +1,85 @@
+\hypertarget{collection_8c}{}\doxysection{Référence du fichier src/collection.c}
+\label{collection_8c}\index{src/collection.c@{src/collection.c}}
+
+
+Fichier regroupant les fonctions utilisées pour la collection.  
+
+
+{\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
+{\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../header/window.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/carte.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/collection.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../header/init\+\_\+jeu.\+h\char`\"{}}\newline
+\doxysubsection*{Fonctions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{collection_8c_a939ccefb84a83a6091fbfe1648107a18}{creation\+\_\+\+R\+\_\+collec}} (int taille, SDL\+\_\+\+Rect tab\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em fonction de création des rectangles dans lesquels les noms des cartes vont apparaitres \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{collection_8c_aea40c7732bbc62536c364e17439e4166}{collection}} (SDL\+\_\+\+Window $\ast$p\+Window, SDL\+\_\+\+Texture $\ast$img\+\_\+\+Collec\+\_\+\+BG, SDL\+\_\+\+Renderer $\ast$renderer\+\_\+collec, int $\ast$running)
+\begin{DoxyCompactList}\small\item\em fonction d\textquotesingle{}affichage de la collection appelée dans le menu \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Description détaillée}
+Fichier regroupant les fonctions utilisées pour la collection. 
+
+\begin{DoxyAuthor}{Auteur}
+Arthur (\href{mailto:arthur.boullier.etu@univ-lemans.fr}{\texttt{ arthur.\+boullier.\+etu@univ-\/lemans.\+fr}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/04-\/06 
+\end{DoxyDate}
+
+
+\doxysubsection{Documentation des fonctions}
+\mbox{\Hypertarget{collection_8c_aea40c7732bbc62536c364e17439e4166}\label{collection_8c_aea40c7732bbc62536c364e17439e4166}} 
+\index{collection.c@{collection.c}!collection@{collection}}
+\index{collection@{collection}!collection.c@{collection.c}}
+\doxysubsubsection{\texorpdfstring{collection()}{collection()}}
+{\footnotesize\ttfamily int collection (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Window $\ast$}]{p\+Window,  }\item[{SDL\+\_\+\+Texture $\ast$}]{img\+\_\+\+Collec\+\_\+\+BG,  }\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+collec,  }\item[{int $\ast$}]{running }\end{DoxyParamCaption})}
+
+
+
+fonction d\textquotesingle{}affichage de la collection appelée dans le menu 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em p\+Window} & notre fenêtre précédemment créée \\
+\hline
+{\em img\+\_\+\+Collec\+\_\+\+Texture} & la texture de fond d\textquotesingle{}écran initialisée dans le menu pour qu\textquotesingle{}elle soit le même dans la collection \\
+\hline
+{\em renderer\+\_\+collec} & notre renderer \\
+\hline
+{\em running} & pointeur sur entier permettant de quitter la page de collection et la page de menu ensuite \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+int 
+\end{DoxyReturn}
+\mbox{\Hypertarget{collection_8c_a939ccefb84a83a6091fbfe1648107a18}\label{collection_8c_a939ccefb84a83a6091fbfe1648107a18}} 
+\index{collection.c@{collection.c}!creation\_R\_collec@{creation\_R\_collec}}
+\index{creation\_R\_collec@{creation\_R\_collec}!collection.c@{collection.c}}
+\doxysubsubsection{\texorpdfstring{creation\_R\_collec()}{creation\_R\_collec()}}
+{\footnotesize\ttfamily void creation\+\_\+\+R\+\_\+collec (\begin{DoxyParamCaption}\item[{int}]{taille,  }\item[{SDL\+\_\+\+Rect}]{tab\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$}]{tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+fonction de création des rectangles dans lesquels les noms des cartes vont apparaitres 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em taille} & entier donnant le nombre de rectangle à créer \\
+\hline
+{\em tab} & tableau de SDL\+\_\+\+Rect contenant tout les rectangles créés \\
+\hline
+{\em tab\+\_\+sauvegarde} & tableau de carte\+\_\+t contenant les cartes devant apparaitre dans la collection \\
+\hline
+\end{DoxyParams}

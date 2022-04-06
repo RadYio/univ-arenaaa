@@ -39,14 +39,14 @@ enum \mbox{\hyperlink{carte_8h_a7aead736a07eaf25623ad7bfa1f0ee2d}{type}} \{ {\bf
 \item 
 \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} \mbox{\hyperlink{carte_8h_af6cfe6170b25e7a9aa24e73704285e60}{creer\+\_\+carte2}} (char $\ast$nom, char $\ast$nom\+\_\+collec, char $\ast$chemin\+\_\+carte, int hp, int nb\+\_\+degats, type\+\_\+t type\+\_\+attaque, type\+\_\+t type\+\_\+vulnerable, int id\+\_\+carte)
 \begin{DoxyCompactList}\small\item\em fonction de creation d\textquotesingle{}une carte \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{carte_8h_a56717bc73e4267fd96af74f0d05bdc96}{init\+\_\+cartes}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]})
+void \mbox{\hyperlink{carte_8h_ab42ec86d30e0225709ef64bc411c9694}{init\+\_\+cartes}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em fonction qui remplit un tableau donné de cartes \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{carte_8h_a6ab6399a92810ae4a498413b73161671}\label{carte_8h_a6ab6399a92810ae4a498413b73161671}} 
-void \mbox{\hyperlink{carte_8h_a6ab6399a92810ae4a498413b73161671}{creer\+\_\+sauvegarde}} ()
+\mbox{\Hypertarget{carte_8h_a1d10e92e2106ccaf28f89f9c6f9dc897}\label{carte_8h_a1d10e92e2106ccaf28f89f9c6f9dc897}} 
+void \mbox{\hyperlink{carte_8h_a1d10e92e2106ccaf28f89f9c6f9dc897}{creer\+\_\+sauvegarde}} ()
 \begin{DoxyCompactList}\small\item\em creation d\textquotesingle{}un fichier de sauvegarde (deprecated) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{carte_8h_a9c52d1da4e61ae5a6d073c227124bffe}{maj\+\_\+sauvergarde}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$carte)
 \begin{DoxyCompactList}\small\item\em fonction qui met à jour le fichier de sauvegarde en lui rajoutant une carte (deprecated) \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{carte_8h_a5f37835f0a2dea3a9f004df70a6cbdf1}{recup\+\_\+sauvegarde}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]})
+void \mbox{\hyperlink{carte_8h_a80dc6eb33e46733ec062d06626cd04c2}{recup\+\_\+sauvegarde}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]})
 \begin{DoxyCompactList}\small\item\em fonction qui met les cartes sauvegardées dans un tableau (deprecated) \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{carte_8h_a976b22faf95ea37150a1417d8a734419}{creation\+\_\+tab\+\_\+main}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+main\mbox{[}$\,$\mbox{]}, int taille)
 \begin{DoxyCompactList}\small\item\em fonction de creation de la main lors du lancement d\textquotesingle{}un jeu \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -116,11 +116,11 @@ fonction de creation d\textquotesingle{}une carte
 \begin{DoxyReturn}{Renvoie}
 carte\+\_\+t la carte qui à été faite 
 \end{DoxyReturn}
-\mbox{\Hypertarget{carte_8h_a56717bc73e4267fd96af74f0d05bdc96}\label{carte_8h_a56717bc73e4267fd96af74f0d05bdc96}} 
+\mbox{\Hypertarget{carte_8h_ab42ec86d30e0225709ef64bc411c9694}\label{carte_8h_ab42ec86d30e0225709ef64bc411c9694}} 
 \index{carte.h@{carte.h}!init\_cartes@{init\_cartes}}
 \index{init\_cartes@{init\_cartes}!carte.h@{carte.h}}
 \doxysubsubsection{\texorpdfstring{init\_cartes()}{init\_cartes()}}
-{\footnotesize\ttfamily void init\+\_\+cartes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily init\+\_\+cartes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
@@ -146,11 +146,11 @@ fonction qui met à jour le fichier de sauvegarde en lui rajoutant une carte (de
 {\em carte} & la carte à rajouter dans la sauvegarde \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{carte_8h_a5f37835f0a2dea3a9f004df70a6cbdf1}\label{carte_8h_a5f37835f0a2dea3a9f004df70a6cbdf1}} 
+\mbox{\Hypertarget{carte_8h_a80dc6eb33e46733ec062d06626cd04c2}\label{carte_8h_a80dc6eb33e46733ec062d06626cd04c2}} 
 \index{carte.h@{carte.h}!recup\_sauvegarde@{recup\_sauvegarde}}
 \index{recup\_sauvegarde@{recup\_sauvegarde}!carte.h@{carte.h}}
 \doxysubsubsection{\texorpdfstring{recup\_sauvegarde()}{recup\_sauvegarde()}}
-{\footnotesize\ttfamily void recup\+\_\+sauvegarde (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$}]{tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily recup\+\_\+sauvegarde (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} $\ast$}]{tab\+\_\+sauvegarde\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 

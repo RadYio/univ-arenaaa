@@ -1,3 +1,11 @@
+/**
+ * @file collection.c
+ * @author Arthur (arthur.boullier.etu@univ-lemans.fr)
+ * @brief  Fichier regroupant les fonctions utilisées pour la collection
+ * @version 1.0
+ * @date 2022-04-06
+ *
+ */
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -14,15 +22,15 @@
 #include "../header/init_jeu.h"
 
 
-void creation_R_collec(int taille,SDL_Rect tab[],carte_t * tab_sauvegarde[]){
+void creation_R_collec(int taille, SDL_Rect tab[], carte_t* tab_sauvegarde[]){
 	if (taille == 0){
     	return;
 	}else{
 		int y = 180;
 		for(int i=0;i<taille;i++){
-			tab[i] = creer_rectangle(110, y ,80,(strlen(tab_sauvegarde[i]->nom_collec)* 30));
+			tab[i] = creer_rectangle(110, y, 80, (strlen(tab_sauvegarde[i]->nom_collec)*30));
 			if(i+1 <taille){
-				tab[i+1] = creer_rectangle(420, y ,80,(strlen(tab_sauvegarde[i+1]->nom_collec)* 30));
+				tab[i+1] = creer_rectangle(420, y, 80, (strlen(tab_sauvegarde[i+1]->nom_collec)*30));
 				y += 90;
 				i++;
 			}

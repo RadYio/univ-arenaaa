@@ -1,8 +1,8 @@
 /**
- * @file attaque.h
+ * @file attaque.c
  * @author Jonathan Otto
  * @brief ensemble des fonctions gérant le système d'attaque : l'attaque d'une carte, la mise a jour des hp et enlevement de cartes si nécessaire
- * @version 1
+ * @version 1.0
  * @date 2022-03-30
  */
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>univ-arenaaa: Répertoire de référence de src</title>
@@ -93,6 +93,9 @@ Fichiers</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="affichage_8c.html">affichage.c</a></td></tr>
 <tr class="memdesc:affichage_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fichier contenant les fonctions d'affichage du jeu ainsi que certaines fonctions essentielles à la mise à jour de tableaux qui seront affichés ensuite <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="attaque_8c.html">attaque.c</a></td></tr>
+<tr class="memdesc:attaque_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ensemble des fonctions gérant le système d'attaque : l'attaque d'une carte, la mise a jour des hp et enlevement de cartes si nécessaire <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bot_8c.html">bot.c</a></td></tr>
 <tr class="memdesc:bot_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ici on gère les actions du bot qui est actif lorsque le joueur joue en solo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,17 +105,17 @@ Fichiers</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="client_8c.html">client.c</a></td></tr>
 <tr class="memdesc:client_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fichier regroupant les fonctions princpales permettant le lien et le contact avec un serveur (cf. <a class="el" href="server_8c.html" title="Fichier.c qui regroupe l&#39;intégralité du code pour le serveur.">server.c</a>) <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="collection_8c.html">collection.c</a></td></tr>
+<tr class="memdesc:collection_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fichier regroupant les fonctions utilisées pour la collection. <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="init__jeu_8c.html">init_jeu.c</a></td></tr>
 <tr class="memdesc:init__jeu_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction lancé lorsqu'on commence une partie, met en place les cartes, les rectangles pour l'affichage, les mains etc... <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="init__jeu__solo_8c.html">init_jeu_solo.c</a></td></tr>
-<tr class="memdesc:init__jeu__solo_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction lancé lorsqu'on commence une partie, met en place les cartes, les rectangles pour l'affichage, les mains etc... <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeu__multi_8c.html">jeu_multi.c</a></td></tr>
 <tr class="memdesc:jeu__multi_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur grace à un serveur allumé <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="jeu__solo_8c.html">jeu_solo.c</a></td></tr>
-<tr class="memdesc:jeu__solo_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">quatrième fichier dans la structure du programme en parallèle avec <a class="el" href="jeu__multi_8c.html" title="Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur...">jeu_multi.c</a> et collection.c, contient tout le code lié au mode de jeu en solo <br /></td></tr>
+<tr class="memdesc:jeu__solo_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">quatrième fichier dans la structure du programme en parallèle avec <a class="el" href="jeu__multi_8c.html" title="Fichier qui en lien avec une connexion établie, maintient une connexion et gere un jeu en multijoueur...">jeu_multi.c</a> et <a class="el" href="collection_8c.html" title="Fichier regroupant les fonctions utilisées pour la collection.">collection.c</a>, contient tout le code lié au mode de jeu en solo <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">fichier &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html">main.c</a></td></tr>
 <tr class="memdesc:main_8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction main, sert juste à appeler la suite du programme <br /></td></tr>

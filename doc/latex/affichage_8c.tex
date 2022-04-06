@@ -9,6 +9,7 @@ fichier contenant les fonctions d\textquotesingle{}affichage du jeu ainsi que ce
 {\ttfamily \#include $<$stdlib.\+h$>$}\newline
 {\ttfamily \#include $<$time.\+h$>$}\newline
 {\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include $<$SDL2/\+SDL.\+h$>$}\newline
 {\ttfamily \#include $<$SDL2/\+SDL\+\_\+ttf.\+h$>$}\newline
 {\ttfamily \#include $<$SDL2/\+SDL\+\_\+image.\+h$>$}\newline
@@ -40,7 +41,8 @@ void {\bfseries double\+\_\+clique2} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+je
 \mbox{\Hypertarget{affichage_8c_aed0a17425a603dcc23e3004d9d67d76f}\label{affichage_8c_aed0a17425a603dcc23e3004d9d67d76f}} 
 void {\bfseries affichage\+\_\+actions} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, int $\ast$nb\+\_\+actions)
 \item 
-void \mbox{\hyperlink{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}{affichage\+\_\+jeu2}} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Texture $\ast$img\+\_\+jeu\+\_\+\+Texture, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+j, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+joueur\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+adv, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+adv\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+adv, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int $\ast$taille\+\_\+main, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+main\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]}, SDL\+\_\+\+Texture $\ast$menu\+\_\+t, SDL\+\_\+\+Rect menu\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+menu\+\_\+\+Hover\+\_\+T, SDL\+\_\+\+Rect txt\+\_\+menu\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+menu\+\_\+T, SDL\+\_\+\+Texture $\ast$passe\+\_\+t, SDL\+\_\+\+Rect passe\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+passe\+\_\+\+Hover\+\_\+T, SDL\+\_\+\+Texture $\ast$txt\+\_\+passe\+\_\+T, SDL\+\_\+\+Rect txt\+\_\+passe\+\_\+R, int $\ast$nb\+\_\+actions)
+\mbox{\Hypertarget{affichage_8c_aaaa6fe6cd813cf27794212b678f8fede}\label{affichage_8c_aaaa6fe6cd813cf27794212b678f8fede}} 
+void {\bfseries affichage\+\_\+jeu2} (SDL\+\_\+\+Renderer $\ast$renderer\+\_\+jeu, SDL\+\_\+\+Texture $\ast$img\+\_\+jeu\+\_\+\+Texture, SDL\+\_\+\+Rect $\ast$rect\+\_\+aff\+\_\+carte\+\_\+j, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+j, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+joueur\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+txt\+\_\+deck\+\_\+adv, SDL\+\_\+\+Texture $\ast$txt\+\_\+titre\+\_\+adv\+\_\+T, SDL\+\_\+\+Rect $\ast$rect\+\_\+joueur, SDL\+\_\+\+Rect $\ast$rect\+\_\+adv, int tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]}, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]}, int $\ast$taille\+\_\+main, SDL\+\_\+\+Rect tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+main\mbox{[}$\,$\mbox{]}, \mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]}, SDL\+\_\+\+Texture $\ast$menu\+\_\+t, SDL\+\_\+\+Rect menu\+\_\+R, SDL\+\_\+\+Rect txt\+\_\+menu\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+menu\+\_\+T, SDL\+\_\+\+Texture $\ast$passe\+\_\+t, SDL\+\_\+\+Rect passe\+\_\+R, SDL\+\_\+\+Texture $\ast$txt\+\_\+passe\+\_\+T, SDL\+\_\+\+Rect txt\+\_\+passe\+\_\+R, int $\ast$nb\+\_\+actions)
 \item 
 void \mbox{\hyperlink{affichage_8c_aa271a4a6d364cb514acaf556588caca5}{supprimer\+\_\+carte\+\_\+tab}} (\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}} tab\+\_\+main\mbox{[}$\,$\mbox{]}, int indice\+\_\+main, int $\ast$taille\+\_\+main)
 \begin{DoxyCompactList}\small\item\em fonction de suppression d\textquotesingle{}une carte dans un tableau \end{DoxyCompactList}\item 
@@ -116,69 +118,6 @@ fonction d\textquotesingle{}affichage des grands rectangles qui séparent le cot
 {\em rect\+\_\+adv} & le grand rectangle de l\textquotesingle{}adversaire \\
 \hline
 {\em rect\+\_\+aff\+\_\+carte\+\_\+j} & rectangle d\textquotesingle{}affichage pour la zone d\textquotesingle{}affichage en gros d\textquotesingle{}une carte \\
-\hline
-\end{DoxyParams}
-\mbox{\Hypertarget{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}\label{affichage_8c_a91be66bdfc6ea54589dac4cd8954a816}} 
-\index{affichage.c@{affichage.c}!affichage\_jeu2@{affichage\_jeu2}}
-\index{affichage\_jeu2@{affichage\_jeu2}!affichage.c@{affichage.c}}
-\doxysubsubsection{\texorpdfstring{affichage\_jeu2()}{affichage\_jeu2()}}
-{\footnotesize\ttfamily void affichage\+\_\+jeu2 (\begin{DoxyParamCaption}\item[{SDL\+\_\+\+Renderer $\ast$}]{renderer\+\_\+jeu,  }\item[{SDL\+\_\+\+Texture $\ast$}]{img\+\_\+jeu\+\_\+\+Texture,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+aff\+\_\+carte\+\_\+j,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+j,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+titre\+\_\+joueur\+\_\+T,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+txt\+\_\+deck\+\_\+adv,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+titre\+\_\+adv\+\_\+T,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+joueur,  }\item[{SDL\+\_\+\+Rect $\ast$}]{rect\+\_\+adv,  }\item[{int}]{tab\+\_\+formation\+\_\+cartesJ\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formationJ\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int}]{tab\+\_\+formation\+\_\+cartes\+ADV\mbox{[}5\mbox{]}\mbox{[}3\mbox{]},  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+formation\+Adv\mbox{[}$\,$\mbox{]}\mbox{[}3\mbox{]},  }\item[{int $\ast$}]{taille\+\_\+main,  }\item[{SDL\+\_\+\+Rect}]{tab\+\_\+rect\+\_\+main\mbox{[}12\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+main\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{structcarte__s}{carte\+\_\+t}}}]{tab\+\_\+cartes\+\_\+total\mbox{[}$\,$\mbox{]},  }\item[{SDL\+\_\+\+Texture $\ast$}]{menu\+\_\+t,  }\item[{SDL\+\_\+\+Rect}]{menu\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+menu\+\_\+\+Hover\+\_\+T,  }\item[{SDL\+\_\+\+Rect}]{txt\+\_\+menu\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+menu\+\_\+T,  }\item[{SDL\+\_\+\+Texture $\ast$}]{passe\+\_\+t,  }\item[{SDL\+\_\+\+Rect}]{passe\+\_\+R,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+passe\+\_\+\+Hover\+\_\+T,  }\item[{SDL\+\_\+\+Texture $\ast$}]{txt\+\_\+passe\+\_\+T,  }\item[{SDL\+\_\+\+Rect}]{txt\+\_\+passe\+\_\+R,  }\item[{int $\ast$}]{nb\+\_\+actions }\end{DoxyParamCaption})}
-
-
-\begin{DoxyParams}{Paramètres}
-{\em renderer\+\_\+jeu} & \\
-\hline
-{\em img\+\_\+jeu\+\_\+\+Texture} & \\
-\hline
-{\em rect\+\_\+aff\+\_\+carte\+\_\+j} & \\
-\hline
-{\em rect\+\_\+txt\+\_\+deck\+\_\+j} & \\
-\hline
-{\em txt\+\_\+titre\+\_\+joueur\+\_\+T} & \\
-\hline
-{\em rect\+\_\+txt\+\_\+deck\+\_\+adv} & \\
-\hline
-{\em txt\+\_\+titre\+\_\+adv\+\_\+T} & \\
-\hline
-{\em rect\+\_\+joueur} & \\
-\hline
-{\em rect\+\_\+adv} & \\
-\hline
-{\em tab\+\_\+formation\+\_\+cartesJ} & \\
-\hline
-{\em tab\+\_\+rect\+\_\+formationJ} & \\
-\hline
-{\em tab\+\_\+formation\+\_\+cartes\+ADV} & \\
-\hline
-{\em tab\+\_\+rect\+\_\+formation\+Adv} & \\
-\hline
-{\em taille\+\_\+main} & \\
-\hline
-{\em tab\+\_\+rect\+\_\+main} & \\
-\hline
-{\em tab\+\_\+main} & \\
-\hline
-{\em tab\+\_\+cartes\+\_\+total} & \\
-\hline
-{\em menu\+\_\+t} & \\
-\hline
-{\em menu\+\_\+R} & \\
-\hline
-{\em txt\+\_\+menu\+\_\+\+Hover\+\_\+T} & \\
-\hline
-{\em txt\+\_\+menu\+\_\+R} & \\
-\hline
-{\em txt\+\_\+menu\+\_\+T} & \\
-\hline
-{\em passe\+\_\+t} & \\
-\hline
-{\em passe\+\_\+R} & \\
-\hline
-{\em txt\+\_\+passe\+\_\+\+Hover\+\_\+T} & \\
-\hline
-{\em txt\+\_\+passe\+\_\+T} & \\
-\hline
-{\em txt\+\_\+passe\+\_\+R} & \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{affichage_8c_a8419d8dd4e49ce616ae2ede0692927a3}\label{affichage_8c_a8419d8dd4e49ce616ae2ede0692927a3}} 

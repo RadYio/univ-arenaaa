@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>univ-arenaaa: Référence du fichier header/bot.h</title>
@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('bot_8h.html',''); initResizable(); });
 </div><!--header-->
 <div class="contents">
 
-<p>header de <a class="el" href="bot_8h.html" title="header de bot.h">bot.h</a>  
+<p>header de <a class="el" href="bot_8c.html" title="ici on gère les actions du bot qui est actif lorsque le joueur joue en solo">bot.c</a>  
 <a href="#details">Plus de détails...</a></p>
 
 <p><a href="bot_8h_source.html">Aller au code source de ce fichier.</a></p>
@@ -103,12 +103,12 @@ Fonctions</h2></td></tr>
 <tr class="memitem:a66de0aea99603f913111f433c7a9807c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bot_8h.html#a66de0aea99603f913111f433c7a9807c">attaquer_carte_bot</a> (int tab_formation_cartesADV[][3], int tab_formation_cartesJ[][3], <a class="el" href="structcarte__s.html">carte_t</a> deck_bot[], <a class="el" href="structcarte__s.html">carte_t</a> deck_joueur[], int *taille_deck_joueur)</td></tr>
 <tr class="memdesc:a66de0aea99603f913111f433c7a9807c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction permettant au bot d'attaquer une carte du joueur : parcourt la matrice du joueur, dès qu'il trouve une carte il l'attaque, s'il trouve rien il fait rien  <a href="bot_8h.html#a66de0aea99603f913111f433c7a9807c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a66de0aea99603f913111f433c7a9807c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c7354b0a3cf7545995b8db7befff8e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bot_8h.html#a2c7354b0a3cf7545995b8db7befff8e0">bot</a> (int tab_formation_cartesADV[][3], <a class="el" href="structcarte__s.html">carte_t</a> main_bot[], int *taille_main_bot, int tab_formation_cartesJ[][3], <a class="el" href="structcarte__s.html">carte_t</a> deck_bot[], <a class="el" href="structcarte__s.html">carte_t</a> deck_joueur[], int *taille_deck_joueur)</td></tr>
-<tr class="memdesc:a2c7354b0a3cf7545995b8db7befff8e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction gérant le tour du bot : soit il pose une carte, soit il attaque, soit il ne fait rien  <a href="bot_8h.html#a2c7354b0a3cf7545995b8db7befff8e0">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a2c7354b0a3cf7545995b8db7befff8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6ad28cc957bd390c6989ff3c91a787be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="bot_8h.html#a6ad28cc957bd390c6989ff3c91a787be">bot</a> (int tab_formation_cartesADV[][3], <a class="el" href="structcarte__s.html">carte_t</a> main_bot[], int *taille_main_bot, int tab_formation_cartesJ[][3], <a class="el" href="structcarte__s.html">carte_t</a> deck_bot[], <a class="el" href="structcarte__s.html">carte_t</a> deck_joueur[], int *taille_deck_joueur)</td></tr>
+<tr class="memdesc:a6ad28cc957bd390c6989ff3c91a787be"><td class="mdescLeft">&#160;</td><td class="mdescRight">fonction gérant le tour du bot : soit il pose une carte, soit il attaque, soit il ne fait rien  <a href="bot_8h.html#a6ad28cc957bd390c6989ff3c91a787be">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6ad28cc957bd390c6989ff3c91a787be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
-<div class="textblock"><p >header de <a class="el" href="bot_8h.html" title="header de bot.h">bot.h</a> </p>
+<div class="textblock"><p >header de <a class="el" href="bot_8c.html" title="ici on gère les actions du bot qui est actif lorsque le joueur joue en solo">bot.c</a> </p>
 <dl class="section author"><dt>Auteur</dt><dd>Jonathan Otto </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2022-03-28 </dd></dl>
@@ -171,14 +171,14 @@ Fonctions</h2></td></tr>
 
 </div>
 </div>
-<a id="a2c7354b0a3cf7545995b8db7befff8e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2c7354b0a3cf7545995b8db7befff8e0">&#9670;&nbsp;</a></span>bot()</h2>
+<a id="a6ad28cc957bd390c6989ff3c91a787be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ad28cc957bd390c6989ff3c91a787be">&#9670;&nbsp;</a></span>bot()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void bot </td>
+          <td class="memname">bot </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>tab_formation_cartesADV</em>[][3], </td>
