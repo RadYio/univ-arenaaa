@@ -256,13 +256,29 @@ int menu(SDL_Window* pWindow){
 						//affichage ecran noir + connexion au serveur...
 						infoServer.joueurTrouve=0;
 						infoServer.valSocket=connectC();
-						printf("valSocket = %i\n",infoServer.valSocket);
 						if(infoServer.valSocket==-1){
 							//Tenta maximum atteinte
 							//Afficher erreur
 						}
 						else{
 							/* DECLARATION waiting*/
+							SDL_Surface* txt_attente_S = TTF_RenderUTF8_Blended(police, "En attente de joueur", couleurGold);
+
+							if(!txt_attente_S){
+								fprintf(stderr, "Erreur à la création du texte ''txt_attente_S 2'': %s\n", SDL_GetError());
+								exit(EXIT_FAILURE);
+							}
+							SDL_Texture* txt_attente_T = SDL_CreateTextureFromSurface(renderer_menu, txt_attente_S);
+
+							if(!txt_attente_T){
+								fprintf(stderr, "Erreur à la création du rendu du texte : %s\n", SDL_GetError());
+								exit(EXIT_FAILURE);
+							}
+							SDL_FreeSurface(txt_attente_S); /* on a la texture, plus besoin du texte via surface */
+
+							SDL_Rect txt_attente_R = creer_rectangle(715, 780, 40, strlen("En attente de joueur")*10);
+
+
 							SDL_Surface* img_Waiting_Surface = IMG_Load("img/waiting.png");
 							SDL_Surface* img_Waiting_BG_Surface = IMG_Load("img/waitingBG.png");
 							if(!img_Waiting_Surface || !img_Waiting_BG_Surface){
@@ -280,7 +296,7 @@ int menu(SDL_Window* pWindow){
 							}
 
 							/* On va creer les rectangles de positionnement */
-							SDL_Rect rect_Waiting = creer_rectangle(670-64,800,64,64); /* -64 est du à la taille de l'image :) */
+							SDL_Rect rect_Waiting = creer_rectangle(700-64,835-64,64,64); /* -64 est du à la taille de l'image :) */
 							SDL_Rect rect_Waiting_Evolution = creer_rectangle(0,0,64,64);
 							SDL_Rect rect_Waiting_BG_Evolution = creer_rectangle(0,0,368,768);
 
@@ -308,9 +324,13 @@ int menu(SDL_Window* pWindow){
 									animation2=(animation2+1)%7;
 								}
 
+
 								SDL_RenderClear(renderer_menu);
-								SDL_RenderCopy(renderer_menu,img_Waiting_BG_Texture, &rect_Waiting_BG_Evolution, NULL);
+
+								SDL_RenderCopy(renderer_menu, img_Waiting_BG_Texture, &rect_Waiting_BG_Evolution, NULL);
 								SDL_RenderCopy(renderer_menu, img_Waiting_Texture, &rect_Waiting_Evolution, &rect_Waiting);
+								SDL_RenderCopy(renderer_menu, txt_attente_T, NULL, &txt_attente_R);
+
 								SDL_RenderPresent(renderer_menu);
 								diffDelai1 = delai1;
 								diffDelai2 = delai2;
@@ -321,11 +341,18 @@ int menu(SDL_Window* pWindow){
 									/* Si l'utilisateur decide de fermer le jeu */
 									cancel = 1;
 									running = 0;
+									SDL_DestroyTexture(img_Waiting_BG_Texture);
+									SDL_DestroyTexture(img_Waiting_Texture);
+									SDL_DestroyTexture(txt_attente_T);
 									break;
 								}
-
+								if(e.type == SDL_MOUSEBUTTONDOWN)
+									printf("x: %i\ny: %i\n",e.button.x,e.button.y);
 								if(e.type == SDL_MOUSEBUTTONDOWN && e.button.x >= rect_Waiting.x && e.button.x <= rect_Waiting.x+rect_Waiting.w && e.button.y >= rect_Waiting.y && e.button.y <= rect_Waiting.y+rect_Waiting.h){
 									/* Si l'utilisateur decide de retourner au Menu */
+									SDL_DestroyTexture(img_Waiting_BG_Texture);
+									SDL_DestroyTexture(img_Waiting_Texture);
+									SDL_DestroyTexture(txt_attente_T);
 									cancel = 1;
 									break;
 								}
@@ -338,6 +365,10 @@ int menu(SDL_Window* pWindow){
 								connectF(&infoServer.valSocket); /* Coupe la connexion */
 								break;
 							}
+
+							SDL_DestroyTexture(img_Waiting_BG_Texture);
+							SDL_DestroyTexture(img_Waiting_Texture);
+							SDL_DestroyTexture(txt_attente_T);
 
 							jeu_multi(pWindow, renderer_menu, &running, &infoServer.valSocket);
 
